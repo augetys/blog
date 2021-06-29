@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active: dev
+  security:
+    user:
+      name: lijin
+      password: 123456
+mybatis-plus:
+  mapper-locations:
+    - classpath:mapper/**/*.xml
+  typeAliasesPackage: com.hope.blog.*.model
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: ji8n3439n439n43ld9ne9343fdfer49h #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间ms
+  tokenPrefix: 'Bearer '  #JWT负载中拿到开头
+  expiration_remember: 60 * 60 * 24 * 7
+
+secure:
+  ignored:
+    urls: #安全路径白名单,文件通配符一定要使用两个**
+      - /needLogin
+      - /swagger*//**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /actuator/**
+      - /druid/**
+      - /sys/user/login
+      - /sys/user/register
+      - /index.html
