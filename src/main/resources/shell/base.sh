@@ -1,11 +1,11 @@
 start(){
-	echo "base服务启动了..."
-	nohup java -jar base-1.0.0-SNAPSHOT.jar --spring.profiles.active=test >base.out &
+	echo "blog服务启动了..."
+	nohup java -jar blog-1.0.0-SNAPSHOT.jar --spring.profiles.active=test >blog.out &
 	echo "启动完成..."
 }
 stop(){
-	echo "停止base-1.0.0-SNAPSHOT.jar服务..."
-	kill -9 $(ps -ef | grep base-1.0.0-SNAPSHOT.jar | grep -v grep)
+	echo "停止blog-1.0.0-SNAPSHOT.jar服务..."
+	kill -9 $(ps -ef | grep blog-1.0.0-SNAPSHOT.jar | grep -v grep)
                 echo "停止完成..."
 }
 case $1 in
