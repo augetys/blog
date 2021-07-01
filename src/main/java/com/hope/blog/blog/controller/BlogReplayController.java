@@ -1,7 +1,7 @@
-package ${package.Controller};
+package com.hope.blog.blog.controller;
 
-import com.hope.blog.blog.model.${entity};
-import com.hope.blog.blog.service.${table.serviceName};
+import com.hope.blog.blog.model.BlogReplay;
+import com.hope.blog.blog.service.BlogReplayService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
@@ -11,52 +11,33 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-
-#if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
-#else
-import org.springframework.stereotype.Controller;
-#end
-#if(${superControllerClassPackage})
-import ${superControllerClassPackage};
-#end
+
+import java.util.List;
 
 /**
  * <p>
- * $!{table.comment} 前端控制器
+ * 博客文章回复表 前端控制器
  * </p>
  *
- * @author ${author}
- * @since ${date}
+ * @author lijin
+ * @since 2021-07-01
  */
-@Api(tags = "$!{table.comment}")
-#if(${restControllerStyle})
+@Api(tags = "博客文章回复表")
 @RestController
-#else
-@Controller
-#end
-@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
-#if(${kotlin})
-class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
-
-#else
-    #if(${superControllerClass})
-    public class ${table.controllerName} extends ${superControllerClass} {
-    #else
-    public class ${table.controllerName} {
-    #end
+@RequestMapping("/blog/blogReplay")
+    public class BlogReplayController {
 
     @Autowired
-    private ${table.serviceName} ${entity}Service;
+    private BlogReplayService blogReplayService;
 
     /**
      * 查询分页数据
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<${entity}>> findListByPage(@ApiParam @RequestBody ${entity} entity){
-        List<${entity}> list=${entity}Service.findListByPage(entity);
+    public CommonResult<CommonPage<BlogReplay>> findListByPage(@ApiParam @RequestBody BlogReplay entity){
+        List<BlogReplay> list=blogReplayService.findListByPage(entity);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -66,8 +47,8 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
-    public CommonResult<${entity}> getById(@PathVariable String id){
-    ${entity} entity=${entity}Service.getById(id);
+    public CommonResult<BlogReplay> getById(@PathVariable String id){
+    BlogReplay entity=blogReplayService.getById(id);
         return CommonResult.success(entity);
     }
 
@@ -76,8 +57,8 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody ${entity} entity){
-        boolean success=${entity}Service.saveOrUpdate(entity);
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogReplay entity){
+        boolean success=blogReplayService.saveOrUpdate(entity);
         if (success){
         return CommonResult.success();
         }
@@ -90,7 +71,7 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
     public CommonResult<ResultCode> delete(@PathVariable String id){
-        boolean success=${entity}Service.removeById(id);
+        boolean success=blogReplayService.removeById(id);
         if (success){
         return CommonResult.success();
         }
@@ -102,8 +83,8 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
      */
      @ApiOperation(value = "修改单条记录")
      @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody ${entity} entity){
-        boolean success=${entity}Service.updateById(entity);
+     public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogReplay entity){
+        boolean success=blogReplayService.updateById(entity);
         if (success){
         return CommonResult.success();
         }
@@ -111,4 +92,3 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
      }
 }
 
-#end
