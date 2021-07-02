@@ -8,7 +8,7 @@ import lombok.Data;
  * Created by lijin on  2021/6/8
  */
 @Data
-public class PageInfo<T> {
+public class PageInfo {
 
 
     /**

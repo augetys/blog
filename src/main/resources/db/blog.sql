@@ -29,11 +29,27 @@ DROP TABLE IF EXISTS `blog_tag`;
 CREATE TABLE `blog_tag` (
   `id` varchar(64) NOT NULL,
   `name` varchar(255) DEFAULT NULL COMMENT '标签内容',
-  `sort` int(11) NULL DEFAULT 0 COMMENT '排序',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `sort` int(11) NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客标签表';
+
+INSERT INTO `blog_tag` VALUES ('187f8729ec18cf905731e310c4e72db3', 'Java', '2021-07-02 13:36:46', '2021-07-02 13:36:46', 1);
+INSERT INTO `blog_tag` VALUES ('20de3df42eeaaef1e5cc95d3de28c6c5', 'Python', '2021-07-02 13:40:58', '2021-07-02 13:40:58', 17);
+INSERT INTO `blog_tag` VALUES ('41c92c174cb4919ee9e308909dd50930', 'Linux', '2021-07-02 13:36:55', '2021-07-02 13:36:55', 2);
+INSERT INTO `blog_tag` VALUES ('468b56ac826c651c1a371755713466ce', '面试', '2021-07-02 13:37:13', '2021-07-02 13:37:13', 4);
+INSERT INTO `blog_tag` VALUES ('57c6c0742164d8610045412b6ee4bbe0', '大数据', '2021-07-02 13:39:10', '2021-07-02 13:39:10', 13);
+INSERT INTO `blog_tag` VALUES ('59a8f4d900a557d4beff96c2489541f1', 'Redis', '2021-07-02 13:38:30', '2021-07-02 13:38:30', 11);
+INSERT INTO `blog_tag` VALUES ('62edf1de6f1bc800d3350da3dfd9e479', 'Nginx', '2021-07-02 13:40:48', '2021-07-02 13:40:48', 16);
+INSERT INTO `blog_tag` VALUES ('6cbdcb2e57728d35c0e04935291d3f83', 'Spring Cloud', '2021-07-02 13:37:32', '2021-07-02 13:37:32', 6);
+INSERT INTO `blog_tag` VALUES ('7f5e239f57b8331cd82fc3d9cbad10ce', '学习笔记', '2021-07-02 13:37:05', '2021-07-02 13:37:05', 3);
+INSERT INTO `blog_tag` VALUES ('8b794439c07b4c81d371c3d700793a91', 'Docker', '2021-07-02 13:37:53', '2021-07-02 13:37:53', 8);
+INSERT INTO `blog_tag` VALUES ('9e68d831c5c2166ee0fd47871adfb700', 'RabbitMQ', '2021-07-02 13:38:04', '2021-07-02 13:38:04', 10);
+INSERT INTO `blog_tag` VALUES ('a30e4e9c6be6f02f8f572459cb584866', '前端开发', '2021-07-02 13:37:41', '2021-07-02 13:37:41', 7);
+INSERT INTO `blog_tag` VALUES ('c0926c417d88c8f02dc0e172bf5a3042', '校园生活', '2021-07-02 13:37:24', '2021-07-02 13:37:24', 5);
+INSERT INTO `blog_tag` VALUES ('d6a8731ca2463914879efed545a9c932', 'Spring Boot', '2021-07-02 13:38:41', '2021-07-02 13:38:41', 12);
+INSERT INTO `blog_tag` VALUES ('ee9a96eeb14a0f3e57e0bb440274790d', 'Vue', '2021-07-02 13:40:39', '2021-07-02 13:40:39', 15);
 
 -- ----------------------------
 -- Table structure for blog_category
@@ -48,6 +64,12 @@ CREATE TABLE `blog_category` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客分类表';
+
+INSERT INTO `blog_category` VALUES ('49e72a0020525c53c22bdc11518b858a', '后端开发', '后端开发专题', 3, '2021-07-02 08:00:00', '2021-07-02 13:56:31');
+INSERT INTO `blog_category` VALUES ('61d6476665b0889e1c62358874ac25cf', '技术新闻', '发现世界的每一天', 2, '2021-07-02 08:00:00', '2021-07-02 13:56:23');
+INSERT INTO `blog_category` VALUES ('645415d47b4c66a29ba1cc5b07e758c3', '前端开发', '前端开发专题', 4, '2021-07-02 08:00:00', '2021-07-02 13:56:37');
+INSERT INTO `blog_category` VALUES ('bbd3ad1fa70b95a53e3a006acc3eeb98', '学习笔记', '学习笔记', 1, '2021-07-02 13:55:33', '2021-07-02 13:55:33');
+INSERT INTO `blog_category` VALUES ('c7d88a558c05e2099b1430b0f77c69c3', '面试', '面试专题', 5, '2021-07-02 13:56:54', '2021-07-02 13:56:54');
 
 -- ----------------------------
 -- Table structure for blog_comment
@@ -68,21 +90,6 @@ CREATE TABLE `blog_comment` (
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_replay`;
 CREATE TABLE `blog_replay` (
-  `id` varchar(64) NOT NULL,
-  `content` varchar(1000) DEFAULT NULL COMMENT '回复内容',
-  `user_id` varchar(64) DEFAULT NULL COMMENT '回复用户',
-  `comment_id` varchar(64) DEFAULT NULL COMMENT '回复评论id',
-  `article_id` varchar(64) DEFAULT NULL COMMENT '博客文章id',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客文章回复表';
-
--- ----------------------------
--- Table structure for blog_replay
--- ----------------------------
-DROP TABLE IF EXISTS `test`;
-CREATE TABLE `test` (
   `id` varchar(64) NOT NULL,
   `content` varchar(1000) DEFAULT NULL COMMENT '回复内容',
   `user_id` varchar(64) DEFAULT NULL COMMENT '回复用户',

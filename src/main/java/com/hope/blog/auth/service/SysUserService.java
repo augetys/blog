@@ -1,12 +1,11 @@
 package com.hope.blog.auth.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.auth.dto.request.LoginRequestDto;
 import com.hope.blog.auth.dto.request.RegisterRequestDto;
 import com.hope.blog.auth.dto.request.UpdateSysUserStatusRequestDto;
 import com.hope.blog.auth.dto.request.SysUserSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysRoleResponseDto;
 import com.hope.blog.auth.dto.response.SysUserInfoResponseDto;
-import com.hope.blog.auth.dto.response.SysUserResponseDto;
 import com.hope.blog.auth.model.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hope.blog.auth.model.SysMenus;
@@ -46,7 +45,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param registerRequestDto
      * @return
      */
-    SysUserResponseDto register(RegisterRequestDto registerRequestDto);
+    SysUser register(RegisterRequestDto registerRequestDto);
 
     /**
      * 获取当前登录用户信息
@@ -91,7 +90,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param userId
      * @return
      */
-    List<SysRoleResponseDto> getRoleList(String userId);
+    List<SysRole> getRoleList(String userId);
 
     /**
      * 分配角色
@@ -113,6 +112,6 @@ public interface SysUserService extends IService<SysUser> {
      * @param sysUserSearchRequestDto
      * @return
      */
-    List<SysUserResponseDto> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto);
+    Page<SysUser> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto);
 
 }

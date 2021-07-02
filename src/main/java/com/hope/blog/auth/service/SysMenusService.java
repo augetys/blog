@@ -1,7 +1,7 @@
 package com.hope.blog.auth.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.auth.dto.request.SysMenusSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysMenusResponseDto;
 import com.hope.blog.auth.dto.response.SysMenusTreeResponseDto;
 import com.hope.blog.auth.model.SysMenus;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface SysMenusService extends IService<SysMenus> {
 
-    List<SysMenusResponseDto> findListByPage(SysMenusSearchRequestDto sysMenusSearchRequestDto);
+    Page<SysMenus> findListByPage(SysMenusSearchRequestDto sysMenusSearchRequestDto);
 
     List<SysMenusTreeResponseDto> treeList();
 }

@@ -1,9 +1,9 @@
 package com.hope.blog.auth.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.auth.dto.request.SysAllocMenusRequestDto;
 import com.hope.blog.auth.dto.request.RoleSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysMenusResponseDto;
-import com.hope.blog.auth.dto.response.SysRoleResponseDto;
+import com.hope.blog.auth.model.SysMenus;
 import com.hope.blog.auth.model.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -30,12 +30,12 @@ public interface SysRoleService extends IService<SysRole> {
      * @param roleId
      * @return
      */
-    List<SysMenusResponseDto> listMenu(String roleId);
+    List<SysMenus> listMenu(String roleId);
 
     /**
      * 分页查询角色列表
      * @param roleSearchRequestDto
      * @return
      */
-    List<SysRoleResponseDto> findListByPage(RoleSearchRequestDto roleSearchRequestDto);
+    Page<SysRole> findListByPage(RoleSearchRequestDto roleSearchRequestDto);
 }

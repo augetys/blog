@@ -1,14 +1,13 @@
 package com.hope.blog.auth.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.auth.dto.request.SysAllocMenusRequestDto;
 import com.hope.blog.auth.dto.request.RoleSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysMenusResponseDto;
-import com.hope.blog.auth.dto.response.SysRoleResponseDto;
+import com.hope.blog.auth.model.SysMenus;
 import com.hope.blog.auth.model.SysRole;
 import com.hope.blog.auth.service.SysRoleService;
 import com.hope.blog.common.api.ResultCode;
 import com.hope.blog.log.handle.OperationLog;
-import com.hope.blog.utils.CopyUtil;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import io.swagger.annotations.Api;
@@ -42,8 +41,8 @@ public class SysRoleController {
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<SysRoleResponseDto>> findListByPage(@ApiParam @RequestBody RoleSearchRequestDto roleSearchRequestDto) {
-        List<SysRoleResponseDto> list = sysRoleService.findListByPage(roleSearchRequestDto);
+    public CommonResult<CommonPage<SysRole>> findListByPage(@ApiParam @RequestBody RoleSearchRequestDto roleSearchRequestDto) {
+        Page<SysRole> list = sysRoleService.findListByPage(roleSearchRequestDto);
 
         return CommonResult.success(CommonPage.restPage(list));
     }
@@ -53,9 +52,9 @@ public class SysRoleController {
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
-    public CommonResult<SysRoleResponseDto> getById(@PathVariable String id) {
+    public CommonResult<SysRole> getById(@PathVariable String id) {
         SysRole entity = sysRoleService.getById(id);
-        return CommonResult.success(CopyUtil.copy(entity,SysRoleResponseDto.class));
+        return CommonResult.success(entity);
     }
 
     /**
@@ -103,8 +102,8 @@ public class SysRoleController {
     @ApiOperation("获取角色相关菜单")
     @RequestMapping(value = "/listMenu/{roleId}", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<SysMenusResponseDto>> listResource(@PathVariable String roleId) {
-        List<SysMenusResponseDto> roleList = sysRoleService.listMenu(roleId);
+    public CommonResult<List<SysMenus>> listResource(@PathVariable String roleId) {
+        List<SysMenus> roleList = sysRoleService.listMenu(roleId);
         return CommonResult.success(roleList);
     }
 

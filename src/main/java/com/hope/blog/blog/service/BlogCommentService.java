@@ -2,7 +2,6 @@ package com.hope.blog.blog.service;
 
 import com.hope.blog.blog.model.BlogComment;
 import com.baomidou.mybatisplus.extension.service.IService;
-
 import java.util.List;
 
 /**
@@ -11,9 +10,8 @@ import java.util.List;
  * </p>
  *
  * @author lijin
- * @since 2021-07-01
+ * @since 2021-07-02
  */
 public interface BlogCommentService extends IService<BlogComment> {
-
     List<BlogComment> findListByPage(BlogComment entity);
 }

@@ -6,7 +6,6 @@ import com.hope.blog.blog.service.BlogReplayService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 /**
@@ -15,12 +14,11 @@ import java.util.List;
  * </p>
  *
  * @author lijin
- * @since 2021-07-01
+ * @since 2021-07-02
  */
 @Service
 @Transactional
 public class BlogReplayServiceImpl extends ServiceImpl<BlogReplayMapper, BlogReplay> implements BlogReplayService {
-
     @Override
     public List<BlogReplay> findListByPage(BlogReplay entity) {
         return null;

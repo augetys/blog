@@ -3,13 +3,11 @@ package com.hope.blog.auth.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.auth.dto.request.SysMenusSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysMenusResponseDto;
 import com.hope.blog.auth.dto.response.SysMenusTreeResponseDto;
 import com.hope.blog.auth.model.SysMenus;
 import com.hope.blog.auth.mapper.SysMenusMapper;
 import com.hope.blog.auth.service.SysMenusService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hope.blog.utils.CopyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +33,7 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
     private SysMenusMapper sysMenusMapper;
 
     @Override
-    public List<SysMenusResponseDto> findListByPage(SysMenusSearchRequestDto sysMenusSearchRequestDto) {
+    public Page<SysMenus> findListByPage(SysMenusSearchRequestDto sysMenusSearchRequestDto) {
         QueryWrapper<SysMenus> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(sysMenusSearchRequestDto.getName())) {
             queryWrapper.like("name", sysMenusSearchRequestDto.getName());
@@ -47,8 +45,7 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
             queryWrapper.eq("level", sysMenusSearchRequestDto.getLevel());
         }
         queryWrapper.lambda().orderByAsc(SysMenus::getSort);
-        List<SysMenus> records = sysMenusMapper.selectPage(new Page<>(sysMenusSearchRequestDto.getPageNum(), sysMenusSearchRequestDto.getPageSize()), queryWrapper).getRecords();
-        return CopyUtil.copyList(records, SysMenusResponseDto.class);
+        return sysMenusMapper.selectPage(new Page<>(sysMenusSearchRequestDto.getPageNum(), sysMenusSearchRequestDto.getPageSize()), queryWrapper);
     }
 
     @Override

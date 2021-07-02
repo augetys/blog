@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author lijin
- * @since 2021-07-01
+ * @since 2021-07-02
  */
 public interface BlogReplayMapper extends BaseMapper<BlogReplay> {
 

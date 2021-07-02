@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.auth.dto.request.SysAllocMenusRequestDto;
 import com.hope.blog.auth.dto.request.RoleSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysMenusResponseDto;
-import com.hope.blog.auth.dto.response.SysRoleResponseDto;
 import com.hope.blog.auth.mapper.SysRoleMenusMapper;
 import com.hope.blog.auth.model.SysMenus;
 import com.hope.blog.auth.model.SysRole;
@@ -45,21 +43,19 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     private SysRoleMapper sysRoleMapper;
 
     @Override
-    public List<SysRoleResponseDto> findListByPage(RoleSearchRequestDto roleSearchRequestDto) {
+    public Page<SysRole> findListByPage(RoleSearchRequestDto roleSearchRequestDto) {
         QueryWrapper<SysRole> queryWrapper = new QueryWrapper<>();
         //构建条件
         String name = roleSearchRequestDto.getName();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
         }
-        List<SysRole> records = sysRoleMapper.selectPage(new Page<>(roleSearchRequestDto.getPageNum(), roleSearchRequestDto.getPageSize()), queryWrapper).getRecords();
-        return CopyUtil.copyList(records, SysRoleResponseDto.class);
+        return sysRoleMapper.selectPage(new Page<>(roleSearchRequestDto.getPageNum(), roleSearchRequestDto.getPageSize()), queryWrapper);
     }
 
     @Override
-    public List<SysMenusResponseDto> listMenu(String roleId) {
-        List<SysMenus> sysMenusList = sysRoleMenusMapper.getMenuListByRoleId(roleId);
-        return CopyUtil.copyList(sysMenusList, SysMenusResponseDto.class);
+    public List<SysMenus> listMenu(String roleId) {
+        return sysRoleMenusMapper.getMenuListByRoleId(roleId);
     }
 
     @Override

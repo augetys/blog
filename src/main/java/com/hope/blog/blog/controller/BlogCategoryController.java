@@ -1,5 +1,7 @@
 package com.hope.blog.blog.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.blog.dto.request.BlogCategorySearchRequestDto;
 import com.hope.blog.blog.model.BlogCategory;
 import com.hope.blog.blog.service.BlogCategoryService;
 import com.hope.blog.common.api.CommonPage;
@@ -11,9 +13,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
+
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -21,7 +23,7 @@ import java.util.List;
  * </p>
  *
  * @author lijin
- * @since 2021-07-01
+ * @since 2021-07-02
  */
 @Api(tags = "博客分类表")
 @RestController
@@ -29,18 +31,28 @@ import java.util.List;
     public class BlogCategoryController {
 
     @Autowired
-    private BlogCategoryService blogCategoryService;
+    private BlogCategoryService iBlogCategoryService;
 
     /**
      * 查询分页数据
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<BlogCategory>> findListByPage(@ApiParam @RequestBody BlogCategory entity){
-        List<BlogCategory> list=blogCategoryService.findListByPage(entity);
+    public CommonResult<CommonPage<BlogCategory>> findListByPage(@ApiParam @RequestBody BlogCategorySearchRequestDto blogCategorySearchRequestDto){
+        Page<BlogCategory> list=iBlogCategoryService.findListByPage(blogCategorySearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
+
+    /**
+     * 查询分页数据
+     */
+    @ApiOperation(value = "查询所有数据")
+    @PostMapping(value = "/findAll")
+    public CommonResult<List<BlogCategory>> findAll(@ApiParam @RequestBody BlogCategorySearchRequestDto blogCategorySearchRequestDto){
+        List<BlogCategory> list=iBlogCategoryService.findAll(blogCategorySearchRequestDto);
+        return CommonResult.success(list);
+    }
 
     /**
      * 根据id查询
@@ -48,7 +60,7 @@ import java.util.List;
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
     public CommonResult<BlogCategory> getById(@PathVariable String id){
-    BlogCategory entity=blogCategoryService.getById(id);
+    BlogCategory entity=iBlogCategoryService.getById(id);
         return CommonResult.success(entity);
     }
 
@@ -58,7 +70,7 @@ import java.util.List;
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogCategory entity){
-        boolean success=blogCategoryService.saveOrUpdate(entity);
+        boolean success=iBlogCategoryService.saveOrUpdate(entity);
         if (success){
         return CommonResult.success();
         }
@@ -71,7 +83,7 @@ import java.util.List;
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
     public CommonResult<ResultCode> delete(@PathVariable String id){
-        boolean success=blogCategoryService.removeById(id);
+        boolean success=iBlogCategoryService.removeById(id);
         if (success){
         return CommonResult.success();
         }
@@ -84,7 +96,7 @@ import java.util.List;
      @ApiOperation(value = "修改单条记录")
      @PostMapping(value = "/update")
      public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogCategory entity){
-        boolean success=blogCategoryService.updateById(entity);
+        boolean success=iBlogCategoryService.updateById(entity);
         if (success){
         return CommonResult.success();
         }

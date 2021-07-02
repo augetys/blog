@@ -70,13 +70,13 @@ INSERT INTO `sys_menus` VALUES ('5', '2', '菜单管理', '/sys/menu', 'sys-menu
 INSERT INTO `sys_menus` VALUES ('6', '2', '系统配置', '/sys/config', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
 INSERT INTO `sys_menus` VALUES ('7', '2', '操作日志', '/sys/log', 'sys-log', 70, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
 INSERT INTO `sys_menus` VALUES ('8', '0', '监控中心', '/monitor', 'monitor', 80, 0, '2021-06-16 13:05:30', '2021-06-16 13:05:30');
-INSERT INTO `sys_menus` VALUES ('9', '7', '服务器监控', '/monitor/system', 'monitor', 90, 1, '2021-06-16 13:05:50', '2021-06-16 13:05:50');
-INSERT INTO `sys_menus` VALUES ('10', '7', 'druid', '/monitor/druid', 'monitor-druid', 100, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('9', '8', '服务器监控', '/monitor/system', 'monitor', 90, 1, '2021-06-16 13:05:50', '2021-06-16 13:05:50');
+INSERT INTO `sys_menus` VALUES ('10', '8', 'druid', '/monitor/druid', 'monitor-druid', 100, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 INSERT INTO `sys_menus` VALUES ('11', '0', '博客管理', '/blog', 'blog', 110, 0, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('12', '10', '文章管理', '/blog/article', 'blog-article', 120, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('13', '10', '分类管理', '/blog/category', 'blog-category', 130, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('14', '10', '标签管理', '/blog/tag', 'blog-tag', 140, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('15', '10', '评论管理', '/blog/comment', 'blog-comment', 150, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('12', '11', '文章管理', '/blog/article', 'blog-article', 120, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('13', '11', '分类管理', '/blog/category', 'blog-category', 130, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('14', '11', '标签管理', '/blog/tag', 'blog-tag', 140, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('15', '11', '评论管理', '/blog/comment', 'blog-comment', 150, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 
 -- ----------------------------
 -- Table structure for sys_user_role

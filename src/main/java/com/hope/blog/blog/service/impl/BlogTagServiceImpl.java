@@ -1,13 +1,19 @@
 package com.hope.blog.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.blog.dto.request.BlogTagSearchRequestDto;
 import com.hope.blog.blog.model.BlogTag;
 import com.hope.blog.blog.mapper.BlogTagMapper;
 import com.hope.blog.blog.service.BlogTagService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+
 
 /**
  * <p>
@@ -15,14 +21,34 @@ import java.util.List;
  * </p>
  *
  * @author lijin
- * @since 2021-07-01
+ * @since 2021-07-02
  */
 @Service
 @Transactional
 public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> implements BlogTagService {
 
+    @Autowired
+    private BlogTagMapper blogTagMapper;
+
     @Override
-    public List<BlogTag> findListByPage(BlogTag entity) {
-        return null;
+    public Page<BlogTag> findListByPage(BlogTagSearchRequestDto blogTagSearchRequestDto) {
+        QueryWrapper<BlogTag> queryWrapper = new QueryWrapper<>();
+        //构建条件
+        String name = blogTagSearchRequestDto.getName();
+        if (!StringUtils.isEmpty(name)) {
+            queryWrapper.like("name", name);
+        }
+        return blogTagMapper.selectPage(new Page<>(blogTagSearchRequestDto.getPageNum(), blogTagSearchRequestDto.getPageSize()), queryWrapper);
+    }
+
+    @Override
+    public List<BlogTag> findAll(BlogTagSearchRequestDto blogTagSearchRequestDto) {
+        QueryWrapper<BlogTag> queryWrapper = new QueryWrapper<>();
+        //构建条件
+        String name = blogTagSearchRequestDto.getName();
+        if (!StringUtils.isEmpty(name)) {
+            queryWrapper.like("name", name);
+        }
+        return blogTagMapper.selectList(queryWrapper);
     }
 }

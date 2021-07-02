@@ -1,18 +1,17 @@
 package com.hope.blog.auth.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.auth.dto.request.LoginRequestDto;
 import com.hope.blog.auth.dto.request.RegisterRequestDto;
 import com.hope.blog.auth.dto.request.UpdateSysUserStatusRequestDto;
 import com.hope.blog.auth.dto.request.SysUserSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysRoleResponseDto;
 import com.hope.blog.auth.dto.response.SysUserInfoResponseDto;
-import com.hope.blog.auth.dto.response.SysUserResponseDto;
+import com.hope.blog.auth.model.SysRole;
 import com.hope.blog.auth.model.SysUser;
 import com.hope.blog.auth.service.SysUserService;
 import com.hope.blog.common.api.ResultCode;
 import com.hope.blog.common.constant.CommonConstant;
 import com.hope.blog.log.handle.OperationLog;
-import com.hope.blog.utils.CopyUtil;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import io.swagger.annotations.Api;
@@ -50,8 +49,8 @@ public class SysUserController {
      */
     @ApiOperation(value = "用户列表")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<SysUserResponseDto>> findListByPage(@ApiParam @RequestBody SysUserSearchRequestDto sysUserSearchRequestDto) {
-        List<SysUserResponseDto> list = iSysUserService.findListByPage(sysUserSearchRequestDto);
+    public CommonResult<CommonPage<SysUser>> findListByPage(@ApiParam @RequestBody SysUserSearchRequestDto sysUserSearchRequestDto) {
+        Page<SysUser> list = iSysUserService.findListByPage(sysUserSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -60,9 +59,9 @@ public class SysUserController {
      */
     @ApiOperation(value = "根据id查询用户")
     @GetMapping(value = "/{id}")
-    public CommonResult<SysUserResponseDto> getById(@PathVariable String id) {
+    public CommonResult<SysUser> getById(@PathVariable String id) {
         SysUser entity = iSysUserService.getById(id);
-        return CommonResult.success(CopyUtil.copy(entity,SysUserResponseDto.class));
+        return CommonResult.success(entity);
     }
 
     /**
@@ -124,8 +123,8 @@ public class SysUserController {
      */
     @ApiOperation(value = "注册")
     @PostMapping(value = "/register")
-    public CommonResult<SysUserResponseDto> register(@ApiParam @RequestBody RegisterRequestDto registerRequestDto) {
-        SysUserResponseDto sysUser = iSysUserService.register(registerRequestDto);
+    public CommonResult<SysUser> register(@ApiParam @RequestBody RegisterRequestDto registerRequestDto) {
+        SysUser sysUser = iSysUserService.register(registerRequestDto);
         return CommonResult.success(sysUser);
     }
 
@@ -144,9 +143,9 @@ public class SysUserController {
      */
     @ApiOperation(value = "退出")
     @GetMapping(value = "/logout")
-    public CommonResult<SysUserResponseDto> logout() {
+    public CommonResult<SysUser> logout() {
         SysUser sysUser = iSysUserService.logout();
-        return CommonResult.success(CopyUtil.copy(sysUser,SysUserResponseDto.class));
+        return CommonResult.success(sysUser);
     }
 
     /**
@@ -168,8 +167,8 @@ public class SysUserController {
      */
     @ApiOperation(value = "获取用户角色信息")
     @GetMapping(value = "/role/{userId}")
-    public CommonResult<List<SysRoleResponseDto>> getRoleList(@ApiParam @PathVariable String userId) {
-        List<SysRoleResponseDto> roleList = iSysUserService.getRoleList(userId);
+    public CommonResult<List<SysRole>> getRoleList(@ApiParam @PathVariable String userId) {
+        List<SysRole> roleList = iSysUserService.getRoleList(userId);
         return CommonResult.success(roleList);
     }
 

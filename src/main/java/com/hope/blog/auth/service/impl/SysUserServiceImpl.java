@@ -6,9 +6,7 @@ import com.hope.blog.auth.dto.request.LoginRequestDto;
 import com.hope.blog.auth.dto.request.RegisterRequestDto;
 import com.hope.blog.auth.dto.request.UpdateSysUserStatusRequestDto;
 import com.hope.blog.auth.dto.request.SysUserSearchRequestDto;
-import com.hope.blog.auth.dto.response.SysRoleResponseDto;
 import com.hope.blog.auth.dto.response.SysUserInfoResponseDto;
-import com.hope.blog.auth.dto.response.SysUserResponseDto;
 import com.hope.blog.auth.mapper.SysRoleMapper;
 import com.hope.blog.auth.mapper.SysUserMapper;
 import com.hope.blog.auth.model.SysUser;
@@ -70,7 +68,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 
     @Override
-    public List<SysUserResponseDto> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto) {
+    public Page<SysUser> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         //构建条件
         String username = sysUserSearchRequestDto.getUsername();
@@ -86,8 +84,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             queryWrapper.eq("status", status);
         }
         queryWrapper.eq("is_delete", 0);
-        List<SysUser> records = sysUserMapper.selectPage(new Page<>(sysUserSearchRequestDto.getPageNum(), sysUserSearchRequestDto.getPageSize()), queryWrapper).getRecords();
-        return CopyUtil.copyList(records, SysUserResponseDto.class);
+        return sysUserMapper.selectPage(new Page<>(sysUserSearchRequestDto.getPageNum(), sysUserSearchRequestDto.getPageSize()), queryWrapper);
     }
 
 
@@ -121,7 +118,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public SysUserResponseDto register(RegisterRequestDto registerRequestDto) {
+    public SysUser register(RegisterRequestDto registerRequestDto) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(registerRequestDto, sysUser);
         sysUser.setCreateTime(new Date());
@@ -136,7 +133,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         //注册成功
         int insert = sysUserMapper.insert(sysUser);
         if (insert > 0) {
-            return CopyUtil.copy(sysUser, SysUserResponseDto.class);
+            return sysUser;
         }
         return null;
     }
@@ -180,9 +177,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public List<SysRoleResponseDto> getRoleList(String userId) {
-        List<SysRole> roleList = roleMapper.getRoleList(userId);
-        return CopyUtil.copyList(roleList, SysRoleResponseDto.class);
+    public List<SysRole> getRoleList(String userId) {
+        return roleMapper.getRoleList(userId);
     }
 
     @Override
