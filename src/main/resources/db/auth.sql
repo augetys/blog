@@ -12,8 +12,8 @@ CREATE TABLE `sys_user` (
   `note` varchar(500) DEFAULT NULL COMMENT '备注信息',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
-  `status` int(1) DEFAULT '1' COMMENT '启用状态：0->禁用；1->启用',
-  `is_delete` int(1) DEFAULT '0' COMMENT '是否注销 0->否；1->是',
+  `status` int(1) DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
+  `is_delete` int(1) DEFAULT 0 COMMENT '是否注销 0->否；1->是',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='后台用户表';
 
@@ -67,16 +67,20 @@ INSERT INTO `sys_menus` VALUES ('2', '0', '系统管理', '/sys', 'sys', 20, 0, 
 INSERT INTO `sys_menus` VALUES ('3', '2', '用户管理', '/sys/user', 'sys-user', 30, 1, '2021-05-17 11:49:04', '2021-05-17 11:49:04');
 INSERT INTO `sys_menus` VALUES ('4', '2', '角色管理', '/sys/role', 'sys-role', 40, 1, '2021-05-17 11:49:04', '2021-05-17 11:49:04');
 INSERT INTO `sys_menus` VALUES ('5', '2', '菜单管理', '/sys/menu', 'sys-menu', 50, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('6', '2', '系统配置', '/sys/config', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('7', '2', '操作日志', '/sys/log', 'sys-log', 70, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
-INSERT INTO `sys_menus` VALUES ('8', '0', '监控中心', '/monitor', 'monitor', 80, 0, '2021-06-16 13:05:30', '2021-06-16 13:05:30');
-INSERT INTO `sys_menus` VALUES ('9', '8', '服务器监控', '/monitor/system', 'monitor', 90, 1, '2021-06-16 13:05:50', '2021-06-16 13:05:50');
-INSERT INTO `sys_menus` VALUES ('10', '8', 'druid', '/monitor/druid', 'monitor-druid', 100, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('11', '0', '博客管理', '/blog', 'blog', 110, 0, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('12', '11', '文章管理', '/blog/article', 'blog-article', 120, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('13', '11', '分类管理', '/blog/category', 'blog-category', 130, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('14', '11', '标签管理', '/blog/tag', 'blog-tag', 140, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('15', '11', '评论管理', '/blog/comment', 'blog-comment', 150, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('6', '2', '代码生成', '/sys/code', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('7', '2', '字典管理', '/sys/dict', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('8', '2', '系统配置', '/sys/config', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('9', '0', '日志管理', '/log', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('10', '9', '操作日志', '/sys/log', 'sys-log', 70, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
+INSERT INTO `sys_menus` VALUES ('11', '9', '异常日志', '/sys/exception', 'sys-log', 70, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
+INSERT INTO `sys_menus` VALUES ('12', '0', '监控中心', '/monitor', 'monitor', 80, 0, '2021-06-16 13:05:30', '2021-06-16 13:05:30');
+INSERT INTO `sys_menus` VALUES ('13', '12', '服务器监控', '/monitor/system', 'monitor', 90, 1, '2021-06-16 13:05:50', '2021-06-16 13:05:50');
+INSERT INTO `sys_menus` VALUES ('14', '12', 'druid', '/monitor/druid', 'monitor-druid', 100, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('15', '0', '博客管理', '/blog', 'blog', 110, 0, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('16', '15', '文章管理', '/blog/article', 'blog-article', 120, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('17', '15', '分类管理', '/blog/category', 'blog-category', 130, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('18', '15', '标签管理', '/blog/tag', 'blog-tag', 140, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('19', '15', '评论管理', '/blog/comment', 'blog-comment', 150, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -128,6 +132,10 @@ INSERT INTO `sys_role_menus` VALUES ('12', 'e8a1d847a93cf5cc541731be3c12fd87', '
 INSERT INTO `sys_role_menus` VALUES ('13', 'e8a1d847a93cf5cc541731be3c12fd87', '13', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('14', 'e8a1d847a93cf5cc541731be3c12fd87', '14', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('15', 'e8a1d847a93cf5cc541731be3c12fd87', '15', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('16', 'e8a1d847a93cf5cc541731be3c12fd87', '16', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('17', 'e8a1d847a93cf5cc541731be3c12fd87', '17', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('18', 'e8a1d847a93cf5cc541731be3c12fd87', '18', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('19', 'e8a1d847a93cf5cc541731be3c12fd87', '19', '2021-05-18 15:06:32', NULL);
 
 
 
@@ -165,5 +173,104 @@ CREATE TABLE `sys_log` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `spend_time` int(11) DEFAULT '0' COMMENT '方法请求花费的时间',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志表';
+
+
+-- ----------------------------
+-- Table structure for sys_dict
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict` (
+  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(255) NOT NULL COMMENT '字典名称',
+  `description` varchar(255) DEFAULT NULL COMMENT '描述',
+  `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='数据字典';
+
+
+-- ----------------------------
+-- Table structure for sys_dict_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_detail`;
+CREATE TABLE `sys_dict_detail` (
+  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `dict_id` bigint(11) DEFAULT NULL COMMENT '字典id',
+  `label` varchar(255) NOT NULL COMMENT '字典标签',
+  `value` varchar(255) NOT NULL COMMENT '字典值',
+  `dict_sort` int(5) DEFAULT NULL COMMENT '排序',
+  `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='数据字典详情';
+
+
+-- ----------------------------
+-- Table structure for config_email
+-- ----------------------------
+DROP TABLE IF EXISTS `config_email`;
+CREATE TABLE `config_email` (
+  `config_id` varchar(32) NOT NULL COMMENT 'ID',
+  `from_user` varchar(255) DEFAULT NULL COMMENT '收件人',
+  `host` varchar(255) DEFAULT NULL COMMENT '邮件服务器SMTP地址',
+  `pass` varchar(255) DEFAULT NULL COMMENT '密码',
+  `port` varchar(255) DEFAULT NULL COMMENT '端口',
+  `user` varchar(255) DEFAULT NULL COMMENT '发件者用户名',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='邮箱配置';
+
+-- ----------------------------
+-- Table structure for config_local_storage
+-- ----------------------------
+DROP TABLE IF EXISTS `config_local_storage`;
+CREATE TABLE `config_local_storage` (
+  `storage_id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `real_name` varchar(255) DEFAULT NULL COMMENT '文件真实的名称',
+  `name` varchar(255) DEFAULT NULL COMMENT '文件名',
+  `suffix` varchar(255) DEFAULT NULL COMMENT '后缀',
+  `path` varchar(255) DEFAULT NULL COMMENT '路径',
+  `type` varchar(255) DEFAULT NULL COMMENT '类型',
+  `size` varchar(100) DEFAULT NULL COMMENT '大小',
+  `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='本地存储';
+
+-- ----------------------------
+-- Table structure for config_qiniu
+-- ----------------------------
+DROP TABLE IF EXISTS `config_qiniu`;
+CREATE TABLE `config_qiniu` (
+  `id` varchar(32) NOT NULL COMMENT 'ID',
+  `access_key` text DEFAULT NULL COMMENT 'accessKey',
+  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
+  `host` varchar(255) NOT NULL COMMENT '外链域名',
+  `secret_key` text DEFAULT NULL COMMENT 'secretKey',
+  `type` varchar(255) DEFAULT NULL COMMENT '空间类型',
+  `zone` varchar(255) DEFAULT NULL COMMENT '机房',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='七牛云配置';
+
+-- ----------------------------
+-- Table structure for config_qiniu_content
+-- ----------------------------
+DROP TABLE IF EXISTS `config_qiniu_content`;
+CREATE TABLE `config_qiniu_content` (
+  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
+  `name` varchar(255) DEFAULT NULL COMMENT '文件名称',
+  `size` varchar(255) DEFAULT NULL COMMENT '文件大小',
+  `type` varchar(255) DEFAULT NULL COMMENT '文件类型：私有或公开',
+  `url` varchar(255) DEFAULT NULL COMMENT '文件url',
+  `suffix` varchar(255) DEFAULT NULL COMMENT '文件后缀',
+  `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='七牛云文件存储';

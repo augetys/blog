@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.hope.blog.log.model.SysLog;
-import com.hope.blog.security.config.AuthUserDetails;
+import com.hope.blog.common.security.config.AuthUserDetails;
 import com.hope.blog.utils.HttpContextUtil;
 import com.hope.blog.utils.IPUtil;
 import lombok.extern.slf4j.Slf4j;

@@ -50,4 +50,14 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
         }
         return blogCategoryMapper.selectList(queryWrapper);
     }
+
+    @Override
+    public BlogCategory findById(String id) {
+        QueryWrapper<BlogCategory> queryWrapper = new QueryWrapper<>();
+        //构建条件
+        if (!StringUtils.isEmpty(id)) {
+            queryWrapper.eq("id", id);
+        }
+        return blogCategoryMapper.selectOne(queryWrapper);
+    }
 }

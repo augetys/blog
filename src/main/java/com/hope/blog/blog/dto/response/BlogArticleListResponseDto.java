@@ -1,36 +1,18 @@
-package com.hope.blog.blog.model;
+package com.hope.blog.blog.dto.response;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Data;
+
+import java.util.Date;
+import java.util.List;
 
 /**
- * <p>
- * 博客文章表
- * </p>
- *
- * @author lijin
- * @since 2021-07-02
+ * Create by lijin on 2021/7/4 10:15
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@TableName("blog_article")
-@ApiModel(value="BlogArticle对象", description="博客文章表")
-public class BlogArticle implements Serializable {
+public class BlogArticleListResponseDto {
 
-    private static final long serialVersionUID=1L;
-
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @ApiModelProperty(value = "id")
     private String id;
 
     @ApiModelProperty(value = "博客标题")
@@ -51,6 +33,9 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "标签id")
     private String tagId;
 
+    @ApiModelProperty(value = "博客标签")
+    private List<String> tagList;
+
     @ApiModelProperty(value = "封面")
     private String cover;
 
@@ -69,6 +54,9 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "博客分类ID")
     private String articleCategoryId;
 
+    @ApiModelProperty(value = "博客分类名称")
+    private String articleCategoryName;
+
     @ApiModelProperty(value = "排序字段")
     private Integer sort;
 
@@ -76,12 +64,8 @@ public class BlogArticle implements Serializable {
     private Integer openComment;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
-
 }

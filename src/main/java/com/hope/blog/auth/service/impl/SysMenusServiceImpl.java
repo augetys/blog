@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +54,7 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
         List<SysMenus> menuList = list();
         // 先查出一级菜单，先查询对应的子菜单
         return menuList.stream()
-                .filter(menu -> menu.getParentId().equals("0"))
+                .filter(menu -> menu.getParentId().equals("0")).sorted(Comparator.comparing(SysMenus::getSort))
                 .map(menu -> covertMenuNode(menu, menuList)).collect(Collectors.toList());
     }
 
@@ -64,7 +65,7 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
         SysMenusTreeResponseDto node = new SysMenusTreeResponseDto();
         BeanUtils.copyProperties(menu, node);
         List<SysMenusTreeResponseDto> children = menuList.stream()
-                .filter(subMenu -> subMenu.getParentId().equals(menu.getId()))
+                .filter(subMenu -> subMenu.getParentId().equals(menu.getId())).sorted(Comparator.comparing(SysMenus::getSort))
                 .map(subMenu -> covertMenuNode(subMenu, menuList)).collect(Collectors.toList());
         node.setChildren(children);
         return node;

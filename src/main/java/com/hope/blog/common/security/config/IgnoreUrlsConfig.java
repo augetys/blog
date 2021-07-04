@@ -1,4 +1,4 @@
-package com.hope.blog.security.config;
+package com.hope.blog.common.security.config;
 
 import lombok.Getter;
 import lombok.Setter;

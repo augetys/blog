@@ -18,4 +18,6 @@ public interface BlogCategoryService extends IService<BlogCategory> {
     Page<BlogCategory> findListByPage(BlogCategorySearchRequestDto blogCategorySearchRequestDto);
 
     List<BlogCategory> findAll(BlogCategorySearchRequestDto blogCategorySearchRequestDto);
+
+    BlogCategory findById(String id);
 }

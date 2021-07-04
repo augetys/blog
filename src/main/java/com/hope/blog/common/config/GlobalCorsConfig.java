@@ -1,4 +1,4 @@
-package com.hope.blog.config;
+package com.hope.blog.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

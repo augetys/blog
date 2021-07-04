@@ -1,4 +1,4 @@
-package com.hope.blog.config;
+package com.hope.blog.common.config;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;

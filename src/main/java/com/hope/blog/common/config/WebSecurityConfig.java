@@ -1,9 +1,9 @@
-package com.hope.blog.config;
+package com.hope.blog.common.config;
 
-import com.hope.blog.security.config.IgnoreUrlsConfig;
-import com.hope.blog.security.config.JwtAuthenticationTokenFilter;
-import com.hope.blog.security.config.RestAuthenticationEntryPoint;
-import com.hope.blog.security.config.RestfulAccessDeniedHandler;
+import com.hope.blog.common.security.config.IgnoreUrlsConfig;
+import com.hope.blog.common.security.config.JwtAuthenticationTokenFilter;
+import com.hope.blog.common.security.config.RestAuthenticationEntryPoint;
+import com.hope.blog.common.security.config.RestfulAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

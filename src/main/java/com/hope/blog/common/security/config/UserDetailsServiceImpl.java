@@ -1,4 +1,4 @@
-package com.hope.blog.security.config;
+package com.hope.blog.common.security.config;
 
 import com.hope.blog.auth.model.SysUser;
 import com.hope.blog.auth.service.SysUserService;

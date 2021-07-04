@@ -6,6 +6,7 @@ CREATE TABLE `blog_article` (
   `id` varchar(64) NOT NULL,
   `title` varchar(200) DEFAULT NULL COMMENT '博客标题',
   `summary` varchar(200) DEFAULT NULL COMMENT '博客简介',
+  `admin_id` varchar(36) DEFAULT NULL COMMENT '上传人id',
   `content` longtext DEFAULT NULL COMMENT '博客内容',
   `is_publish` int(1) DEFAULT '1' COMMENT '是否发布：0：否，1：是',
   `tag_id` varchar(255) DEFAULT NULL COMMENT '标签id',

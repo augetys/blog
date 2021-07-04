@@ -1,4 +1,4 @@
-package com.hope.blog.security.config;
+package com.hope.blog.common.security.config;
 
 import com.hope.blog.utils.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;

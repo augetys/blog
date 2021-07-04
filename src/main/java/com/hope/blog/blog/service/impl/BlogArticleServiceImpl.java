@@ -7,10 +7,14 @@ import com.hope.blog.blog.model.BlogArticle;
 import com.hope.blog.blog.mapper.BlogArticleMapper;
 import com.hope.blog.blog.service.BlogArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hope.blog.blog.service.BlogCategoryService;
+import com.hope.blog.utils.MarkdownUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 
 /**
@@ -31,11 +35,19 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     @Override
     public Page<BlogArticle> findListByPage(BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
         QueryWrapper<BlogArticle> queryWrapper = new QueryWrapper<>();
-        //构建条件
-        String name = blogArticleSearchRequestDto.getTitle();
-        if (!StringUtils.isEmpty(name)) {
-            queryWrapper.like("title", name);
+        if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTitle())) {
+            queryWrapper.like("title", blogArticleSearchRequestDto.getTitle());
         }
-        return blogArticleMapper.selectPage(new Page<>(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()), queryWrapper);
+        Page<BlogArticle> blogArticlePage = blogArticleMapper.selectPage(new Page<>(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()), queryWrapper);
+        List<BlogArticle> records = blogArticlePage.getRecords();
+        records.forEach(
+                item->{
+                    // html转markdown
+                    String content = item.getContent();
+                    item.setContent(MarkdownUtil.htmlToMarkdown(content));
+                }
+        );
+        blogArticlePage.setRecords(records);
+        return blogArticlePage;
     }
 }
