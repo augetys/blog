@@ -239,6 +239,8 @@ CREATE TABLE `config_email` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮箱配置';
 
+INSERT INTO `config_email` VALUES ('1', '15549402651@163.com', 'smtp.163.com', 'AGUOOJQIDMDAFDUX', '465', 'choot');
+
 -- ----------------------------
 -- Table structure for config_qiniu
 -- ----------------------------
@@ -249,10 +251,12 @@ CREATE TABLE `config_qiniu` (
   `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
   `host` varchar(255) NOT NULL COMMENT '外链域名',
   `secret_key` text DEFAULT NULL COMMENT 'secretKey',
-  `type` varchar(255) DEFAULT NULL COMMENT '空间类型',
-  `zone` varchar(255) DEFAULT NULL COMMENT '机房',
+  `type` varchar(255) DEFAULT NULL COMMENT '空间类型 0私有 1公开',
+  `zone` varchar(255) DEFAULT NULL COMMENT '机房区域',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云配置';
+
+INSERT INTO `config_qiniu` VALUES ('1', '6riz6eaJfEtERl28wRX1pQfHgcn6X-WS69N1xgLx', 'hopelittle', 'http://photo.choot.top', 'LXJ0AfRwisSgLfvqDqLcENjgaTK_76CIEHeFrPT_', '1', '华南');
 
 -- ----------------------------
 -- Table structure for config_local_storage
@@ -278,13 +282,14 @@ CREATE TABLE `config_local_storage` (
 -- ----------------------------
 DROP TABLE IF EXISTS `qiniu_content`;
 CREATE TABLE `qiniu_content` (
-  `content_id` varchar(64) NOT NULL COMMENT 'ID',
+  `id` varchar(64) NOT NULL COMMENT 'ID',
   `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
   `name` varchar(255) DEFAULT NULL COMMENT '文件名称',
   `size` varchar(255) DEFAULT NULL COMMENT '文件大小',
+  `file_key` varchar(255) DEFAULT NULL COMMENT '文件key值',
   `type` varchar(255) DEFAULT NULL COMMENT '文件类型：私有或公开',
   `url` varchar(255) DEFAULT NULL COMMENT '文件url',
   `suffix` varchar(255) DEFAULT NULL COMMENT '文件后缀',
   `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
-  PRIMARY KEY (`content_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云文件存储';

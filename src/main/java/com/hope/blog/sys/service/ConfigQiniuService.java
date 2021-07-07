@@ -1,6 +1,5 @@
 package com.hope.blog.sys.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.model.ConfigQiniu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-07-05
  */
 public interface ConfigQiniuService extends IService<ConfigQiniu> {
-
+    ConfigQiniu find();
 }

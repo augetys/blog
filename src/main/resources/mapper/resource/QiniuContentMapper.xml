@@ -4,7 +4,7 @@
 
         <!-- 通用查询映射结果 -->
         <resultMap id="BaseResultMap" type="com.hope.blog.resource.model.QiniuContent">
-                    <id column="content_id" property="contentId"/>
+                    <id column="id" property="id"/>
                     <result column="bucket" property="bucket"/>
                     <result column="name" property="name"/>
                     <result column="size" property="size"/>
@@ -16,14 +16,19 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-            content_id,
+            id,
             bucket,
             name,
             size,
             type,
+            file_key,
             url,
             suffix,
             update_time
         </sql>
+
+    <select id="findByKey" resultType="com.hope.blog.resource.model.QiniuContent">
+        select <include refid="Base_Column_List"></include> from qiniu_content where file_key=#{fileNameNoEx}
+    </select>
 
 </mapper>

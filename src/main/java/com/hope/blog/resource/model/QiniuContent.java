@@ -31,14 +31,17 @@ public class QiniuContent implements Serializable {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "ID")
-    @TableId(value = "content_id", type = IdType.ASSIGN_UUID)
-    private String contentId;
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
 
     @ApiModelProperty(value = "Bucket 识别符")
     private String bucket;
 
     @ApiModelProperty(value = "文件名称")
     private String name;
+
+    @ApiModelProperty(value = "文件key值")
+    private String fileKey;
 
     @ApiModelProperty(value = "文件大小")
     private String size;

@@ -37,8 +37,8 @@ public class ConfigEmailServiceImpl extends ServiceImpl<ConfigEmailMapper, Confi
     }
 
     @Override
-    public boolean send(EmailSendRequestDto emailSendRequestDto,ConfigEmail emailConfig) {
-        if (emailConfig==null){
+    public boolean send(EmailSendRequestDto emailSendRequestDto, ConfigEmail emailConfig) {
+        if (emailConfig == null) {
             Asserts.fail("请先设置邮箱配置");
         }
         // 封装
@@ -48,7 +48,7 @@ public class ConfigEmailServiceImpl extends ServiceImpl<ConfigEmailMapper, Confi
         account.setHost(emailConfig.getHost());
         account.setPort(Integer.parseInt(emailConfig.getPort()));
         account.setAuth(true);
-        account.setFrom(emailConfig.getUser()+"<"+emailConfig.getFromUser()+">");
+        account.setFrom(emailConfig.getUser() + "<" + emailConfig.getFromUser() + ">");
         account.setPass(emailConfig.getPass());
         // ssl方式发送
         account.setSslEnable(true);
@@ -67,8 +67,9 @@ public class ConfigEmailServiceImpl extends ServiceImpl<ConfigEmailMapper, Confi
                     .setUseGlobalSession(false)
                     .send();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+            Asserts.fail("邮件发送失败！");
         }
         return false;
     }

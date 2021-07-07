@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface QiniuContentMapper extends BaseMapper<QiniuContent> {
 
+    QiniuContent findByKey(String fileNameNoEx);
+
 }
