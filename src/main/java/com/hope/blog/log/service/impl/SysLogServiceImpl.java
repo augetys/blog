@@ -2,7 +2,7 @@ package com.hope.blog.log.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hope.blog.log.dto.request.SysLogListRequestDto;
+import com.hope.blog.log.dto.request.SysLogSearchRequestDto;
 import com.hope.blog.log.model.SysLog;
 import com.hope.blog.log.mapper.SysLogMapper;
 import com.hope.blog.log.service.SysLogService;
@@ -32,7 +32,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
     private SysLogMapper sysLogMapper;
 
     @Override
-    public List<SysLog> findListByPage(SysLogListRequestDto sysLog) {
+    public Page<SysLog> findListByPage(SysLogSearchRequestDto sysLog) {
         QueryWrapper<SysLog> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(sysLog.getOperation())) {
             queryWrapper.like("operation", sysLog.getOperation());
@@ -45,6 +45,6 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
             queryWrapper.between("create_time", DateUtil.format(startTime.get(0), DateUtil.DATE_FORMAT_SECOND), DateUtil.format(startTime.get(1), DateUtil.DATE_FORMAT_SECOND));
         }
         queryWrapper.lambda().orderByAsc(SysLog::getCreateTime);
-        return sysLogMapper.selectPage(new Page<>(sysLog.getPageNum(), sysLog.getPageSize()), queryWrapper).getRecords();
+        return sysLogMapper.selectPage(new Page<>(sysLog.getPageNum(), sysLog.getPageSize()), queryWrapper);
     }
 }

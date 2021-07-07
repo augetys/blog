@@ -5,8 +5,9 @@ start(){
 }
 stop(){
 	echo "停止blog-1.0.0-SNAPSHOT.jar服务..."
-	kill -9 $(ps -ef | grep blog-1.0.0-SNAPSHOT.jar | grep -v grep)
-                echo "停止完成..."
+  pid=`ps -ef | grep blog-1.0.0-SNAPSHOT.jar | grep -v grep | awk '{print $2}'`
+	kill -9 $pid
+  echo "停止完成..."
 }
 case $1 in
   start)

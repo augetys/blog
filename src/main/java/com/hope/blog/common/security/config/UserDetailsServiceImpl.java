@@ -1,7 +1,7 @@
 package com.hope.blog.common.security.config;
 
-import com.hope.blog.auth.model.SysUser;
-import com.hope.blog.auth.service.SysUserService;
+import com.hope.blog.sys.model.SysUser;
+import com.hope.blog.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

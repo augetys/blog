@@ -1,8 +1,8 @@
 package ${package.Controller};
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hope.blog.blog.model.${entity};
-import com.hope.blog.blog.service.${table.serviceName};
+import com.hope.blog.${package.ModuleName}.model.${entity};
+import com.hope.blog.${package.ModuleName}.service.${table.serviceName};
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
@@ -12,7 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;

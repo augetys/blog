@@ -1,7 +1,7 @@
 package com.hope.blog.common.security.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hope.blog.auth.model.SysUser;
+import com.hope.blog.sys.model.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;

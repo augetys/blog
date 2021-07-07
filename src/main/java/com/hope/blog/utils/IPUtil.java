@@ -14,6 +14,9 @@ import java.net.UnknownHostException;
 
 /**
  * ip地址工具类
+ * 线上环境获取city下的文件有问题，需要创建临时目录存储
+ * http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true 此接口也可以查询ip归属
+ * 目前用的方法是不需要调用第三方接口获取ip所属
  * Created by lijin on  2021/4/2
  */
 @Slf4j

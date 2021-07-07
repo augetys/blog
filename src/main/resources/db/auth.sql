@@ -22,7 +22,6 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('da6d966d37fcb819546064424a8bdd9f', 'admin', '$2a$10$KJMluGRhQ2ZrOzXck9t5M.k93Y30h6UuX0obPDVbZZ9Zsk/LMX5zi', 'http://photo.choot.top/test', NULL, '小甜瓜', NULL, '2021-05-13 14:35:29', NULL, 1,0);
 
-
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
@@ -40,7 +39,6 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('e8a1d847a93cf5cc541731be3c12fd87', '超级管理员','超级管理员', '2021-05-14 14:10:38', '2021-05-14 14:10:38');
-
 
 -- ----------------------------
 -- Table structure for sys_menus
@@ -100,7 +98,6 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', 'da6d966d37fcb819546064424a8bdd9f', 'e8a1d847a93cf5cc541731be3c12fd87', '2021-05-14 14:11:08', NULL);
 
-
 -- ----------------------------
 -- Table structure for sys_role_menus
 -- ----------------------------
@@ -137,9 +134,6 @@ INSERT INTO `sys_role_menus` VALUES ('17', 'e8a1d847a93cf5cc541731be3c12fd87', '
 INSERT INTO `sys_role_menus` VALUES ('18', 'e8a1d847a93cf5cc541731be3c12fd87', '18', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('19', 'e8a1d847a93cf5cc541731be3c12fd87', '19', '2021-05-18 15:06:32', NULL);
 
-
-
-
 -- ----------------------------
 -- Table structure for sys_user_menus
 -- ----------------------------
@@ -153,15 +147,14 @@ CREATE TABLE `sys_user_menus` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='后台用户与权限附加表';
 
-
 -- ----------------------------
 -- Table structure for sys_log
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE `sys_log` (
-  `id` varchar(32) NOT NULL COMMENT '唯一id',
+  `id` varchar(64) NOT NULL COMMENT '唯一id',
   `user_name` varchar(255) NOT NULL COMMENT '用户名',
-  `user_id` varchar(32) DEFAULT NULL COMMENT '管理员uid',
+  `user_id` varchar(64) DEFAULT NULL COMMENT '管理员uid',
   `ip` varchar(50) DEFAULT NULL COMMENT '请求ip地址',
   `ip_address` varchar(50) DEFAULT NULL COMMENT 'ip所属地',
   `url` varchar(255) DEFAULT NULL COMMENT '请求url',
@@ -176,39 +169,60 @@ CREATE TABLE `sys_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志表';
 
+-- ----------------------------
+-- Table structure for sys_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_exception_log`;
+CREATE TABLE `sys_exception_log` (
+  `id` varchar(64) NOT NULL COMMENT '唯一id',
+  `ip` varchar(50) DEFAULT NULL COMMENT '请求ip地址',
+  `user_name` varchar(255) NOT NULL COMMENT '用户名',
+  `user_id` varchar(64) DEFAULT NULL COMMENT '管理员uid',
+  `ip_address` varchar(50) DEFAULT NULL COMMENT 'ip所属地',
+  `method` varchar(32) DEFAULT NULL COMMENT '请求方法名',
+  `url` varchar(255) DEFAULT NULL COMMENT '请求url',
+  `operation` varchar(32) DEFAULT NULL COMMENT '描述',
+  `params` longtext COMMENT '请求参数',
+  `exceptionJson` mediumtext COMMENT '异常对象json格式',
+  `exceptionMessage` mediumtext COMMENT '异常简单信息,等同于e.getMessage',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='异常日志表';
 
 -- ----------------------------
 -- Table structure for sys_dict
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict` (
-  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` varchar(64) NOT NULL COMMENT 'ID',
   `name` varchar(255) NOT NULL COMMENT '字典名称',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
+  `sort` int(5) DEFAULT NULL COMMENT '排序',
+  `status` int(1) DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
   `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='数据字典';
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据字典';
 
 -- ----------------------------
 -- Table structure for sys_dict_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_detail`;
 CREATE TABLE `sys_dict_detail` (
-  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` varchar(64) NOT NULL COMMENT 'ID',
   `dict_id` bigint(11) DEFAULT NULL COMMENT '字典id',
   `label` varchar(255) NOT NULL COMMENT '字典标签',
   `value` varchar(255) NOT NULL COMMENT '字典值',
-  `dict_sort` int(5) DEFAULT NULL COMMENT '排序',
+  `sort` int(5) DEFAULT NULL COMMENT '排序',
   `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='数据字典详情';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据字典详情';
 
 
 -- ----------------------------
@@ -216,21 +230,36 @@ CREATE TABLE `sys_dict_detail` (
 -- ----------------------------
 DROP TABLE IF EXISTS `config_email`;
 CREATE TABLE `config_email` (
-  `config_id` varchar(32) NOT NULL COMMENT 'ID',
-  `from_user` varchar(255) DEFAULT NULL COMMENT '收件人',
+  `id` varchar(64) NOT NULL COMMENT 'ID',
+  `from_user` varchar(255) DEFAULT NULL COMMENT '发件人',
   `host` varchar(255) DEFAULT NULL COMMENT '邮件服务器SMTP地址',
   `pass` varchar(255) DEFAULT NULL COMMENT '密码',
   `port` varchar(255) DEFAULT NULL COMMENT '端口',
   `user` varchar(255) DEFAULT NULL COMMENT '发件者用户名',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='邮箱配置';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮箱配置';
+
+-- ----------------------------
+-- Table structure for config_qiniu
+-- ----------------------------
+DROP TABLE IF EXISTS `config_qiniu`;
+CREATE TABLE `config_qiniu` (
+  `id` varchar(64) NOT NULL COMMENT 'ID',
+  `access_key` text DEFAULT NULL COMMENT 'accessKey',
+  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
+  `host` varchar(255) NOT NULL COMMENT '外链域名',
+  `secret_key` text DEFAULT NULL COMMENT 'secretKey',
+  `type` varchar(255) DEFAULT NULL COMMENT '空间类型',
+  `zone` varchar(255) DEFAULT NULL COMMENT '机房',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云配置';
 
 -- ----------------------------
 -- Table structure for config_local_storage
 -- ----------------------------
-DROP TABLE IF EXISTS `config_local_storage`;
+DROP TABLE IF EXISTS `local_storage`;
 CREATE TABLE `config_local_storage` (
-  `storage_id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` varchar(64) NOT NULL COMMENT 'ID',
   `real_name` varchar(255) DEFAULT NULL COMMENT '文件真实的名称',
   `name` varchar(255) DEFAULT NULL COMMENT '文件名',
   `suffix` varchar(255) DEFAULT NULL COMMENT '后缀',
@@ -242,29 +271,14 @@ CREATE TABLE `config_local_storage` (
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='本地存储';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='本地存储';
 
 -- ----------------------------
--- Table structure for config_qiniu
+-- Table structure for qiniu_content
 -- ----------------------------
-DROP TABLE IF EXISTS `config_qiniu`;
-CREATE TABLE `config_qiniu` (
-  `id` varchar(32) NOT NULL COMMENT 'ID',
-  `access_key` text DEFAULT NULL COMMENT 'accessKey',
-  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
-  `host` varchar(255) NOT NULL COMMENT '外链域名',
-  `secret_key` text DEFAULT NULL COMMENT 'secretKey',
-  `type` varchar(255) DEFAULT NULL COMMENT '空间类型',
-  `zone` varchar(255) DEFAULT NULL COMMENT '机房',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='七牛云配置';
-
--- ----------------------------
--- Table structure for config_qiniu_content
--- ----------------------------
-DROP TABLE IF EXISTS `config_qiniu_content`;
-CREATE TABLE `config_qiniu_content` (
-  `id` varchar(32) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+DROP TABLE IF EXISTS `qiniu_content`;
+CREATE TABLE `qiniu_content` (
+  `content_id` varchar(64) NOT NULL COMMENT 'ID',
   `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
   `name` varchar(255) DEFAULT NULL COMMENT '文件名称',
   `size` varchar(255) DEFAULT NULL COMMENT '文件大小',
@@ -272,5 +286,5 @@ CREATE TABLE `config_qiniu_content` (
   `url` varchar(255) DEFAULT NULL COMMENT '文件url',
   `suffix` varchar(255) DEFAULT NULL COMMENT '文件后缀',
   `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='七牛云文件存储';
+  PRIMARY KEY (`content_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云文件存储';

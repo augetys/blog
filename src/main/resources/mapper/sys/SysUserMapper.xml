@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hope.blog.sys.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hope.blog.sys.model.SysUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="icon" property="icon"/>
+        <result column="email" property="email"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="note" property="note"/>
+        <result column="create_time" property="createTime"/>
+        <result column="login_time" property="loginTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <update id="updateStatus">
+        update sys_user set status=#{status} where id=#{id}
+    </update>
+
+    <select id="getMenus" resultType="com.hope.blog.sys.model.SysMenus">
+        SELECT
+            c.*
+        FROM
+            sys_role_menus a
+            LEFT JOIN sys_user_role b ON a.role_id = b.role_id
+            LEFT JOIN sys_menus c ON a.menu_id = c.id
+        WHERE
+            b.user_id = #{userId}
+    </select>
+
+    <select id="getRoles" resultType="com.hope.blog.sys.model.SysRole">
+        SELECT
+        id,
+        name,
+        description,
+        create_time,
+        update_time
+        FROM
+        sys_role
+        WHERE
+        id IN ( SELECT role_id FROM sys_user_role WHERE user_id = #{userId} )
+    </select>
+
+</mapper>

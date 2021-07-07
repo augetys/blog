@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hope.blog.sys.mapper.ConfigQiniuMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.hope.blog.sys.model.ConfigQiniu">
+                    <id column="id" property="id"/>
+                    <result column="access_key" property="accessKey"/>
+                    <result column="bucket" property="bucket"/>
+                    <result column="host" property="host"/>
+                    <result column="secret_key" property="secretKey"/>
+                    <result column="type" property="type"/>
+                    <result column="zone" property="zone"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id,
+            access_key,
+            bucket,
+            host,
+            secret_key,
+            type,
+            zone
+        </sql>
+
+</mapper>

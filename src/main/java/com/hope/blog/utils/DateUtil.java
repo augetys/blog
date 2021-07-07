@@ -338,4 +338,63 @@ public class DateUtil {
         // long sec = diff % nd % nh % nm / ns;
         return day + "天" + hour + "小时" + min + "分钟";
     }
+
+    /**
+     * 获取上个月的同一天
+     * 像有些月的前一个月是没有31号的，则默认用这个月的31号去与上个月的30;另外2月份也是一个特殊的月，闰年时为29天，非闰年为28天，所以闰年的3月份的30，31的上个月为29号，非闰年的29，30，31号的上一个月的同一天为28号。还有就是这个月是1月，这上个月是去年的12月。
+     * @param date
+     * @return
+     */
+    public Date getBefore(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        long millis = getBefore(calendar);
+        calendar.setTimeInMillis(millis);
+
+        return calendar.getTime();
+    }
+
+    private long getBefore(Calendar c) {
+        int month = (c.get(Calendar.MONTH) + 1);
+        long monthMillis = 0;
+        switch (month) {
+            // 31 day
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                monthMillis = calculateMillis(31);
+                break;
+            // 30 day
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                monthMillis = calculateMillis(30);
+                break;
+            // 2 month
+            default:
+                if (isLeapYear(c)) {
+                    monthMillis = calculateMillis(29);
+                } else {
+                    monthMillis = calculateMillis(28);
+                }
+                break;
+        }
+        System.out.println(monthMillis);
+        return (c.getTimeInMillis() - monthMillis);
+    }
+
+    private long calculateMillis(int month) {
+        return month * (long) 24 * 60 * 60 * 1000;
+    }
+
+    private boolean isLeapYear(Calendar calendar) {
+        int year = calendar.get(Calendar.YEAR);
+        return (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0));
+    }
 }

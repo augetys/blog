@@ -1,6 +1,7 @@
 package com.hope.blog.log.controller;
 
-import com.hope.blog.log.dto.request.SysLogListRequestDto;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.log.dto.request.SysLogSearchRequestDto;
 import com.hope.blog.log.model.SysLog;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
@@ -26,7 +27,7 @@ import java.util.List;
  */
 @Api(tags = "操作日志表")
 @RestController
-@RequestMapping("/sys/log")
+@RequestMapping("/log/operation")
     public class SysLogController {
 
     @Autowired
@@ -37,8 +38,8 @@ import java.util.List;
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<SysLog>> findListByPage(@ApiParam @RequestBody SysLogListRequestDto sysLog){
-        List<SysLog> list=sysLogService.findListByPage(sysLog);
+    public CommonResult<CommonPage<SysLog>> findListByPage(@ApiParam @RequestBody SysLogSearchRequestDto sysLog){
+        Page<SysLog> list=sysLogService.findListByPage(sysLog);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
