@@ -12,6 +12,9 @@ import com.qiniu.util.Auth;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 
 /**
@@ -79,4 +82,16 @@ public class QiniuUtil {
         }
     }
 
+
+    /**
+     * 生成七牛云文件名
+     * 规则为日期加上文件hash值
+     *
+     * @return
+     */
+    public static String createFileName(String file) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        return sdf.format(date) + "-" + UUID.randomUUID().toString().replace("-", "") + FileUtil.getExtensionName(file);
+    }
 }

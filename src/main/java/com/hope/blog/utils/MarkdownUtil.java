@@ -18,7 +18,6 @@ public class MarkdownUtil {
     public static String htmlToMarkdown(String html) {
         MutableDataSet options = new MutableDataSet();
         String markdown = FlexmarkHtmlConverter.builder(options).build().convert(html);
-        System.out.println(markdown);
         return markdown;
     }
 
@@ -32,7 +31,6 @@ public class MarkdownUtil {
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
         Node document = parser.parse(markdown);
-        String html = renderer.render(document);
-        return html;
+        return renderer.render(document);
     }
 }

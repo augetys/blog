@@ -17,6 +17,7 @@ import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -49,7 +50,7 @@ public class QiniuServiceImpl implements QiniuService {
         Auth auth = Auth.create(configQiniu.getAccessKey(), configQiniu.getSecretKey());
         String upToken = auth.uploadToken(configQiniu.getBucket());
         try {
-            String key = file.getOriginalFilename();
+            String key = QiniuUtil.createFileName(file.getOriginalFilename());
             Response response = uploadManager.put(file.getBytes(), key, upToken);
             //解析上传成功的结果
             DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
@@ -64,8 +65,8 @@ public class QiniuServiceImpl implements QiniuService {
                 qiniuContent.setUrl(configQiniu.getHost() + "/" + putRet.key);
                 qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
                 qiniuContentMapper.insert(qiniuContent);
+                return qiniuContent;
             }
-            return content;
         } catch (Exception e) {
             e.printStackTrace();
             Asserts.fail("文件上传失败！");

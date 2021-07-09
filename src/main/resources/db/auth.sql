@@ -61,24 +61,35 @@ CREATE TABLE `sys_menus` (
 -- Records of sys_menus
 -- ----------------------------
 INSERT INTO `sys_menus` VALUES ('1', '0', '首页', '/home', 'home', 10, 0, '2021-05-18 15:06:06', '2021-05-18 15:06:08');
-INSERT INTO `sys_menus` VALUES ('2', '0', '系统管理', '/sys', 'sys', 20, 0, '2021-05-17 08:00:00', '2021-06-16 09:33:06');
-INSERT INTO `sys_menus` VALUES ('3', '2', '用户管理', '/sys/user', 'sys-user', 30, 1, '2021-05-17 11:49:04', '2021-05-17 11:49:04');
-INSERT INTO `sys_menus` VALUES ('4', '2', '角色管理', '/sys/role', 'sys-role', 40, 1, '2021-05-17 11:49:04', '2021-05-17 11:49:04');
-INSERT INTO `sys_menus` VALUES ('5', '2', '菜单管理', '/sys/menu', 'sys-menu', 50, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('6', '2', '代码生成', '/sys/code', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('7', '2', '字典管理', '/sys/dict', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('8', '2', '系统配置', '/sys/config', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('9', '0', '日志管理', '/log', 'sys-config', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('10', '9', '操作日志', '/sys/log', 'sys-log', 70, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
-INSERT INTO `sys_menus` VALUES ('11', '9', '异常日志', '/sys/exception', 'sys-log', 70, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
-INSERT INTO `sys_menus` VALUES ('12', '0', '监控中心', '/monitor', 'monitor', 80, 0, '2021-06-16 13:05:30', '2021-06-16 13:05:30');
-INSERT INTO `sys_menus` VALUES ('13', '12', '服务器监控', '/monitor/system', 'monitor', 90, 1, '2021-06-16 13:05:50', '2021-06-16 13:05:50');
-INSERT INTO `sys_menus` VALUES ('14', '12', 'druid', '/monitor/druid', 'monitor-druid', 100, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('15', '0', '博客管理', '/blog', 'blog', 110, 0, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('16', '15', '文章管理', '/blog/article', 'blog-article', 120, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('17', '15', '分类管理', '/blog/category', 'blog-category', 130, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('18', '15', '标签管理', '/blog/tag', 'blog-tag', 140, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('19', '15', '评论管理', '/blog/comment', 'blog-comment', 150, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+
+INSERT INTO `sys_menus` VALUES ('2', '0', '博客管理', '/blog', 'blog', 20, 0, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('3', '2', '文章管理', '/blog/article', 'blog-article', 30, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('4', '2', '分类管理', '/blog/category', 'blog-category', 40, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('5', '2', '标签管理', '/blog/tag', 'blog-tag', 50, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('6', '2', '评论管理', '/blog/comment', 'blog-comment', 60, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+
+INSERT INTO `sys_menus` VALUES ('10', '0', '系统工具', '/tool', 'tool', 70, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('11', '10', '邮件', '/tool/email', 'tool-email', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('12', '10', '代码生成', '/tool/code', 'tool-code', 61, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+
+INSERT INTO `sys_menus` VALUES ('20', '0', '资源管理', '/resource', 'resource', 80, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('21', '20', '七牛云', '/resource/qiniu', 'resource-qiniu', 90, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('22', '20', '本地存储', '/resource/localStorage', 'resource-localStorage', 100, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+
+INSERT INTO `sys_menus` VALUES ('30', '0', '监控中心', '/monitor', 'monitor', 110, 0, '2021-06-16 13:05:30', '2021-06-16 13:05:30');
+INSERT INTO `sys_menus` VALUES ('31', '30', '服务器监控', '/monitor/system', 'monitor', 120, 1, '2021-06-16 13:05:50', '2021-06-16 13:05:50');
+INSERT INTO `sys_menus` VALUES ('32', '30', 'druid', '/monitor/druid', 'monitor-druid', 130, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('33', '30', '操作日志', '/monitor/log', 'monitor-log', 140, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
+INSERT INTO `sys_menus` VALUES ('34', '30', '异常日志', '/monitor/exception', 'monitor-exception', 150, 1, '2021-06-16 08:00:00', '2021-06-16 14:48:31');
+
+INSERT INTO `sys_menus` VALUES ('40', '0', '系统管理', '/sys', 'sys', 160, 0, '2021-05-17 08:00:00', '2021-06-16 09:33:06');
+INSERT INTO `sys_menus` VALUES ('41', '40', '用户管理', '/sys/user', 'sys-user', 170, 1, '2021-05-17 11:49:04', '2021-05-17 11:49:04');
+INSERT INTO `sys_menus` VALUES ('42', '40', '角色管理', '/sys/role', 'sys-role', 180, 1, '2021-05-17 11:49:04', '2021-05-17 11:49:04');
+INSERT INTO `sys_menus` VALUES ('43', '40', '菜单管理', '/sys/menu', 'sys-menu', 190, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('44', '40', '字典管理', '/sys/dict', 'sys-dict', 200, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('45', '40', '定时任务', '/sys/task', 'sys-task', 210, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+
+
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -120,19 +131,23 @@ INSERT INTO `sys_role_menus` VALUES ('3', 'e8a1d847a93cf5cc541731be3c12fd87', '3
 INSERT INTO `sys_role_menus` VALUES ('4', 'e8a1d847a93cf5cc541731be3c12fd87', '4', '2021-05-18 11:32:24', NULL);
 INSERT INTO `sys_role_menus` VALUES ('5', 'e8a1d847a93cf5cc541731be3c12fd87', '5', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('6', 'e8a1d847a93cf5cc541731be3c12fd87', '6', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('7', 'e8a1d847a93cf5cc541731be3c12fd87', '7', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('8', 'e8a1d847a93cf5cc541731be3c12fd87', '8', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('9', 'e8a1d847a93cf5cc541731be3c12fd87', '9', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('10', 'e8a1d847a93cf5cc541731be3c12fd87', '10', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('11', 'e8a1d847a93cf5cc541731be3c12fd87', '11', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('12', 'e8a1d847a93cf5cc541731be3c12fd87', '12', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('13', 'e8a1d847a93cf5cc541731be3c12fd87', '13', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('14', 'e8a1d847a93cf5cc541731be3c12fd87', '14', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('15', 'e8a1d847a93cf5cc541731be3c12fd87', '15', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('16', 'e8a1d847a93cf5cc541731be3c12fd87', '16', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('17', 'e8a1d847a93cf5cc541731be3c12fd87', '17', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('18', 'e8a1d847a93cf5cc541731be3c12fd87', '18', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('19', 'e8a1d847a93cf5cc541731be3c12fd87', '19', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('7', 'e8a1d847a93cf5cc541731be3c12fd87', '10', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('8', 'e8a1d847a93cf5cc541731be3c12fd87', '11', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('9', 'e8a1d847a93cf5cc541731be3c12fd87', '20', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('10', 'e8a1d847a93cf5cc541731be3c12fd87', '21', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('11', 'e8a1d847a93cf5cc541731be3c12fd87', '22', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('12', 'e8a1d847a93cf5cc541731be3c12fd87', '30', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('13', 'e8a1d847a93cf5cc541731be3c12fd87', '31', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('14', 'e8a1d847a93cf5cc541731be3c12fd87', '32', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('15', 'e8a1d847a93cf5cc541731be3c12fd87', '33', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('16', 'e8a1d847a93cf5cc541731be3c12fd87', '34', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('17', 'e8a1d847a93cf5cc541731be3c12fd87', '40', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('18', 'e8a1d847a93cf5cc541731be3c12fd87', '41', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('19', 'e8a1d847a93cf5cc541731be3c12fd87', '42', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('20', 'e8a1d847a93cf5cc541731be3c12fd87', '43', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('21', 'e8a1d847a93cf5cc541731be3c12fd87', '44', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('22', 'e8a1d847a93cf5cc541731be3c12fd87', '45', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('23', 'e8a1d847a93cf5cc541731be3c12fd87', '12', '2021-05-18 15:06:32', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_menus
