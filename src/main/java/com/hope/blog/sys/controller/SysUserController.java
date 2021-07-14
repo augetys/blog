@@ -71,6 +71,7 @@ public class SysUserController {
     @PostMapping(value = "/create")
     @OperationLog(value = "新增用户")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody SysUser sysUser) {
+        int i=10/0;
         String encodePassword = passwordEncoder.encode(CommonConstant.PASSWORD);
         sysUser.setPassword(encodePassword);
         boolean success = iSysUserService.saveOrUpdate(sysUser);

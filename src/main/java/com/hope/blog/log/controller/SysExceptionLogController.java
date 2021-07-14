@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "异常日志表")
 @RestController
-@RequestMapping("/log/sysExceptionLog")
+@RequestMapping("/log/exception")
     public class SysExceptionLogController {
 
     @Autowired

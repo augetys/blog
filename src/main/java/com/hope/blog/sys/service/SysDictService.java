@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
 import com.hope.blog.sys.model.SysDict;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hope.blog.sys.model.SysDictDetail;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysDictService extends IService<SysDict> {
     Page<SysDict> findListByPage(SysDictSearchRequestDto sysDictSearchRequestDto);
+
+    List<SysDictDetail> getDetailById(String id);
 }

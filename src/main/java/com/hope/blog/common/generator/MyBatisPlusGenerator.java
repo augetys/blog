@@ -112,11 +112,11 @@ public class MyBatisPlusGenerator {
     private static TemplateConfig initTemplateConfig() {
         TemplateConfig templateConfig = new TemplateConfig();
         //可以对controller、service、entity模板进行配置
-        templateConfig.setController("/templates/controller.java.vm");
-        templateConfig.setEntity("/templates/entity.java.vm");
-        templateConfig.setService("/templates/service.java.vm");
-        templateConfig.setMapper("/templates/mapper.java.vm");
-        templateConfig.setServiceImpl("/templates/serviceImpl.java.vm");
+        templateConfig.setController("/templates/generator/controller.java.vm");
+        templateConfig.setEntity("/templates/generator/entity.java.vm");
+        templateConfig.setService("/templates/generator/service.java.vm");
+        templateConfig.setMapper("/templates/generator/mapper.java.vm");
+        templateConfig.setServiceImpl("/templates/generator/serviceImpl.java.vm");
         //mapper.xml模板需单独配置,配置后不会在mapper中生成xml文件夹
         templateConfig.setXml(null);
         return templateConfig;

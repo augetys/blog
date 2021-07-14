@@ -8,7 +8,6 @@
                     <result column="name" property="name"/>
                     <result column="description" property="description"/>
                     <result column="sort" property="sort"/>
-                    <result column="status" property="status"/>
                     <result column="create_by" property="createBy"/>
                     <result column="update_by" property="updateBy"/>
                     <result column="create_time" property="createTime"/>
@@ -21,7 +20,6 @@
             name,
             description,
             sort,
-            status,
             create_by,
             update_by,
             create_time,

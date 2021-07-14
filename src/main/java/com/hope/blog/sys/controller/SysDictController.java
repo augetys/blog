@@ -3,6 +3,7 @@ package com.hope.blog.sys.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
 import com.hope.blog.sys.model.SysDict;
+import com.hope.blog.sys.model.SysDictDetail;
 import com.hope.blog.sys.service.SysDictService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * <p>
  * 数据字典 前端控制器
@@ -27,8 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "数据字典")
 @RestController
-@RequestMapping("/sys/sysDict")
-    public class SysDictController {
+@RequestMapping("/sys/dict")
+public class SysDictController {
 
     @Autowired
     private SysDictService iSysDictService;
@@ -38,8 +41,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<SysDict>> findListByPage(@ApiParam @RequestBody SysDictSearchRequestDto sysDictSearchRequestDto){
-        Page<SysDict> list=iSysDictService.findListByPage(sysDictSearchRequestDto);
+    public CommonResult<CommonPage<SysDict>> findListByPage(@ApiParam @RequestBody SysDictSearchRequestDto sysDictSearchRequestDto) {
+        Page<SysDict> list = iSysDictService.findListByPage(sysDictSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -49,8 +52,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
-    public CommonResult<SysDict> getById(@PathVariable String id){
-    SysDict entity=iSysDictService.getById(id);
+    public CommonResult<SysDict> getById(@PathVariable String id) {
+        SysDict entity = iSysDictService.getById(id);
         return CommonResult.success(entity);
     }
 
@@ -59,10 +62,10 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysDict entity){
-        boolean success=iSysDictService.saveOrUpdate(entity);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysDict entity) {
+        boolean success = iSysDictService.saveOrUpdate(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
@@ -72,25 +75,35 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
-    public CommonResult<ResultCode> delete(@PathVariable String id){
-        boolean success=iSysDictService.removeById(id);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> delete(@PathVariable String id) {
+        boolean success = iSysDictService.removeById(id);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
 
-     /**
+    /**
      * 修改单条记录
      */
-     @ApiOperation(value = "修改单条记录")
-     @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody SysDict entity){
-        boolean success=iSysDictService.updateById(entity);
-        if (success){
-        return CommonResult.success();
+    @ApiOperation(value = "修改单条记录")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody SysDict entity) {
+        boolean success = iSysDictService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
-     }
+    }
+
+    /**
+     * 根据id查询
+     */
+    @ApiOperation(value = "根据id查询数据")
+    @GetMapping(value = "/getDetailById/{id}")
+    public CommonResult<List<SysDictDetail>> getDetailById(@PathVariable String id) {
+        List<SysDictDetail> entity = iSysDictService.getDetailById(id);
+        return CommonResult.success(entity);
+    }
 }
 

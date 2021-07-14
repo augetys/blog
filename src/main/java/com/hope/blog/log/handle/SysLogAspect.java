@@ -11,6 +11,7 @@ import com.hope.blog.log.model.SysLog;
 import com.hope.blog.common.security.config.AuthUserDetails;
 import com.hope.blog.utils.HttpContextUtil;
 import com.hope.blog.utils.IPUtil;
+import com.hope.blog.utils.ThrowableUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -84,9 +85,7 @@ public class SysLogAspect {
         exception.setMethod(joinPoint.getSignature().getName());
         exception.setParams(JSONObject.toJSONString(getFieldsName(joinPoint)));
         exception.setUrl(request.getRequestURI());
-        exception.setExceptionJson(JSON.toJSONString(e,
-                SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteMapNullValue));
+        exception.setExceptionJson(ThrowableUtil.getStackTrace(e));
         exception.setExceptionMessage(e.getMessage());
         AuthUserDetails securityUser = (AuthUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         exception.setUserName(securityUser.getUsername());

@@ -3,14 +3,18 @@ package com.hope.blog.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
+import com.hope.blog.sys.mapper.SysDictDetailMapper;
 import com.hope.blog.sys.model.SysDict;
 import com.hope.blog.sys.mapper.SysDictMapper;
+import com.hope.blog.sys.model.SysDictDetail;
 import com.hope.blog.sys.service.SysDictService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * <p>
@@ -27,6 +31,9 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     @Autowired
     private SysDictMapper sysDictMapper;
 
+    @Autowired
+    private SysDictDetailMapper sysDictDetailMapper;
+
     @Override
     public Page<SysDict> findListByPage(SysDictSearchRequestDto sysDictSearchRequestDto) {
         QueryWrapper<SysDict> queryWrapper = new QueryWrapper<>();
@@ -35,5 +42,15 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         }
         queryWrapper.lambda().orderByAsc(SysDict::getSort);
         return sysDictMapper.selectPage(new Page<>(sysDictSearchRequestDto.getPageNum(), sysDictSearchRequestDto.getPageSize()), queryWrapper);
+    }
+
+    @Override
+    public List<SysDictDetail> getDetailById(String id) {
+        QueryWrapper<SysDictDetail> queryWrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(id)) {
+            queryWrapper.eq("dict_id", id);
+            return sysDictDetailMapper.selectList(queryWrapper);
+        }
+        return null;
     }
 }

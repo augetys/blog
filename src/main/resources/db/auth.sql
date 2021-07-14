@@ -87,7 +87,7 @@ INSERT INTO `sys_menus` VALUES ('41', '40', '用户管理', '/sys/user', 'sys-us
 INSERT INTO `sys_menus` VALUES ('42', '40', '角色管理', '/sys/role', 'sys-role', 180, 1, '2021-05-17 11:49:04', '2021-05-17 11:49:04');
 INSERT INTO `sys_menus` VALUES ('43', '40', '菜单管理', '/sys/menu', 'sys-menu', 190, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
 INSERT INTO `sys_menus` VALUES ('44', '40', '字典管理', '/sys/dict', 'sys-dict', 200, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('45', '40', '定时任务', '/sys/task', 'sys-task', 210, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
+INSERT INTO `sys_menus` VALUES ('45', '40', '任务调度', '/sys/task', 'sys-task', 210, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
 
 
 
@@ -214,7 +214,6 @@ CREATE TABLE `sys_dict` (
   `name` varchar(255) NOT NULL COMMENT '字典名称',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
   `sort` int(5) DEFAULT NULL COMMENT '排序',
-  `status` int(1) DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
   `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
@@ -228,10 +227,11 @@ CREATE TABLE `sys_dict` (
 DROP TABLE IF EXISTS `sys_dict_detail`;
 CREATE TABLE `sys_dict_detail` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
-  `dict_id` bigint(11) DEFAULT NULL COMMENT '字典id',
+  `dict_id` varchar(64) DEFAULT NULL COMMENT '字典id',
   `label` varchar(255) NOT NULL COMMENT '字典标签',
   `value` varchar(255) NOT NULL COMMENT '字典值',
   `sort` int(5) DEFAULT NULL COMMENT '排序',
+  `status` int(1) DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
   `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
@@ -243,7 +243,7 @@ CREATE TABLE `sys_dict_detail` (
 -- ----------------------------
 -- Table structure for config_email
 -- ----------------------------
-DROP TABLE IF EXISTS `config_email`;
+DROP TABLE IF EXISTS `email_tool`;
 CREATE TABLE `config_email` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `from_user` varchar(255) DEFAULT NULL COMMENT '发件人',
@@ -259,8 +259,8 @@ INSERT INTO `config_email` VALUES ('1', '15549402651@163.com', 'smtp.163.com', '
 -- ----------------------------
 -- Table structure for config_qiniu
 -- ----------------------------
-DROP TABLE IF EXISTS `config_qiniu`;
-CREATE TABLE `config_qiniu` (
+DROP TABLE IF EXISTS `qiniu_config`;
+CREATE TABLE `qiniu_config` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `access_key` text DEFAULT NULL COMMENT 'accessKey',
   `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
@@ -271,13 +271,13 @@ CREATE TABLE `config_qiniu` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云配置';
 
-INSERT INTO `config_qiniu` VALUES ('1', '6riz6eaJfEtERl28wRX1pQfHgcn6X-WS69N1xgLx', 'hopelittle', 'http://photo.choot.top', 'LXJ0AfRwisSgLfvqDqLcENjgaTK_76CIEHeFrPT_', '1', '华南');
+INSERT INTO `qiniu_config` VALUES ('1', '6riz6eaJfEtERl28wRX1pQfHgcn6X-WS69N1xgLx', 'hopelittle', 'http://photo.choot.top', 'LXJ0AfRwisSgLfvqDqLcENjgaTK_76CIEHeFrPT_', '1', '华南');
 
 -- ----------------------------
 -- Table structure for config_local_storage
 -- ----------------------------
 DROP TABLE IF EXISTS `local_storage`;
-CREATE TABLE `config_local_storage` (
+CREATE TABLE `local_storage` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `real_name` varchar(255) DEFAULT NULL COMMENT '文件真实的名称',
   `name` varchar(255) DEFAULT NULL COMMENT '文件名',
@@ -295,8 +295,8 @@ CREATE TABLE `config_local_storage` (
 -- ----------------------------
 -- Table structure for qiniu_content
 -- ----------------------------
-DROP TABLE IF EXISTS `qiniu_content`;
-CREATE TABLE `qiniu_content` (
+DROP TABLE IF EXISTS `qiniu_file`;
+CREATE TABLE `qiniu_file` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
   `name` varchar(255) DEFAULT NULL COMMENT '文件名称',
@@ -308,3 +308,55 @@ CREATE TABLE `qiniu_content` (
   `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云文件存储';
+
+-- ----------------------------
+-- Table structure for sys_quartz_job
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_quartz_job`;
+CREATE TABLE `sys_quartz_job` (
+  `id` varchar(64) NOT NULL COMMENT 'ID',
+  `bean_name` varchar(255) DEFAULT NULL COMMENT 'Spring Bean名称',
+  `cron_expression` varchar(255) DEFAULT NULL COMMENT 'cron 表达式',
+  `is_pause` int(1) DEFAULT 0 COMMENT '状态：1暂停、0启用',
+  `job_name` varchar(255) DEFAULT NULL COMMENT '任务名称',
+  `method_name` varchar(255) DEFAULT NULL COMMENT '方法名称',
+  `params` varchar(255) DEFAULT NULL COMMENT '参数',
+  `description` varchar(255) DEFAULT NULL COMMENT '备注',
+  `person_in_charge` varchar(100) DEFAULT NULL COMMENT '负责人',
+  `email` varchar(100) DEFAULT NULL COMMENT '报警邮箱',
+  `sub_task` varchar(100) DEFAULT NULL COMMENT '子任务ID',
+  `pause_after_failure` int(1) DEFAULT 1 COMMENT '任务失败后是否暂停',
+  `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
+  `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务';
+
+-- ----------------------------
+-- Records of sys_quartz_job
+-- ----------------------------
+INSERT INTO `sys_quartz_job` VALUES ('1', 'testTask', '0/5 * * * * ?', 1, '测试1', 'run1', 'test', '带参测试，多参使用json', 'admin', '1181881941@qq.com', NULL, 1, 'admin', 'admin', '2019-08-22 14:08:29', '2020-05-24 13:58:33');
+INSERT INTO `sys_quartz_job` VALUES ('2', 'testTask', '0/5 * * * * ?', 0, '测试2', 'run', '', '不带参测试', 'admin', '1181881941@qq.com', '3', 1, 'admin', 'admin', '2019-09-26 16:44:39', '2020-05-24 14:48:12');
+INSERT INTO `sys_quartz_job` VALUES ('3', 'testTask', '0/5 * * * * ?', 1, '测试3', 'run2', '', '测试3', 'admin', '1181881941@qq.com', NULL, 1, 'admin', 'admin', '2020-05-05 20:35:41', '2020-05-05 20:36:07');
+INSERT INTO `sys_quartz_job` VALUES ('4', 'test', '0/5 * * * * ?', 1, '测试4', 'run2', '', '测试3', 'admin', '1181881941@qq.com', NULL, 1, 'admin', 'admin', '2020-05-05 20:35:41', '2020-05-05 20:36:07');
+
+-- ----------------------------
+-- Table structure for sys_quartz_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_quartz_log`;
+CREATE TABLE `sys_quartz_log` (
+  `id` varchar(64) NOT NULL COMMENT 'ID',
+  `bean_name` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `cron_expression` varchar(255) DEFAULT NULL,
+  `exception_detail` text DEFAULT NULL,
+  `is_success` int(1) DEFAULT NULL,
+  `job_name` varchar(255) DEFAULT NULL,
+  `method_name` varchar(255) DEFAULT NULL,
+  `params` varchar(255) DEFAULT NULL,
+  `time` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+
+commit;

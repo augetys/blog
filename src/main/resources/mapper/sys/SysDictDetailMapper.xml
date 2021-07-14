@@ -9,6 +9,7 @@
                     <result column="label" property="label"/>
                     <result column="value" property="value"/>
                     <result column="sort" property="sort"/>
+                    <result column="status" property="status"/>
                     <result column="create_by" property="createBy"/>
                     <result column="update_by" property="updateBy"/>
                     <result column="create_time" property="createTime"/>
@@ -22,6 +23,7 @@
             label,
             value,
             sort,
+            status,
             create_by,
             update_by,
             create_time,

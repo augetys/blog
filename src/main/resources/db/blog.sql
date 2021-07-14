@@ -101,3 +101,4 @@ CREATE TABLE `blog_replay` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客文章回复表';
 
+commit;

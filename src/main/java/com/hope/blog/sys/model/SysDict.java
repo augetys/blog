@@ -30,7 +30,6 @@ public class SysDict implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
@@ -42,9 +41,6 @@ public class SysDict implements Serializable {
 
     @ApiModelProperty(value = "排序")
     private Integer sort;
-
-    @ApiModelProperty(value = "启用状态：0->禁用；1->启用")
-    private Integer status;
 
     @ApiModelProperty(value = "创建者")
     private String createBy;

@@ -1,6 +1,6 @@
 package com.hope.blog.utils;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSONObject;
 import com.hope.blog.common.constant.Secret;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -47,7 +47,7 @@ public class QiniuUtil {
 
         Response response = uploadManager.put(localFilePath, key, getUploadToken());
         //解析上传成功的结果
-        DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+        DefaultPutRet putRet = JSONObject.parseObject(response.bodyString(), DefaultPutRet.class);
         System.out.println(putRet.key);
         System.out.println(putRet.hash);
         log.info("{七牛图片上传key: " + putRet.key + ",七牛图片上传hash: " + putRet.hash + "}");

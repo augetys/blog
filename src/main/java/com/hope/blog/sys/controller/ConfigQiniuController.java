@@ -24,22 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "七牛云配置")
 @RestController
 @RequestMapping("/sys/configQiniu")
-    public class ConfigQiniuController {
+public class ConfigQiniuController {
 
     @Autowired
     private ConfigQiniuService iConfigQiniuService;
 
-     /**
+    /**
      * 修改单条记录
      */
-     @ApiOperation(value = "修改单条记录")
-     @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody ConfigQiniu entity){
-        boolean success=iConfigQiniuService.updateById(entity);
-        if (success){
-        return CommonResult.success();
+    @ApiOperation(value = "修改单条记录")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody ConfigQiniu entity) {
+        boolean success = iConfigQiniuService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
-     }
+    }
 }
 
