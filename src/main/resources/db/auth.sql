@@ -254,7 +254,7 @@ CREATE TABLE `email_config` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮箱配置';
 
-INSERT INTO `email_config` VALUES ('1', '15549402651@163.com', 'smtp.163.com', 'AGUOOJQIDMDAFDUX', '465', 'choot');
+INSERT INTO `email_config` VALUES ('1', '15549402651@163.com', 'smtp.163.com', 'YBZMMDFBEENJWSDX', '465', 'choot');
 
 
 -- ----------------------------

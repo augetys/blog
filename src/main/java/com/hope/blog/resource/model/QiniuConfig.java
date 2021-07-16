@@ -21,7 +21,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("config_qiniu")
+@TableName("qiniu_config")
 @ApiModel(value="ConfigQiniu对象", description="七牛云配置")
 public class QiniuConfig implements Serializable {
 

@@ -21,7 +21,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("config_email")
+@TableName("email_config")
 @ApiModel(value="ConfigEmail对象", description="邮箱配置")
 public class EmailConfig implements Serializable {
 
