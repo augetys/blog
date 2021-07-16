@@ -220,6 +220,7 @@ CREATE TABLE `sys_dict` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据字典';
 
+INSERT INTO `sys_dict` VALUES ('9723b0724dc12dbd9462f65cb058bbc1', 'user_status', '用户状态', NULL, NULL, '2021-07-16 15:24:17', '2021-07-16 15:24:17');
 
 -- ----------------------------
 -- Table structure for sys_dict_detail
@@ -240,6 +241,8 @@ CREATE TABLE `sys_dict_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据字典详情';
 
+INSERT INTO `sys_dict_detail` VALUES ('05ae2a61717d9760b114f86b1678a13f', '9723b0724dc12dbd9462f65cb058bbc1', '启用', '1', 1, 1, 1, NULL, NULL, '2021-07-16 15:40:49', '2021-07-16 15:40:49');
+INSERT INTO `sys_dict_detail` VALUES ('c69a2cd2c714ba6ba929fbd6f3f6f62e', '9723b0724dc12dbd9462f65cb058bbc1', '禁用', '0', 2, 1, 1, NULL, NULL, '2021-07-16 15:49:30', '2021-07-16 15:49:30');
 
 -- ----------------------------
 -- Table structure for config_email

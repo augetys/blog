@@ -38,6 +38,7 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
         }
+        queryWrapper.lambda().orderByAsc(BlogTag::getSort);
         return blogTagMapper.selectPage(new Page<>(blogTagSearchRequestDto.getPageNum(), blogTagSearchRequestDto.getPageSize()), queryWrapper);
     }
 
