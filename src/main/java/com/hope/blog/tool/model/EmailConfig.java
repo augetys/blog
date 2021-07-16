@@ -1,4 +1,4 @@
-package com.hope.blog.sys.model;
+package com.hope.blog.tool.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -23,7 +23,7 @@ import lombok.*;
 @AllArgsConstructor
 @TableName("config_email")
 @ApiModel(value="ConfigEmail对象", description="邮箱配置")
-public class ConfigEmail implements Serializable {
+public class EmailConfig implements Serializable {
 
     private static final long serialVersionUID=1L;
 

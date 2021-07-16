@@ -1,4 +1,4 @@
-package com.hope.blog.sys.dto.request;
+package com.hope.blog.tool.dto.request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.hope.blog.sys.mapper;
+package com.hope.blog.resource.mapper;
 
-import com.hope.blog.sys.model.ConfigQiniu;
+import com.hope.blog.resource.model.QiniuConfig;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author lijin
  * @since 2021-07-05
  */
-public interface ConfigQiniuMapper extends BaseMapper<ConfigQiniu> {
+public interface QiniuConfigMapper extends BaseMapper<QiniuConfig> {
 
 }

@@ -1,7 +1,7 @@
-package com.hope.blog.sys.mapper;
+package com.hope.blog.tool.mapper;
 
-import com.hope.blog.sys.model.ConfigEmail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hope.blog.tool.model.EmailConfig;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author lijin
  * @since 2021-07-05
  */
-public interface ConfigEmailMapper extends BaseMapper<ConfigEmail> {
+public interface EmailConfigMapper extends BaseMapper<EmailConfig> {
 
 }

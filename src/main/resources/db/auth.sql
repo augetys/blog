@@ -243,8 +243,8 @@ CREATE TABLE `sys_dict_detail` (
 -- ----------------------------
 -- Table structure for config_email
 -- ----------------------------
-DROP TABLE IF EXISTS `email_tool`;
-CREATE TABLE `config_email` (
+DROP TABLE IF EXISTS `email_config`;
+CREATE TABLE `email_config` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `from_user` varchar(255) DEFAULT NULL COMMENT '发件人',
   `host` varchar(255) DEFAULT NULL COMMENT '邮件服务器SMTP地址',
@@ -254,7 +254,23 @@ CREATE TABLE `config_email` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮箱配置';
 
-INSERT INTO `config_email` VALUES ('1', '15549402651@163.com', 'smtp.163.com', 'AGUOOJQIDMDAFDUX', '465', 'choot');
+INSERT INTO `email_config` VALUES ('1', '15549402651@163.com', 'smtp.163.com', 'AGUOOJQIDMDAFDUX', '465', 'choot');
+
+
+-- ----------------------------
+-- Table structure for config_email
+-- ----------------------------
+DROP TABLE IF EXISTS `email_content`;
+CREATE TABLE `email_content` (
+  `id` varchar(64) NOT NULL COMMENT 'ID',
+  `from_user` varchar(255) DEFAULT NULL COMMENT '发件人',
+  `user` varchar(255) DEFAULT NULL COMMENT '发件者用户名',
+  `subject` varchar(255) DEFAULT NULL COMMENT '邮件主题',
+  `content` varchar(255) DEFAULT NULL COMMENT '邮件内容',
+  `to_user` varchar(255) DEFAULT NULL COMMENT '收件人',
+  `create_time` varchar(255) DEFAULT NULL COMMENT '发送时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮箱发送内容';
 
 -- ----------------------------
 -- Table structure for config_qiniu

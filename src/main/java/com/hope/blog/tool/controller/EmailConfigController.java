@@ -1,10 +1,10 @@
-package com.hope.blog.sys.controller;
+package com.hope.blog.tool.controller;
 
-import com.hope.blog.sys.dto.request.EmailSendRequestDto;
-import com.hope.blog.sys.model.ConfigEmail;
-import com.hope.blog.sys.service.ConfigEmailService;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.tool.model.EmailConfig;
+import com.hope.blog.tool.service.EmailConfigService;
+import com.hope.blog.tool.dto.request.EmailSendRequestDto;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
@@ -25,18 +25,18 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "邮箱配置")
 @RestController
 @RequestMapping("/sys/configEmail")
-    public class ConfigEmailController {
+    public class EmailConfigController {
 
     @Autowired
-    private ConfigEmailService iConfigEmailService;
+    private EmailConfigService iEmailConfigService;
 
     /**
      * 查询邮箱配置
      */
     @ApiOperation(value = "查询邮箱配置")
     @GetMapping(value = "/find")
-    public CommonResult<ConfigEmail> find(){
-        ConfigEmail entity=iConfigEmailService.find();
+    public CommonResult<EmailConfig> find(){
+        EmailConfig entity= iEmailConfigService.find();
         return CommonResult.success(entity);
     }
 
@@ -45,8 +45,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
      @ApiOperation(value = "修改配置")
      @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody ConfigEmail entity){
-        boolean success=iConfigEmailService.updateById(entity);
+     public CommonResult<ResultCode> update(@ApiParam @RequestBody EmailConfig entity){
+        boolean success= iEmailConfigService.updateById(entity);
         if (success){
         return CommonResult.success();
         }
@@ -59,7 +59,7 @@ import org.springframework.web.bind.annotation.RestController;
     @ApiOperation(value = "发送邮件")
     @PostMapping(value = "/send")
     public CommonResult<ResultCode> send(@ApiParam @RequestBody EmailSendRequestDto emailSendRequestDto){
-        boolean success=iConfigEmailService.send(emailSendRequestDto,iConfigEmailService.find());
+        boolean success= iEmailConfigService.send(emailSendRequestDto, iEmailConfigService.find());
         if (success){
             return CommonResult.success();
         }

@@ -1,10 +1,17 @@
 package com.hope.blog.utils;
 
 import cn.hutool.core.util.IdUtil;
+import com.hope.blog.common.exception.Asserts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -47,11 +54,11 @@ public class FileUtil {
      */
     private static final DecimalFormat DF = new DecimalFormat("0.00");
 
-    public static final String IMAGE = "图片";
-    public static final String TXT = "文档";
-    public static final String MUSIC = "音乐";
-    public static final String VIDEO = "视频";
-    public static final String OTHER = "其他";
+    public static final String IMAGE = "1";
+    public static final String TXT = "2";
+    public static final String MUSIC = "3";
+    public static final String VIDEO = "4";
+    public static final String OTHER = "5";
 
     /**
      * MultipartFile转File
@@ -87,9 +94,22 @@ public class FileUtil {
     }
 
     /**
+     * Java文件操作 获取不带扩展名的文件名
+     */
+    public static String getFileNameNoEx(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot > -1) && (dot < (filename.length()))) {
+                return filename.substring(0, dot);
+            }
+        }
+        return filename;
+    }
+
+    /**
      * inputStream 转 File
      */
-    static File inputStreamToFile(InputStream ins, String name){
+    static File inputStreamToFile(InputStream ins, String name) {
         File file = new File(SYS_TEM_DIR + name);
         if (file.exists()) {
             return file;
@@ -112,21 +132,6 @@ public class FileUtil {
         return file;
     }
 
-
-    /**
-     * Java文件操作 获取不带扩展名的文件名
-     */
-    public static String getFileNameNoEx(String filename) {
-        if ((filename != null) && (filename.length() > 0)) {
-            int dot = filename.lastIndexOf('.');
-            if ((dot > -1) && (dot < (filename.length()))) {
-                return filename.substring(0, dot);
-            }
-        }
-        return filename;
-    }
-
-
     /**
      * 文件大小转换
      */
@@ -148,7 +153,58 @@ public class FileUtil {
     }
 
     /**
+     * 校验文件大小
+     *
+     * @param maxSize
+     * @param size
+     */
+    public static void checkSize(Long maxSize, long size) {
+        // M
+        int len = 1024 * 1024;
+        if (size > (maxSize * len)) {
+            Asserts.fail("文件超出规定大小");
+        }
+    }
+
+    /**
+     * 从Request中获取文件
+     *
+     * @return
+     */
+    public static List<MultipartFile> getMultipartFileList(HttpServletRequest request) {
+        List<MultipartFile> files = new ArrayList<>();
+        try {
+            CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+                    request.getSession().getServletContext());
+            if (request instanceof MultipartHttpServletRequest) {
+                // 将request变成多部分request
+                MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+                Iterator<String> iter = multiRequest.getFileNames();
+                // 检查form中是否有enctype="multipart/form-data"
+                if (multipartResolver.isMultipart(request) && iter.hasNext()) {
+                    // 获取multiRequest 中所有的文件名
+                    while (iter.hasNext()) {
+                        List<MultipartFile> fileRows = multiRequest
+                                .getFiles(iter.next().toString());
+                        if (fileRows.size() != 0) {
+                            for (MultipartFile file : fileRows) {
+                                if (file != null && !file.isEmpty()) {
+                                    files.add(file);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            log.error("解析MultipartRequest错误", ex);
+        }
+        return files;
+    }
+
+    /**
      * 关闭连接
+     *
      * @param closeable
      */
     public static void close(Closeable closeable) {
@@ -163,6 +219,7 @@ public class FileUtil {
 
     /**
      * 关闭连接
+     *
      * @param closeable
      */
     public static void close(AutoCloseable closeable) {
@@ -172,6 +229,29 @@ public class FileUtil {
             } catch (Exception e) {
                 // 静默关闭
             }
+        }
+    }
+
+    /**
+     * 获取文件格式
+     * @param type
+     * @return
+     */
+    public static String getFileType(String type) {
+        String documents = "txt doc pdf ppt pps xlsx xls docx";
+        String music = "mp3 wav wma mpa ram ra aac aif m4a";
+        String video = "avi mpg mpe mpeg asf wmv mov qt rm mp4 flv m4v webm ogv ogg";
+        String image = "bmp dib pcp dif wmf gif jpg tif eps psd cdr iff tga pcd mpt png jpeg";
+        if (image.contains(type)) {
+            return IMAGE;
+        } else if (documents.contains(type)) {
+            return TXT;
+        } else if (music.contains(type)) {
+            return MUSIC;
+        } else if (video.contains(type)) {
+            return VIDEO;
+        } else {
+            return OTHER;
         }
     }
 }

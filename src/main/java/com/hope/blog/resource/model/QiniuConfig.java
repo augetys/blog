@@ -1,4 +1,4 @@
-package com.hope.blog.sys.model;
+package com.hope.blog.resource.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -23,7 +23,7 @@ import lombok.*;
 @AllArgsConstructor
 @TableName("config_qiniu")
 @ApiModel(value="ConfigQiniu对象", description="七牛云配置")
-public class ConfigQiniu implements Serializable {
+public class QiniuConfig implements Serializable {
 
     private static final long serialVersionUID=1L;
 

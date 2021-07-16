@@ -1,14 +1,14 @@
-package com.hope.blog.sys.service.impl;
+package com.hope.blog.tool.service.impl;
 
 import cn.hutool.extra.mail.Mail;
 import cn.hutool.extra.mail.MailAccount;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hope.blog.common.exception.Asserts;
-import com.hope.blog.sys.dto.request.EmailSendRequestDto;
-import com.hope.blog.sys.model.ConfigEmail;
-import com.hope.blog.sys.mapper.ConfigEmailMapper;
-import com.hope.blog.sys.service.ConfigEmailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hope.blog.tool.model.EmailConfig;
+import com.hope.blog.tool.mapper.EmailConfigMapper;
+import com.hope.blog.tool.service.EmailConfigService;
+import com.hope.blog.tool.dto.request.EmailSendRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,20 +24,20 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ConfigEmailServiceImpl extends ServiceImpl<ConfigEmailMapper, ConfigEmail> implements ConfigEmailService {
+public class EmailConfigServiceImpl extends ServiceImpl<EmailConfigMapper, EmailConfig> implements EmailConfigService {
 
     @Autowired
-    private ConfigEmailMapper configEmailMapper;
+    private EmailConfigMapper emailConfigMapper;
 
     @Override
-    public ConfigEmail find() {
-        QueryWrapper<ConfigEmail> queryWrapper = new QueryWrapper<>();
+    public EmailConfig find() {
+        QueryWrapper<EmailConfig> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", "1");
-        return configEmailMapper.selectOne(queryWrapper);
+        return emailConfigMapper.selectOne(queryWrapper);
     }
 
     @Override
-    public boolean send(EmailSendRequestDto emailSendRequestDto, ConfigEmail emailConfig) {
+    public boolean send(EmailSendRequestDto emailSendRequestDto, EmailConfig emailConfig) {
         if (emailConfig == null) {
             Asserts.fail("请先设置邮箱配置");
         }
@@ -52,8 +52,6 @@ public class ConfigEmailServiceImpl extends ServiceImpl<ConfigEmailMapper, Confi
         account.setPass(emailConfig.getPass());
         // ssl方式发送
         account.setSslEnable(true);
-        // 使用STARTTLS安全连接
-        account.setStartttlsEnable(true);
         String content = emailSendRequestDto.getContent();
         // 发送
         try {

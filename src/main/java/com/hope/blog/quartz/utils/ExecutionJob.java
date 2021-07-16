@@ -10,8 +10,8 @@ import com.hope.blog.quartz.mapper.QuartzLogMapper;
 import com.hope.blog.quartz.model.QuartzJob;
 import com.hope.blog.quartz.model.QuartzLog;
 import com.hope.blog.quartz.service.QuartzJobService;
-import com.hope.blog.sys.dto.request.EmailSendRequestDto;
-import com.hope.blog.sys.service.ConfigEmailService;
+import com.hope.blog.tool.dto.request.EmailSendRequestDto;
+import com.hope.blog.tool.service.EmailConfigService;
 import com.hope.blog.utils.RedisUtil;
 import com.hope.blog.utils.SpringContextHolder;
 import com.hope.blog.utils.ThrowableUtil;
@@ -86,7 +86,7 @@ public class ExecutionJob extends QuartzJobBean {
                 quartzJobService.updateIsPause(JobUpdateStatusRequestDto.builder().id(quartzJob.getId()).isPause(1).build());
             }
             if(quartzJob.getEmail() != null){
-                ConfigEmailService emailService = SpringContextHolder.getBean(ConfigEmailService.class);
+                EmailConfigService emailService = SpringContextHolder.getBean(EmailConfigService.class);
                 // 邮箱报警
                 if(!StringUtils.isEmpty(quartzJob.getEmail())){
                     EmailSendRequestDto emailVo = taskAlarm(quartzJob, ThrowableUtil.getStackTrace(e));
