@@ -39,9 +39,6 @@ public class SysDict implements Serializable {
     @ApiModelProperty(value = "描述")
     private String description;
 
-    @ApiModelProperty(value = "排序")
-    private Integer sort;
-
     @ApiModelProperty(value = "创建者")
     private String createBy;
 
@@ -55,6 +52,4 @@ public class SysDict implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
-
 }

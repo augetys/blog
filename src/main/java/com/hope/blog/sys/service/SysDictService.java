@@ -1,6 +1,7 @@
 package com.hope.blog.sys.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.sys.dto.request.SysDictDetailSearchRequestDto;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
 import com.hope.blog.sys.model.SysDict;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -19,5 +20,5 @@ import java.util.List;
 public interface SysDictService extends IService<SysDict> {
     Page<SysDict> findListByPage(SysDictSearchRequestDto sysDictSearchRequestDto);
 
-    List<SysDictDetail> getDetailById(String id);
+    List<SysDictDetail> getDetailById(SysDictDetailSearchRequestDto sysDictDetailSearchRequestDto);
 }

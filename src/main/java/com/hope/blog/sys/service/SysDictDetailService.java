@@ -1,5 +1,6 @@
 package com.hope.blog.sys.service;
 
+import com.hope.blog.sys.dto.request.UpdateDictDetailStatusRequetDto;
 import com.hope.blog.sys.model.SysDictDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -14,5 +15,5 @@ import java.util.List;
  * @since 2021-07-05
  */
 public interface SysDictDetailService extends IService<SysDictDetail> {
-    List<SysDictDetail> getByDictId(String dictId);
+    boolean updateStatusById(UpdateDictDetailStatusRequetDto updateDictDetailStatusRequetDto);
 }

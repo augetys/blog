@@ -1,6 +1,7 @@
 package com.hope.blog.sys.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.sys.dto.request.SysDictDetailSearchRequestDto;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
 import com.hope.blog.sys.model.SysDict;
 import com.hope.blog.sys.model.SysDictDetail;
@@ -100,9 +101,9 @@ public class SysDictController {
      * 根据id查询
      */
     @ApiOperation(value = "根据id查询数据")
-    @GetMapping(value = "/getDetailById/{id}")
-    public CommonResult<List<SysDictDetail>> getDetailById(@PathVariable String id) {
-        List<SysDictDetail> entity = iSysDictService.getDetailById(id);
+    @PostMapping(value = "/getDetailById")
+    public CommonResult<List<SysDictDetail>> getDetailById(@ApiParam @RequestBody SysDictDetailSearchRequestDto sysDictDetailSearchRequestDto) {
+        List<SysDictDetail> entity = iSysDictService.getDetailById(sysDictDetailSearchRequestDto);
         return CommonResult.success(entity);
     }
 }

@@ -2,6 +2,7 @@ package com.hope.blog.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.sys.dto.request.SysDictDetailSearchRequestDto;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
 import com.hope.blog.sys.mapper.SysDictDetailMapper;
 import com.hope.blog.sys.model.SysDict;
@@ -40,17 +41,18 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         if (!StringUtils.isEmpty(sysDictSearchRequestDto.getName())) {
             queryWrapper.like("name", sysDictSearchRequestDto.getName());
         }
-        queryWrapper.lambda().orderByAsc(SysDict::getSort);
         return sysDictMapper.selectPage(new Page<>(sysDictSearchRequestDto.getPageNum(), sysDictSearchRequestDto.getPageSize()), queryWrapper);
     }
 
     @Override
-    public List<SysDictDetail> getDetailById(String id) {
+    public List<SysDictDetail> getDetailById(SysDictDetailSearchRequestDto sysDictDetailSearchRequestDto) {
         QueryWrapper<SysDictDetail> queryWrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(id)) {
-            queryWrapper.eq("dict_id", id);
-            return sysDictDetailMapper.selectList(queryWrapper);
+        if (!StringUtils.isEmpty(sysDictDetailSearchRequestDto.getDictId())) {
+            queryWrapper.eq("dict_id", sysDictDetailSearchRequestDto.getDictId());
         }
-        return null;
+        if (!StringUtils.isEmpty(sysDictDetailSearchRequestDto.getLabel())) {
+            queryWrapper.eq("label", sysDictDetailSearchRequestDto.getLabel());
+        }
+        return sysDictDetailMapper.selectList(queryWrapper);
     }
 }

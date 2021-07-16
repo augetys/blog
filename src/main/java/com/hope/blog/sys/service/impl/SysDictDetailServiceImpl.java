@@ -1,6 +1,6 @@
 package com.hope.blog.sys.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hope.blog.sys.dto.request.UpdateDictDetailStatusRequetDto;
 import com.hope.blog.sys.model.SysDictDetail;
 import com.hope.blog.sys.mapper.SysDictDetailMapper;
 import com.hope.blog.sys.service.SysDictDetailService;
@@ -8,9 +8,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 /**
  * <p>
@@ -28,12 +25,7 @@ public class SysDictDetailServiceImpl extends ServiceImpl<SysDictDetailMapper, S
     private SysDictDetailMapper sysDictDetailMapper;
 
     @Override
-    public List<SysDictDetail> getByDictId(String dictId) {
-        QueryWrapper<SysDictDetail> queryWrapper = new QueryWrapper<>();
-        //构建条件
-        if (!StringUtils.isEmpty(dictId)) {
-            queryWrapper.like("dict_id", dictId);
-        }
-       return sysDictDetailMapper.selectList(queryWrapper);
+    public boolean updateStatusById(UpdateDictDetailStatusRequetDto updateDictDetailStatusRequetDto) {
+        return sysDictDetailMapper.updateStatus(updateDictDetailStatusRequetDto)>0;
     }
 }

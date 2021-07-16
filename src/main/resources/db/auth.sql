@@ -213,13 +213,13 @@ CREATE TABLE `sys_dict` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `name` varchar(255) NOT NULL COMMENT '字典名称',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
-  `sort` int(5) DEFAULT NULL COMMENT '排序',
   `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据字典';
+
 
 -- ----------------------------
 -- Table structure for sys_dict_detail
@@ -232,6 +232,7 @@ CREATE TABLE `sys_dict_detail` (
   `value` varchar(255) NOT NULL COMMENT '字典值',
   `sort` int(5) DEFAULT NULL COMMENT '排序',
   `status` int(1) DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
+  `is_default` int(1) DEFAULT 1 COMMENT '是否默认：0->是；1->否',
   `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
