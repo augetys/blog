@@ -38,16 +38,6 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTitle())) {
             queryWrapper.like("title", blogArticleSearchRequestDto.getTitle());
         }
-        Page<BlogArticle> blogArticlePage = blogArticleMapper.selectPage(new Page<>(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()), queryWrapper);
-        List<BlogArticle> records = blogArticlePage.getRecords();
-        records.forEach(
-                item->{
-                    // html转markdown
-                    String content = item.getContent();
-                    item.setContent(MarkdownUtil.htmlToMarkdown(content));
-                }
-        );
-        blogArticlePage.setRecords(records);
-        return blogArticlePage;
+        return blogArticleMapper.selectPage(new Page<>(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()), queryWrapper);
     }
 }

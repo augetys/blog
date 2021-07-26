@@ -36,6 +36,9 @@ public class BlogTag implements Serializable {
     @ApiModelProperty(value = "标签内容")
     private String name;
 
+    @ApiModelProperty(value = "标签图标")
+    private String icon;
+
     @ApiModelProperty(value = "排序")
     private Integer sort;
 

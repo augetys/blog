@@ -47,4 +47,6 @@ secure:
       - /druid/**
       - /sys/user/login
       - /sys/user/register
+      - /blog/category/findAll
+      - /blog/tag/findAll
       - /index.html

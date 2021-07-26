@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "博客文章回复表")
 @RestController
-@RequestMapping("/blog/blogReplay")
+@RequestMapping("/blog/replay")
     public class BlogReplayController {
 
     @Autowired

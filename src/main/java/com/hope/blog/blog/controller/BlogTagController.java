@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Api(tags = "博客标签表")
 @RestController
-@RequestMapping("/blog/blogTag")
+@RequestMapping("/blog/tag")
     public class BlogTagController {
 
     @Autowired
