@@ -118,4 +118,20 @@ CREATE TABLE `blog_looper` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB CHARSET=utf8mb4 COMMENT='轮播图';
 
+
+-- ----------------------------
+-- Table structure for tb_looper
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_nav`;
+CREATE TABLE `blog_nav` (
+  `id` varchar(20) NOT NULL COMMENT 'ID',
+  `name` varchar(128) NOT NULL COMMENT '导航名称',
+  `icon` varchar(128) NOT NULL COMMENT '导航图标',
+  `sort` int(11) DEFAULT 1 COMMENT '导航排序',
+  `path` varchar(128) NOT NULL COMMENT '跳转路由',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB CHARSET=utf8mb4 COMMENT='导航';
+
 commit;

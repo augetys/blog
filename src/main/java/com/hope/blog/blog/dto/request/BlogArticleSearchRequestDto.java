@@ -17,10 +17,14 @@ public class BlogArticleSearchRequestDto extends PageInfo {
     private String title;
     @ApiModelProperty(value = "分类名")
     private String categoryKeyword;
+    @ApiModelProperty(value = "分类Id")
+    private String categoryId;
     @ApiModelProperty(value = "是否原创")
     private String originalKeyword;
     @ApiModelProperty(value = "是否发布")
     private String publishKeyword;
     @ApiModelProperty(value = "标签名")
     private String tagKeyword;
+    @ApiModelProperty(value = "发布时间")
+    private String createTime;
 }

@@ -47,6 +47,16 @@ public class BlogArticleController {
 
 
     /**
+     * 热门文章
+     */
+    @ApiOperation(value = "热门文章")
+    @GetMapping(value = "/getHotArticle")
+    public CommonResult<List<BlogArticle>> getHotArticle() {
+        List<BlogArticle> entity = iBlogArticleService.getHotArticle();
+        return CommonResult.success(entity);
+    }
+
+    /**
      * 根据id查询
      */
     @ApiOperation(value = "根据id查询数据")

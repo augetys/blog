@@ -42,4 +42,8 @@
             update_time
         </sql>
 
+    <select id="getHotArticle" resultType="com.hope.blog.blog.model.BlogArticle">
+        select * from blog_article order by click_count desc limit 10
+    </select>
+
 </mapper>

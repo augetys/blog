@@ -1,8 +1,11 @@
 package com.hope.blog.blog.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.blog.dto.request.BlogLooperSearchRequestDto;
 import com.hope.blog.blog.model.BlogLooper;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,5 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-07-27
  */
 public interface BlogLooperService extends IService<BlogLooper> {
-    Page<BlogLooper> findListByPage(BlogLooper entity);
+    Page<BlogLooper> findListByPage(BlogLooperSearchRequestDto blogLooperSearchRequestDto);
+
+    List<BlogLooper> findAll();
 }

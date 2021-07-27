@@ -38,6 +38,14 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTitle())) {
             queryWrapper.like("title", blogArticleSearchRequestDto.getTitle());
         }
+        if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getCategoryId())){
+            queryWrapper.eq("categoryId", blogArticleSearchRequestDto.getTitle());
+        }
         return blogArticleMapper.selectPage(new Page<>(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()), queryWrapper);
+    }
+
+    @Override
+    public List<BlogArticle> getHotArticle() {
+       return blogArticleMapper.getHotArticle();
     }
 }
