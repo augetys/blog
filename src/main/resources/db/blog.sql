@@ -37,7 +37,6 @@ CREATE TABLE `blog_tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客标签表';
 
-INSERT INTO `blog_tag` VALUES ('187f8729ec18cf905731e310c4e72db3', 'Java', 'icon-search', '2021-07-02 13:36:46', '2021-07-02 13:36:46', 1);
 INSERT INTO `blog_tag` VALUES ('20de3df42eeaaef1e5cc95d3de28c6c5', 'Python', 'icon-search', '2021-07-02 13:40:58', '2021-07-02 13:40:58', 17);
 INSERT INTO `blog_tag` VALUES ('41c92c174cb4919ee9e308909dd50930', 'Linux', 'icon-search', '2021-07-02 13:36:55', '2021-07-02 13:36:55', 2);
 INSERT INTO `blog_tag` VALUES ('468b56ac826c651c1a371755713466ce', '面试', 'icon-search', '2021-07-02 13:37:13', '2021-07-02 13:37:13', 4);
@@ -48,8 +47,6 @@ INSERT INTO `blog_tag` VALUES ('6cbdcb2e57728d35c0e04935291d3f83', 'Spring Cloud
 INSERT INTO `blog_tag` VALUES ('7f5e239f57b8331cd82fc3d9cbad10ce', '学习笔记', 'icon-search', '2021-07-02 13:37:05', '2021-07-02 13:37:05', 3);
 INSERT INTO `blog_tag` VALUES ('8b794439c07b4c81d371c3d700793a91', 'Docker', 'icon-search', '2021-07-02 13:37:53', '2021-07-02 13:37:53', 8);
 INSERT INTO `blog_tag` VALUES ('9e68d831c5c2166ee0fd47871adfb700', 'RabbitMQ', 'icon-search', '2021-07-02 13:38:04', '2021-07-02 13:38:04', 10);
-INSERT INTO `blog_tag` VALUES ('a30e4e9c6be6f02f8f572459cb584866', '前端开发', 'icon-search', '2021-07-02 13:37:41', '2021-07-02 13:37:41', 7);
-INSERT INTO `blog_tag` VALUES ('c0926c417d88c8f02dc0e172bf5a3042', '校园生活', 'icon-search', '2021-07-02 13:37:24', '2021-07-02 13:37:24', 5);
 INSERT INTO `blog_tag` VALUES ('d6a8731ca2463914879efed545a9c932', 'Spring Boot', 'icon-search', '2021-07-02 13:38:41', '2021-07-02 13:38:41', 12);
 INSERT INTO `blog_tag` VALUES ('ee9a96eeb14a0f3e57e0bb440274790d', 'Vue', 'icon-search', '2021-07-02 13:40:39', '2021-07-02 13:40:39', 15);
 

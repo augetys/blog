@@ -49,4 +49,6 @@ secure:
       - /sys/user/register
       - /blog/category/findAll
       - /blog/tag/findAll
+      - /blog/article/list
+      - /blog/article/{id}
       - /index.html

@@ -7,6 +7,7 @@ import com.hope.blog.blog.service.BlogArticleService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.utils.MarkdownUtil;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
@@ -52,6 +53,7 @@ public class BlogArticleController {
     @GetMapping(value = "/{id}")
     public CommonResult<BlogArticle> getById(@PathVariable String id) {
         BlogArticle entity = iBlogArticleService.getById(id);
+        entity.setContent(MarkdownUtil.markdownToHtml(entity.getContent()));
         return CommonResult.success(entity);
     }
 
