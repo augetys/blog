@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "博客分类表")
 @RestController
 @RequestMapping("/blog/category")
-    public class BlogCategoryController {
+public class BlogCategoryController {
 
     @Autowired
     private BlogCategoryService iBlogCategoryService;
@@ -38,8 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<BlogCategory>> findListByPage(@ApiParam @RequestBody BlogCategorySearchRequestDto blogCategorySearchRequestDto){
-        Page<BlogCategory> list=iBlogCategoryService.findListByPage(blogCategorySearchRequestDto);
+    public CommonResult<CommonPage<BlogCategory>> findListByPage(@ApiParam @RequestBody BlogCategorySearchRequestDto blogCategorySearchRequestDto) {
+        Page<BlogCategory> list = iBlogCategoryService.findListByPage(blogCategorySearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -49,8 +50,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "查询所有数据")
     @PostMapping(value = "/findAll")
-    public CommonResult<List<BlogCategory>> findAll(@ApiParam @RequestBody BlogCategorySearchRequestDto blogCategorySearchRequestDto){
-        List<BlogCategory> list=iBlogCategoryService.findAll(blogCategorySearchRequestDto);
+    public CommonResult<List<BlogCategory>> findAll(@ApiParam @RequestBody BlogCategorySearchRequestDto blogCategorySearchRequestDto) {
+        List<BlogCategory> list = iBlogCategoryService.findAll(blogCategorySearchRequestDto);
         return CommonResult.success(list);
     }
 
@@ -59,8 +60,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
-    public CommonResult<BlogCategory> getById(@PathVariable String id){
-    BlogCategory entity=iBlogCategoryService.getById(id);
+    public CommonResult<BlogCategory> getById(@PathVariable String id) {
+        BlogCategory entity = iBlogCategoryService.getById(id);
         return CommonResult.success(entity);
     }
 
@@ -69,10 +70,10 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogCategory entity){
-        boolean success=iBlogCategoryService.saveOrUpdate(entity);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogCategory entity) {
+        boolean success = iBlogCategoryService.saveOrUpdate(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
@@ -82,25 +83,25 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
-    public CommonResult<ResultCode> delete(@PathVariable String id){
-        boolean success=iBlogCategoryService.removeById(id);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> delete(@PathVariable String id) {
+        boolean success = iBlogCategoryService.removeById(id);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
 
-     /**
+    /**
      * 修改单条记录
      */
-     @ApiOperation(value = "修改单条记录")
-     @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogCategory entity){
-        boolean success=iBlogCategoryService.updateById(entity);
-        if (success){
-        return CommonResult.success();
+    @ApiOperation(value = "修改单条记录")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogCategory entity) {
+        boolean success = iBlogCategoryService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
-     }
+    }
 }
 

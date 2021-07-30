@@ -2,11 +2,15 @@ package com.hope.blog.blog.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -24,11 +28,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("blog_looper")
-@ApiModel(value="BlogLooper对象", description="轮播图")
-public class BlogLooper implements Serializable {
+@TableName("blog_loop")
+@ApiModel(value = "BlogLoop对象", description = "轮播图")
+public class BlogLoop implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
@@ -38,10 +42,7 @@ public class BlogLooper implements Serializable {
     private String title;
 
     @ApiModelProperty(value = "顺序")
-    private Integer order;
-
-    @ApiModelProperty(value = "状态：0表示不可用，1表示正常")
-    private Integer status;
+    private Integer sort;
 
     @ApiModelProperty(value = "目标URL")
     private String targetUrl;

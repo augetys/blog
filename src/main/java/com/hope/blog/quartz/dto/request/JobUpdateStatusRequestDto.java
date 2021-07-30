@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JobUpdateStatusRequestDto {
     @ApiModelProperty(value = "id")
-    private String id ;
+    private String id;
     @ApiModelProperty(value = "状态：1暂停、0启用")
     private Integer isPause;
 }

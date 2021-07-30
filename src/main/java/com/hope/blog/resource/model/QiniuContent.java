@@ -2,11 +2,15 @@ package com.hope.blog.resource.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -25,10 +29,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("qiniu_content")
-@ApiModel(value="QiniuContent对象", description="七牛云文件存储")
+@ApiModel(value = "QiniuContent对象", description = "七牛云文件存储")
 public class QiniuContent implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)

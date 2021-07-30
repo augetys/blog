@@ -4,16 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.hope.blog.sys.model.SysRole">
-        <id column="id" property="id" />
-        <result column="description" property="description" />
-        <result column="name" property="name" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <id column="id" property="id"/>
+        <result column="description" property="description"/>
+        <result column="name" property="name"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <select id="getRoleList" resultType="com.hope.blog.sys.model.SysRole">
         select r.*
-        from  sys_user_role ar left join sys_role r on ar.role_id = r.id
+        from sys_user_role ar left join sys_role r on ar.role_id = r.id
         where ar.user_id = #{userId}
     </select>
 

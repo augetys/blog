@@ -6,6 +6,7 @@ import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 
 /**
  * 验证工具
+ *
  * @author lijin
  */
 public class ValidationUtil {
@@ -13,9 +14,9 @@ public class ValidationUtil {
     /**
      * 验证空
      */
-    public static void isNull(Object obj, String entity, String parameter , Object value){
-        if(ObjectUtil.isNull(obj)){
-            String msg = entity + " 不存在: "+ parameter +" is "+ value;
+    public static void isNull(Object obj, String entity, String parameter, Object value) {
+        if (ObjectUtil.isNull(obj)) {
+            String msg = entity + " 不存在: " + parameter + " is " + value;
             Assert.fail(msg);
         }
     }

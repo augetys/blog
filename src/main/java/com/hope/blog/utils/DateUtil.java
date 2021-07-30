@@ -41,14 +41,13 @@ public class DateUtil {
     public static final String DATE_FORMAT_MILLI_SECOND = "yyyy-MM-dd HH:mm:ss SSS";
 
 
-
     /**
      * 将  String 转换成  date
      *
      * @param dateTime
      * @return
      */
-    public static Date parse(String dateTime,String format) throws ParseException {
+    public static Date parse(String dateTime, String format) throws ParseException {
         if (StringUtils.isEmpty(dateTime)) {
             return null;
         }
@@ -62,7 +61,7 @@ public class DateUtil {
      * @param dateTime，formatDate
      * @return
      */
-    public static String format(Date dateTime,String formatDate) {
+    public static String format(Date dateTime, String formatDate) {
         if (dateTime == null) {
             return null;
         }
@@ -109,8 +108,8 @@ public class DateUtil {
      * @return
      */
     public static List<String> getDayBetweenDates(String begin, String end) throws ParseException {
-        Date dBegin = parse(begin,DATE_FORMAT_SECOND);
-        Date dEnd = parse(end,DATE_FORMAT_SECOND);
+        Date dBegin = parse(begin, DATE_FORMAT_SECOND);
+        Date dEnd = parse(end, DATE_FORMAT_SECOND);
         List<String> lDate = new ArrayList<>();
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
         lDate.add(sd.format(dBegin));
@@ -317,6 +316,7 @@ public class DateUtil {
 
     /**
      * 计算两个日期时间差
+     *
      * @param endDate
      * @param nowDate
      * @return
@@ -342,6 +342,7 @@ public class DateUtil {
     /**
      * 获取上个月的同一天
      * 像有些月的前一个月是没有31号的，则默认用这个月的31号去与上个月的30;另外2月份也是一个特殊的月，闰年时为29天，非闰年为28天，所以闰年的3月份的30，31的上个月为29号，非闰年的29，30，31号的上一个月的同一天为28号。还有就是这个月是1月，这上个月是去年的12月。
+     *
      * @param date
      * @return
      */

@@ -4,7 +4,6 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 /**
- *
  * Created by lijin on  2021/6/22
  */
 public abstract class AbstractRequestAwareRunnable implements Runnable {

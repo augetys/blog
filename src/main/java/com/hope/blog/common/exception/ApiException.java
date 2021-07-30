@@ -6,7 +6,7 @@ import com.hope.blog.common.api.IErrorCode;
  * 自定义异常
  * Create by lijin on 2021/3/20 18:27
  */
-public class ApiException extends RuntimeException{
+public class ApiException extends RuntimeException {
     private IErrorCode errorCode;
 
     public ApiException(IErrorCode errorCode) {

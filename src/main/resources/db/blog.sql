@@ -23,6 +23,8 @@ CREATE TABLE `blog_article` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客文章表';
 
+
+
 -- ----------------------------
 -- Table structure for blog_tag
 -- ----------------------------
@@ -37,18 +39,14 @@ CREATE TABLE `blog_tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客标签表';
 
-INSERT INTO `blog_tag` VALUES ('20de3df42eeaaef1e5cc95d3de28c6c5', 'Python', 'icon-search', '2021-07-02 13:40:58', '2021-07-02 13:40:58', 17);
-INSERT INTO `blog_tag` VALUES ('41c92c174cb4919ee9e308909dd50930', 'Linux', 'icon-search', '2021-07-02 13:36:55', '2021-07-02 13:36:55', 2);
-INSERT INTO `blog_tag` VALUES ('468b56ac826c651c1a371755713466ce', '面试', 'icon-search', '2021-07-02 13:37:13', '2021-07-02 13:37:13', 4);
-INSERT INTO `blog_tag` VALUES ('57c6c0742164d8610045412b6ee4bbe0', '大数据', 'icon-search', '2021-07-02 13:39:10', '2021-07-02 13:39:10', 13);
-INSERT INTO `blog_tag` VALUES ('59a8f4d900a557d4beff96c2489541f1', 'Redis', 'icon-search', '2021-07-02 13:38:30', '2021-07-02 13:38:30', 11);
-INSERT INTO `blog_tag` VALUES ('62edf1de6f1bc800d3350da3dfd9e479', 'Nginx', 'icon-search', '2021-07-02 13:40:48', '2021-07-02 13:40:48', 16);
-INSERT INTO `blog_tag` VALUES ('6cbdcb2e57728d35c0e04935291d3f83', 'Spring Cloud', 'icon-search', '2021-07-02 13:37:32', '2021-07-02 13:37:32', 6);
-INSERT INTO `blog_tag` VALUES ('7f5e239f57b8331cd82fc3d9cbad10ce', '学习笔记', 'icon-search', '2021-07-02 13:37:05', '2021-07-02 13:37:05', 3);
-INSERT INTO `blog_tag` VALUES ('8b794439c07b4c81d371c3d700793a91', 'Docker', 'icon-search', '2021-07-02 13:37:53', '2021-07-02 13:37:53', 8);
-INSERT INTO `blog_tag` VALUES ('9e68d831c5c2166ee0fd47871adfb700', 'RabbitMQ', 'icon-search', '2021-07-02 13:38:04', '2021-07-02 13:38:04', 10);
-INSERT INTO `blog_tag` VALUES ('d6a8731ca2463914879efed545a9c932', 'Spring Boot', 'icon-search', '2021-07-02 13:38:41', '2021-07-02 13:38:41', 12);
-INSERT INTO `blog_tag` VALUES ('ee9a96eeb14a0f3e57e0bb440274790d', 'Vue', 'icon-search', '2021-07-02 13:40:39', '2021-07-02 13:40:39', 15);
+INSERT INTO `blog_tag` VALUES ('3bfb57eb21eeac3e3f49370e936bbcf7', 'linux', 'icon-linux', '2021-07-29 10:23:36', '2021-07-29 10:23:36', 3);
+INSERT INTO `blog_tag` VALUES ('4338a8bc2afbb095169b03c291e0b8ff', '面试', 'icon-interview', '2021-07-29 10:27:20', '2021-07-29 10:27:20', 5);
+INSERT INTO `blog_tag` VALUES ('61bd0d34e03ae3038cb4168be8f67893', '股票', 'icon-banking', '2021-07-29 10:22:45', '2021-07-29 10:22:45', 2);
+INSERT INTO `blog_tag` VALUES ('62edf1de6f1bc800d3350da3dfd9e479', 'java', 'icon-java', '2021-07-02 08:00:00', '2021-07-29 10:21:12', 1);
+INSERT INTO `blog_tag` VALUES ('7193b408d6ef276b9906d0147064fdbf', 'vue', 'icon-vue', '2021-07-29 10:26:56', '2021-07-29 10:26:56', 4);
+INSERT INTO `blog_tag` VALUES ('e7cb6f8a0e571e32ea5d372c6f0493dd', 'Think', 'icon-xingqiu', '2021-07-29 08:00:00', '2021-07-29 10:30:07', 7);
+INSERT INTO `blog_tag` VALUES ('f62f8f1730f0d8241367258ec3d69c39', '旅行', 'icon-travel', '2021-07-29 10:28:04', '2021-07-29 10:28:04', 6);
+
 
 -- ----------------------------
 -- Table structure for blog_category
@@ -64,11 +62,10 @@ CREATE TABLE `blog_category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客分类表';
 
-INSERT INTO `blog_category` VALUES ('49e72a0020525c53c22bdc11518b858a', '后端开发', '后端开发专题', 3, '2021-07-02 08:00:00', '2021-07-02 13:56:31');
+INSERT INTO `blog_category` VALUES ('49e72a0020525c53c22bdc11518b858a', '开发', '前后端开发专题', 3, '2021-07-02 08:00:00', '2021-07-29 10:20:27');
 INSERT INTO `blog_category` VALUES ('61d6476665b0889e1c62358874ac25cf', '技术新闻', '发现世界的每一天', 2, '2021-07-02 08:00:00', '2021-07-02 13:56:23');
-INSERT INTO `blog_category` VALUES ('645415d47b4c66a29ba1cc5b07e758c3', '前端开发', '前端开发专题', 4, '2021-07-02 08:00:00', '2021-07-02 13:56:37');
+INSERT INTO `blog_category` VALUES ('79d9169cef8d7936e0983e4a75e405da', '思考人生', '思考人生', 5, '2021-07-29 10:19:48', '2021-07-29 10:19:48');
 INSERT INTO `blog_category` VALUES ('bbd3ad1fa70b95a53e3a006acc3eeb98', '学习笔记', '学习笔记', 1, '2021-07-02 13:55:33', '2021-07-02 13:55:33');
-INSERT INTO `blog_category` VALUES ('c7d88a558c05e2099b1430b0f77c69c3', '面试', '面试专题', 5, '2021-07-02 13:56:54', '2021-07-02 13:56:54');
 
 
 
@@ -105,12 +102,11 @@ CREATE TABLE `blog_replay` (
 -- ----------------------------
 -- Table structure for tb_looper
 -- ----------------------------
-DROP TABLE IF EXISTS `blog_looper`;
-CREATE TABLE `blog_looper` (
-  `id` varchar(20) NOT NULL COMMENT 'ID',
+DROP TABLE IF EXISTS `blog_loop`;
+CREATE TABLE `blog_loop` (
+  `id` varchar(64) NOT NULL COMMENT 'ID',
   `title` varchar(128) NOT NULL COMMENT '轮播图标题',
-  `order` int(11) NOT NULL DEFAULT '0' COMMENT '顺序',
-  `status` int(11) NOT NULL COMMENT '状态：0表示不可用，1表示正常',
+  `sort` int(11) NOT NULL DEFAULT '0' COMMENT '顺序',
   `target_url` varchar(1024) DEFAULT NULL COMMENT '目标URL',
   `image_url` varchar(2014) NOT NULL COMMENT '图片地址',
   `create_time` datetime NOT NULL COMMENT '创建时间',
@@ -118,13 +114,18 @@ CREATE TABLE `blog_looper` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB CHARSET=utf8mb4 COMMENT='轮播图';
 
+INSERT INTO `blog_loop` VALUES ('4f5710d7bfa908c1f92bfd5f1f5e97b3', '呜呜呜呜我我', 5, 'https://www.baidu.com', 'http://photo.choot.top/vape-relx.webp', '2021-07-28 14:38:43', '2021-07-28 14:38:43');
+INSERT INTO `blog_loop` VALUES ('58627203626381717ea3a47766a5fa35', '哈哈哈', 2, 'https://www.baidu.com', 'http://photo.choot.top/2020-08-14-sea-1.webp', '2021-07-28 08:00:00', '2021-07-28 14:37:46');
+INSERT INTO `blog_loop` VALUES ('7382725c2dfa596b92c86efc2d356b11', '嫩恩恩额', 4, 'https://www.baidu.com', 'http://photo.choot.top/03-15-code-review.webp', '2021-07-28 08:00:00', '2021-07-28 14:37:58');
+INSERT INTO `blog_loop` VALUES ('7cfe21e91d8f12f8877f1cafd9491699', '恩恩额恩恩', 3, 'https://www.baidu.com', 'http://photo.choot.top/2021-0526-hope.webp', '2021-07-28 08:00:00', '2021-07-28 14:38:07');
+INSERT INTO `blog_loop` VALUES ('8d972bef3ab84331d7779f7d0302341b', '呜呜呜', 1, 'https://www.baidu.com', 'http://photo.choot.top/fuckoff.png', '2021-07-28 08:00:00', '2021-07-28 14:38:19');
 
 -- ----------------------------
 -- Table structure for tb_looper
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_nav`;
 CREATE TABLE `blog_nav` (
-  `id` varchar(20) NOT NULL COMMENT 'ID',
+  `id` varchar(64) NOT NULL COMMENT 'ID',
   `name` varchar(128) NOT NULL COMMENT '导航名称',
   `icon` varchar(128) NOT NULL COMMENT '导航图标',
   `sort` int(11) DEFAULT 1 COMMENT '导航排序',
@@ -133,5 +134,16 @@ CREATE TABLE `blog_nav` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB CHARSET=utf8mb4 COMMENT='导航';
+
+INSERT INTO `blog_nav` VALUES ('1', '醉花阴', 'icon-home', 1, '/', '2021-07-28 09:02:42', '2021-07-28 09:02:46');
+INSERT INTO `blog_nav` VALUES ('10', '海市蜃楼', 'icon-video', 10, '/', '2021-07-28 09:05:18', '2021-07-28 09:05:20');
+INSERT INTO `blog_nav` VALUES ('2', '无妄海', 'icon-code', 2, '/', '2021-07-28 09:03:03', '2021-07-28 09:03:06');
+INSERT INTO `blog_nav` VALUES ('3', '清平乐', 'icon-think', 3, '/', '2021-07-28 09:03:19', '2021-07-28 09:03:21');
+INSERT INTO `blog_nav` VALUES ('4', '如梦令', 'icon-life', 4, '/', '2021-07-28 09:03:37', '2021-07-28 09:03:40');
+INSERT INTO `blog_nav` VALUES ('5', '荏苒', 'icon-date', 5, '/', '2021-07-28 09:03:54', '2021-07-28 09:03:58');
+INSERT INTO `blog_nav` VALUES ('6', '琉璃镜', 'icon-photo', 6, '/', '2021-07-28 09:04:14', '2021-07-28 09:04:16');
+INSERT INTO `blog_nav` VALUES ('7', '藏经阁', 'icon-file', 7, '/', '2021-07-28 09:04:31', '2021-07-28 09:04:33');
+INSERT INTO `blog_nav` VALUES ('8', '山外小楼', 'icon-guestbook', 8, '/', '2021-07-28 08:00:00', '2021-07-29 10:00:39');
+INSERT INTO `blog_nav` VALUES ('9', '天命风流', 'icon-personInfo', 9, '/', '2021-07-28 08:00:00', '2021-07-29 10:00:31');
 
 commit;

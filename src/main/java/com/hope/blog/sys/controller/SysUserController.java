@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class SysUserController {
         String encodePassword = passwordEncoder.encode(CommonConstant.PASSWORD);
         sysUser.setPassword(encodePassword);
         boolean success = iSysUserService.saveOrUpdate(sysUser);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -88,7 +89,7 @@ public class SysUserController {
     @OperationLog(value = "删除用户")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iSysUserService.deleteById(id);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -102,7 +103,7 @@ public class SysUserController {
     @OperationLog(value = "修改用户信息")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody SysUser sysUser) {
         boolean success = iSysUserService.updateById(sysUser);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -156,7 +157,7 @@ public class SysUserController {
     @OperationLog(value = "修改用户状态")
     public CommonResult<ResultCode> updateStatus(@ApiParam @RequestBody UpdateSysUserStatusRequestDto updateSysUserStatusRequestDto) {
         boolean success = iSysUserService.updateStatusRequest(updateSysUserStatusRequestDto);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -176,7 +177,7 @@ public class SysUserController {
     @PostMapping(value = "/role/update")
     @OperationLog(value = "给用户分配角色")
     public CommonResult<ResultCode> updateRole(@RequestParam("userId") String userId,
-                                   @RequestParam("roleIds") List<String> roleIds) {
+                                               @RequestParam("roleIds") List<String> roleIds) {
         int count = iSysUserService.updateRole(userId, roleIds);
         if (count >= 0) {
             return CommonResult.success();

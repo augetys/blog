@@ -19,6 +19,7 @@ import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.StringUtils;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +29,16 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 参考人人开源，https://gitee.com/renrenio/renren-security
+ *
  * @author /
  * @date 2019-01-07
  */
 @Async
 public class ExecutionJob extends QuartzJobBean {
 
-    /** 该处仅供参考 */
+    /**
+     * 该处仅供参考
+     */
     private final static ThreadPoolExecutor EXECUTOR = ThreadPoolExecutorUtil.getPoll();
 
     @Override
@@ -65,7 +69,7 @@ public class ExecutionJob extends QuartzJobBean {
             System.out.println("任务执行完毕，任务名称：" + quartzJob.getJobName() + ", 执行时间：" + times + "毫秒");
             System.out.println("--------------------------------------------------------------");
             // 判断是否存在子任务
-            if(!StringUtils.isEmpty(quartzJob.getSubTask())){
+            if (!StringUtils.isEmpty(quartzJob.getSubTask())) {
                 String[] tasks = quartzJob.getSubTask().split("[,，]");
                 // 执行子任务
                 quartzJobService.executionSubJob(tasks);
@@ -81,14 +85,14 @@ public class ExecutionJob extends QuartzJobBean {
             log.setIsSuccess(0);
             log.setExceptionDetail(ThrowableUtil.getStackTrace(e));
             // 任务如果失败了则暂停
-            if(quartzJob.getPauseAfterFailure()==1){
+            if (quartzJob.getPauseAfterFailure() == 1) {
                 //更新状态
                 quartzJobService.updateIsPause(JobUpdateStatusRequestDto.builder().id(quartzJob.getId()).isPause(1).build());
             }
-            if(quartzJob.getEmail() != null){
+            if (quartzJob.getEmail() != null) {
                 EmailConfigService emailService = SpringContextHolder.getBean(EmailConfigService.class);
                 // 邮箱报警
-                if(!StringUtils.isEmpty(quartzJob.getEmail())){
+                if (!StringUtils.isEmpty(quartzJob.getEmail())) {
                     EmailSendRequestDto emailVo = taskAlarm(quartzJob, ThrowableUtil.getStackTrace(e));
                     emailService.send(emailVo, emailService.find());
                 }
@@ -100,7 +104,7 @@ public class ExecutionJob extends QuartzJobBean {
 
     private EmailSendRequestDto taskAlarm(QuartzJob quartzJob, String msg) {
         EmailSendRequestDto emailVo = new EmailSendRequestDto();
-        emailVo.setSubject("定时任务【"+ quartzJob.getJobName() +"】执行失败，请尽快处理！");
+        emailVo.setSubject("定时任务【" + quartzJob.getJobName() + "】执行失败，请尽快处理！");
         Map<String, Object> data = new HashMap<>(16);
         data.put("task", quartzJob);
         data.put("msg", msg);

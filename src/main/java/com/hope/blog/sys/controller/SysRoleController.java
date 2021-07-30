@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 
@@ -35,7 +36,7 @@ public class SysRoleController {
 
     @Autowired
     private SysRoleService sysRoleService;
-    
+
     /**
      * 查询分页数据
      */
@@ -64,7 +65,7 @@ public class SysRoleController {
     @OperationLog(value = "新增角色")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody SysRole entity) {
         boolean success = sysRoleService.saveOrUpdate(entity);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -78,7 +79,7 @@ public class SysRoleController {
     @OperationLog(value = "删除角色")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = sysRoleService.removeById(id);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -92,7 +93,7 @@ public class SysRoleController {
     @OperationLog(value = "修改角色信息")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody SysRole entity) {
         boolean success = sysRoleService.updateById(entity);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -114,7 +115,7 @@ public class SysRoleController {
     @OperationLog(value = "分配菜单")
     public CommonResult<ResultCode> allocMenu(@ApiParam @RequestBody SysAllocMenusRequestDto sysAllocMenusRequestDto) {
         boolean success = sysRoleService.allocMenu(sysAllocMenusRequestDto);
-        if (success){
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();

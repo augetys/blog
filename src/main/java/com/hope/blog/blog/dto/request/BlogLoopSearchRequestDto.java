@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BlogLooperSearchRequestDto extends PageInfo {
+public class BlogLoopSearchRequestDto extends PageInfo {
     @ApiModelProperty(value = "标题")
     private String title;
 }

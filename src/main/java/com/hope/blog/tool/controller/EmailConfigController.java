@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "邮箱配置")
 @RestController
 @RequestMapping("/sys/configEmail")
-    public class EmailConfigController {
+public class EmailConfigController {
 
     @Autowired
     private EmailConfigService iEmailConfigService;
@@ -35,32 +35,32 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "查询邮箱配置")
     @GetMapping(value = "/find")
-    public CommonResult<EmailConfig> find(){
-        EmailConfig entity= iEmailConfigService.find();
+    public CommonResult<EmailConfig> find() {
+        EmailConfig entity = iEmailConfigService.find();
         return CommonResult.success(entity);
     }
 
-     /**
+    /**
      * 修改单条记录
      */
-     @ApiOperation(value = "修改配置")
-     @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody EmailConfig entity){
-        boolean success= iEmailConfigService.updateById(entity);
-        if (success){
-        return CommonResult.success();
+    @ApiOperation(value = "修改配置")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody EmailConfig entity) {
+        boolean success = iEmailConfigService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
-     }
+    }
 
     /**
      * 发送邮件
      */
     @ApiOperation(value = "发送邮件")
     @PostMapping(value = "/send")
-    public CommonResult<ResultCode> send(@ApiParam @RequestBody EmailSendRequestDto emailSendRequestDto){
-        boolean success= iEmailConfigService.send(emailSendRequestDto, iEmailConfigService.find());
-        if (success){
+    public CommonResult<ResultCode> send(@ApiParam @RequestBody EmailSendRequestDto emailSendRequestDto) {
+        boolean success = iEmailConfigService.send(emailSendRequestDto, iEmailConfigService.find());
+        if (success) {
             return CommonResult.success();
         }
         return CommonResult.failed();

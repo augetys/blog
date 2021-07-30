@@ -29,7 +29,7 @@ import java.util.List;
 @Api(tags = "博客标签表")
 @RestController
 @RequestMapping("/blog/tag")
-    public class BlogTagController {
+public class BlogTagController {
 
     @Autowired
     private BlogTagService iBlogTagService;
@@ -39,8 +39,8 @@ import java.util.List;
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<BlogTag>> findListByPage(@ApiParam @RequestBody BlogTagSearchRequestDto blogTagSearchRequestDto){
-        Page<BlogTag> list=iBlogTagService.findListByPage(blogTagSearchRequestDto);
+    public CommonResult<CommonPage<BlogTag>> findListByPage(@ApiParam @RequestBody BlogTagSearchRequestDto blogTagSearchRequestDto) {
+        Page<BlogTag> list = iBlogTagService.findListByPage(blogTagSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -49,8 +49,8 @@ import java.util.List;
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/findAll")
-    public CommonResult<List<BlogTag>> findAll(@ApiParam @RequestBody BlogTagSearchRequestDto blogTagSearchRequestDto){
-        List<BlogTag> list=iBlogTagService.findAll(blogTagSearchRequestDto);
+    public CommonResult<List<BlogTag>> findAll(@ApiParam @RequestBody BlogTagSearchRequestDto blogTagSearchRequestDto) {
+        List<BlogTag> list = iBlogTagService.findAll(blogTagSearchRequestDto);
         return CommonResult.success(list);
     }
 
@@ -60,8 +60,8 @@ import java.util.List;
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
-    public CommonResult<BlogTag> getById(@PathVariable String id){
-    BlogTag entity=iBlogTagService.getById(id);
+    public CommonResult<BlogTag> getById(@PathVariable String id) {
+        BlogTag entity = iBlogTagService.getById(id);
         return CommonResult.success(entity);
     }
 
@@ -70,10 +70,10 @@ import java.util.List;
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogTag entity){
-        boolean success=iBlogTagService.saveOrUpdate(entity);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogTag entity) {
+        boolean success = iBlogTagService.saveOrUpdate(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
@@ -83,25 +83,25 @@ import java.util.List;
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
-    public CommonResult<ResultCode> delete(@PathVariable String id){
-        boolean success=iBlogTagService.removeById(id);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> delete(@PathVariable String id) {
+        boolean success = iBlogTagService.removeById(id);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
 
-     /**
+    /**
      * 修改单条记录
      */
-     @ApiOperation(value = "修改单条记录")
-     @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogTag entity){
-        boolean success=iBlogTagService.updateById(entity);
-        if (success){
-        return CommonResult.success();
+    @ApiOperation(value = "修改单条记录")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogTag entity) {
+        boolean success = iBlogTagService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
-     }
+    }
 }
 

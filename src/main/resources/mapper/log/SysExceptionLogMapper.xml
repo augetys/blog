@@ -2,32 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hope.blog.log.mapper.SysExceptionLogMapper">
 
-        <!-- 通用查询映射结果 -->
-        <resultMap id="BaseResultMap" type="com.hope.blog.log.model.SysExceptionLog">
-                    <id column="id" property="id"/>
-                    <result column="ip" property="ip"/>
-                    <result column="ip_address" property="ipAddress"/>
-                    <result column="method" property="method"/>
-                    <result column="operation" property="operation"/>
-                    <result column="params" property="params"/>
-                    <result column="exceptionJson" property="exceptionJson"/>
-                    <result column="exceptionMessage" property="exceptionMessage"/>
-                    <result column="create_time" property="createTime"/>
-                    <result column="update_time" property="updateTime"/>
-        </resultMap>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hope.blog.log.model.SysExceptionLog">
+        <id column="id" property="id"/>
+        <result column="ip" property="ip"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="method" property="method"/>
+        <result column="operation" property="operation"/>
+        <result column="params" property="params"/>
+        <result column="exceptionJson" property="exceptionJson"/>
+        <result column="exceptionMessage" property="exceptionMessage"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
 
-        <!-- 通用查询结果列 -->
-        <sql id="Base_Column_List">
-            id,
-            ip,
-            ip_address,
-            method,
-            operation,
-            params,
-            exceptionJson,
-            exceptionMessage,
-            create_time,
-            update_time
-        </sql>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        ip,
+        ip_address,
+        method,
+        operation,
+        params,
+        exceptionJson,
+        exceptionMessage,
+        create_time,
+        update_time
+    </sql>
 
 </mapper>

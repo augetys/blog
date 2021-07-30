@@ -2,11 +2,15 @@ package com.hope.blog.resource.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -25,10 +29,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("local_storage")
-@ApiModel(value="LocalStorage对象", description="本地存储")
+@ApiModel(value = "LocalStorage对象", description = "本地存储")
 public class LocalStorage implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)

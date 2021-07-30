@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hope.blog.sys.model.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 
 /**
@@ -15,7 +16,7 @@ public class AuthUserDetails implements UserDetails {
     private final String uid;
 
 
-    public AuthUserDetails(SysUser sysUser,String uid) {
+    public AuthUserDetails(SysUser sysUser, String uid) {
         this.sysUser = sysUser;
         this.uid = uid;
     }

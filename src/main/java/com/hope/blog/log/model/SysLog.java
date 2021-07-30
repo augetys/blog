@@ -2,11 +2,15 @@ package com.hope.blog.log.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -25,10 +29,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("sys_log")
-@ApiModel(value="SysLog对象", description="操作日志表")
+@ApiModel(value = "SysLog对象", description = "操作日志表")
 public class SysLog implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "唯一id")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)

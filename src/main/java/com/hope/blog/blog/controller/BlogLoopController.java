@@ -1,9 +1,9 @@
 package com.hope.blog.blog.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hope.blog.blog.dto.request.BlogLooperSearchRequestDto;
-import com.hope.blog.blog.model.BlogLooper;
-import com.hope.blog.blog.service.BlogLooperService;
+import com.hope.blog.blog.dto.request.BlogLoopSearchRequestDto;
+import com.hope.blog.blog.model.BlogLoop;
+import com.hope.blog.blog.service.BlogLoopService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
@@ -28,19 +28,19 @@ import java.util.List;
  */
 @Api(tags = "轮播图")
 @RestController
-@RequestMapping("/blog/blogLooper")
-public class BlogLooperController {
+@RequestMapping("/blog/loop")
+public class BlogLoopController {
 
     @Autowired
-    private BlogLooperService iBlogLooperService;
+    private BlogLoopService iBlogLoopService;
 
     /**
      * 查询分页数据
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<BlogLooper>> findListByPage(@ApiParam @RequestBody BlogLooperSearchRequestDto blogLooperSearchRequestDto){
-        Page<BlogLooper> list=iBlogLooperService.findListByPage(blogLooperSearchRequestDto);
+    public CommonResult<CommonPage<BlogLoop>> findListByPage(@ApiParam @RequestBody BlogLoopSearchRequestDto blogLoopSearchRequestDto) {
+        Page<BlogLoop> list = iBlogLoopService.findListByPage(blogLoopSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -50,8 +50,8 @@ public class BlogLooperController {
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/findAll")
-    public CommonResult<List<BlogLooper>> findAll(){
-        List<BlogLooper> list=iBlogLooperService.findAll();
+    public CommonResult<List<BlogLoop>> findAll() {
+        List<BlogLoop> list = iBlogLoopService.findAll();
         return CommonResult.success(list);
     }
 
@@ -60,8 +60,8 @@ public class BlogLooperController {
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
-    public CommonResult<BlogLooper> getById(@PathVariable String id){
-    BlogLooper entity=iBlogLooperService.getById(id);
+    public CommonResult<BlogLoop> getById(@PathVariable String id) {
+        BlogLoop entity = iBlogLoopService.getById(id);
         return CommonResult.success(entity);
     }
 
@@ -70,10 +70,10 @@ public class BlogLooperController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogLooper entity){
-        boolean success=iBlogLooperService.saveOrUpdate(entity);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogLoop entity) {
+        boolean success = iBlogLoopService.saveOrUpdate(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
@@ -83,25 +83,25 @@ public class BlogLooperController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
-    public CommonResult<ResultCode> delete(@PathVariable String id){
-        boolean success=iBlogLooperService.removeById(id);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> delete(@PathVariable String id) {
+        boolean success = iBlogLoopService.removeById(id);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
 
-     /**
+    /**
      * 修改单条记录
      */
-     @ApiOperation(value = "修改单条记录")
-     @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogLooper entity){
-        boolean success=iBlogLooperService.updateById(entity);
-        if (success){
-        return CommonResult.success();
+    @ApiOperation(value = "修改单条记录")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogLoop entity) {
+        boolean success = iBlogLoopService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
-     }
+    }
 }
 

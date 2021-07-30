@@ -4,7 +4,7 @@ package com.hope.blog.common.api;
  * 全局错误码
  * Created by lijin on 2021/03/20.
  */
-public enum  ResultCode implements IErrorCode{
+public enum ResultCode implements IErrorCode {
 
     SUCCESS(200, "操作成功"),
     FAILED(500, "操作失败"),

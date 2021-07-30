@@ -3,7 +3,9 @@ package com.hope.blog.tool.model;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -22,10 +24,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("email_config")
-@ApiModel(value="ConfigEmail对象", description="邮箱配置")
+@ApiModel(value = "ConfigEmail对象", description = "邮箱配置")
 public class EmailConfig implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)

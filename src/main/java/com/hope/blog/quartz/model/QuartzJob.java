@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_quartz_job")
-public class QuartzJob{
+public class QuartzJob {
 
     public static final String JOB_KEY = "JOB_KEY";
 

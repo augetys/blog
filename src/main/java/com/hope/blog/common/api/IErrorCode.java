@@ -5,5 +5,6 @@ package com.hope.blog.common.api;
  */
 public interface IErrorCode {
     long getCode();
+
     String getMessage();
 }

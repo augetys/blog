@@ -1,6 +1,6 @@
 package com.hope.blog.blog.mapper;
 
-import com.hope.blog.blog.model.BlogLooper;
+import com.hope.blog.blog.model.BlogLoop;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author lijin
  * @since 2021-07-27
  */
-public interface BlogLooperMapper extends BaseMapper<BlogLooper> {
+public interface BlogLoopMapper extends BaseMapper<BlogLoop> {
 
 }

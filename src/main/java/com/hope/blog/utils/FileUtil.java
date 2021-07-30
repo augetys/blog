@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.text.DecimalFormat;
@@ -234,6 +235,7 @@ public class FileUtil {
 
     /**
      * 获取文件格式
+     *
      * @param type
      * @return
      */

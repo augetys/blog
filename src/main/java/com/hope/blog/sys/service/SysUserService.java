@@ -80,6 +80,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 修改用户状态
+     *
      * @param updateSysUserStatusRequestDto
      * @return
      */
@@ -87,6 +88,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 获取用户角色列表
+     *
      * @param userId
      * @return
      */
@@ -94,6 +96,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 分配角色
+     *
      * @param userId
      * @param roleIds
      * @return
@@ -102,6 +105,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 注销用户
+     *
      * @param id
      * @return
      */
@@ -109,6 +113,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 分页查询用户列表
+     *
      * @param sysUserSearchRequestDto
      * @return
      */

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "异常日志表")
 @RestController
 @RequestMapping("/log/exception")
-    public class SysExceptionLogController {
+public class SysExceptionLogController {
 
     @Autowired
     private SysExceptionLogService iSysExceptionLogService;
@@ -37,8 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<SysExceptionLog>> findListByPage(@ApiParam @RequestBody SysExceptionLogSearchRequestDto sysExceptionLogSearchRequestDto){
-        Page<SysExceptionLog> list=iSysExceptionLogService.findListByPage(sysExceptionLogSearchRequestDto);
+    public CommonResult<CommonPage<SysExceptionLog>> findListByPage(@ApiParam @RequestBody SysExceptionLogSearchRequestDto sysExceptionLogSearchRequestDto) {
+        Page<SysExceptionLog> list = iSysExceptionLogService.findListByPage(sysExceptionLogSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 }

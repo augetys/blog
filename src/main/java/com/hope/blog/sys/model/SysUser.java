@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -22,10 +23,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("sys_user")
-@ApiModel(value="SysUser对象", description="后台用户表")
+@ApiModel(value = "SysUser对象", description = "后台用户表")
 public class SysUser implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.ASSIGN_UUID)
     private String id;

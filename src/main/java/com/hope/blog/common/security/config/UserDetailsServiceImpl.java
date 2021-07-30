@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Created by lijin on  2021/4/26
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private SysUserService sysUserService;
@@ -21,6 +21,6 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser sysUser = sysUserService.findUserByUserName(username);
 
-        return new AuthUserDetails(sysUser,sysUser.getId());
+        return new AuthUserDetails(sysUser, sysUser.getId());
     }
 }

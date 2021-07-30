@@ -26,6 +26,6 @@ public class SysDictDetailServiceImpl extends ServiceImpl<SysDictDetailMapper, S
 
     @Override
     public boolean updateStatusById(UpdateDictDetailStatusRequetDto updateDictDetailStatusRequetDto) {
-        return sysDictDetailMapper.updateStatus(updateDictDetailStatusRequetDto)>0;
+        return sysDictDetailMapper.updateStatus(updateDictDetailStatusRequetDto) > 0;
     }
 }

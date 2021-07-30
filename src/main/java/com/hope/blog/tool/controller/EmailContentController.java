@@ -36,8 +36,8 @@ public class EmailContentController {
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<EmailContent>> findListByPage(@ApiParam @RequestBody EmailContent entity){
-        Page<EmailContent> list=iEmailContentService.findListByPage(entity);
+    public CommonResult<CommonPage<EmailContent>> findListByPage(@ApiParam @RequestBody EmailContent entity) {
+        Page<EmailContent> list = iEmailContentService.findListByPage(entity);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -47,8 +47,8 @@ public class EmailContentController {
      */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/{id}")
-    public CommonResult<EmailContent> getById(@PathVariable String id){
-    EmailContent entity=iEmailContentService.getById(id);
+    public CommonResult<EmailContent> getById(@PathVariable String id) {
+        EmailContent entity = iEmailContentService.getById(id);
         return CommonResult.success(entity);
     }
 
@@ -57,10 +57,10 @@ public class EmailContentController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody EmailContent entity){
-        boolean success=iEmailContentService.saveOrUpdate(entity);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody EmailContent entity) {
+        boolean success = iEmailContentService.saveOrUpdate(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
@@ -70,25 +70,25 @@ public class EmailContentController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
-    public CommonResult<ResultCode> delete(@PathVariable String id){
-        boolean success=iEmailContentService.removeById(id);
-        if (success){
-        return CommonResult.success();
+    public CommonResult<ResultCode> delete(@PathVariable String id) {
+        boolean success = iEmailContentService.removeById(id);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
     }
 
-     /**
+    /**
      * 修改单条记录
      */
-     @ApiOperation(value = "修改单条记录")
-     @PostMapping(value = "/update")
-     public CommonResult<ResultCode> update(@ApiParam @RequestBody EmailContent entity){
-        boolean success=iEmailContentService.updateById(entity);
-        if (success){
-        return CommonResult.success();
+    @ApiOperation(value = "修改单条记录")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody EmailContent entity) {
+        boolean success = iEmailContentService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
         }
         return CommonResult.failed();
-     }
+    }
 }
 

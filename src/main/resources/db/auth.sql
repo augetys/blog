@@ -68,7 +68,7 @@ INSERT INTO `sys_menus` VALUES ('4', '2', '分类管理', '/blog/category', 'blo
 INSERT INTO `sys_menus` VALUES ('5', '2', '标签管理', '/blog/tag', 'blog-tag', 50, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 INSERT INTO `sys_menus` VALUES ('6', '2', '评论管理', '/blog/comment', 'blog-comment', 60, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 INSERT INTO `sys_menus` VALUES ('7', '2', '导航栏管理', '/blog/nav', 'blog-nav', 31, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('8', '2', '轮播图管理', '/blog/looper', 'blog-looper', 32, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
+INSERT INTO `sys_menus` VALUES ('8', '2', '轮播图管理', '/blog/loop', 'blog-loop', 32, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 
 INSERT INTO `sys_menus` VALUES ('10', '0', '系统工具', '/tool', 'tool', 70, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
 INSERT INTO `sys_menus` VALUES ('11', '10', '邮件', '/tool/email', 'tool-email', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
@@ -133,8 +133,8 @@ INSERT INTO `sys_role_menus` VALUES ('3', 'e8a1d847a93cf5cc541731be3c12fd87', '3
 INSERT INTO `sys_role_menus` VALUES ('4', 'e8a1d847a93cf5cc541731be3c12fd87', '4', '2021-05-18 11:32:24', NULL);
 INSERT INTO `sys_role_menus` VALUES ('5', 'e8a1d847a93cf5cc541731be3c12fd87', '5', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('6', 'e8a1d847a93cf5cc541731be3c12fd87', '6', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('6', 'e8a1d847a93cf5cc541731be3c12fd87', '7', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('6', 'e8a1d847a93cf5cc541731be3c12fd87', '8', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('24', 'e8a1d847a93cf5cc541731be3c12fd87', '7', '2021-05-18 15:06:32', NULL);
+INSERT INTO `sys_role_menus` VALUES ('25', 'e8a1d847a93cf5cc541731be3c12fd87', '8', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('7', 'e8a1d847a93cf5cc541731be3c12fd87', '10', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('8', 'e8a1d847a93cf5cc541731be3c12fd87', '11', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('9', 'e8a1d847a93cf5cc541731be3c12fd87', '20', '2021-05-18 15:06:32', NULL);
@@ -361,7 +361,7 @@ CREATE TABLE `sys_quartz_job` (
 -- Records of sys_quartz_job
 -- ----------------------------
 INSERT INTO `sys_quartz_job` VALUES ('1', 'testTask', '0/5 * * * * ?', 1, '测试1', 'run1', 'test', '带参测试，多参使用json', 'admin', '1181881941@qq.com', NULL, 1, 'admin', 'admin', '2019-08-22 14:08:29', '2020-05-24 13:58:33');
-INSERT INTO `sys_quartz_job` VALUES ('2', 'testTask', '0/5 * * * * ?', 0, '测试2', 'run', '', '不带参测试', 'admin', '1181881941@qq.com', '3', 1, 'admin', 'admin', '2019-09-26 16:44:39', '2020-05-24 14:48:12');
+INSERT INTO `sys_quartz_job` VALUES ('2', 'testTask', '0/5 * * * * ?', 1, '测试2', 'run', '', '不带参测试', 'admin', '1181881941@qq.com', '3', 1, 'admin', 'admin', '2019-09-26 16:44:39', '2020-05-24 14:48:12');
 INSERT INTO `sys_quartz_job` VALUES ('3', 'testTask', '0/5 * * * * ?', 1, '测试3', 'run2', '', '测试3', 'admin', '1181881941@qq.com', NULL, 1, 'admin', 'admin', '2020-05-05 20:35:41', '2020-05-05 20:36:07');
 INSERT INTO `sys_quartz_job` VALUES ('4', 'test', '0/5 * * * * ?', 1, '测试4', 'run2', '', '测试3', 'admin', '1181881941@qq.com', NULL, 1, 'admin', 'admin', '2020-05-05 20:35:41', '2020-05-05 20:36:07');
 

@@ -19,6 +19,7 @@ import java.util.List;
 public interface SysUserMapper extends BaseMapper<SysUser> {
     /**
      * 根据用户id查询用户权限
+     *
      * @param userId
      * @return
      */
@@ -26,6 +27,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     /**
      * 根据用户id查询角色信息
+     *
      * @param userId
      * @return
      */
@@ -33,6 +35,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 
     /**
      * 修改用户状态
+     *
      * @param updateSysUserStatusRequestDto
      * @return
      */

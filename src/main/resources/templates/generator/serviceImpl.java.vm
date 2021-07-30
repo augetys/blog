@@ -22,12 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 #if(${kotlin})
 open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
 
-}
+        }
 #else
-public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
-    @Override
-    public Page<${entity}> findListByPage(${entity} entity) {
+        public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>implements ${table.serviceName} {
+        @Override
+        public Page<${entity}>findListByPage(${entity} entity){
         return null;
-    }
-}
+        }
+        }
 #end

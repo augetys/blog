@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -24,10 +26,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("email_content")
-@ApiModel(value="EmailContent对象", description="邮箱发送内容")
+@ApiModel(value = "EmailContent对象", description = "邮箱发送内容")
 public class EmailContent implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)

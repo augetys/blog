@@ -20,6 +20,7 @@ import java.util.List;
 public interface SysRoleService extends IService<SysRole> {
     /**
      * 分配菜单
+     *
      * @param sysAllocMenusRequestDto
      * @return
      */
@@ -27,6 +28,7 @@ public interface SysRoleService extends IService<SysRole> {
 
     /**
      * 角色对应的菜单列表
+     *
      * @param roleId
      * @return
      */
@@ -34,6 +36,7 @@ public interface SysRoleService extends IService<SysRole> {
 
     /**
      * 分页查询角色列表
+     *
      * @param roleSearchRequestDto
      * @return
      */

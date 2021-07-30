@@ -35,11 +35,14 @@ public class BlogNavServiceImpl extends ServiceImpl<BlogNavMapper, BlogNav> impl
         if (!StringUtils.isEmpty(blogArticleNavSearchRequestDto.getName())) {
             queryWrapper.like("title", blogArticleNavSearchRequestDto.getName());
         }
+        queryWrapper.lambda().orderByAsc(BlogNav::getSort);
         return blogNavMapper.selectPage(new Page<>(blogArticleNavSearchRequestDto.getPageNum(), blogArticleNavSearchRequestDto.getPageSize()), queryWrapper);
     }
 
     @Override
     public List<BlogNav> findAll() {
-        return this.list();
+        QueryWrapper<BlogNav> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().orderByAsc(BlogNav::getSort);
+        return blogNavMapper.selectList(queryWrapper);
     }
 }

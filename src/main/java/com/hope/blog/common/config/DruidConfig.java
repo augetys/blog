@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,24 +18,24 @@ import java.util.Map;
 @Configuration
 public class DruidConfig {
     @Bean
-    public FilterRegistrationBean<WebStatFilter> webStatFilter(){
+    public FilterRegistrationBean<WebStatFilter> webStatFilter() {
         FilterRegistrationBean<WebStatFilter> beanFilter = new FilterRegistrationBean<>();
         beanFilter.setFilter(new WebStatFilter());
-        Map<String,String> initParams = new HashMap<>();
-        initParams.put("exclusions","*.js,*.css,/druid/*");
+        Map<String, String> initParams = new HashMap<>();
+        initParams.put("exclusions", "*.js,*.css,/druid/*");
         beanFilter.setInitParameters(initParams);
         beanFilter.setUrlPatterns(Collections.singletonList("/*"));
-        return  beanFilter;
+        return beanFilter;
     }
 
     @Bean
-    public ServletRegistrationBean<StatViewServlet> setStatViewServlet(){
+    public ServletRegistrationBean<StatViewServlet> setStatViewServlet() {
         ServletRegistrationBean<StatViewServlet> beanServlet = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
-        Map<String,String> initParams = new HashMap<>();
-        initParams.put("loginUsername","admin");
-        initParams.put("loginPassword","123456");
-        initParams.put("allow","");
+        Map<String, String> initParams = new HashMap<>();
+        initParams.put("loginUsername", "admin");
+        initParams.put("loginPassword", "123456");
+        initParams.put("allow", "");
         beanServlet.setInitParameters(initParams);
-        return  beanServlet;
+        return beanServlet;
     }
 }

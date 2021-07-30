@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -141,7 +142,7 @@ public class MyBatisPlusGenerator {
         }
         // 自动填充
         TableFill tableFill = new TableFill("create_time", FieldFill.INSERT);
-        TableFill tableFill2= new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        TableFill tableFill2 = new TableFill("update_time", FieldFill.INSERT_UPDATE);
         List<TableFill> arr = new ArrayList<>();
         arr.add(tableFill);
         arr.add(tableFill2);

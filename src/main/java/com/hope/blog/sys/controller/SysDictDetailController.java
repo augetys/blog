@@ -66,7 +66,7 @@ public class SysDictDetailController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/updateStatus/{id}")
-    public CommonResult<ResultCode> updateStatus(@PathVariable UpdateDictDetailStatusRequetDto updateDictDetailStatusRequetDto ) {
+    public CommonResult<ResultCode> updateStatus(@PathVariable UpdateDictDetailStatusRequetDto updateDictDetailStatusRequetDto) {
         boolean success = iSysDictDetailService.updateStatusById(updateDictDetailStatusRequetDto);
         if (success) {
             return CommonResult.success();
