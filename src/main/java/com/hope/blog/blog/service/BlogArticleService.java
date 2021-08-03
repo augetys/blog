@@ -20,4 +20,8 @@ public interface BlogArticleService extends IService<BlogArticle> {
     Page<BlogArticle> findListByPage(BlogArticleSearchRequestDto blogArticleSearchRequestDto);
 
     List<BlogArticle> getHotArticle();
+
+    Page<BlogArticle> findByTag(BlogArticleSearchRequestDto blogArticleSearchRequestDto);
+
+    Page<BlogArticle> findByCategory(BlogArticleSearchRequestDto blogArticleSearchRequestDto);
 }

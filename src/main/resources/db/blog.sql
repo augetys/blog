@@ -106,7 +106,9 @@ DROP TABLE IF EXISTS `blog_loop`;
 CREATE TABLE `blog_loop` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `title` varchar(128) NOT NULL COMMENT '轮播图标题',
-  `sort` int(11) NOT NULL DEFAULT '0' COMMENT '顺序',
+  `sort` int(11) NOT NULL DEFAULT 0 COMMENT '顺序',
+  `article_id` varchar(64) DEFAULT NULL COMMENT '文章id',
+  `is_link` int(11) NOT NULL DEFAULT 0 COMMENT '是否外链 0 否 1 是',
   `target_url` varchar(1024) DEFAULT NULL COMMENT '目标URL',
   `image_url` varchar(2014) NOT NULL COMMENT '图片地址',
   `create_time` datetime NOT NULL COMMENT '创建时间',

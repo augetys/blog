@@ -45,6 +45,25 @@ public class BlogArticleController {
         return CommonResult.success(CommonPage.restPage(list));
     }
 
+    /**
+     * 根据分类Id查询分页数据
+     */
+    @ApiOperation(value = "根据分类Id查询分页数据")
+    @PostMapping(value = "/findByCategory")
+    public CommonResult<CommonPage<BlogArticle>> findByCategory(@ApiParam @RequestBody BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
+        Page<BlogArticle> list = iBlogArticleService.findByCategory(blogArticleSearchRequestDto);
+        return CommonResult.success(CommonPage.restPage(list));
+    }
+
+    /**
+     * 根据标签Id分页数据
+     */
+    @ApiOperation(value = "根据标签Id分页数据")
+    @PostMapping(value = "/findByTag")
+    public CommonResult<CommonPage<BlogArticle>> findByTag(@ApiParam @RequestBody BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
+        Page<BlogArticle> list = iBlogArticleService.findByTag(blogArticleSearchRequestDto);
+        return CommonResult.success(CommonPage.restPage(list));
+    }
 
     /**
      * 热门文章
