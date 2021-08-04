@@ -71,7 +71,7 @@ public class BlogArticle implements Serializable {
     private String articlesPart;
 
     @ApiModelProperty(value = "博客分类ID")
-    private String articleCategoryId;
+    private String categoryId;
 
     @ApiModelProperty(value = "排序字段")
     private Integer sort;

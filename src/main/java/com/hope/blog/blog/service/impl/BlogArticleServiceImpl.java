@@ -59,8 +59,8 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     @Override
     public Page<BlogArticle> findByCategory(BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
         QueryWrapper<BlogArticle> queryWrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTitle())) {
-            queryWrapper.like("article_category_id", blogArticleSearchRequestDto.getCategoryId());
+        if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getCategoryId())) {
+            queryWrapper.eq("category_id", blogArticleSearchRequestDto.getCategoryId());
         }
         return blogArticleMapper.selectPage(new Page<>(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()), queryWrapper);
     }

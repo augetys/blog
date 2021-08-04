@@ -15,7 +15,7 @@ CREATE TABLE `blog_article` (
   `is_original` int(1) DEFAULT '1' COMMENT '是否原创（0:不是 1：是）',
   `author` varchar(255) DEFAULT NULL COMMENT '作者',
   `articles_part` varchar(255) DEFAULT NULL COMMENT '文章出处',
-  `article_category_id` varchar(32) DEFAULT NULL COMMENT '博客分类ID',
+  `category_id` varchar(32) DEFAULT NULL COMMENT '博客分类ID',
   `sort` int(11) DEFAULT 0 COMMENT '排序字段',
   `open_comment` tinyint(1) DEFAULT 1 COMMENT '是否开启评论(0:否 1:是)',
   `create_time` datetime NOT NULL COMMENT '创建时间',
@@ -139,9 +139,9 @@ CREATE TABLE `blog_nav` (
 
 INSERT INTO `blog_nav` VALUES ('1', '醉花阴', 'icon-home', 1, '/', '2021-07-28 09:02:42', '2021-07-28 09:02:46');
 INSERT INTO `blog_nav` VALUES ('10', '海市蜃楼', 'icon-video', 10, '/', '2021-07-28 09:05:18', '2021-07-28 09:05:20');
-INSERT INTO `blog_nav` VALUES ('2', '无妄海', 'icon-code', 2, '/', '2021-07-28 09:03:03', '2021-07-28 09:03:06');
-INSERT INTO `blog_nav` VALUES ('3', '清平乐', 'icon-think', 3, '/', '2021-07-28 09:03:19', '2021-07-28 09:03:21');
-INSERT INTO `blog_nav` VALUES ('4', '如梦令', 'icon-life', 4, '/', '2021-07-28 09:03:37', '2021-07-28 09:03:40');
+INSERT INTO `blog_nav` VALUES ('2', '无妄海', 'icon-code', 2, '/category/49e72a0020525c53c22bdc11518b858a', '2021-07-28 09:03:03', '2021-07-28 09:03:06');
+INSERT INTO `blog_nav` VALUES ('3', '清平乐', 'icon-think', 3, '/categoryy/79d9169cef8d7936e0983e4a75e405da', '2021-07-28 09:03:19', '2021-07-28 09:03:21');
+INSERT INTO `blog_nav` VALUES ('4', '如梦令', 'icon-life', 4, '/category/bbd3ad1fa70b95a53e3a006acc3eeb98', '2021-07-28 09:03:37', '2021-07-28 09:03:40');
 INSERT INTO `blog_nav` VALUES ('5', '荏苒', 'icon-date', 5, '/', '2021-07-28 09:03:54', '2021-07-28 09:03:58');
 INSERT INTO `blog_nav` VALUES ('6', '琉璃镜', 'icon-photo', 6, '/', '2021-07-28 09:04:14', '2021-07-28 09:04:16');
 INSERT INTO `blog_nav` VALUES ('7', '藏经阁', 'icon-file', 7, '/', '2021-07-28 09:04:31', '2021-07-28 09:04:33');

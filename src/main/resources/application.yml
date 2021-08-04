@@ -53,5 +53,6 @@ secure:
       - /blog/nav/findAll
       - /blog/looper/findAll
       - /blog/article/list
+      - /blog/article/findByCategory
       - /blog/article/{id}
       - /index.html
