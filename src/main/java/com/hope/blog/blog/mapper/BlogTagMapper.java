@@ -1,7 +1,10 @@
 package com.hope.blog.blog.mapper;
 
+import com.hope.blog.blog.dto.response.BlogTagListResponse;
 import com.hope.blog.blog.model.BlogTag;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface BlogTagMapper extends BaseMapper<BlogTag> {
 
+    List<BlogTagListResponse> getTag();
 }

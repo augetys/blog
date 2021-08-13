@@ -44,6 +44,9 @@ public class BlogLoop implements Serializable {
     @ApiModelProperty(value = "顺序")
     private Integer sort;
 
+    @ApiModelProperty(value = "是否外链 0 否 1 是")
+    private Integer isLink;
+
     @ApiModelProperty(value = "目标URL")
     private String targetUrl;
 

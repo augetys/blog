@@ -49,10 +49,10 @@ secure:
       - /sys/user/register
       - /blog/category/findAll
       - /blog/tag/findAll
+      - /blog/tag/getTag
       - /blog/loop/findAll
       - /blog/nav/findAll
       - /blog/looper/findAll
       - /blog/article/list
-      - /blog/article/findByCategory
       - /blog/article/{id}
       - /index.html

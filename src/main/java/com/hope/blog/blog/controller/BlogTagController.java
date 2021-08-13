@@ -2,6 +2,7 @@ package com.hope.blog.blog.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.blog.dto.request.BlogTagSearchRequestDto;
+import com.hope.blog.blog.dto.response.BlogTagListResponse;
 import com.hope.blog.blog.model.BlogTag;
 import com.hope.blog.blog.service.BlogTagService;
 import com.hope.blog.common.api.CommonPage;
@@ -102,6 +103,18 @@ public class BlogTagController {
             return CommonResult.success();
         }
         return CommonResult.failed();
+    }
+
+
+    // 门户
+    /**
+     * 查询标签
+     */
+    @ApiOperation(value = "查询标签")
+    @GetMapping(value = "/getTag")
+    public CommonResult<List<BlogTagListResponse>> getTag() {
+        List<BlogTagListResponse> list = iBlogTagService.getTag();
+        return CommonResult.success(list);
     }
 }
 

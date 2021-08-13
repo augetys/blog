@@ -45,35 +45,6 @@ public class BlogArticleController {
         return CommonResult.success(CommonPage.restPage(list));
     }
 
-    /**
-     * 根据分类Id查询分页数据
-     */
-    @ApiOperation(value = "根据分类Id查询分页数据")
-    @PostMapping(value = "/findByCategory")
-    public CommonResult<CommonPage<BlogArticle>> findByCategory(@ApiParam @RequestBody BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
-        Page<BlogArticle> list = iBlogArticleService.findByCategory(blogArticleSearchRequestDto);
-        return CommonResult.success(CommonPage.restPage(list));
-    }
-
-    /**
-     * 根据标签Id分页数据
-     */
-    @ApiOperation(value = "根据标签Id分页数据")
-    @PostMapping(value = "/findByTag")
-    public CommonResult<CommonPage<BlogArticle>> findByTag(@ApiParam @RequestBody BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
-        Page<BlogArticle> list = iBlogArticleService.findByTag(blogArticleSearchRequestDto);
-        return CommonResult.success(CommonPage.restPage(list));
-    }
-
-    /**
-     * 热门文章
-     */
-    @ApiOperation(value = "热门文章")
-    @GetMapping(value = "/getHotArticle")
-    public CommonResult<List<BlogArticle>> getHotArticle() {
-        List<BlogArticle> entity = iBlogArticleService.getHotArticle();
-        return CommonResult.success(entity);
-    }
 
     /**
      * 根据id查询
@@ -123,6 +94,18 @@ public class BlogArticleController {
             return CommonResult.success();
         }
         return CommonResult.failed();
+    }
+
+    // 门户
+
+    /**
+     * 热门文章
+     */
+    @ApiOperation(value = "热门文章")
+    @GetMapping(value = "/getHotArticle")
+    public CommonResult<List<BlogArticle>> getHotArticle() {
+        List<BlogArticle> entity = iBlogArticleService.getHotArticle();
+        return CommonResult.success(entity);
     }
 }
 

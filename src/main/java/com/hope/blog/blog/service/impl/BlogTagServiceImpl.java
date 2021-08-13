@@ -3,6 +3,7 @@ package com.hope.blog.blog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.blog.dto.request.BlogTagSearchRequestDto;
+import com.hope.blog.blog.dto.response.BlogTagListResponse;
 import com.hope.blog.blog.model.BlogTag;
 import com.hope.blog.blog.mapper.BlogTagMapper;
 import com.hope.blog.blog.service.BlogTagService;
@@ -51,5 +52,10 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
             queryWrapper.like("name", name);
         }
         return blogTagMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public List<BlogTagListResponse> getTag() {
+        return blogTagMapper.getTag();
     }
 }

@@ -20,4 +20,23 @@
         update_time
     </sql>
 
+    <select id="getTag" resultType="com.hope.blog.blog.dto.response.BlogTagListResponse">
+        select a.name,a.id,IFNULL(b.num,0) num,a.icon from blog_tag a left join
+        (
+        SELECT
+        tag_id,
+        count( tag_id ) num
+        FROM
+        (
+        SELECT
+        substring_index( substring_index( qa.tag_id, ',', b.help_topic_id + 1 ), ',',- 1 ) AS tag_id
+        FROM
+        blog_article qa
+        JOIN mysql.help_topic b ON b.help_topic_id &lt; ( length( qa.tag_id ) - length( REPLACE ( qa.tag_id, ',', '' ) ) + 1 )
+        ) a
+        GROUP BY
+        a.tag_id
+        ) b on a.id = b.tag_id
+    </select>
+
 </mapper>

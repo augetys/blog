@@ -319,8 +319,8 @@ CREATE TABLE `local_storage` (
 -- ----------------------------
 -- Table structure for qiniu_content
 -- ----------------------------
-DROP TABLE IF EXISTS `qiniu_file`;
-CREATE TABLE `qiniu_file` (
+DROP TABLE IF EXISTS `qiniu_content`;
+CREATE TABLE `qiniu_content` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
   `name` varchar(255) DEFAULT NULL COMMENT '文件名称',
@@ -332,6 +332,30 @@ CREATE TABLE `qiniu_file` (
   `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云文件存储';
+
+INSERT INTO `qiniu_content` VALUES ('0e71fffbdd98f40d00d952c4d99104aa', 'hopelittle', NULL, '44.18KB   ', '20210727173925757', '1', 'http://photo.choot.top/20210727173925757.jpg', 'jpg', '2021-07-27 17:39:26');
+INSERT INTO `qiniu_content` VALUES ('1387b349b1754c9bc7b11fb6a1757c03', 'hopelittle', NULL, '82.70KB   ', '20210727142243304', '1', 'http://photo.choot.top/20210727142243304.jpg', 'jpg', '2021-07-27 14:22:44');
+INSERT INTO `qiniu_content` VALUES ('1adb37b6c15136768f7dedc21b8caaaf', 'hopelittle', NULL, '42.08KB   ', '20210727172945177', '1', 'http://photo.choot.top/20210727172945177.jpg', 'jpg', '2021-07-27 17:29:46');
+INSERT INTO `qiniu_content` VALUES ('1dc47d874c9ffa9d7bbfaaa5c06cd14e', 'hopelittle', NULL, '34.38KB   ', '20210728090058863', '1', 'http://photo.choot.top/20210728090058863.jpg', 'jpg', '2021-07-28 09:00:59');
+INSERT INTO `qiniu_content` VALUES ('20a0b3242e2dc95c6113a0619d0d05ec', 'hopelittle', NULL, '88.98KB   ', '2021072714513319', '1', 'http://photo.choot.top/2021072714513319.jpg', 'jpg', '2021-07-27 14:51:33');
+INSERT INTO `qiniu_content` VALUES ('3a8f3faee45181ea5b0b38495ae4540b', 'hopelittle', NULL, '51.21KB   ', '202107271639237', '1', 'http://photo.choot.top/202107271639237.jpg', 'jpg', '2021-07-27 16:39:23');
+INSERT INTO `qiniu_content` VALUES ('3b92223c6f1b8279c9a41e184bee4f29', 'hopelittle', NULL, '82.70KB   ', '20210727173437581', '1', 'http://photo.choot.top/20210727173437581.jpg', 'jpg', '2021-07-27 17:34:38');
+INSERT INTO `qiniu_content` VALUES ('433b33151dcb2a641689d37a53d48196', 'hopelittle', NULL, '82.70KB   ', '20210727142609381', '1', 'http://photo.choot.top/20210727142609381.jpg', 'jpg', '2021-07-27 14:26:10');
+INSERT INTO `qiniu_content` VALUES ('49ff0b4aabfa88b7437adda6f18b752b', 'hopelittle', NULL, '46.37KB   ', '20210806122417757', '1', 'http://photo.choot.top/20210806122417757.jpg', 'jpg', '2021-08-06 12:24:18');
+INSERT INTO `qiniu_content` VALUES ('5178b27138a82abd54c083662e03fe80', 'hopelittle', NULL, '5.69KB   ', '20210728183239522', '1', 'http://photo.choot.top/20210728183239522.jpg', 'jpg', '2021-07-28 18:32:40');
+INSERT INTO `qiniu_content` VALUES ('5ecdd3cdcacd13da1eb8809df667b445', 'hopelittle', NULL, '88.98KB   ', '20210727173554575', '1', 'http://photo.choot.top/20210727173554575.jpg', 'jpg', '2021-07-27 17:35:55');
+INSERT INTO `qiniu_content` VALUES ('661bb374e6fdfd2702753c40187bc9b2', 'hopelittle', NULL, '82.70KB   ', '20210727142252470', '1', 'http://photo.choot.top/20210727142252470.jpg', 'jpg', '2021-07-27 14:22:53');
+INSERT INTO `qiniu_content` VALUES ('66a9e678ef69592da7a4f442b7421427', 'hopelittle', NULL, '82.70KB   ', '20210727142443131', '1', 'http://photo.choot.top/20210727142443131.jpg', 'jpg', '2021-07-27 14:24:43');
+INSERT INTO `qiniu_content` VALUES ('6a1d49a6f18b6a596d0a740fd51f9507', 'hopelittle', NULL, '5.69KB   ', '2021072818362344', '1', 'http://photo.choot.top/2021072818362344.jpg', 'jpg', '2021-07-28 18:36:23');
+INSERT INTO `qiniu_content` VALUES ('74df6099f4233e496381176cace88372', 'hopelittle', NULL, '46.37KB   ', '20210806122418257', '1', 'http://photo.choot.top/20210806122418257.jpg', 'jpg', '2021-08-06 12:24:19');
+INSERT INTO `qiniu_content` VALUES ('75f42d803b565ed8591f67f294c866de', 'hopelittle', NULL, '46.11KB   ', '2021072809003761', '1', 'http://photo.choot.top/2021072809003761.jpg', 'jpg', '2021-07-28 09:00:37');
+INSERT INTO `qiniu_content` VALUES ('8f51db13e207b94de90b5f200600b2c3', 'hopelittle', NULL, '5.69KB   ', '20210728181902268', '1', 'http://photo.choot.top/20210728181902268.jpg', 'jpg', '2021-07-28 18:19:03');
+INSERT INTO `qiniu_content` VALUES ('a40dc32a253aa1ea34ed6fef447f7c3d', 'hopelittle', NULL, '43.05KB   ', '20210728085852388', '1', 'http://photo.choot.top/20210728085852388.jpg', 'jpg', '2021-07-28 08:58:53');
+INSERT INTO `qiniu_content` VALUES ('bda86106441771b5e6742ab184f4dac0', 'hopelittle', NULL, '45.85KB   ', '20210729085839401', '1', 'http://photo.choot.top/20210729085839401.jpg', 'jpg', '2021-07-29 08:58:40');
+INSERT INTO `qiniu_content` VALUES ('d3238355eba7c5bce219f02060275942', 'hopelittle', NULL, '19.11KB   ', '20210716140612848', '1', 'http://photo.choot.top/20210716140612848.jpg', 'jpg', '2021-07-16 14:06:13');
+INSERT INTO `qiniu_content` VALUES ('de1f6d04d1a8dc40e75d134687150922', 'hopelittle', NULL, '82.70KB   ', '20210727142501560', '1', 'http://photo.choot.top/20210727142501560.jpg', 'jpg', '2021-07-27 14:25:02');
+INSERT INTO `qiniu_content` VALUES ('e63e2d59de91b424d08e1f0521ca970a', 'hopelittle', NULL, '37.02KB   ', '20210728085253581', '1', 'http://photo.choot.top/20210728085253581.jpg', 'jpg', '2021-07-28 08:52:54');
+INSERT INTO `qiniu_content` VALUES ('e6ad69928a1e28eb2caa37d0127736d2', 'hopelittle', NULL, '37.05KB   ', '20210729085708657', '1', 'http://photo.choot.top/20210729085708657.jpg', 'jpg', '2021-07-29 08:57:09');
 
 -- ----------------------------
 -- Table structure for sys_quartz_job
