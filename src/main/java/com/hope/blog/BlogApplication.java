@@ -8,10 +8,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class BaseApplication extends SpringBootServletInitializer {
+public class BlogApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(BaseApplication.class, args);
+        SpringApplication.run(BlogApplication.class, args);
     }
 
     @Bean
@@ -22,6 +22,6 @@ public class BaseApplication extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         // 注意这里要指向原先用main方法执行的Application启动类
-        return application.sources(BaseApplication.class);
+        return application.sources(BlogApplication.class);
     }
 }
