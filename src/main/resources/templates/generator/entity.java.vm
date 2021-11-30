@@ -8,10 +8,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 #end
 #if(${entityLombokModel})
-import lombok.*;
-    #if(${chainModel})
-    import lombok.experimental.Accessors;
-    #end
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+#if(${chainModel})
+import lombok.experimental.Accessors;
+#end
 #end
 
 /**
@@ -24,30 +25,27 @@ import lombok.*;
  */
 #if(${entityLombokModel})
 @Data
-    #if(${superEntityClass})
-    @EqualsAndHashCode(callSuper = true)
-    #else
-    @EqualsAndHashCode(callSuper = false)
-    #end
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-    #if(${chainModel})
-    @Accessors(chain = true)
-    #end
+#if(${superEntityClass})
+@EqualsAndHashCode(callSuper = true)
+#else
+@EqualsAndHashCode(callSuper = false)
+#end
+#if(${chainModel})
+@Accessors(chain = true)
+#end
 #end
 #if(${table.convert})
 @TableName("${table.name}")
 #end
 #if(${swagger2})
-@ApiModel(value = "${entity}对象", description = "$!{table.comment}")
+@ApiModel(value="${entity}对象", description="$!{table.comment}")
 #end
 #if(${superEntityClass})
 public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
 public class ${entity} extends Model<${entity}> {
 #else
-public class ${entity} implements Serializable{
+public class ${entity} implements Serializable {
 #end
 
 #if(${entitySerialVersionUID})
@@ -108,12 +106,12 @@ private ${field.propertyType} ${field.propertyName};
             #set($getprefix="get")
         #end
 
-    public ${field.propertyType} ${getprefix}${field.capitalName}(){
+    public ${field.propertyType} ${getprefix}${field.capitalName}() {
             return ${field.propertyName};
             }
 
         #if(${chainModel})
-        public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}){
+        public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
         #else
         public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
         #end
@@ -129,13 +127,13 @@ private ${field.propertyType} ${field.propertyName};
 
 #if(${entityColumnConstant})
     #foreach($field in ${table.fields})
-    public static final String ${field.name.toUpperCase()} ="${field.name}";
+    public static final String ${field.name.toUpperCase()} = "${field.name}";
 
     #end
 #end
 #if(${activeRecord})
 @Override
-protected Serializable pkVal(){
+protected Serializable pkVal() {
     #if(${keyPropertyName})
             return this.${keyPropertyName};
     #else
@@ -158,4 +156,4 @@ public String toString() {
         "}";
         }
 #end
-        }
+}
