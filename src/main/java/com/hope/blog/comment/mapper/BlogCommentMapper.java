@@ -1,6 +1,6 @@
-package com.hope.blog.blog.mapper;
+package com.hope.blog.comment.mapper;
 
-import com.hope.blog.blog.model.BlogComment;
+import com.hope.blog.comment.model.BlogComment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author lijin
- * @since 2021-07-02
+ * @since 2021-11-24
  */
 public interface BlogCommentMapper extends BaseMapper<BlogComment> {
 

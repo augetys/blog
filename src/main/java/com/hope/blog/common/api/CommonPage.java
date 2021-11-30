@@ -1,7 +1,8 @@
 package com.hope.blog.common.api;
 
 import cn.hutool.core.convert.Convert;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import lombok.Data;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class CommonPage<T> {
     /**
      * 将MyBatis Plus 分页结果转化为通用结果
      */
-    public static <T> CommonPage<T> restPage(Page<T> pageResult) {
+    public static <T> CommonPage<T> restPage(IPage<T> pageResult) {
         CommonPage<T> result = new CommonPage<>();
         result.setPageNum(Convert.toInt(pageResult.getCurrent()));
         result.setPageSize(Convert.toInt(pageResult.getSize()));

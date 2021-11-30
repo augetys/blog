@@ -52,6 +52,7 @@ secure:
       - /blog/tag/getTag
       - /blog/loop/findAll
       - /blog/nav/findAll
+      - /comment/blogComment/commentsByArticleId
       - /blog/looper/findAll
       - /blog/article/list
       - /blog/article/{id}

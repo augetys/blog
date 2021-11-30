@@ -52,10 +52,10 @@ public class BlogArticleListResponseDto {
     private String articlesPart;
 
     @ApiModelProperty(value = "博客分类ID")
-    private String articleCategoryId;
+    private String categoryId;
 
     @ApiModelProperty(value = "博客分类名称")
-    private String articleCategoryName;
+    private String categoryName;
 
     @ApiModelProperty(value = "排序字段")
     private Integer sort;

@@ -1,4 +1,4 @@
-package com.hope.blog.blog.model;
+package com.hope.blog.comment.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -13,7 +13,8 @@ import java.io.Serializable;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -21,13 +22,10 @@ import lombok.*;
  * </p>
  *
  * @author lijin
- * @since 2021-07-02
+ * @since 2021-11-24
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @TableName("blog_comment")
 @ApiModel(value = "BlogComment对象", description = "博客文章评论表")
 public class BlogComment implements Serializable {
@@ -42,6 +40,12 @@ public class BlogComment implements Serializable {
 
     @ApiModelProperty(value = "评论用户")
     private String userId;
+
+    @ApiModelProperty(value = "评论用户头像")
+    private String userAvatar;
+
+    @ApiModelProperty(value = "点赞的数量")
+    private Integer likeNum;
 
     @ApiModelProperty(value = "博客文章id")
     private String articleId;

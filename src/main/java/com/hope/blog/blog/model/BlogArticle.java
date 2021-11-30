@@ -64,9 +64,6 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "是否原创（0:不是 1：是）")
     private Integer isOriginal;
 
-    @ApiModelProperty(value = "作者")
-    private String author;
-
     @ApiModelProperty(value = "文章出处")
     private String articlesPart;
 
@@ -86,6 +83,5 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
 
 }

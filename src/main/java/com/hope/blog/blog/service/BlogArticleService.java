@@ -1,7 +1,8 @@
 package com.hope.blog.blog.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.blog.dto.request.BlogArticleSearchRequestDto;
+import com.hope.blog.blog.dto.response.BlogArticleListResponseDto;
 import com.hope.blog.blog.model.BlogArticle;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * @since 2021-07-02
  */
 public interface BlogArticleService extends IService<BlogArticle> {
-    Page<BlogArticle> findListByPage(BlogArticleSearchRequestDto blogArticleSearchRequestDto);
+    IPage<BlogArticleListResponseDto> findListByPage(BlogArticleSearchRequestDto blogArticleSearchRequestDto);
 
     List<BlogArticle> getHotArticle();
 

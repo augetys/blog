@@ -68,7 +68,10 @@ public class MyBatisPlusGenerator {
         config.setAuthor("lijin");
         config.setOpen(false);
         config.setSwagger2(true);
+        // 通用查询映射结果
         config.setBaseResultMap(true);
+        // 通用查询结果列
+        config.setBaseColumnList(true);
         config.setFileOverride(false);
         config.setIdType(IdType.ASSIGN_UUID);
         config.setDateType(DateType.ONLY_DATE);

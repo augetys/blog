@@ -1,7 +1,9 @@
 package com.hope.blog.blog.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.blog.dto.request.BlogArticleSearchRequestDto;
+import com.hope.blog.blog.dto.response.BlogArticleListResponseDto;
 import com.hope.blog.blog.model.BlogArticle;
 import com.hope.blog.blog.service.BlogArticleService;
 import com.hope.blog.common.api.CommonPage;
@@ -40,8 +42,8 @@ public class BlogArticleController {
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<BlogArticle>> findListByPage(@ApiParam @RequestBody BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
-        Page<BlogArticle> list = iBlogArticleService.findListByPage(blogArticleSearchRequestDto);
+    public CommonResult<CommonPage<BlogArticleListResponseDto>> findListByPage(@ApiParam @RequestBody BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
+        IPage<BlogArticleListResponseDto> list = iBlogArticleService.findListByPage(blogArticleSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
