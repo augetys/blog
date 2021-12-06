@@ -51,7 +51,7 @@ public class EmailConfigServiceImpl extends ServiceImpl<EmailConfigMapper, Email
         account.setFrom(emailConfig.getUser() + "<" + emailConfig.getFromUser() + ">");
         account.setPass(emailConfig.getPass());
         // ssl方式发送
-        account.setSslEnable(true);
+        account.setSslEnable(false);
         String content = emailSendRequestDto.getContent();
         // 发送
         try {

@@ -1,6 +1,6 @@
 package com.hope.blog.quartz.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
@@ -37,14 +37,14 @@ public class QuartzJobController {
     @ApiOperation("查询定时任务")
     @PostMapping("/jobs")
     public CommonResult<CommonPage<QuartzJob>> query(@ApiParam @RequestBody JobQueryRequestDto criteria) {
-        Page<QuartzJob> list = quartzJobService.findJobByPage(criteria);
+        IPage<QuartzJob> list = quartzJobService.findJobByPage(criteria);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
     @ApiOperation("查询任务执行日志")
     @PostMapping("/logs")
     public CommonResult<CommonPage<QuartzLog>> queryJobLog(@ApiParam @RequestBody JobQueryRequestDto criteria) {
-        Page<QuartzLog> list = quartzJobService.findLogByPage(criteria);
+        IPage<QuartzLog> list = quartzJobService.findLogByPage(criteria);
         return CommonResult.success(CommonPage.restPage(list));
     }
 

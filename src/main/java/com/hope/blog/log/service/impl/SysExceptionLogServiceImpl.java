@@ -1,6 +1,7 @@
 package com.hope.blog.log.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.log.dto.request.SysExceptionLogSearchRequestDto;
 import com.hope.blog.log.model.SysExceptionLog;
@@ -32,7 +33,7 @@ public class SysExceptionLogServiceImpl extends ServiceImpl<SysExceptionLogMappe
     private SysExceptionLogMapper sysExceptionLogMapper;
 
     @Override
-    public Page<SysExceptionLog> findListByPage(SysExceptionLogSearchRequestDto sysExceptionLogSearchRequestDto) {
+    public IPage<SysExceptionLog> findListByPage(SysExceptionLogSearchRequestDto sysExceptionLogSearchRequestDto) {
         QueryWrapper<SysExceptionLog> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(sysExceptionLogSearchRequestDto.getOperation())) {
             queryWrapper.like("operation", sysExceptionLogSearchRequestDto.getOperation());

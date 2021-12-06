@@ -5,6 +5,10 @@ spring:
     user:
       name: lijin
       password: 123456
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 mybatis-plus:
   mapper-locations:
     - classpath:mapper/**/*.xml
@@ -12,8 +16,9 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+logging:
+  level:
+    com.hope.blog: debug
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: ji8n3439n439n43ld9ne9343fdfer49h #JWT加解密使用的密钥

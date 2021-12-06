@@ -1,12 +1,11 @@
 package com.hope.blog.log.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.log.dto.request.SysExceptionLogSearchRequestDto;
 import com.hope.blog.log.model.SysExceptionLog;
 import com.hope.blog.log.service.SysExceptionLogService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
-import com.hope.blog.common.api.ResultCode;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +37,7 @@ public class SysExceptionLogController {
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
     public CommonResult<CommonPage<SysExceptionLog>> findListByPage(@ApiParam @RequestBody SysExceptionLogSearchRequestDto sysExceptionLogSearchRequestDto) {
-        Page<SysExceptionLog> list = iSysExceptionLogService.findListByPage(sysExceptionLogSearchRequestDto);
+        IPage<SysExceptionLog> list = iSysExceptionLogService.findListByPage(sysExceptionLogSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 }

@@ -29,7 +29,7 @@
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <velocity.version>2.2</velocity.version>
         <alibaba.fastjson.version>1.2.31</alibaba.fastjson.version>
-        <mail.version>1.4.7</mail.version>
+        <mail.version>1.5</mail.version>
         <core.version>3.3.3</core.version>
         <oshi.version>3.9.1</oshi.version>
         <ip2region.version>1.7.2</ip2region.version>
@@ -161,8 +161,8 @@
         </dependency>
         <!--邮件-->
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
             <version>${mail.version}</version>
         </dependency>
         <!---二维码-->
@@ -247,7 +247,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.2.1.RELEASE</version>
             </plugin>
         </plugins>
     </build>

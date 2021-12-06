@@ -1,8 +1,11 @@
 package com.hope.blog.resource.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.common.exception.Asserts;
+import com.hope.blog.resource.dto.request.FileSearchRequestDto;
 import com.hope.blog.resource.mapper.QiniuConfigMapper;
 import com.hope.blog.resource.mapper.QiniuContentMapper;
 import com.hope.blog.resource.model.QiniuContent;
@@ -10,14 +13,10 @@ import com.hope.blog.resource.service.QiniuService;
 import com.hope.blog.resource.model.QiniuConfig;
 import com.hope.blog.utils.FileUtil;
 import com.hope.blog.utils.QiniuUtil;
-import com.qiniu.http.Response;
-import com.qiniu.storage.Configuration;
-import com.qiniu.storage.UploadManager;
-import com.qiniu.storage.model.DefaultPutRet;
-import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +34,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class QiniuServiceImpl implements QiniuService {
+public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuContent> implements QiniuService {
 
     @Autowired
     private QiniuContentMapper qiniuContentMapper;
@@ -44,62 +43,81 @@ public class QiniuServiceImpl implements QiniuService {
     private QiniuConfigMapper qiniuConfigMapper;
 
     @Override
-    public QiniuContent uploadPhoto(MultipartFile file) {
-        QiniuConfig qiniuConfig = this.findConfig();
-        if (qiniuConfig == null) {
-            Asserts.fail("请先设置七牛云配置！");
-        }
-        // 构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(QiniuUtil.getRegion(qiniuConfig.getZone()));
-        UploadManager uploadManager = new UploadManager(cfg);
-        Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
-        String upToken = auth.uploadToken(qiniuConfig.getBucket());
+    public QiniuContent uploadFile(MultipartFile file, String bucket, String name) {
         try {
-            String key = QiniuUtil.createFileName(file.getOriginalFilename());
-            Response response = uploadManager.put(file.getBytes(), key, upToken);
-            //解析上传成功的结果
-            DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
-            QiniuContent content = qiniuContentMapper.findByKey(FileUtil.getFileNameNoEx(putRet.key));
+            String key = QiniuUtil.uploadFile(file, bucket);
+            QiniuContent content = qiniuContentMapper.findByKey(key);
+            QiniuConfig qiniuConfig = findConfigByBucket(bucket);
             if (content == null) {
                 //存入数据库
                 QiniuContent qiniuContent = new QiniuContent();
-                qiniuContent.setSuffix(FileUtil.getExtensionName(putRet.key));
-                qiniuContent.setBucket(qiniuConfig.getBucket());
+                qiniuContent.setSuffix(FileUtil.getExtensionName(key));
+                qiniuContent.setName(name);
+                qiniuContent.setBucket(bucket);
                 qiniuContent.setType(qiniuConfig.getType());
-                qiniuContent.setFileKey(FileUtil.getFileNameNoEx(putRet.key));
-                qiniuContent.setUrl(qiniuConfig.getHost() + "/" + putRet.key);
+                qiniuContent.setFileKey(FileUtil.getFileNameNoEx(key));
+                qiniuContent.setUrl(qiniuConfig.getHost() + "/" + key);
                 qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
                 qiniuContentMapper.insert(qiniuContent);
                 return qiniuContent;
+            } else {
+                Asserts.fail("七牛云文件已存在！");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Asserts.fail("文件上传失败！");
+            Asserts.fail("七牛云文件上传失败！");
         }
         return null;
     }
 
     @Override
-    public List<QiniuContent> uploadPhotos(HttpServletRequest request) {
+    public List<QiniuContent> uploadFiles(HttpServletRequest request, String bucket) {
         List<QiniuContent> contents = new ArrayList<>();
         List<MultipartFile> multipartFileList = FileUtil.getMultipartFileList(request);
         multipartFileList.forEach(
                 item -> {
-                    contents.add(uploadPhoto(item));
+                    contents.add(uploadFile(item, bucket, null));
                 }
         );
         return contents;
     }
 
     @Override
-    public QiniuConfig findConfig() {
+    public List<QiniuConfig> findConfig() {
         QueryWrapper<QiniuConfig> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("id", 1);
+        return qiniuConfigMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public QiniuConfig findConfigByBucket(String bucket) {
+        QueryWrapper<QiniuConfig> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("bucket", bucket);
         return qiniuConfigMapper.selectOne(queryWrapper);
     }
 
     @Override
     public boolean updateConfig(QiniuConfig entity) {
         return qiniuConfigMapper.updateById(entity) > 0;
+    }
+
+    @Override
+    public IPage<QiniuContent> findListByPage(FileSearchRequestDto fileSearchRequestDto) {
+        QueryWrapper<QiniuContent> queryWrapper = new QueryWrapper<>();
+        //构建条件
+        String name = fileSearchRequestDto.getRealName();
+        if (!StringUtils.isEmpty(name)) {
+            queryWrapper.like("real_name", name);
+        }
+        queryWrapper.lambda().orderByAsc(QiniuContent::getUpdateTime);
+        Page<QiniuContent> page = new Page<>();
+        page.setCurrent(fileSearchRequestDto.getPageNum());
+        page.setSize(fileSearchRequestDto.getPageSize());
+        return qiniuContentMapper.selectPage(page, queryWrapper);
+    }
+
+    @Override
+    public boolean deleteById(String id) {
+        QiniuContent qiniuContent = qiniuContentMapper.selectById(id);
+        return QiniuUtil.deleteFile(qiniuContent.getBucket(), qiniuContent.getFileKey()) && qiniuContentMapper.deleteById(id) > 0;
     }
 }

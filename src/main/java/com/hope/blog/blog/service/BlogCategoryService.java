@@ -1,6 +1,6 @@
 package com.hope.blog.blog.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.blog.dto.request.BlogCategorySearchRequestDto;
 import com.hope.blog.blog.model.BlogCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2021-07-02
  */
 public interface BlogCategoryService extends IService<BlogCategory> {
-    Page<BlogCategory> findListByPage(BlogCategorySearchRequestDto blogCategorySearchRequestDto);
+    IPage<BlogCategory> findListByPage(BlogCategorySearchRequestDto blogCategorySearchRequestDto);
 
     List<BlogCategory> findAll(BlogCategorySearchRequestDto blogCategorySearchRequestDto);
 

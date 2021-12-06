@@ -1,6 +1,6 @@
 package com.hope.blog.sys.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.SysAllocMenusRequestDto;
 import com.hope.blog.sys.dto.request.RoleSearchRequestDto;
 import com.hope.blog.sys.model.SysMenus;
@@ -43,7 +43,7 @@ public class SysRoleController {
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
     public CommonResult<CommonPage<SysRole>> findListByPage(@ApiParam @RequestBody RoleSearchRequestDto roleSearchRequestDto) {
-        Page<SysRole> list = sysRoleService.findListByPage(roleSearchRequestDto);
+        IPage<SysRole> list = sysRoleService.findListByPage(roleSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 

@@ -1,6 +1,6 @@
 package com.hope.blog.blog.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.blog.dto.request.BlogTagSearchRequestDto;
 import com.hope.blog.blog.dto.response.BlogTagListResponse;
 import com.hope.blog.blog.model.BlogTag;
@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2021-07-02
  */
 public interface BlogTagService extends IService<BlogTag> {
-    Page<BlogTag> findListByPage(BlogTagSearchRequestDto blogTagSearchRequestDto);
+    IPage<BlogTag> findListByPage(BlogTagSearchRequestDto blogTagSearchRequestDto);
 
     List<BlogTag> findAll(BlogTagSearchRequestDto blogTagSearchRequestDto);
 

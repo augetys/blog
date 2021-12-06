@@ -38,7 +38,5 @@ spring:
 #    timeout: 3000ms # 连接超时时间（毫秒）
 upload:
   file: /opt/file
-  photo: /opt/avatar
   # 文件大小 /M
   maxSize: 100
-  avatarMaxSize: 5

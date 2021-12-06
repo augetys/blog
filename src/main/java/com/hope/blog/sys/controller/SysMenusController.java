@@ -1,6 +1,6 @@
 package com.hope.blog.sys.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.SysMenusSearchRequestDto;
 import com.hope.blog.sys.dto.response.SysMenusTreeResponseDto;
 import com.hope.blog.sys.model.SysMenus;
@@ -41,7 +41,7 @@ public class SysMenusController {
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
     public CommonResult<CommonPage<SysMenus>> findListByPage(@ApiParam @RequestBody SysMenusSearchRequestDto sysMenusSearchRequestDto) {
-        Page<SysMenus> list = sysMenusService.findListByPage(sysMenusSearchRequestDto);
+        IPage<SysMenus> list = sysMenusService.findListByPage(sysMenusSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 

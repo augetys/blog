@@ -16,4 +16,6 @@ import java.util.List;
  */
 public interface SysDictDetailService extends IService<SysDictDetail> {
     boolean updateStatusById(UpdateDictDetailStatusRequetDto updateDictDetailStatusRequetDto);
+
+    List<SysDictDetail> findByDictName(String name);
 }

@@ -1,6 +1,6 @@
 package com.hope.blog.sys.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.LoginRequestDto;
 import com.hope.blog.sys.dto.request.RegisterRequestDto;
 import com.hope.blog.sys.dto.request.UpdateSysUserStatusRequestDto;
@@ -51,7 +51,7 @@ public class SysUserController {
     @ApiOperation(value = "用户列表")
     @PostMapping(value = "/list")
     public CommonResult<CommonPage<SysUser>> findListByPage(@ApiParam @RequestBody SysUserSearchRequestDto sysUserSearchRequestDto) {
-        Page<SysUser> list = iSysUserService.findListByPage(sysUserSearchRequestDto);
+        IPage<SysUser> list = iSysUserService.findListByPage(sysUserSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 

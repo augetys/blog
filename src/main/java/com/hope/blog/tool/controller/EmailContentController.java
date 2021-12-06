@@ -1,6 +1,6 @@
 package com.hope.blog.tool.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.tool.model.EmailContent;
 import com.hope.blog.tool.service.EmailContentService;
 import com.hope.blog.common.api.CommonPage;
@@ -37,7 +37,7 @@ public class EmailContentController {
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
     public CommonResult<CommonPage<EmailContent>> findListByPage(@ApiParam @RequestBody EmailContent entity) {
-        Page<EmailContent> list = iEmailContentService.findListByPage(entity);
+        IPage<EmailContent> list = iEmailContentService.findListByPage(entity);
         return CommonResult.success(CommonPage.restPage(list));
     }
 

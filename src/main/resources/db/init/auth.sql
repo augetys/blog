@@ -66,13 +66,11 @@ INSERT INTO `sys_menus` VALUES ('2', '0', '博客管理', '/blog', 'blog', 20, 0
 INSERT INTO `sys_menus` VALUES ('3', '2', '文章管理', '/blog/article', 'blog-article', 30, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 INSERT INTO `sys_menus` VALUES ('4', '2', '分类管理', '/blog/category', 'blog-category', 40, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 INSERT INTO `sys_menus` VALUES ('5', '2', '标签管理', '/blog/tag', 'blog-tag', 50, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
-INSERT INTO `sys_menus` VALUES ('6', '2', '评论管理', '/blog/comment', 'blog-comment', 60, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 INSERT INTO `sys_menus` VALUES ('7', '2', '导航栏管理', '/blog/nav', 'blog-nav', 31, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 INSERT INTO `sys_menus` VALUES ('8', '2', '轮播图管理', '/blog/loop', 'blog-loop', 32, 1, '2021-06-16 16:25:43', '2021-06-16 16:25:47');
 
 INSERT INTO `sys_menus` VALUES ('10', '0', '系统工具', '/tool', 'tool', 70, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
 INSERT INTO `sys_menus` VALUES ('11', '10', '邮件', '/tool/email', 'tool-email', 60, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
-INSERT INTO `sys_menus` VALUES ('12', '10', '代码生成', '/tool/code', 'tool-code', 61, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
 
 INSERT INTO `sys_menus` VALUES ('20', '0', '资源管理', '/resource', 'resource', 80, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
 INSERT INTO `sys_menus` VALUES ('21', '20', '七牛云', '/resource/qiniu', 'resource-qiniu', 90, 1, '2021-05-18 11:32:02', '2021-06-15 19:55:40');
@@ -132,7 +130,6 @@ INSERT INTO `sys_role_menus` VALUES ('2', 'e8a1d847a93cf5cc541731be3c12fd87', '2
 INSERT INTO `sys_role_menus` VALUES ('3', 'e8a1d847a93cf5cc541731be3c12fd87', '3', '2021-05-17 14:44:13', NULL);
 INSERT INTO `sys_role_menus` VALUES ('4', 'e8a1d847a93cf5cc541731be3c12fd87', '4', '2021-05-18 11:32:24', NULL);
 INSERT INTO `sys_role_menus` VALUES ('5', 'e8a1d847a93cf5cc541731be3c12fd87', '5', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('6', 'e8a1d847a93cf5cc541731be3c12fd87', '6', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('24', 'e8a1d847a93cf5cc541731be3c12fd87', '7', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('25', 'e8a1d847a93cf5cc541731be3c12fd87', '8', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('7', 'e8a1d847a93cf5cc541731be3c12fd87', '10', '2021-05-18 15:06:32', NULL);
@@ -151,7 +148,6 @@ INSERT INTO `sys_role_menus` VALUES ('19', 'e8a1d847a93cf5cc541731be3c12fd87', '
 INSERT INTO `sys_role_menus` VALUES ('20', 'e8a1d847a93cf5cc541731be3c12fd87', '43', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('21', 'e8a1d847a93cf5cc541731be3c12fd87', '44', '2021-05-18 15:06:32', NULL);
 INSERT INTO `sys_role_menus` VALUES ('22', 'e8a1d847a93cf5cc541731be3c12fd87', '45', '2021-05-18 15:06:32', NULL);
-INSERT INTO `sys_role_menus` VALUES ('23', 'e8a1d847a93cf5cc541731be3c12fd87', '12', '2021-05-18 15:06:32', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_menus
@@ -295,7 +291,9 @@ CREATE TABLE `qiniu_config` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='七牛云配置';
 
-INSERT INTO `qiniu_config` VALUES ('1', '6riz6eaJfEtERl28wRX1pQfHgcn6X-WS69N1xgLx', 'hopelittle', 'http://photo.choot.top', 'LXJ0AfRwisSgLfvqDqLcENjgaTK_76CIEHeFrPT_', '1', '华南');
+INSERT INTO `qiniu_config` VALUES ('1', '6riz6eaJfEtERl28wRX1pQfHgcn6X-WS69N1xgLx', 'hopelittle', 'https://photo.choot.top', 'LXJ0AfRwisSgLfvqDqLcENjgaTK_76CIEHeFrPT_', '1', '华南');
+INSERT INTO `qiniu_config` VALUES ('2', '6riz6eaJfEtERl28wRX1pQfHgcn6X-WS69N1xgLx', 'hopefile', 'http://file.choot.top', 'LXJ0AfRwisSgLfvqDqLcENjgaTK_76CIEHeFrPT_', '1', '华南');
+INSERT INTO `qiniu_config` VALUES ('3', '6riz6eaJfEtERl28wRX1pQfHgcn6X-WS69N1xgLx', 'hopevideo', 'http://video.choot.top', 'LXJ0AfRwisSgLfvqDqLcENjgaTK_76CIEHeFrPT_', '1', '华南');
 
 -- ----------------------------
 -- Table structure for config_local_storage
@@ -307,7 +305,7 @@ CREATE TABLE `local_storage` (
   `name` varchar(255) DEFAULT NULL COMMENT '文件名',
   `suffix` varchar(255) DEFAULT NULL COMMENT '后缀',
   `path` varchar(255) DEFAULT NULL COMMENT '路径',
-  `type` varchar(255) DEFAULT NULL COMMENT '类型',
+  `type` varchar(255) DEFAULT NULL COMMENT '类型 IMAGE-1,TXT-2,MUSIC-3,VIDEO-4,OTHER-5',
   `size` varchar(100) DEFAULT NULL COMMENT '大小',
   `create_by` varchar(255) DEFAULT NULL COMMENT '创建者',
   `update_by` varchar(255) DEFAULT NULL COMMENT '更新者',

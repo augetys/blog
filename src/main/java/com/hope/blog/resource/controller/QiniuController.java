@@ -1,7 +1,10 @@
 package com.hope.blog.resource.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.resource.dto.request.FileSearchRequestDto;
 import com.hope.blog.resource.model.QiniuContent;
 import com.hope.blog.resource.service.QiniuService;
 import com.hope.blog.resource.model.QiniuConfig;
@@ -36,8 +39,8 @@ public class QiniuController {
      */
     @ApiOperation(value = "查询七牛云配置")
     @PostMapping(value = "/findConfig")
-    public CommonResult<QiniuConfig> findConfig() {
-        QiniuConfig config = iqiniuService.findConfig();
+    public CommonResult<List<QiniuConfig>> findConfig() {
+        List<QiniuConfig> config = iqiniuService.findConfig();
         return CommonResult.success(config);
     }
 
@@ -56,23 +59,46 @@ public class QiniuController {
     }
 
     /**
-     * 文件上传接口
+     * 查询分页数据
      */
-    @ApiOperation(value = "文件上传接口")
-    @PostMapping("/file")
-    public CommonResult<QiniuContent> uploadPic(@RequestParam("file") MultipartFile file) {
-        QiniuContent qiniuContent = iqiniuService.uploadPhoto(file);
-        return CommonResult.success(qiniuContent);
+    @ApiOperation(value = "查询分页数据")
+    @PostMapping(value = "/list")
+    public CommonResult<CommonPage<QiniuContent>> findListByPage(@ApiParam @RequestBody FileSearchRequestDto fileSearchRequestDto) {
+        IPage<QiniuContent> list = iqiniuService.findListByPage(fileSearchRequestDto);
+        return CommonResult.success(CommonPage.restPage(list));
     }
 
     /**
      * 文件上传接口
      */
     @ApiOperation(value = "文件上传接口")
-    @PostMapping("/files")
-    public CommonResult<List<QiniuContent>> uploadPics(HttpServletRequest request) {
-        List<QiniuContent> qiniuContent = iqiniuService.uploadPhotos(request);
+    @PostMapping("/file")
+    public CommonResult<QiniuContent> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("bucket") String bucket, @RequestParam("name") String name) {
+        QiniuContent qiniuContent = iqiniuService.uploadFile(file, bucket, name);
         return CommonResult.success(qiniuContent);
+    }
+
+    /**
+     * 文件上传接口
+     */
+    @ApiOperation(value = "多文件上传接口")
+    @PostMapping("/files")
+    public CommonResult<List<QiniuContent>> uploadFiles(HttpServletRequest request, @RequestParam("bucket") String bucket) {
+        List<QiniuContent> qiniuContent = iqiniuService.uploadFiles(request, bucket);
+        return CommonResult.success(qiniuContent);
+    }
+
+    /**
+     * 删除文件
+     */
+    @ApiOperation(value = "删除文件")
+    @GetMapping(value = "/delete/{id}")
+    public CommonResult<ResultCode> delete(@PathVariable String id) {
+        boolean success = iqiniuService.deleteById(id);
+        if (success) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 }
 

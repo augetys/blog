@@ -1,6 +1,6 @@
 package com.hope.blog.quartz.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
 import com.hope.blog.quartz.model.QuartzJob;
 import com.hope.blog.quartz.model.QuartzLog;
@@ -21,7 +21,7 @@ public interface QuartzJobService {
      * @param criteria 条件
      * @return /
      */
-    Page<QuartzJob> findJobByPage(JobQueryRequestDto criteria);
+    IPage<QuartzJob> findJobByPage(JobQueryRequestDto criteria);
 
     /**
      * 查询全部
@@ -37,7 +37,7 @@ public interface QuartzJobService {
      * @param criteria 条件
      * @return /
      */
-    Page<QuartzLog> findLogByPage(JobQueryRequestDto criteria);
+    IPage<QuartzLog> findLogByPage(JobQueryRequestDto criteria);
 
     /**
      * 查询全部

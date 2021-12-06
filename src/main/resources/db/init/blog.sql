@@ -109,7 +109,6 @@ CREATE TABLE `blog_nav` (
 ) ENGINE=INNODB CHARSET=utf8mb4 COMMENT='导航';
 
 INSERT INTO `blog_nav` VALUES ('1', '醉花阴', 'icon-home', 1, '/', '2021-07-28 09:02:42', '2021-07-28 09:02:46');
-INSERT INTO `blog_nav` VALUES ('10', '海市蜃楼', 'icon-video', 10, '/', '2021-07-28 09:05:18', '2021-07-28 09:05:20');
 INSERT INTO `blog_nav` VALUES ('2', '无妄海', 'icon-code', 2, '/category/150a6f7616e6b97816fee7df0517c74f', '2021-07-28 09:03:03', '2021-07-28 09:03:06');
 INSERT INTO `blog_nav` VALUES ('3', '清平乐', 'icon-think', 3, '/category/7da852b03f1d20c774a38276fbc5ffee', '2021-07-28 09:03:19', '2021-07-28 09:03:21');
 INSERT INTO `blog_nav` VALUES ('4', '如梦令', 'icon-life', 4, '/category/20bdc01a6393225a7ff6546333a40786', '2021-07-28 09:03:37', '2021-07-28 09:03:40');
@@ -118,6 +117,7 @@ INSERT INTO `blog_nav` VALUES ('6', '琉璃镜', 'icon-photo', 6, '/', '2021-07-
 INSERT INTO `blog_nav` VALUES ('7', '藏经阁', 'icon-file', 7, '/', '2021-07-28 09:04:31', '2021-07-28 09:04:33');
 INSERT INTO `blog_nav` VALUES ('8', '山外小楼', 'icon-guestbook', 8, '/', '2021-07-28 08:00:00', '2021-07-29 10:00:39');
 INSERT INTO `blog_nav` VALUES ('9', '天命风流', 'icon-personInfo', 9, '/about', '2021-07-28 08:00:00', '2021-07-29 10:00:31');
+INSERT INTO `blog_nav` VALUES ('10', '海市蜃楼', 'icon-video', 10, '/video', '2021-07-28 09:05:18', '2021-07-28 09:05:20');
 
 
 -- ----------------------------

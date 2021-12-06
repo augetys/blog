@@ -1,6 +1,6 @@
 package com.hope.blog.sys.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.SysAllocMenusRequestDto;
 import com.hope.blog.sys.dto.request.RoleSearchRequestDto;
 import com.hope.blog.sys.model.SysMenus;
@@ -40,5 +40,5 @@ public interface SysRoleService extends IService<SysRole> {
      * @param roleSearchRequestDto
      * @return
      */
-    Page<SysRole> findListByPage(RoleSearchRequestDto roleSearchRequestDto);
+    IPage<SysRole> findListByPage(RoleSearchRequestDto roleSearchRequestDto);
 }

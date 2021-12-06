@@ -22,7 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Bean
     BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -33,12 +32,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new JwtAuthenticationTokenFilter(authenticationManager());
     }
 
-
     @Bean
     RestfulAccessDeniedHandler accessDeniedHandler() throws Exception {
         return new RestfulAccessDeniedHandler();
     }
-
 
     @Bean
     RestAuthenticationEntryPoint authenticationEntryPoint() throws Exception {

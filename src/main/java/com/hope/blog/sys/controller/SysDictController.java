@@ -1,6 +1,6 @@
 package com.hope.blog.sys.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.SysDictDetailSearchRequestDto;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
 import com.hope.blog.sys.model.SysDict;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -43,20 +44,10 @@ public class SysDictController {
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
     public CommonResult<CommonPage<SysDict>> findListByPage(@ApiParam @RequestBody SysDictSearchRequestDto sysDictSearchRequestDto) {
-        Page<SysDict> list = iSysDictService.findListByPage(sysDictSearchRequestDto);
+        IPage<SysDict> list = iSysDictService.findListByPage(sysDictSearchRequestDto);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
-
-    /**
-     * 根据id查询
-     */
-    @ApiOperation(value = "根据id查询数据")
-    @GetMapping(value = "/{id}")
-    public CommonResult<SysDict> getById(@PathVariable String id) {
-        SysDict entity = iSysDictService.getById(id);
-        return CommonResult.success(entity);
-    }
 
     /**
      * 新增
@@ -100,11 +91,21 @@ public class SysDictController {
     /**
      * 根据id查询
      */
-    @ApiOperation(value = "根据id查询数据")
+    @ApiOperation(value = "根据字典id查询字典详情")
     @PostMapping(value = "/getDetailById")
     public CommonResult<List<SysDictDetail>> getDetailById(@ApiParam @RequestBody SysDictDetailSearchRequestDto sysDictDetailSearchRequestDto) {
         List<SysDictDetail> entity = iSysDictService.getDetailById(sysDictDetailSearchRequestDto);
         return CommonResult.success(entity);
+    }
+
+    /**
+     * 根据字典名称查询数据
+     */
+    @ApiOperation(value = "根据字典名称查询数据")
+    @PostMapping(value = "/getDetailByNames")
+    public CommonResult<Map<String, List<SysDictDetail>>> getDetailByNames(@ApiParam @RequestBody List<String> nameLists) {
+        Map<String, List<SysDictDetail>> map = iSysDictService.getDetailByNames(nameLists);
+        return CommonResult.success(map);
     }
 }
 

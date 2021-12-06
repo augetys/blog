@@ -1,6 +1,7 @@
 package com.hope.blog.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.blog.dto.request.BlogArticleNavSearchRequestDto;
 import com.hope.blog.blog.model.BlogNav;
@@ -30,7 +31,7 @@ public class BlogNavServiceImpl extends ServiceImpl<BlogNavMapper, BlogNav> impl
     private BlogNavMapper blogNavMapper;
 
     @Override
-    public Page<BlogNav> findListByPage(BlogArticleNavSearchRequestDto blogArticleNavSearchRequestDto) {
+    public IPage<BlogNav> findListByPage(BlogArticleNavSearchRequestDto blogArticleNavSearchRequestDto) {
         QueryWrapper<BlogNav> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(blogArticleNavSearchRequestDto.getName())) {
             queryWrapper.like("title", blogArticleNavSearchRequestDto.getName());

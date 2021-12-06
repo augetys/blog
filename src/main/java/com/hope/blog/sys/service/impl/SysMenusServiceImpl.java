@@ -1,6 +1,7 @@
 package com.hope.blog.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.dto.request.SysMenusSearchRequestDto;
 import com.hope.blog.sys.dto.response.SysMenusTreeResponseDto;
@@ -34,7 +35,7 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
     private SysMenusMapper sysMenusMapper;
 
     @Override
-    public Page<SysMenus> findListByPage(SysMenusSearchRequestDto sysMenusSearchRequestDto) {
+    public IPage<SysMenus> findListByPage(SysMenusSearchRequestDto sysMenusSearchRequestDto) {
         QueryWrapper<SysMenus> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(sysMenusSearchRequestDto.getName())) {
             queryWrapper.like("name", sysMenusSearchRequestDto.getName());

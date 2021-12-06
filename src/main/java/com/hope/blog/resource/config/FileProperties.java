@@ -16,15 +16,7 @@ public class FileProperties {
      */
     private Long maxSize;
     /**
-     * 图片大小限制
-     */
-    private Long avatarMaxSize;
-    /**
      * 文件上传路径
      */
     private String file;
-    /**
-     * 图片上传路径
-     */
-    private String photo;
 }

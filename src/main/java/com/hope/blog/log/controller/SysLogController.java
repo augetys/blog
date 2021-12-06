@@ -1,6 +1,6 @@
 package com.hope.blog.log.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.log.dto.request.SysLogSearchRequestDto;
 import com.hope.blog.log.model.SysLog;
 import com.hope.blog.common.api.CommonPage;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 /**
  * <p>
@@ -39,7 +38,7 @@ public class SysLogController {
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
     public CommonResult<CommonPage<SysLog>> findListByPage(@ApiParam @RequestBody SysLogSearchRequestDto sysLog) {
-        Page<SysLog> list = sysLogService.findListByPage(sysLog);
+        IPage<SysLog> list = sysLogService.findListByPage(sysLog);
         return CommonResult.success(CommonPage.restPage(list));
     }
 

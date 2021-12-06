@@ -1,6 +1,7 @@
 package com.hope.blog.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.dto.request.LoginRequestDto;
 import com.hope.blog.sys.dto.request.RegisterRequestDto;
@@ -67,7 +68,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 
     @Override
-    public Page<SysUser> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto) {
+    public IPage<SysUser> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         //构建条件
         String username = sysUserSearchRequestDto.getUsername();

@@ -1,6 +1,7 @@
 package com.hope.blog.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.blog.dto.request.BlogTagSearchRequestDto;
 import com.hope.blog.blog.dto.response.BlogTagListResponse;
@@ -32,7 +33,7 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
     private BlogTagMapper blogTagMapper;
 
     @Override
-    public Page<BlogTag> findListByPage(BlogTagSearchRequestDto blogTagSearchRequestDto) {
+    public IPage<BlogTag> findListByPage(BlogTagSearchRequestDto blogTagSearchRequestDto) {
         QueryWrapper<BlogTag> queryWrapper = new QueryWrapper<>();
         //构建条件
         String name = blogTagSearchRequestDto.getName();

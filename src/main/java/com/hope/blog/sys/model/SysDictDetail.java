@@ -52,9 +52,6 @@ public class SysDictDetail implements Serializable {
     @ApiModelProperty(value = "启用状态：0->禁用；1->启用")
     private Integer status;
 
-    @ApiModelProperty(value = "启用状态：0->禁用；1->启用")
-    private Integer isDefault;
-
     @ApiModelProperty(value = "创建者")
     private String createBy;
 

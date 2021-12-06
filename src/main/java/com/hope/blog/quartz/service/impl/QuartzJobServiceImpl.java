@@ -1,6 +1,7 @@
 package com.hope.blog.quartz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.common.exception.Asserts;
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
@@ -36,7 +37,7 @@ public class QuartzJobServiceImpl implements QuartzJobService {
 
 
     @Override
-    public Page<QuartzJob> findJobByPage(JobQueryRequestDto jobQueryRequestDto) {
+    public IPage<QuartzJob> findJobByPage(JobQueryRequestDto jobQueryRequestDto) {
         QueryWrapper<QuartzJob> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(jobQueryRequestDto.getJobName())) {
             queryWrapper.like("job_name", jobQueryRequestDto.getJobName());
@@ -54,7 +55,7 @@ public class QuartzJobServiceImpl implements QuartzJobService {
     }
 
     @Override
-    public Page<QuartzLog> findLogByPage(JobQueryRequestDto jobQueryRequestDto) {
+    public IPage<QuartzLog> findLogByPage(JobQueryRequestDto jobQueryRequestDto) {
         QueryWrapper<QuartzLog> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(jobQueryRequestDto.getJobName())) {
             queryWrapper.like("job_name", jobQueryRequestDto.getJobName());

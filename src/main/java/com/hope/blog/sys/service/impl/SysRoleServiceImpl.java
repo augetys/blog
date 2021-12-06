@@ -1,6 +1,7 @@
 package com.hope.blog.sys.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.dto.request.SysAllocMenusRequestDto;
 import com.hope.blog.sys.dto.request.RoleSearchRequestDto;
@@ -42,7 +43,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     private SysRoleMapper sysRoleMapper;
 
     @Override
-    public Page<SysRole> findListByPage(RoleSearchRequestDto roleSearchRequestDto) {
+    public IPage<SysRole> findListByPage(RoleSearchRequestDto roleSearchRequestDto) {
         QueryWrapper<SysRole> queryWrapper = new QueryWrapper<>();
         //构建条件
         String name = roleSearchRequestDto.getName();

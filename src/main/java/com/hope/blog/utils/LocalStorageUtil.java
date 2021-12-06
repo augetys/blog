@@ -1,5 +1,6 @@
 package com.hope.blog.utils;
 
+import com.hope.blog.common.exception.Asserts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,6 +8,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by lijin on  2021/7/15
@@ -14,22 +16,24 @@ import java.util.List;
 @Slf4j
 public class LocalStorageUtil {
     /**
-     * 将文件名解析成文件的上传路径
+     * 上传文件到指定路径
      */
     public static File upload(MultipartFile file, String filePath) {
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddhhmmssS");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        // 获取文件后缀
         String suffix = FileUtil.getExtensionName(file.getOriginalFilename());
         String nowStr = format.format(date);
         try {
-            String fileName = nowStr + "." + suffix;
-            String path = filePath + fileName;
+            // 重新命名文件
+            String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + suffix;
             // 创建目录
-            File dest = new File(path).getCanonicalFile();
+            String path = filePath + "/" + nowStr + "/" + suffix;
+            File dest = new File(path, fileName);
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {
                 if (!dest.getParentFile().mkdirs()) {
-                    System.out.println("was not successful.");
+                    Asserts.fail("创建文件目录失败！");
                 }
             }
             // 文件写入

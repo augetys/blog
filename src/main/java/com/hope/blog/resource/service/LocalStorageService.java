@@ -1,5 +1,7 @@
 package com.hope.blog.resource.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.hope.blog.resource.dto.request.FileSearchRequestDto;
 import com.hope.blog.resource.model.LocalStorage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +20,11 @@ import java.util.List;
  */
 public interface LocalStorageService extends IService<LocalStorage> {
 
-    LocalStorage uploadPhoto(MultipartFile file);
+    LocalStorage uploadFile(MultipartFile file, String name);
 
-    List<LocalStorage> uploadPhotos(HttpServletRequest request);
+    List<LocalStorage> uploadFiles(HttpServletRequest request);
+
+    IPage<LocalStorage> findListByPage(FileSearchRequestDto fileSearchRequestDto);
+
+    boolean deleteById(String id);
 }

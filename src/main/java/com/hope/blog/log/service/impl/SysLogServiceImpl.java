@@ -1,6 +1,7 @@
 package com.hope.blog.log.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.log.dto.request.SysLogSearchRequestDto;
 import com.hope.blog.log.model.SysLog;
@@ -32,7 +33,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
     private SysLogMapper sysLogMapper;
 
     @Override
-    public Page<SysLog> findListByPage(SysLogSearchRequestDto sysLog) {
+    public IPage<SysLog> findListByPage(SysLogSearchRequestDto sysLog) {
         QueryWrapper<SysLog> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(sysLog.getOperation())) {
             queryWrapper.like("operation", sysLog.getOperation());

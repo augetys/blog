@@ -1,6 +1,6 @@
 package com.hope.blog.sys.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.LoginRequestDto;
 import com.hope.blog.sys.dto.request.RegisterRequestDto;
 import com.hope.blog.sys.dto.request.UpdateSysUserStatusRequestDto;
@@ -117,6 +117,6 @@ public interface SysUserService extends IService<SysUser> {
      * @param sysUserSearchRequestDto
      * @return
      */
-    Page<SysUser> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto);
+    IPage<SysUser> findListByPage(SysUserSearchRequestDto sysUserSearchRequestDto);
 
 }
