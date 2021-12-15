@@ -11,6 +11,7 @@ import com.hope.blog.comment.model.BlogCommentReplay;
 import com.hope.blog.comment.service.BlogCommentReplayService;
 import com.hope.blog.comment.service.BlogCommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hope.blog.common.constant.CommonConstant;
 import com.hope.blog.utils.CopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -31,21 +33,24 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogComment>implements BlogCommentService {
+public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogComment> implements BlogCommentService {
+
+    @Autowired
+    private BlogCommentMapper blogCommentMapper;
 
     @Autowired
     private BlogCommentReplayService blogCommentReplayService;
 
     @Override
-    public IPage<BlogComment> findListByPage(BlogComment entity){
+    public IPage<BlogComment> findListByPage(BlogComment entity) {
         return null;
     }
 
     @Override
     public IPage<BlogCommentResponse> commentsByArticleId(BlogCommentQueryRequest blogCommentQueryRequest) {
         QueryWrapper<BlogComment> queryWrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(blogCommentQueryRequest.getId())){
-            queryWrapper.eq("article_id",blogCommentQueryRequest.getId());
+        if (!StringUtils.isEmpty(blogCommentQueryRequest.getId())) {
+            queryWrapper.eq("article_id", blogCommentQueryRequest.getId());
         }
         Page<BlogComment> page = new Page<>();
         page.setCurrent(blogCommentQueryRequest.getPageNum());
@@ -53,15 +58,27 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
         IPage<BlogComment> pageList = this.page(page, queryWrapper);
         IPage<BlogCommentResponse> convert = pageList.convert(BlogComment -> CopyUtil.copy(BlogComment, BlogCommentResponse.class));
         List<BlogCommentResponse> records = convert.getRecords();
-        if (!CollectionUtils.isEmpty(records)){
+        if (!CollectionUtils.isEmpty(records)) {
             records.forEach(
-                    item->{
+                    item -> {
                         QueryWrapper<BlogCommentReplay> replayQueryWrapper = new QueryWrapper<>();
-                        replayQueryWrapper.eq("comment_id",item.getId());
+                        replayQueryWrapper.orderByAsc("create_time");
+                        replayQueryWrapper.eq("comment_id", item.getId());
                         item.setCommentReplayList(blogCommentReplayService.list(replayQueryWrapper));
                     }
             );
         }
         return convert;
+    }
+
+    @Override
+    public boolean commitComment(BlogComment entity) {
+        if (StringUtils.isEmpty(entity.getUserId())) {
+            entity.setUserId(UUID.randomUUID().toString().replace("-", ""));
+        }
+        if (StringUtils.isEmpty(entity.getUserAvatar())) {
+            entity.setUserAvatar(CommonConstant.USERAVATAR);
+        }
+        return blogCommentMapper.insert(entity) > 0;
     }
 }

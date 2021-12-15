@@ -109,5 +109,16 @@ public class BlogArticleController {
         List<BlogArticle> entity = iBlogArticleService.getHotArticle();
         return CommonResult.success(entity);
     }
+
+
+    /**
+     * 关键词搜索
+     */
+    @ApiOperation(value = "关键词搜索")
+    @PostMapping(value = "/keyword")
+    public CommonResult<CommonPage<BlogArticleListResponseDto>> keyword(@ApiParam @RequestBody BlogArticleSearchRequestDto blogArticleSearchRequestDto) {
+        IPage<BlogArticleListResponseDto> list = iBlogArticleService.keyword(blogArticleSearchRequestDto);
+        return CommonResult.success(CommonPage.restPage(list));
+    }
 }
 

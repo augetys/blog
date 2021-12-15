@@ -1,6 +1,7 @@
 package com.hope.blog.common.base;
 
-import lombok.Data;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
 /**
  * PageVO  用于分页
@@ -10,14 +11,9 @@ import lombok.Data;
 @Data
 public class PageInfo {
 
-
-    /**
-     * 当前页
-     */
+    @ApiModelProperty(value = "当前页")
     private Integer pageNum;
 
-    /**
-     * 页大小
-     */
+    @ApiModelProperty(value = "页大小")
     private Integer pageSize;
 }

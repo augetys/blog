@@ -4,6 +4,7 @@ import cn.hutool.extra.template.Template;
 import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
+
 import com.hope.blog.pool.ThreadPoolExecutorUtil;
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
 import com.hope.blog.quartz.mapper.QuartzLogMapper;
@@ -11,19 +12,17 @@ import com.hope.blog.quartz.model.QuartzJob;
 import com.hope.blog.quartz.model.QuartzLog;
 import com.hope.blog.quartz.service.QuartzJobService;
 import com.hope.blog.tool.dto.request.EmailSendRequestDto;
-import com.hope.blog.tool.service.EmailConfigService;
-import com.hope.blog.utils.RedisUtil;
+import com.hope.blog.tool.service.EmailContentService;
+import com.hope.blog.utils.DateUtil;
 import com.hope.blog.utils.SpringContextHolder;
 import com.hope.blog.utils.ThrowableUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -34,6 +33,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @date 2019-01-07
  */
 @Async
+@Slf4j
 public class ExecutionJob extends QuartzJobBean {
 
     /**
@@ -47,58 +47,58 @@ public class ExecutionJob extends QuartzJobBean {
         // 获取spring bean
         QuartzLogMapper quartzLogMapper = SpringContextHolder.getBean(QuartzLogMapper.class);
         QuartzJobService quartzJobService = SpringContextHolder.getBean(QuartzJobService.class);
-        RedisUtil redisUtils = SpringContextHolder.getBean(RedisUtil.class);
 
-        QuartzLog log = new QuartzLog();
-        log.setJobName(quartzJob.getJobName());
-        log.setBeanName(quartzJob.getBeanName());
-        log.setMethodName(quartzJob.getMethodName());
-        log.setParams(quartzJob.getParams());
+        QuartzLog quartzLog = new QuartzLog();
+        quartzLog.setJobName(quartzJob.getJobName());
+        quartzLog.setBeanName(quartzJob.getBeanName());
+        quartzLog.setMethodName(quartzJob.getMethodName());
+        quartzLog.setParams(quartzJob.getParams());
+        quartzLog.setCreateTime(DateUtil.getNowDate());
         long startTime = System.currentTimeMillis();
-        log.setCronExpression(quartzJob.getCronExpression());
+        quartzLog.setCronExpression(quartzJob.getCronExpression());
         try {
             // 执行任务
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("任务开始执行，任务名称：" + quartzJob.getJobName());
+            log.info("--------------------------------------------------------------");
+            log.info("任务开始执行，任务名称：" + quartzJob.getJobName());
             QuartzRunnable task = new QuartzRunnable(quartzJob.getBeanName(), quartzJob.getMethodName(),
                     quartzJob.getParams());
             Future<?> future = EXECUTOR.submit(task);
             future.get();
             long times = System.currentTimeMillis() - startTime;
-            log.setTime(times);
-            System.out.println("任务执行完毕，任务名称：" + quartzJob.getJobName() + ", 执行时间：" + times + "毫秒");
-            System.out.println("--------------------------------------------------------------");
+            quartzLog.setTime(times);
+            log.info("任务执行完毕，任务名称：" + quartzJob.getJobName() + ", 执行时间：" + times + "毫秒");
+            log.info("--------------------------------------------------------------");
             // 判断是否存在子任务
             if (!StringUtils.isEmpty(quartzJob.getSubTask())) {
                 String[] tasks = quartzJob.getSubTask().split("[,，]");
                 // 执行子任务
                 quartzJobService.executionSubJob(tasks);
                 // 子任务执行完成，修改任务状态
-                log.setIsSuccess(1);
+                quartzLog.setIsSuccess(1);
             }
         } catch (Exception e) {
-            System.out.println("任务执行失败，任务名称：" + quartzJob.getJobName());
-            System.out.println("--------------------------------------------------------------");
+            log.info("任务执行失败，任务名称：" + quartzJob.getJobName());
+            log.info("--------------------------------------------------------------");
             long times = System.currentTimeMillis() - startTime;
-            log.setTime(times);
+            quartzLog.setTime(times);
             // 任务状态 1：成功 0：失败
-            log.setIsSuccess(0);
-            log.setExceptionDetail(ThrowableUtil.getStackTrace(e));
+            quartzLog.setIsSuccess(0);
+            quartzLog.setExceptionDetail(ThrowableUtil.getStackTrace(e));
             // 任务如果失败了则暂停
             if (quartzJob.getPauseAfterFailure() == 1) {
                 //更新状态
                 quartzJobService.updateIsPause(JobUpdateStatusRequestDto.builder().id(quartzJob.getId()).isPause(1).build());
             }
             if (quartzJob.getEmail() != null) {
-                EmailConfigService emailService = SpringContextHolder.getBean(EmailConfigService.class);
+                EmailContentService emailService = SpringContextHolder.getBean(EmailContentService.class);
                 // 邮箱报警
                 if (!StringUtils.isEmpty(quartzJob.getEmail())) {
                     EmailSendRequestDto emailVo = taskAlarm(quartzJob, ThrowableUtil.getStackTrace(e));
-                    emailService.send(emailVo, emailService.find());
+                    emailService.send(emailVo);
                 }
             }
         } finally {
-            quartzLogMapper.insert(log);
+            quartzLogMapper.insert(quartzLog);
         }
     }
 
@@ -108,8 +108,10 @@ public class ExecutionJob extends QuartzJobBean {
         Map<String, Object> data = new HashMap<>(16);
         data.put("task", quartzJob);
         data.put("msg", msg);
+        data.put("year", String.valueOf(DateUtil.getYears()));
+        // 传参到邮件模板
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
-        Template template = engine.getTemplate("email/taskAlarm.vm");
+        Template template = engine.getTemplate("templates/email/taskAlarm.vm");
         emailVo.setContent(template.render(data));
         List<String> emails = Arrays.asList(quartzJob.getEmail().split("[,，]"));
         emailVo.setTos(emails);

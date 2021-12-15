@@ -64,9 +64,9 @@ public interface QuartzJobService {
     /**
      * 删除任务
      *
-     * @param ids /
+     * @param id /
      */
-    void delete(Set<String> ids);
+    void delete(String id);
 
     /**
      * 根据ID查询

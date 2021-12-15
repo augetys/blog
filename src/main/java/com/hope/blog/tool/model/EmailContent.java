@@ -38,9 +38,6 @@ public class EmailContent implements Serializable {
     @ApiModelProperty(value = "发件人")
     private String fromUser;
 
-    @ApiModelProperty(value = "发件者用户名")
-    private String user;
-
     @ApiModelProperty(value = "邮件主题")
     private String subject;
 
@@ -54,5 +51,6 @@ public class EmailContent implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private String createTime;
 
-
+    @ApiModelProperty(value = "创建者")
+    private String createBy;
 }

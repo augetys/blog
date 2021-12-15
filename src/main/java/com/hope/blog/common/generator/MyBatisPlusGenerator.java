@@ -145,10 +145,14 @@ public class MyBatisPlusGenerator {
         }
         // 自动填充
         TableFill tableFill = new TableFill("create_time", FieldFill.INSERT);
-        TableFill tableFill2 = new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        TableFill tableFill1= new TableFill("create_by", FieldFill.INSERT);
+        TableFill tableFill2 = new TableFill("update_time", FieldFill.UPDATE);
+        TableFill tableFill3 = new TableFill("update_by", FieldFill.UPDATE);
         List<TableFill> arr = new ArrayList<>();
         arr.add(tableFill);
+        arr.add(tableFill1);
         arr.add(tableFill2);
+        arr.add(tableFill3);
         strategyConfig.setTableFillList(arr);
         return strategyConfig;
     }

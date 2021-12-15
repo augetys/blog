@@ -7,7 +7,6 @@ import com.hope.blog.common.api.ResultCode;
 import com.hope.blog.resource.dto.request.FileSearchRequestDto;
 import com.hope.blog.resource.model.QiniuContent;
 import com.hope.blog.resource.service.QiniuService;
-import com.hope.blog.resource.model.QiniuConfig;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -38,20 +37,19 @@ public class QiniuController {
      * 查询七牛云配置
      */
     @ApiOperation(value = "查询七牛云配置")
-    @PostMapping(value = "/findConfig")
-    public CommonResult<List<QiniuConfig>> findConfig() {
-        List<QiniuConfig> config = iqiniuService.findConfig();
+    @PostMapping(value = "/findBucket")
+    public CommonResult<List<String>> findBucket() {
+        List<String> config = iqiniuService.findBucket();
         return CommonResult.success(config);
     }
 
-
     /**
-     * 修改七牛云配置
+     * 修改单条记录
      */
-    @ApiOperation(value = "修改七牛云配置")
-    @PostMapping(value = "/updateConfig")
-    public CommonResult<ResultCode> updateConfig(@ApiParam @RequestBody QiniuConfig entity) {
-        boolean success = iqiniuService.updateConfig(entity);
+    @ApiOperation(value = "修改单条记录")
+    @PostMapping(value = "/update")
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody QiniuContent qiniuContent) {
+        boolean success = iqiniuService.updateById(qiniuContent);
         if (success) {
             return CommonResult.success();
         }
@@ -95,6 +93,17 @@ public class QiniuController {
     @GetMapping(value = "/delete/{id}")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iqiniuService.deleteById(id);
+        if (success) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
+    }
+
+
+    @ApiOperation("同步七牛云数据")
+    @PostMapping(value = "/synchronize")
+    public CommonResult<ResultCode> synchronize(){
+        boolean success = iqiniuService.synchronize();
         if (success) {
             return CommonResult.success();
         }

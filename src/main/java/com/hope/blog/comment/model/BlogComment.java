@@ -41,8 +41,14 @@ public class BlogComment implements Serializable {
     @ApiModelProperty(value = "评论用户")
     private String userId;
 
+    @ApiModelProperty(value = "评论用户昵称")
+    private String nickName;
+
     @ApiModelProperty(value = "评论用户头像")
     private String userAvatar;
+
+    @ApiModelProperty(value = "邮箱")
+    private String mail;
 
     @ApiModelProperty(value = "点赞的数量")
     private Integer likeNum;
@@ -54,9 +60,17 @@ public class BlogComment implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
+    @ApiModelProperty(value = "创建人")
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy;
+
     @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
+
+    @ApiModelProperty(value = "修改人")
+    @TableField(fill = FieldFill.UPDATE)
+    private String updateBy;
 
 
 }

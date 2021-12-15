@@ -72,10 +72,6 @@ public class SysLog implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
-    @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
-
     @ApiModelProperty(value = "方法请求花费的时间")
     private Long spendTime;
 }

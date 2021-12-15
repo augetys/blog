@@ -3,6 +3,7 @@ package com.hope.blog.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.sys.dto.request.LoginRequestDto;
 import com.hope.blog.sys.dto.request.RegisterRequestDto;
 import com.hope.blog.sys.dto.request.UpdateSysUserStatusRequestDto;
@@ -17,7 +18,6 @@ import com.hope.blog.sys.model.SysUserRole;
 import com.hope.blog.sys.service.SysUserRoleService;
 import com.hope.blog.sys.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hope.blog.common.exception.Asserts;
 import com.hope.blog.common.security.config.UserDetailsServiceImpl;
 import com.hope.blog.utils.JwtTokenUtil;
 import org.springframework.beans.BeanUtils;
@@ -100,16 +100,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         //校验用户名是否存在
         SysUser sysUser = this.findUserByUserName(loginRequestDto.getUsername());
         if (sysUser == null) {
-            Asserts.fail("该用户不存在！");
+            throw new BusinessException("该用户不存在!");
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequestDto.getUsername());
         //密码是否正确
         if (!passwordEncoder.matches(loginRequestDto.getPassword(), userDetails.getPassword())) {
-            Asserts.fail("密码不正确！");
+            throw new BusinessException("密码不正确!");
         }
         //账号是否被禁用
         if (!userDetails.isEnabled()) {
-            Asserts.fail("帐号已被禁用！");
+            throw new BusinessException("帐号已被禁用!");
         }
         //认证成功，分发凭证
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -125,7 +125,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         //查询用户是否已经存在
         SysUser user = findUserByUserName(registerRequestDto.getUsername());
         if (user != null) {
-            Asserts.fail("该用户已经被注册啦！");
+            throw new BusinessException("该用户已经被注册啦!");
         }
         //密码加密
         String encodePassword = passwordEncoder.encode(registerRequestDto.getPassword());

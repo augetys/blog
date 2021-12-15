@@ -31,12 +31,12 @@ public class IPUtil {
         try {
             config = new DbConfig();
         } catch (DbMakerConfigException e) {
-            e.printStackTrace();
+            log.error("未找到ip数据配置",e);
         }
         try {
             searcher = new DbSearcher(config, dbPath);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            log.error("未找到ip地址配置文件",e);
         }
     }
 
@@ -120,7 +120,7 @@ public class IPUtil {
 
             DataBlock dataBlock = null;
             if (!Util.isIpAddress(ip)) {
-                System.out.println("Error: Invalid ip address");
+                log.debug("Error: Invalid ip address");
             }
 
             dataBlock = (DataBlock) method.invoke(searcher, ip);
@@ -132,7 +132,7 @@ public class IPUtil {
             return ipInfo;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("根据ip获取城市名称失败:",e);
         }
 
         return null;
@@ -148,7 +148,7 @@ public class IPUtil {
         try {
             return InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            log.error("获取ip失败:",e);
         }
         return "127.0.0.1";
     }
@@ -162,7 +162,7 @@ public class IPUtil {
         try {
             return InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            log.error("获取主机名失败:",e);
         }
         return "未知";
     }
@@ -189,7 +189,7 @@ public class IPUtil {
                 try {
                     inet = InetAddress.getLocalHost();
                 } catch (UnknownHostException e) {
-                    e.printStackTrace();
+                    log.error("获取Host失败:",e);
                 }
                 ipAddress = inet.getHostAddress();
             }

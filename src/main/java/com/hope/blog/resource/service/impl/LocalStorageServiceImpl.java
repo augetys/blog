@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hope.blog.common.exception.Asserts;
+import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.resource.config.FileProperties;
 import com.hope.blog.resource.dto.request.FileSearchRequestDto;
 import com.hope.blog.resource.model.LocalStorage;
@@ -68,11 +68,13 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
     @Override
     public LocalStorage uploadFile(MultipartFile multipartFile, String name) {
         // 检查文件大小
-        FileUtil.checkSize(properties.getMaxSize(), multipartFile.getSize());
+        if (FileUtil.checkSize(properties.getMaxSize(), multipartFile.getSize())){
+            throw new BusinessException("文件超出大小！");
+        }
         // 上传文件
         File file = LocalStorageUtil.upload(multipartFile, properties.getFile() + File.separator);
         if (ObjectUtil.isNull(file)) {
-            Asserts.fail("上传失败");
+            throw new BusinessException("上传失败");
         }
         String suffix = FileUtil.getExtensionName(multipartFile.getOriginalFilename());
         String type = FileUtil.getFileType(suffix);

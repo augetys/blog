@@ -1,6 +1,6 @@
 package com.hope.blog.utils;
 
-import com.hope.blog.common.exception.Asserts;
+import com.hope.blog.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,7 +33,7 @@ public class LocalStorageUtil {
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {
                 if (!dest.getParentFile().mkdirs()) {
-                    Asserts.fail("创建文件目录失败！");
+                    throw new BusinessException("创建文件目录失败：" + fileName + " 已存在！");
                 }
             }
             // 文件写入

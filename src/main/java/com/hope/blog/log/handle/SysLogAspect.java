@@ -92,7 +92,6 @@ public class SysLogAspect {
         exception.setUserId(securityUser.getUid());
         exception.setOperation(operationLog.value());
         exception.setCreateTime(new Date());
-        exception.setUpdateTime(new Date());
         sysExceptionLogMapper.insert(exception);
     }
 
@@ -122,7 +121,6 @@ public class SysLogAspect {
         sysLog.setUrl(request.getRequestURI());
         sysLog.setOperation(operationLog.value());
         sysLog.setCreateTime(new Date());
-        sysLog.setUpdateTime(new Date());
         AuthUserDetails securityUser = (AuthUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         sysLog.setUserName(securityUser.getUsername());
         sysLog.setUserId(securityUser.getUid());

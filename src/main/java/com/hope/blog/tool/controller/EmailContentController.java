@@ -1,6 +1,7 @@
 package com.hope.blog.tool.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.hope.blog.tool.dto.request.EmailSendRequestDto;
 import com.hope.blog.tool.model.EmailContent;
 import com.hope.blog.tool.service.EmailContentService;
 import com.hope.blog.common.api.CommonPage;
@@ -85,6 +86,19 @@ public class EmailContentController {
     @PostMapping(value = "/update")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody EmailContent entity) {
         boolean success = iEmailContentService.updateById(entity);
+        if (success) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
+    }
+
+    /**
+     * 发送邮件
+     */
+    @ApiOperation(value = "发送邮件")
+    @PostMapping(value = "/send")
+    public CommonResult<ResultCode> send(@ApiParam @RequestBody EmailSendRequestDto emailSendRequestDto) {
+        boolean success = iEmailContentService.send(emailSendRequestDto);
         if (success) {
             return CommonResult.success();
         }

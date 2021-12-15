@@ -23,6 +23,9 @@ public class BlogCommentResponse {
     @ApiModelProperty(value = "评论用户")
     private String userId;
 
+    @ApiModelProperty(value = "评论用户昵称")
+    private String nickName;
+
     @ApiModelProperty(value = "评论内容")
     private String content;
 

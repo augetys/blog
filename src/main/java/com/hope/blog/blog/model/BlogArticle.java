@@ -14,6 +14,10 @@ import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * <p>
@@ -30,22 +34,28 @@ import lombok.*;
 @AllArgsConstructor
 @TableName("blog_article")
 @ApiModel(value = "BlogArticle对象", description = "博客文章表")
+@Document(indexName = "blog", replicas = 0)
 public class BlogArticle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @Id
     private String id;
 
+    @Field(type = FieldType.Text,searchAnalyzer = "ik_max_word",analyzer = "ik_max_word")
     @ApiModelProperty(value = "博客标题")
     private String title;
 
+    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "博客简介")
     private String summary;
 
+    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "上传人id")
     private String adminId;
 
+    @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "博客内容")
     private String content;
 
@@ -80,8 +90,15 @@ public class BlogArticle implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
+    @ApiModelProperty(value = "创建人")
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy;
+
     @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
+    @ApiModelProperty(value = "修改人")
+    @TableField(fill = FieldFill.UPDATE)
+    private String updateBy;
 }

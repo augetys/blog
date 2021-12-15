@@ -1,5 +1,7 @@
 package com.hope.blog.utils;
 
+import com.hope.blog.common.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  * Created by lijin on  2021/6/24
  */
+@Slf4j
 public class CopyUtil {
     /**
      * 单体复制
@@ -22,8 +25,7 @@ public class CopyUtil {
         try {
             obj = clazz.newInstance();
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new BusinessException("实体复制失败:",e);
         }
         BeanUtils.copyProperties(source, obj);
         return obj;

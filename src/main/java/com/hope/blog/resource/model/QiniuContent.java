@@ -50,18 +50,28 @@ public class QiniuContent implements Serializable {
     @ApiModelProperty(value = "文件大小")
     private String size;
 
-    @ApiModelProperty(value = "文件类型：私有或公开")
-    private String type;
-
     @ApiModelProperty(value = "文件url")
     private String url;
+
+    @ApiModelProperty(value = "文件类型")
+    private String type;
 
     @ApiModelProperty(value = "文件后缀")
     private String suffix;
 
-    @ApiModelProperty(value = "上传或同步的时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    @ApiModelProperty(value = "创建人")
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy;
+
+    @ApiModelProperty(value = "更新时间")
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
-
+    @ApiModelProperty(value = "修改人")
+    @TableField(fill = FieldFill.UPDATE)
+    private String updateBy;
 }

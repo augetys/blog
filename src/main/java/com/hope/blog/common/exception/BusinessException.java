@@ -3,26 +3,26 @@ package com.hope.blog.common.exception;
 import com.hope.blog.common.api.IErrorCode;
 
 /**
- * 自定义异常
+ * 自定义业务类型异常
  * Create by lijin on 2021/3/20 18:27
  */
-public class ApiException extends RuntimeException {
+public class BusinessException extends RuntimeException {
     private IErrorCode errorCode;
 
-    public ApiException(IErrorCode errorCode) {
+    public BusinessException(IErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
 
-    public ApiException(String message) {
+    public BusinessException(String message) {
         super(message);
     }
 
-    public ApiException(Throwable cause) {
+    public BusinessException(Throwable cause) {
         super(cause);
     }
 
-    public ApiException(String message, Throwable cause) {
+    public BusinessException(String message, Throwable cause) {
         super(message, cause);
     }
 

@@ -20,11 +20,9 @@ public class QuartzRunnable implements Callable<Object> {
     private final Method method;
     private final String params;
 
-    QuartzRunnable(String beanName, String methodName, String params)
-            throws NoSuchMethodException, SecurityException {
+    QuartzRunnable(String beanName, String methodName, String params) throws NoSuchMethodException, SecurityException {
         this.target = SpringContextHolder.getBean(beanName);
         this.params = params;
-
         if (StringUtils.isNotBlank(params)) {
             this.method = target.getClass().getDeclaredMethod(methodName, String.class);
         } else {
@@ -34,6 +32,7 @@ public class QuartzRunnable implements Callable<Object> {
 
     @Override
     public Object call() throws Exception {
+        // 将一个方法设置为可调用，主要针对private方法
         ReflectionUtils.makeAccessible(method);
         if (StringUtils.isNotBlank(params)) {
             method.invoke(target, params);

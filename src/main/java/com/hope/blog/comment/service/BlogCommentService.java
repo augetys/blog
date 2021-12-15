@@ -18,4 +18,6 @@ public interface BlogCommentService extends IService<BlogComment> {
     IPage<BlogComment> findListByPage(BlogComment entity);
 
     IPage<BlogCommentResponse> commentsByArticleId(BlogCommentQueryRequest blogCommentQueryRequest);
+
+    boolean commitComment(BlogComment entity);
 }

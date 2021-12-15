@@ -5,6 +5,7 @@ import com.hope.blog.blog.dto.request.BlogArticleSearchRequestDto;
 import com.hope.blog.blog.dto.response.BlogArticleListResponseDto;
 import com.hope.blog.blog.model.BlogArticle;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hope.blog.common.api.CommonPage;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface BlogArticleService extends IService<BlogArticle> {
     IPage<BlogArticleListResponseDto> findListByPage(BlogArticleSearchRequestDto blogArticleSearchRequestDto);
 
     List<BlogArticle> getHotArticle();
+
+    IPage<BlogArticleListResponseDto> keyword(BlogArticleSearchRequestDto blogArticleSearchRequestDto);
 
 }

@@ -1,12 +1,16 @@
 package com.hope.blog.comment.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.comment.model.BlogCommentReplay;
 import com.hope.blog.comment.mapper.BlogCommentReplayMapper;
 import com.hope.blog.comment.service.BlogCommentReplayService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hope.blog.common.constant.CommonConstant;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.UUID;
 
 /**
  * <p>
@@ -18,9 +22,19 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class BlogCommentReplayServiceImpl extends ServiceImpl<BlogCommentReplayMapper, BlogCommentReplay>implements BlogCommentReplayService {
+public class BlogCommentReplayServiceImpl extends ServiceImpl<BlogCommentReplayMapper, BlogCommentReplay> implements BlogCommentReplayService {
+
+    @Autowired
+    private BlogCommentReplayMapper blogCommentReplayMapper;
+
     @Override
-    public IPage<BlogCommentReplay> findListByPage(BlogCommentReplay entity){
-        return null;
+    public boolean commitReplay(BlogCommentReplay entity) {
+        if (StringUtils.isEmpty(entity.getFromId())) {
+            entity.setFromId(UUID.randomUUID().toString().replace("-", ""));
+        }
+        if (StringUtils.isEmpty(entity.getFromAvatar())) {
+            entity.setFromAvatar(CommonConstant.USERAVATAR);
+        }
+        return blogCommentReplayMapper.insert(entity) > 0;
     }
 }

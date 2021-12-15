@@ -32,9 +32,10 @@
                 <td style="padding: .65em;border: 1px solid#777;">${task.jobName}</td>
                 <td style="padding: .65em;border: 1px solid#777;">${task.beanName}</td>
                 <td style="padding: .65em;border: 1px solid#777;">${task.methodName}</td>
-                <td style="padding: .65em;border: 1px solid#777;">${(task.params)!""}</td>
+                <td style="padding: .65em;border: 1px solid#777;">#if(${task.params}=="")
+                 无参数#end</td>
                 <td style="padding: .65em;border: 1px solid#777;">${task.cronExpression}</td>
-                <td style="padding: .65em;border: 1px solid#777;">${(task.description)!""}</td>
+                <td style="padding: .65em;border: 1px solid#777;">${task.description}</td>
             </tr>
         </table>
     </div>
@@ -60,8 +61,8 @@
 			font-size: 12px;
 			padding: 20px 0px;
 			font-family: Microsoft YaHei;">
-        Copyright &copy;${.now?string("yyyy")} <a hover="color: #DA251D;" style="color: #999;"
-                                                  href="https://github.com/elunez/eladmin" target="_blank">Blog</a>
+        Copyright &copy;${year} <a hover="color: #DA251D;" style="color: #999;"
+                                                  href="https://www.choot.top/" target="_blank">Blog</a>
         后台管理系统 All Rights Reserved.
     </div>
 

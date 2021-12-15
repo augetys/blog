@@ -52,19 +52,20 @@ public class SysDictDetail implements Serializable {
     @ApiModelProperty(value = "启用状态：0->禁用；1->启用")
     private Integer status;
 
-    @ApiModelProperty(value = "创建者")
-    private String createBy;
-
-    @ApiModelProperty(value = "更新者")
-    private String updateBy;
-
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
+    @ApiModelProperty(value = "创建人")
+    @TableField(fill = FieldFill.INSERT)
+    private String createBy;
+
     @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
+    @ApiModelProperty(value = "修改人")
+    @TableField(fill = FieldFill.UPDATE)
+    private String updateBy;
 
 }

@@ -2,7 +2,6 @@ package com.hope.blog.resource.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.resource.dto.request.FileSearchRequestDto;
-import com.hope.blog.resource.model.QiniuConfig;
 import com.hope.blog.resource.model.QiniuContent;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,13 +21,13 @@ public interface QiniuService {
 
     List<QiniuContent> uploadFiles(HttpServletRequest request, String bucket);
 
-    List<QiniuConfig> findConfig();
-
-    QiniuConfig findConfigByBucket(String bucket);
-
-    boolean updateConfig(QiniuConfig entity);
-
     IPage<QiniuContent> findListByPage(FileSearchRequestDto fileSearchRequestDto);
 
     boolean deleteById(String id);
+
+    boolean updateById(QiniuContent qiniuContent);
+
+    boolean synchronize();
+
+    List<String> findBucket();
 }

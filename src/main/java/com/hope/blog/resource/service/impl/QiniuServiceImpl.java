@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hope.blog.common.exception.Asserts;
+import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.resource.dto.request.FileSearchRequestDto;
-import com.hope.blog.resource.mapper.QiniuConfigMapper;
 import com.hope.blog.resource.mapper.QiniuContentMapper;
 import com.hope.blog.resource.model.QiniuContent;
 import com.hope.blog.resource.service.QiniuService;
-import com.hope.blog.resource.model.QiniuConfig;
 import com.hope.blog.utils.FileUtil;
 import com.hope.blog.utils.QiniuUtil;
+import com.qiniu.storage.model.FileInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,40 +34,31 @@ import java.util.List;
  */
 @Service
 @Transactional
+@Slf4j
 public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuContent> implements QiniuService {
 
     @Autowired
     private QiniuContentMapper qiniuContentMapper;
 
-    @Autowired
-    private QiniuConfigMapper qiniuConfigMapper;
-
     @Override
     public QiniuContent uploadFile(MultipartFile file, String bucket, String name) {
-        try {
-            String key = QiniuUtil.uploadFile(file, bucket);
-            QiniuContent content = qiniuContentMapper.findByKey(key);
-            QiniuConfig qiniuConfig = findConfigByBucket(bucket);
-            if (content == null) {
-                //存入数据库
-                QiniuContent qiniuContent = new QiniuContent();
-                qiniuContent.setSuffix(FileUtil.getExtensionName(key));
-                qiniuContent.setName(name);
-                qiniuContent.setBucket(bucket);
-                qiniuContent.setType(qiniuConfig.getType());
-                qiniuContent.setFileKey(FileUtil.getFileNameNoEx(key));
-                qiniuContent.setUrl(qiniuConfig.getHost() + "/" + key);
-                qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
-                qiniuContentMapper.insert(qiniuContent);
-                return qiniuContent;
-            } else {
-                Asserts.fail("七牛云文件已存在！");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Asserts.fail("七牛云文件上传失败！");
+        FileInfo fileInfo = QiniuUtil.uploadFile(file, bucket);
+        QiniuContent content = qiniuContentMapper.findByKey(fileInfo.key);
+        if (content == null) {
+            //存入数据库
+            QiniuContent qiniuContent = new QiniuContent();
+            qiniuContent.setSuffix(FileUtil.getExtensionName(fileInfo.key));
+            qiniuContent.setName(name);
+            qiniuContent.setBucket(bucket);
+            qiniuContent.setType(fileInfo.mimeType);
+            qiniuContent.setFileKey(fileInfo.key);
+            qiniuContent.setUrl(QiniuUtil.getUrl(bucket,fileInfo.key));
+            qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
+            qiniuContentMapper.insert(qiniuContent);
+            return qiniuContent;
+        } else {
+            throw new BusinessException("七牛云文件已存在");
         }
-        return null;
     }
 
     @Override
@@ -82,23 +73,6 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
         return contents;
     }
 
-    @Override
-    public List<QiniuConfig> findConfig() {
-        QueryWrapper<QiniuConfig> queryWrapper = new QueryWrapper<>();
-        return qiniuConfigMapper.selectList(queryWrapper);
-    }
-
-    @Override
-    public QiniuConfig findConfigByBucket(String bucket) {
-        QueryWrapper<QiniuConfig> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("bucket", bucket);
-        return qiniuConfigMapper.selectOne(queryWrapper);
-    }
-
-    @Override
-    public boolean updateConfig(QiniuConfig entity) {
-        return qiniuConfigMapper.updateById(entity) > 0;
-    }
 
     @Override
     public IPage<QiniuContent> findListByPage(FileSearchRequestDto fileSearchRequestDto) {
@@ -108,7 +82,7 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("real_name", name);
         }
-        queryWrapper.lambda().orderByAsc(QiniuContent::getUpdateTime);
+        queryWrapper.lambda().orderByAsc(QiniuContent::getCreateTime);
         Page<QiniuContent> page = new Page<>();
         page.setCurrent(fileSearchRequestDto.getPageNum());
         page.setSize(fileSearchRequestDto.getPageSize());
@@ -119,5 +93,42 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
     public boolean deleteById(String id) {
         QiniuContent qiniuContent = qiniuContentMapper.selectById(id);
         return QiniuUtil.deleteFile(qiniuContent.getBucket(), qiniuContent.getFileKey()) && qiniuContentMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public boolean updateById(QiniuContent entity) {
+        return qiniuContentMapper.updateById(entity) > 0;
+    }
+
+    @Override
+    public boolean synchronize() {
+        // 获取所有的bucket
+        List<String> buckets = this.findBucket();
+        buckets.forEach(
+                item -> {
+                    List<FileInfo> fileInfos = QiniuUtil.findAll(item);
+                    fileInfos.forEach(
+                            item1 -> {
+                                if (qiniuContentMapper.findByKey(item1.key) == null) {
+                                    QiniuContent qiniuContent = new QiniuContent();
+                                    qiniuContent.setSuffix(FileUtil.getExtensionName(item1.key));
+                                    qiniuContent.setName(item1.key);
+                                    qiniuContent.setBucket(item);
+                                    qiniuContent.setType(item1.mimeType);
+                                    qiniuContent.setFileKey(item1.key);
+                                    qiniuContent.setUrl(QiniuUtil.getUrl(item,item1.key));
+                                    qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(item1.fsize + "")));
+                                    qiniuContentMapper.insert(qiniuContent);
+                                }
+                            }
+                    );
+                }
+        );
+        return true;
+    }
+
+    @Override
+    public List<String> findBucket() {
+        return QiniuUtil.getBucketsInfo();
     }
 }

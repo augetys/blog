@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
-import com.hope.blog.common.exception.Asserts;
+import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.log.handle.OperationLog;
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
 import com.hope.blog.quartz.model.QuartzJob;
@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
 
 /**
  * @author lijin
@@ -53,7 +52,7 @@ public class QuartzJobController {
     @PostMapping("/create")
     public CommonResult<ResultCode> create(@ApiParam @RequestBody QuartzJob quartzJob) {
         if (quartzJob.getId() != null) {
-            Asserts.fail("A new " + ENTITY_NAME + " cannot already have an ID");
+            throw new BusinessException("A new " + ENTITY_NAME + " cannot already have an ID");
         }
         quartzJobService.create(quartzJob);
         return CommonResult.success();
@@ -85,9 +84,9 @@ public class QuartzJobController {
 
     @OperationLog("删除定时任务")
     @ApiOperation("删除定时任务")
-    @PostMapping("/delete")
-    public CommonResult<ResultCode> delete(@ApiParam @RequestBody Set<String> ids) {
-        quartzJobService.delete(ids);
+    @GetMapping("/delete/{id}")
+    public CommonResult<ResultCode> delete(@ApiParam @PathVariable String id) {
+        quartzJobService.delete(id);
         return CommonResult.success();
     }
 }

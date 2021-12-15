@@ -11,7 +11,7 @@
         <result column="type" property="type"/>
         <result column="url" property="url"/>
         <result column="suffix" property="suffix"/>
-        <result column="update_time" property="updateTime"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -24,11 +24,11 @@
         file_key,
         url,
         suffix,
-        update_time
+        create_time
     </sql>
 
     <select id="findByKey" resultType="com.hope.blog.resource.model.QiniuContent">
-        select <include refid="Base_Column_List"></include> from qiniu_content where file_key=#{fileNameNoEx}
+        select <include refid="Base_Column_List"></include> from qiniu_content where file_key=#{fileKey}
     </select>
 
 </mapper>

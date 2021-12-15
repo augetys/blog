@@ -1,6 +1,5 @@
 package com.hope.blog.comment.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.comment.model.BlogCommentReplay;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-11-24
  */
 public interface BlogCommentReplayService extends IService<BlogCommentReplay> {
-    IPage<BlogCommentReplay> findListByPage(BlogCommentReplay entity);
+    boolean commitReplay(BlogCommentReplay entity);
 }

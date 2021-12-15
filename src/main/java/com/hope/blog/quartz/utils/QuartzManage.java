@@ -1,6 +1,6 @@
 package com.hope.blog.quartz.utils;
 
-import com.hope.blog.common.exception.Asserts;
+import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.quartz.model.QuartzJob;
 import com.ibm.icu.impl.Assert;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class QuartzManage {
             JobDetail jobDetail = JobBuilder.newJob(ExecutionJob.class).
                     withIdentity(JOB_NAME + quartzJob.getId()).build();
 
-            //通过触发器名和cron 表达式创建 Trigger
+            // 通过触发器名和cron 表达式创建 Trigger
             Trigger cronTrigger = newTrigger()
                     .withIdentity(JOB_NAME + quartzJob.getId())
                     .startNow()
@@ -41,10 +41,10 @@ public class QuartzManage {
 
             cronTrigger.getJobDataMap().put(QuartzJob.JOB_KEY, quartzJob);
 
-            //重置启动时间
+            // 重置启动时间
             ((CronTriggerImpl) cronTrigger).setStartTime(new Date());
 
-            //执行定时任务
+            // 执行定时任务
             scheduler.scheduleJob(jobDetail, cronTrigger);
 
             // 暂停任务
@@ -53,7 +53,7 @@ public class QuartzManage {
             }
         } catch (Exception e) {
             log.error("创建定时任务失败", e);
-            Asserts.fail("创建定时任务失败");
+            throw new BusinessException("创建定时任务失败");
         }
     }
 
@@ -73,7 +73,7 @@ public class QuartzManage {
             }
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(quartzJob.getCronExpression());
             trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
-            //重置启动时间
+            // 重置启动时间
             ((CronTriggerImpl) trigger).setStartTime(new Date());
             trigger.getJobDataMap().put(QuartzJob.JOB_KEY, quartzJob);
 
@@ -84,7 +84,7 @@ public class QuartzManage {
             }
         } catch (Exception e) {
             log.error("更新定时任务失败", e);
-            Assert.fail("更新定时任务失败");
+            throw new BusinessException("更新定时任务失败");
         }
 
     }
@@ -101,7 +101,7 @@ public class QuartzManage {
             scheduler.deleteJob(jobKey);
         } catch (Exception e) {
             log.error("删除定时任务失败", e);
-            Assert.fail("删除定时任务失败");
+            throw new BusinessException("删除定时任务失败");
         }
     }
 
@@ -122,7 +122,7 @@ public class QuartzManage {
             scheduler.resumeJob(jobKey);
         } catch (Exception e) {
             log.error("恢复定时任务失败", e);
-            Assert.fail("恢复定时任务失败");
+            throw new BusinessException("恢复定时任务失败");
         }
     }
 
@@ -145,7 +145,7 @@ public class QuartzManage {
             scheduler.triggerJob(jobKey, dataMap);
         } catch (Exception e) {
             log.error("定时任务执行失败", e);
-            Assert.fail("定时任务执行失败");
+            throw new BusinessException("定时任务执行失败");
         }
     }
 
@@ -160,7 +160,7 @@ public class QuartzManage {
             scheduler.pauseJob(jobKey);
         } catch (Exception e) {
             log.error("定时任务暂停失败", e);
-            Assert.fail("定时任务暂停失败");
+            throw new BusinessException("定时任务暂停失败");
         }
     }
 }

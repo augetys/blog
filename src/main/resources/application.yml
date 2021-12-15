@@ -9,6 +9,30 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd
+    #这个是时区，一定要加，否则会默认为格林尼治时间，即少8小时
+    time-zone: GMT+8
+  mail:
+    default-encoding: UTF-8
+    username: 15549402651@163.com
+    password: YBZMMDFBEENJWSDX
+    host: smtp.163.com
+    properties:
+      mail:
+        stmp:
+          ssl:
+            enable: true
+            required: true
+              # 邮件接收时间的限制，单位毫秒
+          timeout: 10000
+          # 连接时间的限制，单位毫秒
+          connectiontimeout: 10000
+          # 邮件发送时间的限制，单位毫秒
+          writetimeout: 10000
+          # 默认25端口
+    port: 25
+
 mybatis-plus:
   mapper-locations:
     - classpath:mapper/**/*.xml
@@ -19,6 +43,7 @@ mybatis-plus:
 logging:
   level:
     com.hope.blog: debug
+    org.springframework.data.elasticsearch.client.WIRE: TRACE
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: ji8n3439n439n43ld9ne9343fdfer49h #JWT加解密使用的密钥
@@ -58,7 +83,10 @@ secure:
       - /blog/loop/findAll
       - /blog/nav/findAll
       - /comment/blogComment/commentsByArticleId
+      - /comment/blogComment/save
+      - /comment/blogCommentReplay/save
       - /blog/looper/findAll
       - /blog/article/list
+      - /blog/article/search
       - /blog/article/{id}
       - /index.html

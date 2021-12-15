@@ -1,7 +1,7 @@
 package com.hope.blog.utils;
 
 import cn.hutool.core.util.IdUtil;
-import com.hope.blog.common.exception.Asserts;
+import com.hope.blog.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -75,7 +75,7 @@ public class FileUtil {
                 os.write(buffer, 0, bytesRead);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("inputStream 转 File失败:",e);
         } finally {
             close(os);
             close(ins);
@@ -156,12 +156,10 @@ public class FileUtil {
      * @param maxSize
      * @param size
      */
-    public static void checkSize(Long maxSize, long size) {
+    public static boolean checkSize(Long maxSize, long size) {
         // M
         int len = 1024 * 1024;
-        if (size > (maxSize * len)) {
-            Asserts.fail("文件超出规定大小");
-        }
+        return size > (maxSize * len);
     }
 
     /**
@@ -194,8 +192,8 @@ public class FileUtil {
                     }
                 }
             }
-        } catch (Exception ex) {
-            log.error("解析MultipartRequest错误", ex);
+        } catch (Exception e) {
+            throw new BusinessException("解析MultipartRequest错误", e);
         }
         return files;
     }

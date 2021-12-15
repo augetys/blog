@@ -27,4 +27,6 @@ public class BlogArticleSearchRequestDto extends PageInfo {
     private String isPublish;
     @ApiModelProperty(value = "发布时间")
     private Date createTime;
+    @ApiModelProperty(value = "关键字")
+    private String keyword;
 }

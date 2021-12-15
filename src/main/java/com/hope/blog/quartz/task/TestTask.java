@@ -1,7 +1,15 @@
 package com.hope.blog.quartz.task;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hope.blog.blog.mapper.BlogArticleMapper;
+import com.hope.blog.blog.model.BlogArticle;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 测试用
@@ -13,7 +21,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestTask {
 
-    public void run() {
+    @Resource
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
+
+    @Resource
+    private BlogArticleMapper blogArticleMapper;
+
+    public void run(){
         log.info("run 执行成功");
     }
 
@@ -22,6 +36,9 @@ public class TestTask {
     }
 
     public void run2() {
-        log.info("run2 执行成功");
+        log.info("像es中批量插入文章");
+        QueryWrapper<BlogArticle> queryWrapper = new QueryWrapper<>();
+        List<BlogArticle> list = blogArticleMapper.selectList(queryWrapper);
+        elasticsearchRestTemplate.save(list, IndexCoordinates.of("blog"));
     }
 }

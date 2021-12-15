@@ -3,6 +3,7 @@ package com.hope.blog.quartz.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -44,6 +45,7 @@ public class QuartzLog implements Serializable {
     @ApiModelProperty(value = "执行耗时", hidden = true)
     private Long time;
 
-    @ApiModelProperty(value = "创建时间", hidden = true)
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "执行日期", hidden = true)
     private Date createTime;
 }
