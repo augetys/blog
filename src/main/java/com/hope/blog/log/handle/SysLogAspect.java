@@ -86,12 +86,10 @@ public class SysLogAspect {
         exception.setParams(JSONObject.toJSONString(getFieldsName(joinPoint)));
         exception.setUrl(request.getRequestURI());
         exception.setExceptionJson(ThrowableUtil.getStackTrace(e));
-        exception.setExceptionMessage(e.getMessage());
         AuthUserDetails securityUser = (AuthUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         exception.setUserName(securityUser.getUsername());
         exception.setUserId(securityUser.getUid());
         exception.setOperation(operationLog.value());
-        exception.setCreateTime(new Date());
         sysExceptionLogMapper.insert(exception);
     }
 
@@ -120,7 +118,6 @@ public class SysLogAspect {
         sysLog.setType(request.getMethod());
         sysLog.setUrl(request.getRequestURI());
         sysLog.setOperation(operationLog.value());
-        sysLog.setCreateTime(new Date());
         AuthUserDetails securityUser = (AuthUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         sysLog.setUserName(securityUser.getUsername());
         sysLog.setUserId(securityUser.getUid());

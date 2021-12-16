@@ -15,6 +15,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 轮播图
@@ -41,15 +44,19 @@ public class BlogLoop implements Serializable {
     @ApiModelProperty(value = "轮播图标题")
     private String title;
 
+    @DecimalMax(value = "9999")
     @ApiModelProperty(value = "顺序")
     private Integer sort;
 
+    @NotBlank(message = "是否外链不能为空")
     @ApiModelProperty(value = "是否外链 0 否 1 是")
     private Integer isLink;
 
+    @NotBlank(message = "目标URL不能为空")
     @ApiModelProperty(value = "目标URL")
     private String targetUrl;
 
+    @NotBlank(message = "图片地址不能为空")
     @ApiModelProperty(value = "图片地址")
     private String imageUrl;
 

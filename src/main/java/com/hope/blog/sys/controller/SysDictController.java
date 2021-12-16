@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class SysDictController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysDict entity) {
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid SysDict entity) {
         boolean success = iSysDictService.saveOrUpdate(entity);
         if (success) {
             return CommonResult.success();
@@ -80,7 +81,7 @@ public class SysDictController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody SysDict entity) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid SysDict entity) {
         boolean success = iSysDictService.updateById(entity);
         if (success) {
             return CommonResult.success();

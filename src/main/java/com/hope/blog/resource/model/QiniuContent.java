@@ -15,6 +15,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 七牛云文件存储
@@ -38,21 +40,27 @@ public class QiniuContent implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @NotBlank(message = "Bucket 识别符不能为空")
     @ApiModelProperty(value = "Bucket 识别符")
     private String bucket;
 
+    @NotBlank(message = "文件名称不能为空")
     @ApiModelProperty(value = "文件名称")
     private String name;
 
+    @NotBlank(message = "文件key值不能为空")
     @ApiModelProperty(value = "文件key值")
     private String fileKey;
 
+    @NotBlank(message = "文件大小不能为空")
     @ApiModelProperty(value = "文件大小")
     private String size;
 
+    @NotBlank(message = "文件url不能为空")
     @ApiModelProperty(value = "文件url")
     private String url;
 
+    @NotBlank(message = "文件类型不能为空")
     @ApiModelProperty(value = "文件类型")
     private String type;
 

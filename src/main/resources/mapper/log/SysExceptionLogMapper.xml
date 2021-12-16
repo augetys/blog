@@ -5,27 +5,30 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.hope.blog.log.model.SysExceptionLog">
         <id column="id" property="id"/>
+        <id column="user_name" property="userName"/>
+        <id column="user_id" property="userId"/>
         <result column="ip" property="ip"/>
         <result column="ip_address" property="ipAddress"/>
+        <result column="url" property="url"/>
         <result column="method" property="method"/>
         <result column="operation" property="operation"/>
         <result column="params" property="params"/>
         <result column="exceptionJson" property="exceptionJson"/>
-        <result column="exceptionMessage" property="exceptionMessage"/>
         <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,
+        user_name,
+        user_id,
         ip,
         ip_address,
+        url,
         method,
         operation,
         params,
         exceptionJson,
-        exceptionMessage,
         create_time,
         update_time
     </sql>

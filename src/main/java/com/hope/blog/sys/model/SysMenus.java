@@ -14,6 +14,11 @@ import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -40,15 +45,19 @@ public class SysMenus implements Serializable {
     @ApiModelProperty(value = "父级ID")
     private String parentId;
 
-    @ApiModelProperty(value = "描述")
+    @Length(min = 1, max = 50, message = "菜单名称在 1 到 50 个字符")
+    @ApiModelProperty(value = "菜单名称")
     private String name;
 
+    @NotBlank(message = "菜单url不为空")
     @ApiModelProperty(value = "菜单url")
     private String path;
 
+    @NotBlank(message = "前端图标不为空")
     @ApiModelProperty(value = "前端图标")
     private String icon;
 
+    @DecimalMax(value = "9999")
     @ApiModelProperty(value = "菜单排序")
     private Integer sort;
 

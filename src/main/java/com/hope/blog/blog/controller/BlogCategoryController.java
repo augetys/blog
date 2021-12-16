@@ -18,6 +18,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * <p>
  * 博客分类表 前端控制器
@@ -70,7 +72,7 @@ public class BlogCategoryController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogCategory entity) {
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid BlogCategory entity) {
         boolean success = iBlogCategoryService.saveOrUpdate(entity);
         if (success) {
             return CommonResult.success();
@@ -96,7 +98,7 @@ public class BlogCategoryController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogCategory entity) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid BlogCategory entity) {
         boolean success = iBlogCategoryService.updateById(entity);
         if (success) {
             return CommonResult.success();

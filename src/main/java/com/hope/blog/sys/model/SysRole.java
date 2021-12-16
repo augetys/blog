@@ -14,6 +14,7 @@ import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * <p>
@@ -37,9 +38,11 @@ public class SysRole implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @Length(min = 1, max = 8, message = "角色名称在 1 到 8 个字符")
     @ApiModelProperty(value = "角色名称")
     private String name;
 
+    @Length(min = 1, max = 20, message = "角色描述在 1 到 20 个字符")
     @ApiModelProperty(value = "描述")
     private String description;
 

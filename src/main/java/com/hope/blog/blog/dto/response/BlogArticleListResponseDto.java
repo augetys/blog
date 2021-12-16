@@ -3,6 +3,7 @@ package com.hope.blog.blog.dto.response;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.DecimalMax;
 import java.util.Date;
 import java.util.List;
 

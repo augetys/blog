@@ -20,7 +20,7 @@ public class TheadFactoryName implements ThreadFactory {
     private final String namePrefix;
 
     public TheadFactoryName() {
-        this("el-pool");
+        this("blog-pool");
     }
 
     private TheadFactoryName(String name) {

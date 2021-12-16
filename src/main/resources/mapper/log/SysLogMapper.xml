@@ -8,6 +8,7 @@
         <result column="user_name" property="userName"/>
         <result column="user_id" property="userId"/>
         <result column="ip" property="ip"/>
+        <result column="ip_address" property="ipAddress"/>
         <result column="url" property="url"/>
         <result column="type" property="type"/>
         <result column="class_path" property="classPath"/>
@@ -15,8 +16,23 @@
         <result column="params" property="params"/>
         <result column="operation" property="operation"/>
         <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
         <result column="spend_time" property="spendTime"/>
     </resultMap>
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        user_name,
+        user_id,
+        ip,
+        ip_address,
+        url,
+        type,
+        class_path
+        method,
+        params,
+        operation,
+        create_time,
+        spend_time
+    </sql>
 </mapper>

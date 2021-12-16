@@ -121,7 +121,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public SysUser register(RegisterRequestDto registerRequestDto) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(registerRequestDto, sysUser);
-        sysUser.setCreateTime(new Date());
         //查询用户是否已经存在
         SysUser user = findUserByUserName(registerRequestDto.getUsername());
         if (user != null) {

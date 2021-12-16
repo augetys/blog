@@ -14,6 +14,10 @@ import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -37,12 +41,15 @@ public class BlogTag implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @ApiModelProperty(value = "标签内容")
+    @Length(min = 1, max = 8, message = "标签名称长度在 1 到 8 个字符")
+    @ApiModelProperty(value = "标签名称")
     private String name;
 
+    @NotBlank(message = "标签图标不能为空")
     @ApiModelProperty(value = "标签图标")
     private String icon;
 
+    @DecimalMax(value = "9999")
     @ApiModelProperty(value = "排序")
     private Integer sort;
 

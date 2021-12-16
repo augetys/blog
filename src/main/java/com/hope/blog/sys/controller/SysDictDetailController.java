@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * Created by lijin on  2021/7/16
  */
@@ -27,7 +29,7 @@ public class SysDictDetailController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysDictDetail entity) {
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid SysDictDetail entity) {
         boolean success = iSysDictDetailService.saveOrUpdate(entity);
         if (success) {
             return CommonResult.success();
@@ -53,7 +55,7 @@ public class SysDictDetailController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody SysDictDetail entity) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid SysDictDetail entity) {
         boolean success = iSysDictDetailService.updateById(entity);
         if (success) {
             return CommonResult.success();

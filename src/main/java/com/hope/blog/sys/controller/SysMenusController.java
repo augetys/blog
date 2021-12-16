@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public class SysMenusController {
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
     @OperationLog(value = "新增菜单")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysMenus entity) {
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid SysMenus entity) {
         boolean success = sysMenusService.saveOrUpdate(entity);
         if (success) {
             return CommonResult.success();
@@ -89,7 +90,7 @@ public class SysMenusController {
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
     @OperationLog(value = "修改菜单信息")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody SysMenus entity) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid SysMenus entity) {
         boolean success = sysMenusService.updateById(entity);
         if (success) {
             return CommonResult.success();

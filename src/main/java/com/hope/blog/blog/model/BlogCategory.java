@@ -14,6 +14,9 @@ import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.DecimalMax;
 
 /**
  * <p>
@@ -37,12 +40,15 @@ public class BlogCategory implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @Length(min = 1, max = 8, message = "分类内容在 1 到 8 个字符")
     @ApiModelProperty(value = "分类内容")
     private String name;
 
+    @Length(min = 1, max = 50, message = "分类简介在 1 到 50 个字符")
     @ApiModelProperty(value = "分类简介")
     private String content;
 
+    @DecimalMax(value = "9999")
     @ApiModelProperty(value = "排序")
     private Integer sort;
 

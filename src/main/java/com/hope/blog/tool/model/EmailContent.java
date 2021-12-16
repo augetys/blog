@@ -7,10 +7,13 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -35,6 +38,7 @@ public class EmailContent implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @NotBlank(message = "发件人不能为空")
     @ApiModelProperty(value = "发件人")
     private String fromUser;
 
@@ -44,13 +48,15 @@ public class EmailContent implements Serializable {
     @ApiModelProperty(value = "邮件内容")
     private String content;
 
+    @NotBlank(message = "收件人不能为空")
     @ApiModelProperty(value = "收件人")
     private String toUser;
 
     @ApiModelProperty(value = "发送时间")
     @TableField(fill = FieldFill.INSERT)
-    private String createTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "创建者")
+    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 }

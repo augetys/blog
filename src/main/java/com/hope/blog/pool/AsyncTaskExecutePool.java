@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 异步任务线程池装配类
  *
  * @author https://juejin.im/entry/5abb8f6951882555677e9da2
+ * https://blog.csdn.net/wszhlzjl/article/details/104422288
  * @date 2019年10月31日15:06:18
  */
 @Slf4j
@@ -30,6 +31,7 @@ public class AsyncTaskExecutePool implements AsyncConfigurer {
 
     @Override
     public Executor getAsyncExecutor() {
+        log.debug("Creating Async Task Executor");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //核心线程池大小
         executor.setCorePoolSize(config.getCorePoolSize());
@@ -39,8 +41,8 @@ public class AsyncTaskExecutePool implements AsyncConfigurer {
         executor.setQueueCapacity(config.getQueueCapacity());
         //活跃时间
         executor.setKeepAliveSeconds(config.getKeepAliveSeconds());
-        //线程名字前缀
-        executor.setThreadNamePrefix("el-async-");
+        //线程名字前缀,在有多个线程池的时候以此做区分
+        executor.setThreadNamePrefix("blog-async-");
         // setRejectedExecutionHandler：当pool已经达到max size的时候，如何处理新任务
         // CallerRunsPolicy：不在新线程中执行任务，而是由调用者所在的线程来执行
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());

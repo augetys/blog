@@ -12,7 +12,24 @@
         <result column="level" property="level"/>
         <result column="sort" property="sort"/>
         <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        parent_id,
+        name,
+        path,
+        icon,
+        level,
+        sort,
+        create_time,
+        create_by,
+        update_time,
+        update_by
+    </sql>
 
 </mapper>

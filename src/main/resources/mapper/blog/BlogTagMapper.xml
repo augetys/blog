@@ -8,7 +8,9 @@
         <result column="name" property="name"/>
         <result column="sort" property="sort"/>
         <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -17,7 +19,9 @@
         name,
         sort,
         create_time,
-        update_time
+        create_by,
+        update_time,
+        update_by
     </sql>
 
     <select id="getTag" resultType="com.hope.blog.blog.dto.response.BlogTagListResponse">

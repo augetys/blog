@@ -5,6 +5,7 @@ import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
 
+import com.hope.blog.common.security.config.AuthUserDetails;
 import com.hope.blog.pool.ThreadPoolExecutorUtil;
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
 import com.hope.blog.quartz.mapper.QuartzLogMapper;
@@ -14,12 +15,14 @@ import com.hope.blog.quartz.service.QuartzJobService;
 import com.hope.blog.tool.dto.request.EmailSendRequestDto;
 import com.hope.blog.tool.service.EmailContentService;
 import com.hope.blog.utils.DateUtil;
+import com.hope.blog.utils.SecurityUtil;
 import com.hope.blog.utils.SpringContextHolder;
 import com.hope.blog.utils.ThrowableUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -53,7 +56,8 @@ public class ExecutionJob extends QuartzJobBean {
         quartzLog.setBeanName(quartzJob.getBeanName());
         quartzLog.setMethodName(quartzJob.getMethodName());
         quartzLog.setParams(quartzJob.getParams());
-        quartzLog.setCreateTime(DateUtil.getNowDate());
+        quartzLog.setCreateTime(new Date());
+        quartzLog.setCreateBy(SecurityUtil.getCurrentUser().getUid());
         long startTime = System.currentTimeMillis();
         quartzLog.setCronExpression(quartzJob.getCronExpression());
         try {

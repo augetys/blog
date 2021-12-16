@@ -7,11 +7,15 @@
         <id column="id" property="id"/>
         <result column="bucket" property="bucket"/>
         <result column="name" property="name"/>
+        <result column="file_key" property="fileKey"/>
         <result column="size" property="size"/>
-        <result column="type" property="type"/>
         <result column="url" property="url"/>
+        <result column="type" property="type"/>
         <result column="suffix" property="suffix"/>
         <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -19,12 +23,15 @@
         id,
         bucket,
         name,
+        file_key,
         size,
         type,
-        file_key,
         url,
         suffix,
-        create_time
+        create_time,
+        create_by,
+        update_time,
+        update_by
     </sql>
 
     <select id="findByKey" resultType="com.hope.blog.resource.model.QiniuContent">

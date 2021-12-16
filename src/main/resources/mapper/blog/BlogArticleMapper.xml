@@ -7,19 +7,20 @@
         <id column="id" property="id"/>
         <result column="title" property="title"/>
         <result column="summary" property="summary"/>
+        <result column="admin_id" property="adminId"/>
         <result column="content" property="content"/>
         <result column="is_publish" property="isPublish"/>
         <result column="tag_id" property="tagId"/>
         <result column="cover" property="cover"/>
         <result column="click_count" property="clickCount"/>
         <result column="is_original" property="isOriginal"/>
-        <result column="author" property="author"/>
         <result column="articles_part" property="articlesPart"/>
-        <result column="article_category_id" property="articleCategoryId"/>
         <result column="sort" property="sort"/>
         <result column="open_comment" property="openComment"/>
         <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -27,23 +28,24 @@
         id,
         title,
         summary,
+        admin_id,
         content,
         is_publish,
         tag_id,
         cover,
         click_count,
         is_original,
-        author,
         articles_part,
-        article_category_id,
         sort,
         open_comment,
         create_time,
-        update_time
+        create_by,
+        update_time,
+        update_by
     </sql>
 
     <select id="getHotArticle" resultType="com.hope.blog.blog.model.BlogArticle">
-        select * from blog_article order by click_count desc limit 10
+        select <include refid="Base_Column_List"></include> from blog_article order by click_count desc limit 10
     </select>
 
 </mapper>

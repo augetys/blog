@@ -8,8 +8,21 @@
         <result column="description" property="description"/>
         <result column="name" property="name"/>
         <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        description,
+        name,
+        create_time,
+        create_by,
+        update_time,
+        update_by
+    </sql>
 
     <select id="getRoleList" resultType="com.hope.blog.sys.model.SysRole">
         select r.*

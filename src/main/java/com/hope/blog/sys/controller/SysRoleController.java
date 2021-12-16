@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -63,7 +64,7 @@ public class SysRoleController {
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
     @OperationLog(value = "新增角色")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysRole entity) {
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid SysRole entity) {
         boolean success = sysRoleService.saveOrUpdate(entity);
         if (success) {
             return CommonResult.success();
@@ -91,7 +92,7 @@ public class SysRoleController {
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
     @OperationLog(value = "修改角色信息")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody SysRole entity) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid SysRole entity) {
         boolean success = sysRoleService.updateById(entity);
         if (success) {
             return CommonResult.success();

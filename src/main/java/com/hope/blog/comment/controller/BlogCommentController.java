@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 
 /**
  * <p>
@@ -39,7 +41,7 @@ public class BlogCommentController {
      */
     @ApiOperation(value = "评论")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogComment entity){
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid BlogComment entity){
         boolean success = iBlogCommentService.commitComment(entity);
         if (success) {
             return CommonResult.success();

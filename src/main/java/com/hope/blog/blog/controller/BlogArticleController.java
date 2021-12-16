@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * <p>
  * 博客文章表 前端控制器
@@ -64,7 +66,7 @@ public class BlogArticleController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogArticle entity) {
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid  BlogArticle entity) {
         boolean success = iBlogArticleService.saveOrUpdate(entity);
         if (success) {
             return CommonResult.success();
@@ -90,7 +92,7 @@ public class BlogArticleController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody BlogArticle entity) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid BlogArticle entity) {
         boolean success = iBlogArticleService.updateById(entity);
         if (success) {
             return CommonResult.success();

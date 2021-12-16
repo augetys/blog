@@ -8,22 +8,21 @@ CREATE TABLE `blog_article` (
   `summary` varchar(200) DEFAULT NULL COMMENT '博客简介',
   `admin_id` varchar(36) NOT NULL COMMENT '上传人id',
   `content` longtext NOT NULL COMMENT '博客内容',
-  `is_publish` int(1) NOT NULL COMMENT '是否发布：0：否，1：是',
+  `is_publish` int(1) DEFAULT 1 COMMENT '是否发布：0：否，1：是',
   `tag_id` varchar(255) NOT NULL COMMENT '标签id',
-  `cover` varchar(255) DEFAULT NULL COMMENT '封面',
+  `cover` varchar(255) NOT NULL COMMENT '封面',
   `click_count` int(11) DEFAULT 0 COMMENT '博客点击数',
-  `is_original` int(1) NOT NULL COMMENT '是否原创（0:不是 1：是）',
+  `is_original` int(1) DEFAULT 1 COMMENT '是否原创（0:不是 1：是）',
   `articles_part` varchar(255) DEFAULT NULL COMMENT '文章出处',
   `category_id` varchar(32) NOT NULL COMMENT '博客分类ID',
   `sort` int(11) DEFAULT 0 COMMENT '排序字段',
-  `open_comment` tinyint(1) NOT NULL COMMENT '是否开启评论(0:否 1:是)',
+  `open_comment` tinyint(1) DEFAULT 1 COMMENT '是否开启评论(0:否 1:是)',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `create_by` varchar(64) NOT NULL COMMENT '创建人ID',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) DEFAULT NULL COMMENT '更新人ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客文章表';
-
 
 
 -- ----------------------------
@@ -83,7 +82,7 @@ CREATE TABLE `blog_loop` (
   `title` varchar(128) DEFAULT NULL COMMENT '轮播图标题',
   `sort` int(11) NOT NULL COMMENT '顺序',
   `is_link` int(11) NOT NULL COMMENT '是否外链 0 否 1 是',
-  `target_url` varchar(1024) DEFAULT NULL COMMENT '目标URL',
+  `target_url` varchar(1024) NOT NULL COMMENT '目标URL',
   `image_url` varchar(2014) NOT NULL COMMENT '图片地址',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `create_by` varchar(64) NOT NULL COMMENT '创建人ID',

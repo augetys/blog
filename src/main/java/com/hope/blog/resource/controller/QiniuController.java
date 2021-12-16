@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -48,7 +49,7 @@ public class QiniuController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody QiniuContent qiniuContent) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid QiniuContent qiniuContent) {
         boolean success = iqiniuService.updateById(qiniuContent);
         if (success) {
             return CommonResult.success();

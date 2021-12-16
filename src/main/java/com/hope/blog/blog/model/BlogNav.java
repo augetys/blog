@@ -14,6 +14,10 @@ import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -38,15 +42,20 @@ public class BlogNav implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @Length(min = 1, max = 8, message = "用户名长度在 1 到 8 个字符")
+    @NotBlank(message = "导航名称不能为空")
     @ApiModelProperty(value = "导航名称")
     private String name;
 
+    @NotBlank(message = "导航图标不能为空")
     @ApiModelProperty(value = "导航图标")
     private String icon;
 
+    @DecimalMax(value = "9999")
     @ApiModelProperty(value = "导航排序")
     private Integer sort;
 
+    @NotBlank(message = "跳转路由不能为空")
     @ApiModelProperty(value = "跳转路由")
     private String path;
 

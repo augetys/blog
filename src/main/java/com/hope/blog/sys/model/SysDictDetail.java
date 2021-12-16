@@ -15,6 +15,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 数据字典详情
@@ -37,15 +40,19 @@ public class SysDictDetail implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @NotBlank(message = "字典id不能为空")
     @ApiModelProperty(value = "字典id")
     private String dictId;
 
+    @NotBlank(message = "字典标签不能为空")
     @ApiModelProperty(value = "字典标签")
     private String label;
 
+    @NotBlank(message = "字典值不能为空")
     @ApiModelProperty(value = "字典值")
     private String value;
 
+    @DecimalMax(value = "9999")
     @ApiModelProperty(value = "排序")
     private Integer sort;
 

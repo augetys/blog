@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * <p>
  * 博客文章评论回复表（子评论表） 前端控制器
@@ -34,7 +36,7 @@ public class BlogCommentReplayController {
      */
     @ApiOperation(value = "回复")
     @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody BlogCommentReplay entity){
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid BlogCommentReplay entity){
         boolean success = iBlogCommentReplayService.commitReplay(entity);
         if (success) {
             return CommonResult.success();

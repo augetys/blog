@@ -7,7 +7,7 @@ CREATE TABLE `sys_user` (
   `username` varchar(64) NOT NULL COMMENT '用户名',
   `password` varchar(64) NOT NULL COMMENT '密码',
   `icon` varchar(500) DEFAULT NULL COMMENT '头像',
-  `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
+  `email` varchar(100) NOT NULL COMMENT '邮箱',
   `nick_name` varchar(200) NOT NULL COMMENT '昵称',
   `note` varchar(500) DEFAULT NULL COMMENT '备注信息',
   `create_time` datetime NOT NULL COMMENT '创建时间',
@@ -20,7 +20,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('da6d966d37fcb819546064424a8bdd9f', 'admin', '$2a$10$KJMluGRhQ2ZrOzXck9t5M.k93Y30h6UuX0obPDVbZZ9Zsk/LMX5zi', 'http://photo.choot.top/test', NULL, '小甜瓜', NULL, '2021-05-13 14:35:29', NULL, 1,0);
+INSERT INTO `sys_user` VALUES ('da6d966d37fcb819546064424a8bdd9f', 'admin', '$2a$10$KJMluGRhQ2ZrOzXck9t5M.k93Y30h6UuX0obPDVbZZ9Zsk/LMX5zi', 'https://photo.choot.top/42e47b8dfcd943ae95da59e1c45bc8d3', '1181881941@qq.com' , '小甜瓜', NULL, '2021-05-13 14:35:29', NULL, 1,0);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -48,12 +48,12 @@ INSERT INTO `sys_role` VALUES ('e8a1d847a93cf5cc541731be3c12fd87', '超级管理
 DROP TABLE IF EXISTS `sys_menus`;
 CREATE TABLE `sys_menus` (
   `id` varchar(64) NOT NULL,
-  `parent_id` varchar(64) DEFAULT NULL COMMENT '父级ID',
+  `parent_id` varchar(64) DEFAULT '0' COMMENT '父级ID',
   `name` varchar(64) NOT NULL COMMENT '名称',
   `path` varchar(100) NOT NULL COMMENT '菜单url',
   `icon` varchar(200) NOT NULL COMMENT '前端图标',
   `sort` int(4) NOT NULL COMMENT '菜单排序',
-  `level` int(4) NOT NULL COMMENT '菜单级别',
+  `level` int(4) DEFAULT NULL COMMENT '菜单级别',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `create_by` varchar(64) NOT NULL COMMENT '创建人ID',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
@@ -64,34 +64,34 @@ CREATE TABLE `sys_menus` (
 -- ----------------------------
 -- Records of sys_menus
 -- ----------------------------
-INSERT INTO `sys_menus` VALUES ('1', '0', '首页', '/home', 'home', 10, 0, '2021-05-18 15:06:06', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-18 15:06:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('1', '0', '首页', '/home', 'home', 10, null, '2021-05-18 15:06:06', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-18 15:06:08', 'da6d966d37fcb819546064424a8bdd9f');
 
-INSERT INTO `sys_menus` VALUES ('2', '0', '博客管理', '/blog', 'blog', 20, 0, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('3', '2', '文章管理', '/blog/article', 'blog-article', 30, 1, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('4', '2', '分类管理', '/blog/category', 'blog-category', 40, 1, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('5', '2', '标签管理', '/blog/tag', 'blog-tag', 50, 1, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('7', '2', '导航栏管理', '/blog/nav', 'blog-nav', 31, 1, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('8', '2', '轮播图管理', '/blog/loop', 'blog-loop', 32, 1, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('2', '0', '博客管理', '/blog', 'blog', 20, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('3', '2', '文章管理', '/blog/article', 'blog-article', 30, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('4', '2', '分类管理', '/blog/category', 'blog-category', 40, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('5', '2', '标签管理', '/blog/tag', 'blog-tag', 50, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('7', '2', '导航栏管理', '/blog/nav', 'blog-nav', 31, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('8', '2', '轮播图管理', '/blog/loop', 'blog-loop', 32, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
 
-INSERT INTO `sys_menus` VALUES ('10', '0', '系统工具', '/tool', 'tool', 70, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('11', '10', '邮件', '/tool/email', 'tool-email', 60, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('10', '0', '系统工具', '/tool', 'tool', 70, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('11', '10', '邮件', '/tool/email', 'tool-email', 60, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
 
-INSERT INTO `sys_menus` VALUES ('20', '0', '资源管理', '/resource', 'resource', 80, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('21', '20', '七牛云', '/resource/qiniu', 'resource-qiniu', 90, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('22', '20', '本地存储', '/resource/localStorage', 'resource-localStorage', 100, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('20', '0', '资源管理', '/resource', 'resource', 80, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('21', '20', '七牛云', '/resource/qiniu', 'resource-qiniu', 90, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('22', '20', '本地存储', '/resource/localStorage', 'resource-localStorage', 100, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
 
-INSERT INTO `sys_menus` VALUES ('30', '0', '监控中心', '/monitor', 'monitor', 110, 0, '2021-06-16 13:05:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 13:05:30', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('31', '30', '服务器监控', '/monitor/system', 'monitor', 120, 1, '2021-06-16 13:05:50', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 13:05:50', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('32', '30', 'druid', '/monitor/druid', 'monitor-druid', 130, 1, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f' ,'2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('33', '30', '操作日志', '/monitor/log', 'monitor-log', 140, 1, '2021-06-16 08:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 14:48:31', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('34', '30', '异常日志', '/monitor/exception', 'monitor-exception', 150, 1, '2021-06-16 08:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 14:48:31', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('30', '0', '监控中心', '/monitor', 'monitor', 110, null, '2021-06-16 13:05:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 13:05:30', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('31', '30', '服务器监控', '/monitor/system', 'monitor', 120, null, '2021-06-16 13:05:50', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 13:05:50', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('32', '30', 'druid', '/monitor/druid', 'monitor-druid', 130, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f' ,'2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('33', '30', '操作日志', '/monitor/log', 'monitor-log', 140, null, '2021-06-16 08:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 14:48:31', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('34', '30', '异常日志', '/monitor/exception', 'monitor-exception', 150, null, '2021-06-16 08:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 14:48:31', 'da6d966d37fcb819546064424a8bdd9f');
 
-INSERT INTO `sys_menus` VALUES ('40', '0', '系统管理', '/sys', 'sys', 160, 0, '2021-05-17 08:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 09:33:06', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('41', '40', '用户管理', '/sys/user', 'sys-user', 170, 1, '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('42', '40', '角色管理', '/sys/role', 'sys-role', 180, 1, '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('43', '40', '菜单管理', '/sys/menu', 'sys-menu', 190, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('44', '40', '字典管理', '/sys/dict', 'sys-dict', 200, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_menus` VALUES ('45', '40', '任务调度', '/sys/task', 'sys-task', 210, 1, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('40', '0', '系统管理', '/sys', 'sys', 160, null, '2021-05-17 08:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 09:33:06', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('41', '40', '用户管理', '/sys/user', 'sys-user', 170, null, '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('42', '40', '角色管理', '/sys/role', 'sys-role', 180, null, '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-17 11:49:04', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('43', '40', '菜单管理', '/sys/menu', 'sys-menu', 190, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('44', '40', '字典管理', '/sys/dict', 'sys-dict', 200, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('45', '40', '任务调度', '/sys/task', 'sys-task', 210, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
 
 
 
@@ -179,15 +179,15 @@ DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE `sys_log` (
   `id` varchar(64) NOT NULL COMMENT '唯一id',
   `user_name` varchar(255) NOT NULL COMMENT '用户名',
-  `user_id` varchar(64) NOT NULL COMMENT '管理员uid',
+  `user_id` varchar(64) NOT NULL COMMENT 'uid',
   `ip` varchar(50) DEFAULT NULL COMMENT '请求ip地址',
   `ip_address` varchar(50) DEFAULT NULL COMMENT 'ip所属地',
   `url` varchar(255) NOT NULL COMMENT '请求url',
-  `type` varchar(32) NOT NULL COMMENT '请求方式',
+  `type` varchar(32) DEFAULT NULL COMMENT '请求方式',
   `class_path` varchar(255) NOT NULL COMMENT '请求类路径',
   `method` varchar(32) NOT NULL COMMENT '请求方法名',
   `params` longtext COMMENT '请求参数',
-  `operation` varchar(32) DEFAULT NULL COMMENT '描述',
+  `operation` varchar(32) NOT NULL COMMENT '描述',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `spend_time` int(11) NOT NULL COMMENT '方法请求花费的时间',
   PRIMARY KEY (`id`)
@@ -208,7 +208,6 @@ CREATE TABLE `sys_exception_log` (
   `operation` varchar(32) NOT NULL COMMENT '描述',
   `params` longtext DEFAULT NULL COMMENT '请求参数',
   `exceptionJson` mediumtext NOT NULL COMMENT '异常对象json格式',
-  `exceptionMessage` mediumtext NOT NULL COMMENT '异常简单信息,等同于e.getMessage',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='异常日志表';
@@ -322,7 +321,7 @@ CREATE TABLE `qiniu_content` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_quartz_job`;
 CREATE TABLE `sys_quartz_job` (
-  `id` varchar(64) NOT NULL COMMENT 'ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `bean_name` varchar(255) NOT NULL COMMENT 'Spring Bean名称',
   `cron_expression` varchar(255) NOT NULL COMMENT 'cron 表达式',
   `is_pause` int(1) DEFAULT 0 COMMENT '状态：1暂停、0启用',
@@ -339,14 +338,15 @@ CREATE TABLE `sys_quartz_job` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) DEFAULT NULL COMMENT '更新人ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 COMMENT='定时任务';
 
 -- ----------------------------
 -- Records of sys_quartz_job
 -- ----------------------------
-INSERT INTO `sys_quartz_job` VALUES ('1', 'testTask', '0/5 * * * * ?', 1, '测试1', 'run1', 'test', '带参测试，多参使用json', 'admin', '1181881941@qq.com', NULL, 1, '2019-08-22 14:08:29', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 13:58:33', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_quartz_job` VALUES ('2', 'testTask', '0/5 * * * * ?', 1, '测试2', 'run', '', '不带参测试', 'admin', '1181881941@qq.com', '3', 1, '2019-09-26 16:44:39', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 14:48:12', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_quartz_job` VALUES ('3', 'testTask', '0/5 * * * * ?', 1, '测试3', 'run2', '', '测试3', 'admin', '1181881941@qq.com', NULL, 1, '2020-05-05 20:35:41', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-05 20:36:07', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_quartz_job` VALUES (1, 'testTask', '0/5 * * * * ?', 1, '测试1', 'run1', 'test', '带参测试，多参使用json', 'admin', '1181881941@qq.com', NULL, 1, '2019-08-22 14:08:29', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 13:58:33', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_quartz_job` VALUES (2, 'testTask', '0/5 * * * * ?', 1, '测试2', 'run', '', '不带参测试', 'admin', '1181881941@qq.com', 3, 1, '2019-09-26 16:44:39', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 14:48:12', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_quartz_job` VALUES (3, 'testTask', '0/5 * * * * ?', 1, '测试3', 'run2', '', '测试3', 'admin', '1181881941@qq.com', NULL, 1, '2020-05-05 20:35:41', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-05 20:36:07', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_quartz_job` VALUES (4, 'testTask', '0 0 0 1/1 * ? ', 0, '同步文章到ES', 'run3', NULL, '同步文章到ES', 'admin', '1181881941@qq.com', NULL, 1, '2021-12-16 15:18:58', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_quartz_log
@@ -356,6 +356,7 @@ CREATE TABLE `sys_quartz_log` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `bean_name` varchar(255) NOT NULL COMMENT 'Spring Bean名称',
   `create_time` datetime NOT NULL COMMENT '执行日期',
+  `create_by` datetime NOT NULL COMMENT '执行人',
   `cron_expression` varchar(255) NOT NULL COMMENT 'cron表达式',
   `exception_detail` text DEFAULT NULL COMMENT '异常详情',
   `is_success` int(1) NOT NULL COMMENT '状态 失败0 成功1',

@@ -19,6 +19,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 博客文章表
@@ -43,6 +46,7 @@ public class BlogArticle implements Serializable {
     @Id
     private String id;
 
+    @NotBlank(message = "博客标题不能为空")
     @Field(type = FieldType.Text,searchAnalyzer = "ik_max_word",analyzer = "ik_max_word")
     @ApiModelProperty(value = "博客标题")
     private String title;
@@ -51,10 +55,12 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "博客简介")
     private String summary;
 
+    @NotBlank(message = "上传人id不能为空")
     @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "上传人id")
     private String adminId;
 
+    @NotBlank(message = "博客内容不能为空")
     @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "博客内容")
     private String content;
@@ -62,6 +68,7 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "是否发布：0：否，1：是")
     private Integer isPublish;
 
+    @NotBlank(message = "标签id不能为空")
     @ApiModelProperty(value = "标签id")
     private String tagId;
 
@@ -77,9 +84,11 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "文章出处")
     private String articlesPart;
 
+    @NotBlank(message = "博客分类ID不能为空")
     @ApiModelProperty(value = "博客分类ID")
     private String categoryId;
 
+    @DecimalMax(value = "9999")
     @ApiModelProperty(value = "排序字段")
     private Integer sort;
 

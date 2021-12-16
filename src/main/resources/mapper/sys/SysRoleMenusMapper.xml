@@ -8,8 +8,22 @@
         <result column="role_id" property="roleId"/>
         <result column="menu_id" property="menuId"/>
         <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        role_id,
+        menu_id,
+        create_time,
+        create_by,
+        update_time,
+        update_by
+    </sql>
+
 
     <select id="getMenuListByRoleId" resultType="com.hope.blog.sys.model.SysMenus">
         SELECT

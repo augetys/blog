@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class SysUserController {
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/create")
     @OperationLog(value = "新增用户")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysUser sysUser) {
+    public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid SysUser sysUser) {
         String encodePassword = passwordEncoder.encode(CommonConstant.PASSWORD);
         sysUser.setPassword(encodePassword);
         boolean success = iSysUserService.saveOrUpdate(sysUser);
@@ -101,7 +102,7 @@ public class SysUserController {
     @ApiOperation(value = "修改用户信息")
     @PostMapping(value = "/update")
     @OperationLog(value = "修改用户信息")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody SysUser sysUser) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid SysUser sysUser) {
         boolean success = iSysUserService.updateById(sysUser);
         if (success) {
             return CommonResult.success();
@@ -114,7 +115,7 @@ public class SysUserController {
      */
     @ApiOperation(value = "登录")
     @PostMapping(value = "/login")
-    public CommonResult<String> login(@ApiParam @RequestBody LoginRequestDto loginRequestDto) {
+    public CommonResult<String> login(@ApiParam @RequestBody @Valid LoginRequestDto loginRequestDto) {
         String token = iSysUserService.login(loginRequestDto);
         return CommonResult.success(token);
     }
@@ -155,7 +156,7 @@ public class SysUserController {
     @ApiOperation(value = "修改用户状态")
     @PostMapping(value = "/updateStatus")
     @OperationLog(value = "修改用户状态")
-    public CommonResult<ResultCode> updateStatus(@ApiParam @RequestBody UpdateSysUserStatusRequestDto updateSysUserStatusRequestDto) {
+    public CommonResult<ResultCode> updateStatus(@ApiParam @RequestBody @Valid UpdateSysUserStatusRequestDto updateSysUserStatusRequestDto) {
         boolean success = iSysUserService.updateStatusRequest(updateSysUserStatusRequestDto);
         if (success) {
             return CommonResult.success();

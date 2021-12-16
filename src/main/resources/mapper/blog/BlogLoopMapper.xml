@@ -6,12 +6,27 @@
     <resultMap id="BaseResultMap" type="com.hope.blog.blog.model.BlogLoop">
         <id column="id" property="id"/>
         <result column="title" property="title"/>
-        <result column="order" property="order"/>
-        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="is_link" property="isLink"/>
         <result column="target_url" property="targetUrl"/>
         <result column="image_url" property="imageUrl"/>
         <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        title,
+        sort,
+        is_link,
+        target_url,
+        image_url,
+        create_time,
+        create_by,
+        update_time,
+        update_by
+    </sql>
 </mapper>

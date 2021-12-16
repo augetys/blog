@@ -15,6 +15,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 本地存储
@@ -41,18 +43,21 @@ public class LocalStorage implements Serializable {
     @ApiModelProperty(value = "文件真实的名称")
     private String realName;
 
+    @NotBlank(message = "文件名不能为空")
     @ApiModelProperty(value = "文件名")
     private String name;
 
     @ApiModelProperty(value = "后缀")
     private String suffix;
 
+    @NotBlank(message = "路径不能为空")
     @ApiModelProperty(value = "路径")
     private String path;
 
     @ApiModelProperty(value = "类型")
     private String type;
 
+    @NotBlank(message = "大小不能为空")
     @ApiModelProperty(value = "大小")
     private String size;
 

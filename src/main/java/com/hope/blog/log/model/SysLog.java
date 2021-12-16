@@ -15,6 +15,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 操作日志表
@@ -38,9 +40,11 @@ public class SysLog implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @NotBlank(message = "用户名不能为空")
     @ApiModelProperty(value = "用户名")
     private String userName;
 
+    @NotBlank(message = "uid不能为空")
     @ApiModelProperty(value = "uid")
     private String userId;
 
@@ -50,21 +54,25 @@ public class SysLog implements Serializable {
     @ApiModelProperty(value = "ip所属地")
     private String ipAddress;
 
+    @NotBlank(message = "请求url不能为空")
     @ApiModelProperty(value = "请求url")
     private String url;
 
     @ApiModelProperty(value = "请求方式")
     private String type;
 
+    @NotBlank(message = "请求类路径不能为空")
     @ApiModelProperty(value = "请求类路径")
     private String classPath;
 
+    @NotBlank(message = "请求方法名不能为空")
     @ApiModelProperty(value = "请求方法名")
     private String method;
 
     @ApiModelProperty(value = "请求参数")
     private String params;
 
+    @NotBlank(message = "描述不能为空")
     @ApiModelProperty(value = "描述")
     private String operation;
 

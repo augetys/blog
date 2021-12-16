@@ -9,18 +9,20 @@
         <result column="from_id" property="fromId" />
         <result column="from_name" property="fromName" />
         <result column="from_avatar" property="fromAvatar" />
+        <result column="mail" property="mail" />
         <result column="to_id" property="toId" />
         <result column="to_name" property="toName" />
         <result column="to_avatar" property="toAvatar" />
-        <result column="article_id" property="articleId" />
         <result column="content" property="content" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, comment_id, from_id, from_name, from_avatar, to_id, to_name, to_avatar, article_id, content, create_time, update_time
+        id, comment_id, from_id, from_name, from_avatar, mail, to_id, to_name, to_avatar, content, create_time, create_by, update_time, update_by
     </sql>
 
 </mapper>

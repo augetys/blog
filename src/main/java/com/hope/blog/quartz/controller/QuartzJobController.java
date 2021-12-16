@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 /**
  * @author lijin
@@ -50,7 +52,7 @@ public class QuartzJobController {
     @OperationLog("新增定时任务")
     @ApiOperation("新增定时任务")
     @PostMapping("/create")
-    public CommonResult<ResultCode> create(@ApiParam @RequestBody QuartzJob quartzJob) {
+    public CommonResult<ResultCode> create(@ApiParam @RequestBody @Valid QuartzJob quartzJob) {
         if (quartzJob.getId() != null) {
             throw new BusinessException("A new " + ENTITY_NAME + " cannot already have an ID");
         }
@@ -61,7 +63,7 @@ public class QuartzJobController {
     @OperationLog("修改定时任务")
     @ApiOperation("修改定时任务")
     @PostMapping("/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody QuartzJob quartzJob) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid QuartzJob quartzJob) {
         quartzJobService.update(quartzJob);
         return CommonResult.success();
     }
@@ -69,7 +71,7 @@ public class QuartzJobController {
     @OperationLog("更改定时任务状态")
     @ApiOperation("更改定时任务状态")
     @PostMapping("/updateStatus")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody JobUpdateStatusRequestDto jobUpdateStatusRequestDto) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid JobUpdateStatusRequestDto jobUpdateStatusRequestDto) {
         quartzJobService.updateIsPause(jobUpdateStatusRequestDto);
         return CommonResult.success();
     }

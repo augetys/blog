@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 
 /**
  * <p>
@@ -40,56 +42,6 @@ public class SysLogController {
     public CommonResult<CommonPage<SysLog>> findListByPage(@ApiParam @RequestBody SysLogSearchRequestDto sysLog) {
         IPage<SysLog> list = sysLogService.findListByPage(sysLog);
         return CommonResult.success(CommonPage.restPage(list));
-    }
-
-
-    /**
-     * 根据id查询
-     */
-    @ApiOperation(value = "根据id查询数据")
-    @GetMapping(value = "/{id}")
-    public CommonResult<SysLog> getById(@PathVariable String id) {
-        SysLog entity = sysLogService.getById(id);
-        return CommonResult.success(entity);
-    }
-
-    /**
-     * 新增
-     */
-    @ApiOperation(value = "新增数据")
-    @PostMapping(value = "/save")
-    public CommonResult<ResultCode> add(@ApiParam @RequestBody SysLog entity) {
-        boolean success = sysLogService.saveOrUpdate(entity);
-        if (success) {
-            return CommonResult.success();
-        }
-        return CommonResult.failed();
-    }
-
-    /**
-     * 删除单条记录
-     */
-    @ApiOperation(value = "删除单条记录")
-    @GetMapping(value = "/delete/{id}")
-    public CommonResult<ResultCode> delete(@PathVariable String id) {
-        boolean success = sysLogService.removeById(id);
-        if (success) {
-            return CommonResult.success();
-        }
-        return CommonResult.failed();
-    }
-
-    /**
-     * 修改单条记录
-     */
-    @ApiOperation(value = "修改单条记录")
-    @PostMapping(value = "/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody SysLog entity) {
-        boolean success = sysLogService.updateById(entity);
-        if (success) {
-            return CommonResult.success();
-        }
-        return CommonResult.failed();
     }
 }
 

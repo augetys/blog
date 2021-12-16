@@ -36,6 +36,10 @@ public class TestTask {
     }
 
     public void run2() {
+        log.info("run2 执行成功");
+    }
+
+    public void run3(){
         log.info("像es中批量插入文章");
         QueryWrapper<BlogArticle> queryWrapper = new QueryWrapper<>();
         List<BlogArticle> list = blogArticleMapper.selectList(queryWrapper);

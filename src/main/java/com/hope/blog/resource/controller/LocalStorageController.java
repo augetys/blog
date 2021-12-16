@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class LocalStorageController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
-    public CommonResult<ResultCode> update(@ApiParam @RequestBody LocalStorage localStorage) {
+    public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid LocalStorage localStorage) {
         boolean success = iLocalStorageService.updateById(localStorage);
         if (success) {
             return CommonResult.success();

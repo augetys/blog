@@ -3,8 +3,6 @@ package com.hope.blog.quartz.model;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -19,33 +17,36 @@ public class QuartzJob {
 
     public static final String JOB_KEY = "JOB_KEY";
 
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
-    private String id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
+    @NotBlank(message = "任务名称不能为空")
     @ApiModelProperty(value = "定时器名称")
     private String jobName;
 
-    @NotBlank
+    @NotBlank(message = "Bean名称不能为空")
     @ApiModelProperty(value = "Bean名称")
     private String beanName;
 
-    @NotBlank
+    @NotBlank(message = "方法名称不能为空")
     @ApiModelProperty(value = "方法名称")
     private String methodName;
 
     @ApiModelProperty(value = "参数")
     private String params;
 
-    @NotBlank
+    @NotBlank(message = "cron表达式不能为空")
     @ApiModelProperty(value = "cron表达式")
     private String cronExpression;
 
     @ApiModelProperty(value = "状态，暂时或启动")
     private Integer isPause;
 
+    @NotBlank(message = "负责人不能为空")
     @ApiModelProperty(value = "负责人")
     private String personInCharge;
 
+    @NotBlank(message = "报警邮箱不能为空")
     @ApiModelProperty(value = "报警邮箱")
     private String email;
 
@@ -55,8 +56,8 @@ public class QuartzJob {
     @ApiModelProperty(value = "失败后暂停")
     private Integer pauseAfterFailure;
 
-    @NotBlank
-    @ApiModelProperty(value = "备注")
+    @NotBlank(message = "描述不能为空")
+    @ApiModelProperty(value = "描述")
     private String description;
 
     @ApiModelProperty(value = "创建时间")
@@ -64,6 +65,7 @@ public class QuartzJob {
     private Date createTime;
 
     @ApiModelProperty(value = "创建人")
+    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @ApiModelProperty(value = "更新时间")
@@ -71,5 +73,6 @@ public class QuartzJob {
     private Date updateTime;
 
     @ApiModelProperty(value = "修改人")
+    @TableField(fill = FieldFill.UPDATE)
     private String updateBy;
 }
