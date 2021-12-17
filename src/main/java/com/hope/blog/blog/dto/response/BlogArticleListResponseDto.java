@@ -22,9 +22,6 @@ public class BlogArticleListResponseDto {
     @ApiModelProperty(value = "博客简介")
     private String summary;
 
-    @ApiModelProperty(value = "上传人id")
-    private String adminId;
-
     @ApiModelProperty(value = "博客内容")
     private String content;
 
@@ -58,11 +55,18 @@ public class BlogArticleListResponseDto {
     @ApiModelProperty(value = "博客分类名称")
     private String categoryName;
 
+    @ApiModelProperty(value = "博客分类图标")
+    private String categoryIcon;
+
+
     @ApiModelProperty(value = "排序字段")
     private Integer sort;
 
     @ApiModelProperty(value = "是否开启评论(0:否 1:是)")
     private Integer openComment;
+
+    @ApiModelProperty(value = "上传人id")
+    private String createBy;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;

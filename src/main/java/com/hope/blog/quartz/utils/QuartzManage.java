@@ -2,6 +2,7 @@ package com.hope.blog.quartz.utils;
 
 import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.quartz.model.QuartzJob;
+import com.hope.blog.utils.SecurityUtil;
 import com.ibm.icu.impl.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -141,6 +142,8 @@ public class QuartzManage {
             }
             JobDataMap dataMap = new JobDataMap();
             dataMap.put(QuartzJob.JOB_KEY, quartzJob);
+            // 将userId放入JobDataMap，避免在异步任务中获取不到SecurityContextHolder上下文
+            dataMap.put("userId", SecurityUtil.getCurrentUser().getUid());
             JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJob.getId());
             scheduler.triggerJob(jobKey, dataMap);
         } catch (Exception e) {

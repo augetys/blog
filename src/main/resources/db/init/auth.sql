@@ -355,8 +355,6 @@ DROP TABLE IF EXISTS `sys_quartz_log`;
 CREATE TABLE `sys_quartz_log` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `bean_name` varchar(255) NOT NULL COMMENT 'Spring Bean名称',
-  `create_time` datetime NOT NULL COMMENT '执行日期',
-  `create_by` datetime NOT NULL COMMENT '执行人',
   `cron_expression` varchar(255) NOT NULL COMMENT 'cron表达式',
   `exception_detail` text DEFAULT NULL COMMENT '异常详情',
   `is_success` int(1) NOT NULL COMMENT '状态 失败0 成功1',
@@ -364,6 +362,8 @@ CREATE TABLE `sys_quartz_log` (
   `method_name` varchar(255) NOT NULL COMMENT '执行方法',
   `params` varchar(255) DEFAULT NULL COMMENT '参数',
   `time` bigint(20) NOT NULL COMMENT '耗时',
+  `create_time` datetime NOT NULL COMMENT '执行日期',
+  `create_by` varchar(64) NOT NULL COMMENT '执行人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 

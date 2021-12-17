@@ -81,7 +81,7 @@ public class QuartzJobController {
     @GetMapping("/exec/{id}")
     public CommonResult<ResultCode> execution(@ApiParam @PathVariable String id) {
         quartzJobService.execution(quartzJobService.findById(id));
-        return CommonResult.success();
+        return CommonResult.success(null,"执行成功，请前往定时任务日志查看运行结果！");
     }
 
     @OperationLog("删除定时任务")

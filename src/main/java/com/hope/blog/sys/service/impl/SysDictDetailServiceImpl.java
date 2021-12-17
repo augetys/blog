@@ -49,6 +49,7 @@ public class SysDictDetailServiceImpl extends ServiceImpl<SysDictDetailMapper, S
         if (!StringUtils.isEmpty(sysDict.getId())) {
             queryWrapper1.eq("dict_id", sysDict.getId());
         }
+        queryWrapper1.orderByAsc("sort");
         return sysDictDetailMapper.selectList(queryWrapper1);
     }
 }

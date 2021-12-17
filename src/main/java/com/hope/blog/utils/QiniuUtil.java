@@ -32,9 +32,9 @@ public class QiniuUtil {
 
     public static final String PHOTO = "https://photo.choot.top/";
 
-    public static final String FILE = "https://file.choot.top/";
+    public static final String FILE = "http://file.choot.top/";
 
-    public static final String VIDEO = "https://video.choot.top/";
+    public static final String VIDEO = "http://video.choot.top/";
 
 
     /**
@@ -142,7 +142,9 @@ public class QiniuUtil {
         Configuration cfg = new Configuration();
         BucketManager bucketManager = new BucketManager(authInstance(), cfg);
         try {
-            return bucketManager.stat(bucketName, fileKey);
+            FileInfo stat = bucketManager.stat(bucketName, fileKey);
+            stat.key = fileKey;
+            return stat;
         } catch (QiniuException e) {
             throw new BusinessException("获取" + fileKey + "文件信息失败！", e);
         }

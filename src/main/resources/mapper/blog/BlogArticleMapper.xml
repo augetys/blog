@@ -7,7 +7,6 @@
         <id column="id" property="id"/>
         <result column="title" property="title"/>
         <result column="summary" property="summary"/>
-        <result column="admin_id" property="adminId"/>
         <result column="content" property="content"/>
         <result column="is_publish" property="isPublish"/>
         <result column="tag_id" property="tagId"/>
@@ -28,7 +27,6 @@
         id,
         title,
         summary,
-        admin_id,
         content,
         is_publish,
         tag_id,

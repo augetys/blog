@@ -52,10 +52,8 @@ public class QuartzLog implements Serializable {
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "执行日期", hidden = true)
-    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @ApiModelProperty(value = "执行人", hidden = true)
-    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 }

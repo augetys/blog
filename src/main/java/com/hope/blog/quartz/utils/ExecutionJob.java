@@ -5,7 +5,6 @@ import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
 
-import com.hope.blog.common.security.config.AuthUserDetails;
 import com.hope.blog.pool.ThreadPoolExecutorUtil;
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
 import com.hope.blog.quartz.mapper.QuartzLogMapper;
@@ -15,14 +14,13 @@ import com.hope.blog.quartz.service.QuartzJobService;
 import com.hope.blog.tool.dto.request.EmailSendRequestDto;
 import com.hope.blog.tool.service.EmailContentService;
 import com.hope.blog.utils.DateUtil;
-import com.hope.blog.utils.SecurityUtil;
 import com.hope.blog.utils.SpringContextHolder;
 import com.hope.blog.utils.ThrowableUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -46,19 +44,21 @@ public class ExecutionJob extends QuartzJobBean {
 
     @Override
     public void executeInternal(JobExecutionContext context) {
-        QuartzJob quartzJob = (QuartzJob) context.getMergedJobDataMap().get(QuartzJob.JOB_KEY);
+        JobDataMap mergedJobDataMap = context.getMergedJobDataMap();
+        QuartzJob quartzJob = (QuartzJob) mergedJobDataMap.get(QuartzJob.JOB_KEY);
+        String userId = (String) mergedJobDataMap.get("userId");
         // 获取spring bean
         QuartzLogMapper quartzLogMapper = SpringContextHolder.getBean(QuartzLogMapper.class);
         QuartzJobService quartzJobService = SpringContextHolder.getBean(QuartzJobService.class);
-
         QuartzLog quartzLog = new QuartzLog();
         quartzLog.setJobName(quartzJob.getJobName());
         quartzLog.setBeanName(quartzJob.getBeanName());
         quartzLog.setMethodName(quartzJob.getMethodName());
         quartzLog.setParams(quartzJob.getParams());
         quartzLog.setCreateTime(new Date());
-        quartzLog.setCreateBy(SecurityUtil.getCurrentUser().getUid());
+        quartzLog.setCreateBy(userId);
         long startTime = System.currentTimeMillis();
+
         quartzLog.setCronExpression(quartzJob.getCronExpression());
         try {
             // 执行任务
@@ -80,6 +80,7 @@ public class ExecutionJob extends QuartzJobBean {
                 // 子任务执行完成，修改任务状态
                 quartzLog.setIsSuccess(1);
             }
+            quartzLog.setIsSuccess(1);
         } catch (Exception e) {
             log.info("任务执行失败，任务名称：" + quartzJob.getJobName());
             log.info("--------------------------------------------------------------");

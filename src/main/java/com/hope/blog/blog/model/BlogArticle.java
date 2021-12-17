@@ -55,11 +55,6 @@ public class BlogArticle implements Serializable {
     @ApiModelProperty(value = "博客简介")
     private String summary;
 
-    @NotBlank(message = "上传人id不能为空")
-    @Field(type = FieldType.Keyword)
-    @ApiModelProperty(value = "上传人id")
-    private String adminId;
-
     @NotBlank(message = "博客内容不能为空")
     @Field(type = FieldType.Keyword)
     @ApiModelProperty(value = "博客内容")
@@ -101,6 +96,7 @@ public class BlogArticle implements Serializable {
 
     @ApiModelProperty(value = "创建人")
     @TableField(fill = FieldFill.INSERT)
+    @Field(type = FieldType.Keyword)
     private String createBy;
 
     @ApiModelProperty(value = "更新时间")

@@ -39,7 +39,7 @@ public class CommonResult<T> {
      * 成功返回结果
      */
     public static <T> CommonResult<T> success() {
-        return failed(ResultCode.SUCCESS);
+        return new CommonResult<T>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), null);
     }
 
     /**

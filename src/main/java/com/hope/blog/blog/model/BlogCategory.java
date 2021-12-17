@@ -48,6 +48,9 @@ public class BlogCategory implements Serializable {
     @ApiModelProperty(value = "分类简介")
     private String content;
 
+    @ApiModelProperty(value = "icon")
+    private String icon;
+
     @DecimalMax(value = "9999")
     @ApiModelProperty(value = "排序")
     private Integer sort;

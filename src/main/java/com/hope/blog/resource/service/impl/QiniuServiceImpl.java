@@ -57,6 +57,7 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
             qiniuContentMapper.insert(qiniuContent);
             return qiniuContent;
         } else {
+            QiniuUtil.deleteFile(bucket,fileInfo.key);
             throw new BusinessException("七牛云文件已存在");
         }
     }

@@ -90,8 +90,9 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(
                     item -> {
-                        item.setAuthor(sysUserService.getById(item.getAdminId()).getUsername());
+                        item.setAuthor(sysUserService.getById(item.getCreateBy()).getUsername());
                         item.setCategoryName(blogCategoryService.getById(item.getCategoryId()).getName());
+                        item.setCategoryIcon(blogCategoryService.getById(item.getCategoryId()).getIcon());
                     }
             );
             if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTagId())) {
@@ -115,7 +116,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         // int page = 0;
         // int pageSize = 3;
         // 添加基本的分词查询
-        queryBuilder.withQuery(QueryBuilders.matchQuery("title", blogArticleSearchRequestDto.getKeyword()))
+        queryBuilder.withQuery(QueryBuilders.multiMatchQuery(blogArticleSearchRequestDto.getKeyword(), "title", "content"))
                 .withSort(SortBuilders.fieldSort("createTime").order(SortOrder.DESC))
                 .withPageable(PageRequest.of(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()));
         //查询结果
@@ -135,6 +136,17 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         IPage<BlogArticle> pageList = this.page(blogArticlePage);
         pageList.setRecords(results);
         pageList.setTotal(blogArticleSearchHits.getTotalHits());
-        return pageList.convert(BlogArticle -> CopyUtil.copy(BlogArticle, BlogArticleListResponseDto.class));
+        IPage<BlogArticleListResponseDto> convert = pageList.convert(BlogArticle -> CopyUtil.copy(BlogArticle, BlogArticleListResponseDto.class));
+        List<BlogArticleListResponseDto> records = convert.getRecords();
+        if (!CollectionUtils.isEmpty(records)) {
+            records.forEach(
+                    item -> {
+                        item.setAuthor(sysUserService.getById(item.getCreateBy()).getUsername());
+                        item.setCategoryName(blogCategoryService.getById(item.getCategoryId()).getName());
+                        item.setCategoryIcon(blogCategoryService.getById(item.getCategoryId()).getIcon());
+                    }
+            );
+        }
+         return convert;
     }
 }
