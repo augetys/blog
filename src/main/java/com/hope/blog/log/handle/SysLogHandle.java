@@ -2,7 +2,7 @@ package com.hope.blog.log.handle;
 
 import com.hope.blog.log.model.SysLog;
 import com.hope.blog.log.service.SysLogService;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysLogHandle extends AbstractRequestAwareRunnable {
 
-    @Autowired
+    @Resource
     private SysLogService sysLogService;
 
     private SysLog sysLog;

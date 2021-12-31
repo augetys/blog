@@ -8,11 +8,12 @@ import com.hope.blog.blog.service.BlogTagService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.log.handle.OperationLog;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,7 @@ import java.util.List;
 @RequestMapping("/blog/tag")
 public class BlogTagController {
 
-    @Autowired
+    @Resource
     private BlogTagService iBlogTagService;
 
     /**
@@ -72,6 +73,7 @@ public class BlogTagController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
+    @OperationLog(value = "新增标签")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid BlogTag entity) {
         boolean success = iBlogTagService.saveOrUpdate(entity);
         if (success) {
@@ -85,6 +87,7 @@ public class BlogTagController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
+    @OperationLog(value = "删除标签（物理删除）")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iBlogTagService.removeById(id);
         if (success) {
@@ -98,6 +101,7 @@ public class BlogTagController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
+    @OperationLog(value = "修改标签")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid BlogTag entity) {
         boolean success = iBlogTagService.updateById(entity);
         if (success) {

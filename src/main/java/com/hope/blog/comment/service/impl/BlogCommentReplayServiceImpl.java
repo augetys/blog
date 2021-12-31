@@ -5,11 +5,12 @@ import com.hope.blog.comment.mapper.BlogCommentReplayMapper;
 import com.hope.blog.comment.service.BlogCommentReplayService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.common.constant.CommonConstant;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -24,7 +25,7 @@ import java.util.UUID;
 @Transactional
 public class BlogCommentReplayServiceImpl extends ServiceImpl<BlogCommentReplayMapper, BlogCommentReplay> implements BlogCommentReplayService {
 
-    @Autowired
+    @Resource
     private BlogCommentReplayMapper blogCommentReplayMapper;
 
     @Override
@@ -35,6 +36,7 @@ public class BlogCommentReplayServiceImpl extends ServiceImpl<BlogCommentReplayM
         if (StringUtils.isEmpty(entity.getFromAvatar())) {
             entity.setFromAvatar(CommonConstant.USERAVATAR);
         }
+        entity.setCreateTime(new Date());
         return blogCommentReplayMapper.insert(entity) > 0;
     }
 }

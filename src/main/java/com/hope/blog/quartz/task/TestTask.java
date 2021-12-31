@@ -9,7 +9,6 @@ import com.hope.blog.sys.service.SysUserService;
 import com.hope.blog.utils.CopyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -52,8 +51,7 @@ public class TestTask {
 
     public void run3() throws Exception {
         log.info("开始删除blog索引");
-        elasticsearchRestTemplate.indexOps(IndexCoordinates.of("blog")).delete();
-        log.info("向es中同步文章");
+        elasticsearchRestTemplate.indexOps(BlogArticleListResponseDto.class).delete();
         QueryWrapper<BlogArticle> queryWrapper = new QueryWrapper<>();
         List<BlogArticle> list = blogArticleMapper.selectList(queryWrapper);
         List<BlogArticleListResponseDto> response = CopyUtil.copyList(list, BlogArticleListResponseDto.class);
@@ -66,7 +64,10 @@ public class TestTask {
                     }
             );
         }
-        // 会自动创建索引
-        elasticsearchRestTemplate.save(response, IndexCoordinates.of("blog"));
+        log.info("开始创建blog索引");
+        elasticsearchRestTemplate.indexOps(BlogArticleListResponseDto.class).create();
+        elasticsearchRestTemplate.putMapping(BlogArticleListResponseDto.class);
+        log.info("开始插入数据");
+        elasticsearchRestTemplate.save(response);
     }
 }

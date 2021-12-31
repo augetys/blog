@@ -13,12 +13,13 @@ import com.hope.blog.comment.service.BlogCommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.common.constant.CommonConstant;
 import com.hope.blog.utils.CopyUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,10 +36,10 @@ import java.util.UUID;
 @Transactional
 public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogComment> implements BlogCommentService {
 
-    @Autowired
+    @Resource
     private BlogCommentMapper blogCommentMapper;
 
-    @Autowired
+    @Resource
     private BlogCommentReplayService blogCommentReplayService;
 
     @Override
@@ -52,6 +53,7 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
         if (!StringUtils.isEmpty(blogCommentQueryRequest.getId())) {
             queryWrapper.eq("article_id", blogCommentQueryRequest.getId());
         }
+        queryWrapper.orderByDesc("create_time");
         Page<BlogComment> page = new Page<>();
         page.setCurrent(blogCommentQueryRequest.getPageNum());
         page.setSize(blogCommentQueryRequest.getPageSize());
@@ -79,6 +81,7 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
         if (StringUtils.isEmpty(entity.getUserAvatar())) {
             entity.setUserAvatar(CommonConstant.USERAVATAR);
         }
+        entity.setCreateTime(new Date());
         return blogCommentMapper.insert(entity) > 0;
     }
 }

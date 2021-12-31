@@ -1,19 +1,21 @@
 package com.hope.blog.quartz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
 import com.hope.blog.quartz.model.QuartzJob;
 import com.hope.blog.quartz.model.QuartzLog;
 import com.hope.blog.quartz.dto.request.JobQueryRequestDto;
 
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * @author lijin
  * @since 2021-07-02
  */
-public interface QuartzJobService {
+public interface QuartzJobService extends IService<QuartzJob> {
 
     /**
      * 分页查询

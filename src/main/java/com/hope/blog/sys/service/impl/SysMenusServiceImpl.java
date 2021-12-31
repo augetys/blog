@@ -10,7 +10,7 @@ import com.hope.blog.sys.mapper.SysMenusMapper;
 import com.hope.blog.sys.service.SysMenusService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> implements SysMenusService {
 
-    @Autowired
+    @Resource
     private SysMenusMapper sysMenusMapper;
 
     @Override

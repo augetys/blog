@@ -2,8 +2,11 @@ package com.hope.blog.blog.dto.response;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import javax.validation.constraints.DecimalMax;
 import java.util.Date;
 import java.util.List;
 
@@ -11,18 +14,23 @@ import java.util.List;
  * Create by lijin on 2021/7/4 10:15
  */
 @Data
+@Document(indexName = "blog", replicas = 0)
 public class BlogArticleListResponseDto {
 
     @ApiModelProperty(value = "id")
-    private String id;
+    @Id
+    private Integer id;
 
     @ApiModelProperty(value = "博客标题")
+    @Field(type = FieldType.Text,searchAnalyzer = "ik_smart",analyzer = "ik_max_word")
     private String title;
 
     @ApiModelProperty(value = "博客简介")
+    @Field(type = FieldType.Text,searchAnalyzer = "ik_smart",analyzer = "ik_max_word")
     private String summary;
 
     @ApiModelProperty(value = "博客内容")
+    @Field(type = FieldType.Text,searchAnalyzer = "ik_smart",analyzer = "ik_max_word")
     private String content;
 
     @ApiModelProperty(value = "是否发布：0：否，1：是")
@@ -47,7 +55,10 @@ public class BlogArticleListResponseDto {
     private String author;
 
     @ApiModelProperty(value = "文章出处")
-    private String articlesPart;
+    private String articlePart;
+
+    @ApiModelProperty(value = "文章作者")
+    private String articleAuthor;
 
     @ApiModelProperty(value = "博客分类ID")
     private String categoryId;
@@ -57,7 +68,6 @@ public class BlogArticleListResponseDto {
 
     @ApiModelProperty(value = "博客分类图标")
     private String categoryIcon;
-
 
     @ApiModelProperty(value = "排序字段")
     private Integer sort;

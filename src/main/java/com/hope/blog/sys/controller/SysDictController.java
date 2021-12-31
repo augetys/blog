@@ -1,6 +1,7 @@
 package com.hope.blog.sys.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.hope.blog.log.handle.OperationLog;
 import com.hope.blog.sys.dto.request.SysDictDetailSearchRequestDto;
 import com.hope.blog.sys.dto.request.SysDictSearchRequestDto;
 import com.hope.blog.sys.model.SysDict;
@@ -13,7 +14,7 @@ import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -36,7 +37,7 @@ import java.util.Map;
 @RequestMapping("/sys/dict")
 public class SysDictController {
 
-    @Autowired
+    @Resource
     private SysDictService iSysDictService;
 
     /**
@@ -55,6 +56,7 @@ public class SysDictController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
+    @OperationLog(value = "新增字典")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid SysDict entity) {
         boolean success = iSysDictService.saveOrUpdate(entity);
         if (success) {
@@ -68,6 +70,7 @@ public class SysDictController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
+    @OperationLog(value = "删除字典（物理删除）")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iSysDictService.removeById(id);
         if (success) {
@@ -81,6 +84,7 @@ public class SysDictController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
+    @OperationLog(value = "修改字典")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid SysDict entity) {
         boolean success = iSysDictService.updateById(entity);
         if (success) {

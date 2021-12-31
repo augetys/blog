@@ -7,11 +7,12 @@ import com.hope.blog.blog.service.BlogLoopService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.log.handle.OperationLog;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +33,7 @@ import java.util.List;
 @RequestMapping("/blog/loop")
 public class BlogLoopController {
 
-    @Autowired
+    @Resource
     private BlogLoopService iBlogLoopService;
 
     /**
@@ -71,6 +72,7 @@ public class BlogLoopController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
+    @OperationLog(value = "新增轮播图")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid BlogLoop entity) {
         boolean success = iBlogLoopService.saveOrUpdate(entity);
         if (success) {
@@ -84,6 +86,7 @@ public class BlogLoopController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
+    @OperationLog(value = "删除轮播图（物理删除）")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iBlogLoopService.removeById(id);
         if (success) {
@@ -97,6 +100,7 @@ public class BlogLoopController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
+    @OperationLog(value = "修改轮播图")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid BlogLoop entity) {
         boolean success = iBlogLoopService.updateById(entity);
         if (success) {

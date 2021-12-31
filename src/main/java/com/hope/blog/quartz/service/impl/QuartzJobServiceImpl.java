@@ -3,6 +3,7 @@ package com.hope.blog.quartz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.quartz.dto.request.JobUpdateStatusRequestDto;
 import com.hope.blog.quartz.mapper.QuartzJobMapper;
@@ -27,7 +28,7 @@ import java.util.*;
  */
 @RequiredArgsConstructor
 @Service(value = "quartzJobService")
-public class QuartzJobServiceImpl implements QuartzJobService {
+public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob> implements QuartzJobService {
 
     private final QuartzJobMapper quartzJobMapper;
     private final QuartzLogMapper quartzLogMapper;
@@ -42,6 +43,7 @@ public class QuartzJobServiceImpl implements QuartzJobService {
         if (!StringUtils.isEmpty(jobQueryRequestDto.getIsPause())) {
             queryWrapper.eq("is_pause", jobQueryRequestDto.getIsPause());
         }
+        queryWrapper.orderByDesc("create_time");
         return quartzJobMapper.selectPage(new Page<>(jobQueryRequestDto.getPageNum(), jobQueryRequestDto.getPageSize()), queryWrapper);
     }
 

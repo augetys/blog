@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.log.handle.OperationLog;
 import com.hope.blog.resource.dto.request.FileSearchRequestDto;
 import com.hope.blog.resource.model.LocalStorage;
 import com.hope.blog.resource.service.LocalStorageService;
@@ -11,7 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ import java.util.List;
 @RequestMapping("/resource/local")
 public class LocalStorageController {
 
-    @Autowired
+    @Resource
     private LocalStorageService iLocalStorageService;
 
     /**
@@ -77,6 +78,7 @@ public class LocalStorageController {
      */
     @ApiOperation(value = "文件上传接口")
     @PostMapping("/file")
+    @OperationLog(value = "本地文件上传")
     public CommonResult<LocalStorage> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("name") String name) {
         LocalStorage localStorage = iLocalStorageService.uploadFile(file, name);
         return CommonResult.success(localStorage);
@@ -87,6 +89,7 @@ public class LocalStorageController {
      */
     @ApiOperation(value = "多文件上传接口")
     @PostMapping("/files")
+    @OperationLog(value = "本地多文件上传")
     public CommonResult<List<LocalStorage>> uploadFiles(HttpServletRequest request) {
         List<LocalStorage> filesList = iLocalStorageService.uploadFiles(request);
         return CommonResult.success(filesList);

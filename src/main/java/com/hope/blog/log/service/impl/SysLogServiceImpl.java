@@ -9,7 +9,7 @@ import com.hope.blog.log.mapper.SysLogMapper;
 import com.hope.blog.log.service.SysLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.utils.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -29,7 +29,7 @@ import java.util.List;
 @Transactional
 public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements SysLogService {
 
-    @Autowired
+    @Resource
     private SysLogMapper sysLogMapper;
 
     @Override

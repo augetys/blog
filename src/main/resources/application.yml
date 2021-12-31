@@ -82,6 +82,9 @@ secure:
       - /blog/tag/getTag
       - /blog/loop/findAll
       - /blog/nav/findAll
+      - /blog/soul/random
+      - /blog/photo/findAll
+      - /blog/website/getNavigation
       - /comment/blogComment/commentsByArticleId
       - /comment/blogComment/save
       - /comment/blogCommentReplay/save

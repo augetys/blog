@@ -12,7 +12,7 @@ public class CommonConstant {
     /**
      * 用户默认头像
      */
-    public static final String USERAVATAR = "https://photo.choot.top/42e47b8dfcd943ae95da59e1c45bc8d3";
+    public static final String USERAVATAR = "https://photo.choot.top/icon.jpg";
 
     /**
      * 七牛云图片bucket

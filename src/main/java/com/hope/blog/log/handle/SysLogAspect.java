@@ -21,7 +21,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -40,10 +40,10 @@ import java.util.Map;
 public class SysLogAspect {
 
 
-    @Autowired
+    @Resource
     private SysLogHandle sysLogHandle;
 
-    @Autowired
+    @Resource
     private SysExceptionLogMapper sysExceptionLogMapper;
 
     /**

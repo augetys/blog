@@ -10,7 +10,7 @@ import com.hope.blog.sys.service.SysDictDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -27,10 +27,10 @@ import java.util.List;
 @Transactional
 public class SysDictDetailServiceImpl extends ServiceImpl<SysDictDetailMapper, SysDictDetail> implements SysDictDetailService {
 
-    @Autowired
+    @Resource
     private SysDictDetailMapper sysDictDetailMapper;
 
-    @Autowired
+    @Resource
     private SysDictMapper sysDictMapper;
 
     @Override

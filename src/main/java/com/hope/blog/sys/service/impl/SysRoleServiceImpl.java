@@ -13,7 +13,7 @@ import com.hope.blog.sys.model.SysRoleMenus;
 import com.hope.blog.sys.service.SysRoleMenusService;
 import com.hope.blog.sys.service.SysRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -33,23 +33,24 @@ import java.util.List;
 @Transactional
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
-    @Autowired
+    @Resource
     private SysRoleMenusService sysRoleMenusService;
 
-    @Autowired
+    @Resource
     private SysRoleMenusMapper sysRoleMenusMapper;
 
-    @Autowired
+    @Resource
     private SysRoleMapper sysRoleMapper;
 
     @Override
     public IPage<SysRole> findListByPage(RoleSearchRequestDto roleSearchRequestDto) {
         QueryWrapper<SysRole> queryWrapper = new QueryWrapper<>();
-        //构建条件
+        // 构建条件
         String name = roleSearchRequestDto.getName();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
         }
+        queryWrapper.orderByDesc("create_time");
         return sysRoleMapper.selectPage(new Page<>(roleSearchRequestDto.getPageNum(), roleSearchRequestDto.getPageSize()), queryWrapper);
     }
 

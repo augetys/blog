@@ -8,7 +8,7 @@ import com.hope.blog.blog.model.BlogCategory;
 import com.hope.blog.blog.mapper.BlogCategoryMapper;
 import com.hope.blog.blog.service.BlogCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -27,13 +27,13 @@ import java.util.List;
 @Transactional
 public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, BlogCategory> implements BlogCategoryService {
 
-    @Autowired
+    @Resource
     private BlogCategoryMapper blogCategoryMapper;
 
     @Override
     public IPage<BlogCategory> findListByPage(BlogCategorySearchRequestDto blogCategorySearchRequestDto) {
         QueryWrapper<BlogCategory> queryWrapper = new QueryWrapper<>();
-        //构建条件
+        // 构建条件
         String name = blogCategorySearchRequestDto.getName();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
@@ -45,7 +45,7 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
     @Override
     public List<BlogCategory> findAll(BlogCategorySearchRequestDto blogCategorySearchRequestDto) {
         QueryWrapper<BlogCategory> queryWrapper = new QueryWrapper<>();
-        //构建条件
+        // 构建条件
         String name = blogCategorySearchRequestDto.getName();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
@@ -56,7 +56,7 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
     @Override
     public BlogCategory findById(String id) {
         QueryWrapper<BlogCategory> queryWrapper = new QueryWrapper<>();
-        //构建条件
+        // 构建条件
         if (!StringUtils.isEmpty(id)) {
             queryWrapper.eq("id", id);
         }

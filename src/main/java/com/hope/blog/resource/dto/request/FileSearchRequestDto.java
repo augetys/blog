@@ -13,6 +13,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileSearchRequestDto extends PageInfo {
-    @ApiModelProperty(value = "文件备注名")
+    @ApiModelProperty(value = "文件名")
+    private String fileKey;
+
+    @ApiModelProperty(value = "bucket名称")
+    private String bucket;
+
+    @ApiModelProperty(value = "本地文件名")
     private String realName;
 }

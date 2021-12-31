@@ -9,7 +9,7 @@ import com.hope.blog.blog.model.BlogTag;
 import com.hope.blog.blog.mapper.BlogTagMapper;
 import com.hope.blog.blog.service.BlogTagService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -29,13 +29,13 @@ import java.util.List;
 @Transactional
 public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> implements BlogTagService {
 
-    @Autowired
+    @Resource
     private BlogTagMapper blogTagMapper;
 
     @Override
     public IPage<BlogTag> findListByPage(BlogTagSearchRequestDto blogTagSearchRequestDto) {
         QueryWrapper<BlogTag> queryWrapper = new QueryWrapper<>();
-        //构建条件
+        // 构建条件
         String name = blogTagSearchRequestDto.getName();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
@@ -47,7 +47,7 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
     @Override
     public List<BlogTag> findAll(BlogTagSearchRequestDto blogTagSearchRequestDto) {
         QueryWrapper<BlogTag> queryWrapper = new QueryWrapper<>();
-        //构建条件
+        // 构建条件
         String name = blogTagSearchRequestDto.getName();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);

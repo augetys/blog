@@ -8,7 +8,7 @@ import com.hope.blog.blog.model.BlogLoop;
 import com.hope.blog.blog.mapper.BlogLoopMapper;
 import com.hope.blog.blog.service.BlogLoopService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -27,7 +27,7 @@ import java.util.List;
 @Transactional
 public class BlogLoopServiceImpl extends ServiceImpl<BlogLoopMapper, BlogLoop> implements BlogLoopService {
 
-    @Autowired
+    @Resource
     private BlogLoopMapper blogLoopMapper;
 
     @Override
@@ -36,6 +36,7 @@ public class BlogLoopServiceImpl extends ServiceImpl<BlogLoopMapper, BlogLoop> i
         if (!StringUtils.isEmpty(blogLoopSearchRequestDto.getTitle())) {
             queryWrapper.like("title", blogLoopSearchRequestDto.getTitle());
         }
+        queryWrapper.orderByDesc("create_time");
         return blogLoopMapper.selectPage(new Page<>(blogLoopSearchRequestDto.getPageNum(), blogLoopSearchRequestDto.getPageSize()), queryWrapper);
     }
 

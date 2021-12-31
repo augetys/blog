@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hope.blog.blog.mapper.BlogWebsiteMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hope.blog.blog.model.BlogWebsite">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="url" property="url" />
+        <result column="category" property="category" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, url, category, create_time, create_by, update_time, update_by
+    </sql>
+
+    <select id="commonList" resultType="com.hope.blog.blog.model.BlogWebsite">
+        select <include refid="Base_Column_List"></include> from blog_website where category=1
+    </select>
+
+    <select id="studyList" resultType="com.hope.blog.blog.model.BlogWebsite">
+        select <include refid="Base_Column_List"></include> from blog_website where category=2
+    </select>
+
+    <select id="sourceList" resultType="com.hope.blog.blog.model.BlogWebsite">
+        select <include refid="Base_Column_List"></include> from blog_website where category=3
+    </select>
+
+    <select id="videoList" resultType="com.hope.blog.blog.model.BlogWebsite">
+        select <include refid="Base_Column_List"></include> from blog_website where category=4
+    </select>
+
+</mapper>

@@ -62,9 +62,6 @@ class BlogApplicationTests {
     }
 
     /**
-     * https://blog.csdn.net/qq_39140300/article/details/110480214
-     * https://blog.csdn.net/weixin_43549350/article/details/116306804?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link
-     * https://www.cnblogs.com/zyh-2017/p/12781440.html
      * spring data elasticsearch 方式
      *
      * @throws Exception
@@ -83,6 +80,7 @@ class BlogApplicationTests {
                 .withPageable(PageRequest.of(page, pageSize));
         //查询结果
         NativeSearchQuery searchQuery = queryBuilder.build();
+        log.info("DSL:{}",searchQuery.getQuery().toString());
         // 执行搜索，获取结果c
         SearchHits<BlogArticle> blogArticleSearchHits = elasticsearchRestTemplate.search(searchQuery, BlogArticle.class);
         System.out.println(blogArticleSearchHits.getTotalHits());
@@ -133,7 +131,7 @@ class BlogApplicationTests {
         // 1.创建并设置SearchSourceBuilder对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         // 查询条件--->生成DSL查询语句
-        searchSourceBuilder.query(QueryBuilders.matchQuery("title", "测试"));
+        searchSourceBuilder.query(QueryBuilders.multiMatchQuery("部署", "title","content","summary"));
         // 第几页
         searchSourceBuilder.from(0);
         // 每页多少条数据
@@ -152,7 +150,7 @@ class BlogApplicationTests {
         // 设置SearchSourceBuilder查询属性
         searchRequest.source(searchSourceBuilder);
         // 打印DSL
-        log.info("searchSourceBuilder:{}", searchSourceBuilder.toString());
+        log.info("DSL:{}", searchSourceBuilder.toString());
         // 3.查询
         SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         System.out.println(searchResponse.toString());
@@ -162,6 +160,7 @@ class BlogApplicationTests {
     public void setMail() {
         MailUtil.send("激活账号", "hahahahha", "1181881941@qq.com" );
     }
+
 }
 
 

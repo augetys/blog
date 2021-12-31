@@ -9,12 +9,13 @@ import com.hope.blog.blog.service.BlogArticleService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.log.handle.OperationLog;
 import com.hope.blog.utils.MarkdownUtil;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.validation.Valid;
 @RequestMapping("/blog/article")
 public class BlogArticleController {
 
-    @Autowired
+    @Resource
     private BlogArticleService iBlogArticleService;
 
     /**
@@ -66,6 +67,7 @@ public class BlogArticleController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
+    @OperationLog(value = "新增文章")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid  BlogArticle entity) {
         boolean success = iBlogArticleService.saveOrUpdate(entity);
         if (success) {
@@ -79,6 +81,7 @@ public class BlogArticleController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
+    @OperationLog(value = "删除文章（物理删除）")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iBlogArticleService.removeById(id);
         if (success) {
@@ -92,6 +95,7 @@ public class BlogArticleController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
+    @OperationLog(value = "修改文章")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid BlogArticle entity) {
         boolean success = iBlogArticleService.updateById(entity);
         if (success) {

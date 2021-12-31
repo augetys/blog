@@ -7,11 +7,12 @@ import com.hope.blog.blog.service.BlogNavService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.log.handle.OperationLog;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +33,7 @@ import java.util.List;
 @RequestMapping("/blog/nav")
 public class BlogNavController {
 
-    @Autowired
+    @Resource
     private BlogNavService iBlogNavService;
 
     /**
@@ -72,6 +73,7 @@ public class BlogNavController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
+    @OperationLog(value = "新增导航")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid BlogNav entity) {
         boolean success = iBlogNavService.saveOrUpdate(entity);
         if (success) {
@@ -85,6 +87,7 @@ public class BlogNavController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
+    @OperationLog(value = "删除导航")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iBlogNavService.removeById(id);
         if (success) {
@@ -98,6 +101,7 @@ public class BlogNavController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
+    @OperationLog(value = "修改导航")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid BlogNav entity) {
         boolean success = iBlogNavService.updateById(entity);
         if (success) {

@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.utils.DateUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -29,7 +29,7 @@ import java.util.List;
 @Transactional
 public class SysExceptionLogServiceImpl extends ServiceImpl<SysExceptionLogMapper, SysExceptionLog> implements SysExceptionLogService {
 
-    @Autowired
+    @Resource
     private SysExceptionLogMapper sysExceptionLogMapper;
 
     @Override

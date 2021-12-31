@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHit;
@@ -50,14 +50,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogArticle> implements BlogArticleService {
 
-    @Autowired
+    @Resource
     private BlogArticleMapper blogArticleMapper;
-    @Autowired
+    @Resource
     private SysUserService sysUserService;
-    @Autowired
+    @Resource
     private BlogCategoryService blogCategoryService;
 
-    @Autowired
+    @Resource
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @Override
@@ -78,7 +78,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getCreateTime())) {
             queryWrapper.apply("date_format(create_time,'%Y-%m-%d') = '" + DateUtil.format(blogArticleSearchRequestDto.getCreateTime(), DateUtil.DATE_FORMAT_DAY) + "'");
         }
-
+        queryWrapper.orderByDesc("create_time");
         Page<BlogArticle> page = new Page<>();
         page.setCurrent(blogArticleSearchRequestDto.getPageNum());
         page.setSize(blogArticleSearchRequestDto.getPageSize());
@@ -90,7 +90,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(
                     item -> {
-                        item.setAuthor(sysUserService.getById(item.getCreateBy()).getUsername());
+                        item.setAuthor(item.getIsOriginal() == 1 ? sysUserService.getById(item.getCreateBy()).getUsername() : item.getArticleAuthor());
                         item.setCategoryName(blogCategoryService.getById(item.getCategoryId()).getName());
                         item.setCategoryIcon(blogCategoryService.getById(item.getCategoryId()).getIcon());
                     }
@@ -116,30 +116,22 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         // int page = 0;
         // int pageSize = 3;
         // 添加基本的分词查询
-        queryBuilder.withQuery(QueryBuilders.multiMatchQuery(blogArticleSearchRequestDto.getKeyword(), "title", "content"))
+        queryBuilder.withQuery(QueryBuilders.multiMatchQuery(blogArticleSearchRequestDto.getKeyword(), "title", "content", "summary"))
                 .withSort(SortBuilders.fieldSort("createTime").order(SortOrder.DESC))
                 .withPageable(PageRequest.of(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize()));
-        //查询结果
+        // 查询结果
         NativeSearchQuery searchQuery = queryBuilder.build();
-        // 执行搜索，获取结果c
-        SearchHits<BlogArticle> blogArticleSearchHits = elasticsearchRestTemplate.search(searchQuery, BlogArticle.class);
-        List<SearchHit<BlogArticle>> searchHits = blogArticleSearchHits.getSearchHits();
-        List<BlogArticle> results = new ArrayList<>();
+        // 执行搜索，获取结果
+        SearchHits<BlogArticleListResponseDto> blogArticleSearchHits = elasticsearchRestTemplate.search(searchQuery, BlogArticleListResponseDto.class);
+        List<SearchHit<BlogArticleListResponseDto>> searchHits = blogArticleSearchHits.getSearchHits();
+        List<BlogArticleListResponseDto> results = new ArrayList<>();
         searchHits.forEach(
                 item -> {
                     results.add(item.getContent());
                 }
         );
-        Page<BlogArticle> blogArticlePage = new Page<>();
-        blogArticlePage.setCurrent(blogArticleSearchRequestDto.getPageNum());
-        blogArticlePage.setSize(blogArticleSearchRequestDto.getPageSize());
-        IPage<BlogArticle> pageList = this.page(blogArticlePage);
-        pageList.setRecords(results);
-        pageList.setTotal(blogArticleSearchHits.getTotalHits());
-        IPage<BlogArticleListResponseDto> convert = pageList.convert(BlogArticle -> CopyUtil.copy(BlogArticle, BlogArticleListResponseDto.class));
-        List<BlogArticleListResponseDto> records = convert.getRecords();
-        if (!CollectionUtils.isEmpty(records)) {
-            records.forEach(
+        if (!CollectionUtils.isEmpty(results)) {
+            results.forEach(
                     item -> {
                         item.setAuthor(sysUserService.getById(item.getCreateBy()).getUsername());
                         item.setCategoryName(blogCategoryService.getById(item.getCategoryId()).getName());
@@ -147,6 +139,11 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
                     }
             );
         }
-         return convert;
+        IPage<BlogArticleListResponseDto> page = new Page<>();
+        page.setRecords(results);
+        page.setTotal(blogArticleSearchHits.getTotalHits());
+        page.setSize(blogArticleSearchRequestDto.getPageSize());
+        page.setPages(blogArticleSearchRequestDto.getPageNum());
+        return page;
     }
 }

@@ -7,11 +7,12 @@ import com.hope.blog.blog.service.BlogCategoryService;
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.api.CommonResult;
 import com.hope.blog.common.api.ResultCode;
+import com.hope.blog.log.handle.OperationLog;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +34,7 @@ import javax.validation.Valid;
 @RequestMapping("/blog/category")
 public class BlogCategoryController {
 
-    @Autowired
+    @Resource
     private BlogCategoryService iBlogCategoryService;
 
     /**
@@ -72,6 +73,7 @@ public class BlogCategoryController {
      */
     @ApiOperation(value = "新增数据")
     @PostMapping(value = "/save")
+    @OperationLog(value = "新增分类")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid BlogCategory entity) {
         boolean success = iBlogCategoryService.saveOrUpdate(entity);
         if (success) {
@@ -85,6 +87,7 @@ public class BlogCategoryController {
      */
     @ApiOperation(value = "删除单条记录")
     @GetMapping(value = "/delete/{id}")
+    @OperationLog(value = "删除分类（物理删除）")
     public CommonResult<ResultCode> delete(@PathVariable String id) {
         boolean success = iBlogCategoryService.removeById(id);
         if (success) {
@@ -98,6 +101,7 @@ public class BlogCategoryController {
      */
     @ApiOperation(value = "修改单条记录")
     @PostMapping(value = "/update")
+    @OperationLog(value = "修改分类")
     public CommonResult<ResultCode> update(@ApiParam @RequestBody @Valid BlogCategory entity) {
         boolean success = iBlogCategoryService.updateById(entity);
         if (success) {

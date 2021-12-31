@@ -16,6 +16,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 博客文章评论表
@@ -35,18 +38,22 @@ public class BlogComment implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
+    @NotBlank(message = "评论内容不能为空")
     @ApiModelProperty(value = "评论内容")
     private String content;
 
     @ApiModelProperty(value = "评论用户")
     private String userId;
 
+    @NotBlank(message = "用户昵称不能为空")
     @ApiModelProperty(value = "评论用户昵称")
     private String nickName;
 
     @ApiModelProperty(value = "评论用户头像")
     private String userAvatar;
 
+    @Email
+    @NotBlank(message = "邮箱不能为空")
     @ApiModelProperty(value = "邮箱")
     private String mail;
 
@@ -57,20 +64,6 @@ public class BlogComment implements Serializable {
     private String articleId;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
-
-    @ApiModelProperty(value = "创建人")
-    @TableField(fill = FieldFill.INSERT)
-    private String createBy;
-
-    @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.UPDATE)
-    private Date updateTime;
-
-    @ApiModelProperty(value = "修改人")
-    @TableField(fill = FieldFill.UPDATE)
-    private String updateBy;
-
 
 }

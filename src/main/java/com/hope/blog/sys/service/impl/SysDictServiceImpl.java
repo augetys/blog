@@ -14,7 +14,7 @@ import com.hope.blog.sys.service.SysDictService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -34,13 +34,13 @@ import java.util.Map;
 @Transactional
 public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> implements SysDictService {
 
-    @Autowired
+    @Resource
     private SysDictMapper sysDictMapper;
 
-    @Autowired
+    @Resource
     private SysDictDetailMapper sysDictDetailMapper;
 
-    @Autowired
+    @Resource
     private SysDictDetailService sysDictDetailService;
 
     @Override
@@ -49,6 +49,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         if (!StringUtils.isEmpty(sysDictSearchRequestDto.getName())) {
             queryWrapper.like("name", sysDictSearchRequestDto.getName());
         }
+        queryWrapper.orderByDesc("create_time");
         return sysDictMapper.selectPage(new Page<>(sysDictSearchRequestDto.getPageNum(), sysDictSearchRequestDto.getPageSize()), queryWrapper);
     }
 

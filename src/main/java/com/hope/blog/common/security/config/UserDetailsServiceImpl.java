@@ -2,7 +2,7 @@ package com.hope.blog.common.security.config;
 
 import com.hope.blog.sys.model.SysUser;
 import com.hope.blog.sys.service.SysUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private SysUserService sysUserService;
 
     @Override

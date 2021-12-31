@@ -13,14 +13,11 @@
         <result column="like_num" property="likeNum" />
         <result column="article_id" property="articleId" />
         <result column="create_time" property="createTime"/>
-        <result column="create_by" property="createBy"/>
-        <result column="update_time" property="updateTime"/>
-        <result column="update_by" property="updateBy"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, content, user_id, nick_name, user_avatar, mail, like_num, article_id, create_time, create_by, update_time, update_by
+        id, content, user_id, nick_name, user_avatar, mail, like_num, article_id, create_time
     </sql>
 
 </mapper>

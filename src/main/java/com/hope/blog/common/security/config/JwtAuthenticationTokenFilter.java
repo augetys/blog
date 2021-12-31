@@ -2,7 +2,7 @@ package com.hope.blog.common.security.config;
 
 import com.hope.blog.utils.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,10 +30,10 @@ public class JwtAuthenticationTokenFilter extends BasicAuthenticationFilter {
     @Value("${jwt.tokenPrefix}")
     private String tokenPrefix;
 
-    @Autowired
+    @Resource
     private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
+    @Resource
     private UserDetailsService userDetailsService;
 
     public JwtAuthenticationTokenFilter(AuthenticationManager authenticationManager) {

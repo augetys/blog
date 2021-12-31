@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,10 +40,10 @@ import java.util.List;
 @RequestMapping("/sys/user")
 public class SysUserController {
 
-    @Autowired
+    @Resource
     private SysUserService iSysUserService;
 
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
 
     /**
@@ -73,8 +73,11 @@ public class SysUserController {
     @PostMapping(value = "/create")
     @OperationLog(value = "新增用户")
     public CommonResult<ResultCode> add(@ApiParam @RequestBody @Valid SysUser sysUser) {
+        // 默认头像
         String encodePassword = passwordEncoder.encode(CommonConstant.PASSWORD);
         sysUser.setPassword(encodePassword);
+        // 默认头像
+        sysUser.setIcon(CommonConstant.USERAVATAR);
         boolean success = iSysUserService.saveOrUpdate(sysUser);
         if (success) {
             return CommonResult.success();

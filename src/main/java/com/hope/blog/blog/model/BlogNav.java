@@ -59,6 +59,10 @@ public class BlogNav implements Serializable {
     @ApiModelProperty(value = "跳转路由")
     private String path;
 
+    @NotBlank(message = "是否打开新窗口不能为空")
+    @ApiModelProperty(value = "是否打开新窗口")
+    private String target;
+
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

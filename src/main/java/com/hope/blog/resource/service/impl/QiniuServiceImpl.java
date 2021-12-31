@@ -13,7 +13,7 @@ import com.hope.blog.utils.FileUtil;
 import com.hope.blog.utils.QiniuUtil;
 import com.qiniu.storage.model.FileInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -37,7 +37,7 @@ import java.util.List;
 @Slf4j
 public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuContent> implements QiniuService {
 
-    @Autowired
+    @Resource
     private QiniuContentMapper qiniuContentMapper;
 
     @Override
@@ -45,7 +45,7 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
         FileInfo fileInfo = QiniuUtil.uploadFile(file, bucket);
         QiniuContent content = qiniuContentMapper.findByKey(fileInfo.key);
         if (content == null) {
-            //存入数据库
+            // 存入数据库
             QiniuContent qiniuContent = new QiniuContent();
             qiniuContent.setSuffix(FileUtil.getExtensionName(fileInfo.key));
             qiniuContent.setName(name);
@@ -78,10 +78,14 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
     @Override
     public IPage<QiniuContent> findListByPage(FileSearchRequestDto fileSearchRequestDto) {
         QueryWrapper<QiniuContent> queryWrapper = new QueryWrapper<>();
-        //构建条件
-        String name = fileSearchRequestDto.getRealName();
-        if (!StringUtils.isEmpty(name)) {
-            queryWrapper.like("real_name", name);
+        // 构建条件
+        String fileKey = fileSearchRequestDto.getFileKey();
+        String bucket = fileSearchRequestDto.getBucket();
+        if (!StringUtils.isEmpty(fileKey)) {
+            queryWrapper.like("file_key", fileKey);
+        }
+        if (!StringUtils.isEmpty(bucket)) {
+            queryWrapper.eq("bucket", bucket);
         }
         queryWrapper.lambda().orderByAsc(QiniuContent::getCreateTime);
         Page<QiniuContent> page = new Page<>();

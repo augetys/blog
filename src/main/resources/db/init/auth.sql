@@ -20,7 +20,8 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('da6d966d37fcb819546064424a8bdd9f', 'admin', '$2a$10$KJMluGRhQ2ZrOzXck9t5M.k93Y30h6UuX0obPDVbZZ9Zsk/LMX5zi', 'https://photo.choot.top/42e47b8dfcd943ae95da59e1c45bc8d3', '1181881941@qq.com' , '小甜瓜', NULL, '2021-05-13 14:35:29', NULL, 1,0);
+INSERT INTO `sys_user` VALUES ('da6d966d37fcb819546064424a8bdd9f', 'Jojo', '$2a$10$KJMluGRhQ2ZrOzXck9t5M.k93Y30h6UuX0obPDVbZZ9Zsk/LMX5zi', 'https://photo.choot.top/icon.jpg', '1181881941@qq.com' , '小甜瓜', NULL, '2021-05-13 14:35:29', NULL, 1,0);
+INSERT INTO `sys_user` VALUES ('e7e6e22f5046cd5bd10243b8066db437', 'Yoyo', '$2a$10$7JET9htfIystcOiiroXRmuiTx.L9QEdzddofDFOCSr40frbOaS43W', 'https://photo.choot.top/icon.jpg', '1181881941@qq.com', '小甜瓜', '普通用户', '2021-12-29 17:34:14', NULL, 1, 0);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -41,6 +42,7 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('e8a1d847a93cf5cc541731be3c12fd87', '超级管理员','超级管理员', '2021-05-14 14:10:38', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:10:38', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role` VALUES ('2ee3ea41f9b6fb03c896c55c20896808', '普通用户', '普通用户', '2021-12-29 15:52:50', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_menus
@@ -72,6 +74,9 @@ INSERT INTO `sys_menus` VALUES ('4', '2', '分类管理', '/blog/category', 'blo
 INSERT INTO `sys_menus` VALUES ('5', '2', '标签管理', '/blog/tag', 'blog-tag', 50, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_menus` VALUES ('7', '2', '导航栏管理', '/blog/nav', 'blog-nav', 31, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_menus` VALUES ('8', '2', '轮播图管理', '/blog/loop', 'blog-loop', 32, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('9', '2', '词句管理', '/blog/soul', 'blog-soul', 33, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('101', '2', '相册管理', '/blog/photo', 'blog-photo', 34, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_menus` VALUES ('102', '2', '网址导航', '/blog/website', 'blog-website', 35, null, '2021-06-16 16:25:43', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-16 16:25:47', 'da6d966d37fcb819546064424a8bdd9f');
 
 INSERT INTO `sys_menus` VALUES ('10', '0', '系统工具', '/tool', 'tool', 70, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_menus` VALUES ('11', '10', '邮件', '/tool/email', 'tool-email', 60, null, '2021-05-18 11:32:02', 'da6d966d37fcb819546064424a8bdd9f', '2021-06-15 19:55:40', 'da6d966d37fcb819546064424a8bdd9f');
@@ -114,6 +119,7 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', 'da6d966d37fcb819546064424a8bdd9f', 'e8a1d847a93cf5cc541731be3c12fd87', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_user_role` VALUES ('dea84f37feafdc18efed799779d7e939', 'e7e6e22f5046cd5bd10243b8066db437', '2ee3ea41f9b6fb03c896c55c20896808', '2021-12-29 17:35:58', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role_menus
@@ -134,28 +140,41 @@ CREATE TABLE `sys_role_menus` (
 -- Records of sys_role_menus
 -- ----------------------------
 INSERT INTO `sys_role_menus` VALUES ('1', 'e8a1d847a93cf5cc541731be3c12fd87', '1', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('2', 'e8a1d847a93cf5cc541731be3c12fd87', '2', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('3', 'e8a1d847a93cf5cc541731be3c12fd87', '3', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('4', 'e8a1d847a93cf5cc541731be3c12fd87', '4', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('5', 'e8a1d847a93cf5cc541731be3c12fd87', '5', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('24', 'e8a1d847a93cf5cc541731be3c12fd87', '7', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('25', 'e8a1d847a93cf5cc541731be3c12fd87', '8', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('7', 'e8a1d847a93cf5cc541731be3c12fd87', '10', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('8', 'e8a1d847a93cf5cc541731be3c12fd87', '11', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_role_menus` VALUES ('9', 'e8a1d847a93cf5cc541731be3c12fd87', '20', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('10', 'e8a1d847a93cf5cc541731be3c12fd87', '21', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('11', 'e8a1d847a93cf5cc541731be3c12fd87', '22', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('12', 'e8a1d847a93cf5cc541731be3c12fd87', '30', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('13', 'e8a1d847a93cf5cc541731be3c12fd87', '31', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('14', 'e8a1d847a93cf5cc541731be3c12fd87', '32', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('143fcf9a0eac899aeacd4252d5f9db81', '2ee3ea41f9b6fb03c896c55c20896808', '102', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 INSERT INTO `sys_role_menus` VALUES ('15', 'e8a1d847a93cf5cc541731be3c12fd87', '33', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('16', 'e8a1d847a93cf5cc541731be3c12fd87', '34', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('17', 'e8a1d847a93cf5cc541731be3c12fd87', '40', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('18', 'e8a1d847a93cf5cc541731be3c12fd87', '41', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('19', 'e8a1d847a93cf5cc541731be3c12fd87', '42', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('2', 'e8a1d847a93cf5cc541731be3c12fd87', '2', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('20', 'e8a1d847a93cf5cc541731be3c12fd87', '43', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('21', 'e8a1d847a93cf5cc541731be3c12fd87', '44', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_role_menus` VALUES ('22', 'e8a1d847a93cf5cc541731be3c12fd87', '45', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('24', 'e8a1d847a93cf5cc541731be3c12fd87', '7', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('25', 'e8a1d847a93cf5cc541731be3c12fd87', '8', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('26', 'e8a1d847a93cf5cc541731be3c12fd87', '9', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('27', 'e8a1d847a93cf5cc541731be3c12fd87', '101', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('28', 'e8a1d847a93cf5cc541731be3c12fd87', '102', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('3', 'e8a1d847a93cf5cc541731be3c12fd87', '3', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('3887c6b88a1f0cf10624500cc3b4d3aa', '2ee3ea41f9b6fb03c896c55c20896808', '7', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('4', 'e8a1d847a93cf5cc541731be3c12fd87', '4', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('5', 'e8a1d847a93cf5cc541731be3c12fd87', '5', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('57c788d782dd5df859cb7e203bffe561', '2ee3ea41f9b6fb03c896c55c20896808', '8', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('601ee8cc73983869d9c85542e53cd0fd', '2ee3ea41f9b6fb03c896c55c20896808', '2', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('7', 'e8a1d847a93cf5cc541731be3c12fd87', '10', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('8', 'e8a1d847a93cf5cc541731be3c12fd87', '11', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('9', 'e8a1d847a93cf5cc541731be3c12fd87', '20', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f', '2021-05-14 14:11:08', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_role_menus` VALUES ('a6c165d464b909c4cd3b7c2c949151a6', '2ee3ea41f9b6fb03c896c55c20896808', '4', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('a8cce2cf3684e4f6a064b0fa9d06ae6d', '2ee3ea41f9b6fb03c896c55c20896808', '5', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('b365a437dc34bef30a2fd0948b1c32d4', '2ee3ea41f9b6fb03c896c55c20896808', '1', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('b46638731411041a68ef330cbebe027e', '2ee3ea41f9b6fb03c896c55c20896808', '3', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('d83d792b3fa5fa98472490873e394e47', '2ee3ea41f9b6fb03c896c55c20896808', '9', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_role_menus` VALUES ('f8d25d8501fec7cb0de771dd43f5a63e', '2ee3ea41f9b6fb03c896c55c20896808', '101', '2021-12-29 15:53:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_menus
@@ -343,10 +362,10 @@ CREATE TABLE `sys_quartz_job` (
 -- ----------------------------
 -- Records of sys_quartz_job
 -- ----------------------------
-INSERT INTO `sys_quartz_job` VALUES (1, 'testTask', '0/5 * * * * ?', 1, '测试1', 'run1', 'test', '带参测试，多参使用json', 'admin', '1181881941@qq.com', NULL, 1, '2019-08-22 14:08:29', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 13:58:33', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_quartz_job` VALUES (2, 'testTask', '0/5 * * * * ?', 1, '测试2', 'run', '', '不带参测试', 'admin', '1181881941@qq.com', 3, 1, '2019-09-26 16:44:39', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 14:48:12', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_quartz_job` VALUES (3, 'testTask', '0/5 * * * * ?', 1, '测试3', 'run2', '', '测试3', 'admin', '1181881941@qq.com', NULL, 1, '2020-05-05 20:35:41', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-05 20:36:07', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `sys_quartz_job` VALUES (4, 'testTask', '0 0 0 1/1 * ? ', 0, '同步文章到ES', 'run3', NULL, '同步文章到ES', 'admin', '1181881941@qq.com', NULL, 1, '2021-12-16 15:18:58', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_quartz_job` VALUES (1, 'testTask', '0/5 * * * * ?', 1, '测试1', 'run1', 'test', '带参测试，多参使用json', 'Jojo', '1181881941@qq.com', NULL, 1, '2019-08-22 14:08:29', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 13:58:33', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_quartz_job` VALUES (2, 'testTask', '0/5 * * * * ?', 1, '测试2', 'run', '', '不带参测试', 'Jojo', '1181881941@qq.com', 3, 1, '2019-09-26 16:44:39', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-24 14:48:12', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_quartz_job` VALUES (3, 'testTask', '0/5 * * * * ?', 1, '测试3', 'run2', '', '测试3', 'Jojo', '1181881941@qq.com', NULL, 1, '2020-05-05 20:35:41', 'da6d966d37fcb819546064424a8bdd9f', '2020-05-05 20:36:07', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_quartz_job` VALUES (4, 'testTask', '0 0 12 * * ?', 0, '同步文章到ES', 'run3', NULL, '同步文章到ES', 'Jojo', '1181881941@qq.com', NULL, 1, '2021-12-16 15:18:58', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_quartz_log

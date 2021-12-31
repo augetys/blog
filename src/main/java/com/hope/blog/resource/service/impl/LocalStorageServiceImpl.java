@@ -13,7 +13,7 @@ import com.hope.blog.resource.service.LocalStorageService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.utils.FileUtil;
 import com.hope.blog.utils.LocalStorageUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -37,15 +37,15 @@ import java.util.List;
 @Transactional
 public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, LocalStorage> implements LocalStorageService {
 
-    @Autowired
+    @Resource
     private LocalStorageMapper localStorageMapper;
-    @Autowired
+    @Resource
     private FileProperties properties;
 
     @Override
     public IPage<LocalStorage> findListByPage(FileSearchRequestDto fileSearchRequestDto) {
         QueryWrapper<LocalStorage> queryWrapper = new QueryWrapper<>();
-        //构建条件
+        // 构建条件
         String name = fileSearchRequestDto.getRealName();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("real_name", name);
