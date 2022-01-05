@@ -4,13 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hope.blog.sys.dto.request.SysMenusSearchRequestDto;
+import com.hope.blog.sys.dto.request.UpdateSysMenusStatusRequestDto;
 import com.hope.blog.sys.dto.response.SysMenusTreeResponseDto;
 import com.hope.blog.sys.model.SysMenus;
 import com.hope.blog.sys.mapper.SysMenusMapper;
 import com.hope.blog.sys.service.SysMenusService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -46,7 +49,7 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
         if (!StringUtils.isEmpty(sysMenusSearchRequestDto.getLevel())) {
             queryWrapper.eq("level", sysMenusSearchRequestDto.getLevel());
         }
-        queryWrapper.lambda().orderByAsc(SysMenus::getSort);
+        queryWrapper.lambda().orderByDesc(SysMenus::getSort);
         return sysMenusMapper.selectPage(new Page<>(sysMenusSearchRequestDto.getPageNum(), sysMenusSearchRequestDto.getPageSize()), queryWrapper);
     }
 
@@ -55,8 +58,14 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
         List<SysMenus> menuList = list();
         // 先查出一级菜单，先查询对应的子菜单
         return menuList.stream()
-                .filter(menu -> menu.getParentId().equals("0")).sorted(Comparator.comparing(SysMenus::getSort))
+                .filter(menu -> menu.getParentId().equals("0"))
+                .sorted(Comparator.comparing(SysMenus::getSort))
                 .map(menu -> covertMenuNode(menu, menuList)).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean updateStatusRequest(UpdateSysMenusStatusRequestDto updateSysMenusStatusRequestDto) {
+        return sysMenusMapper.updateStatus(updateSysMenusStatusRequestDto) > 0;
     }
 
     /**
@@ -66,7 +75,8 @@ public class SysMenusServiceImpl extends ServiceImpl<SysMenusMapper, SysMenus> i
         SysMenusTreeResponseDto node = new SysMenusTreeResponseDto();
         BeanUtils.copyProperties(menu, node);
         List<SysMenusTreeResponseDto> children = menuList.stream()
-                .filter(subMenu -> subMenu.getParentId().equals(menu.getId())).sorted(Comparator.comparing(SysMenus::getSort))
+                .filter(subMenu -> subMenu.getParentId().equals(menu.getId()))
+                .sorted(Comparator.comparing(SysMenus::getSort))
                 .map(subMenu -> covertMenuNode(subMenu, menuList)).collect(Collectors.toList());
         node.setChildren(children);
         return node;

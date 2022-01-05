@@ -64,6 +64,9 @@ public class SysMenus implements Serializable {
     @ApiModelProperty(value = "菜单级别")
     private Integer level;
 
+    @ApiModelProperty(value = "是否展示")
+    private Integer isShow;
+
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

@@ -2,6 +2,8 @@ package com.hope.blog.sys.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.SysMenusSearchRequestDto;
+import com.hope.blog.sys.dto.request.UpdateSysMenusStatusRequestDto;
+import com.hope.blog.sys.dto.request.UpdateSysUserStatusRequestDto;
 import com.hope.blog.sys.dto.response.SysMenusTreeResponseDto;
 import com.hope.blog.sys.model.SysMenus;
 import com.hope.blog.sys.service.SysMenusService;
@@ -106,6 +108,20 @@ public class SysMenusController {
     public CommonResult<List<SysMenusTreeResponseDto>> treeList() {
         List<SysMenusTreeResponseDto> sysMenusTreeResponseDtos = sysMenusService.treeList();
         return CommonResult.success(sysMenusTreeResponseDtos);
+    }
+
+    /**
+     * 修改菜单状态
+     */
+    @ApiOperation(value = "修改菜单状态")
+    @PostMapping(value = "/updateStatus")
+    @OperationLog(value = "修改菜单状态")
+    public CommonResult<ResultCode> updateStatus(@ApiParam @RequestBody @Valid UpdateSysMenusStatusRequestDto updateSysMenusStatusRequestDto) {
+        boolean success = sysMenusService.updateStatusRequest(updateSysMenusStatusRequestDto);
+        if (success) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 }
 

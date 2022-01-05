@@ -45,6 +45,7 @@
         LEFT JOIN sys_user_role b ON a.role_id = b.role_id
         LEFT JOIN sys_menus c ON a.menu_id = c.id
         WHERE
+        c.is_show = 1 and
         b.user_id = #{userId}
     </select>
 

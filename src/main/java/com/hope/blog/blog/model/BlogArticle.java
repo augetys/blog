@@ -17,6 +17,7 @@ import lombok.*;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -41,7 +42,6 @@ public class BlogArticle implements Serializable {
     private Integer id;
 
     @NotBlank(message = "博客标题不能为空")
-
     @ApiModelProperty(value = "博客标题")
     private String title;
 

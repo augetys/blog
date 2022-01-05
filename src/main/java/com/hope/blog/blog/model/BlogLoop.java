@@ -17,6 +17,7 @@ import lombok.*;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -48,7 +49,7 @@ public class BlogLoop implements Serializable {
     @ApiModelProperty(value = "顺序")
     private Integer sort;
 
-    @NotBlank(message = "是否外链不能为空")
+    @NotNull(message = "是否外链不能为空")
     @ApiModelProperty(value = "是否外链 0 否 1 是")
     private Integer isLink;
 

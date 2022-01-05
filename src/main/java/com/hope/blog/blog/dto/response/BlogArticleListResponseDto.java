@@ -48,6 +48,9 @@ public class BlogArticleListResponseDto {
     @ApiModelProperty(value = "博客点击数")
     private Integer clickCount;
 
+    @ApiModelProperty(value = "博客评论数数")
+    private Integer commentCount;
+
     @ApiModelProperty(value = "是否原创（0:不是 1：是）")
     private Integer isOriginal;
 

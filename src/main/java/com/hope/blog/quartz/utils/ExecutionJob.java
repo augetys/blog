@@ -46,7 +46,6 @@ public class ExecutionJob extends QuartzJobBean {
     public void executeInternal(JobExecutionContext context) {
         JobDataMap mergedJobDataMap = context.getMergedJobDataMap();
         QuartzJob quartzJob = (QuartzJob) mergedJobDataMap.get(QuartzJob.JOB_KEY);
-        String userId = (String) mergedJobDataMap.get("userId");
         // 获取spring bean
         QuartzLogMapper quartzLogMapper = SpringContextHolder.getBean(QuartzLogMapper.class);
         QuartzJobService quartzJobService = SpringContextHolder.getBean(QuartzJobService.class);
@@ -56,7 +55,6 @@ public class ExecutionJob extends QuartzJobBean {
         quartzLog.setMethodName(quartzJob.getMethodName());
         quartzLog.setParams(quartzJob.getParams());
         quartzLog.setCreateTime(new Date());
-        quartzLog.setCreateBy(userId);
         long startTime = System.currentTimeMillis();
 
         quartzLog.setCronExpression(quartzJob.getCronExpression());
@@ -94,13 +92,11 @@ public class ExecutionJob extends QuartzJobBean {
                 //更新状态
                 quartzJobService.updateIsPause(JobUpdateStatusRequestDto.builder().id(quartzJob.getId()).isPause(1).build());
             }
-            if (quartzJob.getEmail() != null) {
+            if (!StringUtils.isEmpty(quartzJob.getEmail())) {
                 EmailContentService emailService = SpringContextHolder.getBean(EmailContentService.class);
                 // 邮箱报警
-                if (!StringUtils.isEmpty(quartzJob.getEmail())) {
-                    EmailSendRequestDto emailVo = taskAlarm(quartzJob, ThrowableUtil.getStackTrace(e));
-                    emailService.send(emailVo);
-                }
+                EmailSendRequestDto emailVo = taskAlarm(quartzJob, ThrowableUtil.getStackTrace(e));
+                emailService.send(emailVo);
             }
         } finally {
             quartzLogMapper.insert(quartzLog);
@@ -118,8 +114,9 @@ public class ExecutionJob extends QuartzJobBean {
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
         Template template = engine.getTemplate("templates/email/taskAlarm.vm");
         emailVo.setContent(template.render(data));
-        List<String> emails = Arrays.asList(quartzJob.getEmail().split("[,，]"));
-        emailVo.setTos(emails);
+        // 收件人
+        List<String> tos = Arrays.asList(quartzJob.getEmail().split("[,，]"));
+        emailVo.setTos(tos);
         return emailVo;
     }
 }

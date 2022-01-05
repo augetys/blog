@@ -39,13 +39,13 @@ public class SysExceptionLogServiceImpl extends ServiceImpl<SysExceptionLogMappe
             queryWrapper.like("operation", sysExceptionLogSearchRequestDto.getOperation());
         }
         if (!StringUtils.isEmpty(sysExceptionLogSearchRequestDto.getUserName())) {
-            queryWrapper.eq("user_name", sysExceptionLogSearchRequestDto.getUserName());
+            queryWrapper.like("user_name", sysExceptionLogSearchRequestDto.getUserName());
         }
         if (!StringUtils.isEmpty(sysExceptionLogSearchRequestDto.getCreateTime())) {
             List<Date> startTime = sysExceptionLogSearchRequestDto.getCreateTime();
             queryWrapper.between("create_time", DateUtil.format(startTime.get(0), DateUtil.DATE_FORMAT_SECOND), DateUtil.format(startTime.get(1), DateUtil.DATE_FORMAT_SECOND));
         }
-        queryWrapper.lambda().orderByAsc(SysExceptionLog::getCreateTime);
+        queryWrapper.lambda().orderByDesc(SysExceptionLog::getCreateTime);
         return sysExceptionLogMapper.selectPage(new Page<>(sysExceptionLogSearchRequestDto.getPageNum(), sysExceptionLogSearchRequestDto.getPageSize()), queryWrapper);
     }
 }

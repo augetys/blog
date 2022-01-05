@@ -39,13 +39,13 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
             queryWrapper.like("operation", sysLog.getOperation());
         }
         if (!StringUtils.isEmpty(sysLog.getUserName())) {
-            queryWrapper.eq("user_name", sysLog.getUserName());
+            queryWrapper.like("user_name", sysLog.getUserName());
         }
         if (!StringUtils.isEmpty(sysLog.getCreateTime())) {
             List<Date> startTime = sysLog.getCreateTime();
             queryWrapper.between("create_time", DateUtil.format(startTime.get(0), DateUtil.DATE_FORMAT_SECOND), DateUtil.format(startTime.get(1), DateUtil.DATE_FORMAT_SECOND));
         }
-        queryWrapper.lambda().orderByAsc(SysLog::getCreateTime);
+        queryWrapper.lambda().orderByDesc(SysLog::getCreateTime);
         return sysLogMapper.selectPage(new Page<>(sysLog.getPageNum(), sysLog.getPageSize()), queryWrapper);
     }
 }

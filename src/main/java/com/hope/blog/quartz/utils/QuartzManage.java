@@ -143,7 +143,7 @@ public class QuartzManage {
             JobDataMap dataMap = new JobDataMap();
             dataMap.put(QuartzJob.JOB_KEY, quartzJob);
             // 将userId放入JobDataMap，避免在异步任务中获取不到SecurityContextHolder上下文
-            dataMap.put("userId", SecurityUtil.getCurrentUser().getUid());
+            // dataMap.put("userId", SecurityUtil.getCurrentUser().getUid());
             JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJob.getId());
             scheduler.triggerJob(jobKey, dataMap);
         } catch (Exception e) {

@@ -64,7 +64,7 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
             records.forEach(
                     item -> {
                         QueryWrapper<BlogCommentReplay> replayQueryWrapper = new QueryWrapper<>();
-                        replayQueryWrapper.orderByAsc("create_time");
+                        replayQueryWrapper.orderByDesc("create_time");
                         replayQueryWrapper.eq("comment_id", item.getId());
                         item.setCommentReplayList(blogCommentReplayService.list(replayQueryWrapper));
                     }

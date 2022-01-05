@@ -62,7 +62,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
         if (!StringUtils.isEmpty(sysDictDetailSearchRequestDto.getLabel())) {
             queryWrapper.eq("label", sysDictDetailSearchRequestDto.getLabel());
         }
-        queryWrapper.lambda().orderByAsc(SysDictDetail::getSort);
+        queryWrapper.lambda().orderByDesc(SysDictDetail::getSort);
         return sysDictDetailMapper.selectList(queryWrapper);
     }
 

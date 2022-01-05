@@ -1,5 +1,6 @@
 package com.hope.blog.sys.mapper;
 
+import com.hope.blog.sys.dto.request.UpdateSysMenusStatusRequestDto;
 import com.hope.blog.sys.model.SysMenus;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SysMenusMapper extends BaseMapper<SysMenus> {
 
+    int updateStatus(UpdateSysMenusStatusRequestDto updateSysMenusStatusRequestDto);
 }

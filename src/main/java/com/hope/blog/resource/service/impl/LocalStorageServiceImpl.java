@@ -1,9 +1,11 @@
 package com.hope.blog.resource.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hope.blog.common.constant.CommonConstant;
 import com.hope.blog.common.exception.BusinessException;
 import com.hope.blog.resource.config.FileProperties;
 import com.hope.blog.resource.dto.request.FileSearchRequestDto;
@@ -13,7 +15,10 @@ import com.hope.blog.resource.service.LocalStorageService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.utils.FileUtil;
 import com.hope.blog.utils.LocalStorageUtil;
+
 import javax.annotation.Resource;
+
+import com.hope.blog.utils.SpringContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -21,7 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,7 +57,7 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("real_name", name);
         }
-        queryWrapper.lambda().orderByAsc(LocalStorage::getCreateTime);
+        queryWrapper.lambda().orderByDesc(LocalStorage::getCreateTime);
 
         Page<LocalStorage> page = new Page<>();
         page.setCurrent(fileSearchRequestDto.getPageNum());
@@ -68,7 +75,7 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
     @Override
     public LocalStorage uploadFile(MultipartFile multipartFile, String name) {
         // 检查文件大小
-        if (FileUtil.checkSize(properties.getMaxSize(), multipartFile.getSize())){
+        if (FileUtil.checkSize(properties.getMaxSize(), multipartFile.getSize())) {
             throw new BusinessException("文件超出大小！");
         }
         // 上传文件
@@ -76,12 +83,17 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
         if (ObjectUtil.isNull(file)) {
             throw new BusinessException("上传失败");
         }
+        Date today = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String date = format.format(today);
         String suffix = FileUtil.getExtensionName(multipartFile.getOriginalFilename());
         String type = FileUtil.getFileType(suffix);
         LocalStorage localStorage = new LocalStorage();
         localStorage.setName(StringUtils.isEmpty(name) ? file.getName() : name);
         localStorage.setRealName(multipartFile.getOriginalFilename());
         localStorage.setPath(file.getPath());
+        String activeProfile = SpringContextHolder.getActiveProfile();
+        localStorage.setUrl(activeProfile.equals("dev") ? file.getPath() : CommonConstant.WEBSITE + "/" + date + "/" + (StringUtils.isEmpty(name) ? file.getName() : name));
         localStorage.setSuffix(suffix);
         localStorage.setType(type);
         localStorage.setSize(FileUtil.getSize(multipartFile.getSize()));
@@ -98,7 +110,7 @@ public class LocalStorageServiceImpl extends ServiceImpl<LocalStorageMapper, Loc
         List<MultipartFile> multipartFileList = FileUtil.getMultipartFileList(request);
         multipartFileList.forEach(
                 item -> {
-                    localStorages.add(uploadFile(item,null));
+                    localStorages.add(uploadFile(item, null));
                 }
         );
         return localStorages;

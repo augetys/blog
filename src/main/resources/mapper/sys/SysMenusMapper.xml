@@ -32,4 +32,8 @@
         update_by
     </sql>
 
+    <update id="updateStatus">
+        update sys_menus set is_show=#{isShow} where id=#{id}
+    </update>
+
 </mapper>

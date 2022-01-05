@@ -54,7 +54,7 @@ public class BlogCommentController {
      */
     @ApiOperation(value = "根据文章id获取相关评论")
     @PostMapping(value = "/commentsByArticleId")
-    public CommonResult<CommonPage<BlogCommentResponse>> commentsByArticleId(@ApiParam @RequestBody BlogCommentQueryRequest blogCommentQueryRequest){
+    public CommonResult<CommonPage<BlogCommentResponse>> commentsByArticleId(@ApiParam @RequestBody @Valid BlogCommentQueryRequest blogCommentQueryRequest){
         IPage<BlogCommentResponse> list = iBlogCommentService.commentsByArticleId(blogCommentQueryRequest);
         return CommonResult.success(CommonPage.restPage(list));
     }

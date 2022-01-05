@@ -87,7 +87,7 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
         if (!StringUtils.isEmpty(bucket)) {
             queryWrapper.eq("bucket", bucket);
         }
-        queryWrapper.lambda().orderByAsc(QiniuContent::getCreateTime);
+        queryWrapper.lambda().orderByDesc(QiniuContent::getCreateTime);
         Page<QiniuContent> page = new Page<>();
         page.setCurrent(fileSearchRequestDto.getPageNum());
         page.setSize(fileSearchRequestDto.getPageSize());

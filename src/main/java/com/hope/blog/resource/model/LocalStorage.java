@@ -50,9 +50,13 @@ public class LocalStorage implements Serializable {
     @ApiModelProperty(value = "后缀")
     private String suffix;
 
-    @NotBlank(message = "路径不能为空")
-    @ApiModelProperty(value = "路径")
+    @NotBlank(message = "存储路径不能为空")
+    @ApiModelProperty(value = "存储路径")
     private String path;
+
+    @NotBlank(message = "访问路径不能为空")
+    @ApiModelProperty(value = "访问路径")
+    private String url;
 
     @ApiModelProperty(value = "类型")
     private String type;

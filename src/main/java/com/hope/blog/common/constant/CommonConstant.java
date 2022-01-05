@@ -15,6 +15,11 @@ public class CommonConstant {
     public static final String USERAVATAR = "https://photo.choot.top/icon.jpg";
 
     /**
+     * file域名
+     */
+    public static final String WEBSITE = "https://choot.top/file";
+
+    /**
      * 七牛云图片bucket
      */
     public static final String PHOTO = "hopelittle";

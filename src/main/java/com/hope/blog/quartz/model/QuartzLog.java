@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -46,7 +47,7 @@ public class QuartzLog implements Serializable {
     @ApiModelProperty(value = "异常详情", hidden = true)
     private String exceptionDetail;
 
-    @NotBlank(message = "执行耗时不能为空")
+    @NotNull(message = "执行耗时不能为空")
     @ApiModelProperty(value = "执行耗时", hidden = true)
     private Long time;
 

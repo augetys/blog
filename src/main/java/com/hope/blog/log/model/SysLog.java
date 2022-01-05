@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -80,6 +81,7 @@ public class SysLog implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
-    @ApiModelProperty(value = "方法请求花费的时间")
+    @NotNull(message = "请求耗时不能为空")
+    @ApiModelProperty(value = "请求耗时")
     private Long spendTime;
 }

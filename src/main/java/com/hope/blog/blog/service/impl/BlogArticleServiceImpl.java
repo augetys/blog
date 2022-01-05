@@ -10,6 +10,8 @@ import com.hope.blog.blog.mapper.BlogArticleMapper;
 import com.hope.blog.blog.service.BlogArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.blog.service.BlogCategoryService;
+import com.hope.blog.comment.model.BlogComment;
+import com.hope.blog.comment.service.BlogCommentService;
 import com.hope.blog.sys.service.SysUserService;
 import com.hope.blog.utils.CopyUtil;
 import com.hope.blog.utils.DateUtil;
@@ -56,6 +58,8 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     private SysUserService sysUserService;
     @Resource
     private BlogCategoryService blogCategoryService;
+    @Resource
+    private BlogCommentService blogCommentService;
 
     @Resource
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
@@ -87,12 +91,16 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         // convert方法中是函数式接口,BearUtil不能用
         IPage<BlogArticleListResponseDto> convert = pageList.convert(BlogArticle -> CopyUtil.copy(BlogArticle, BlogArticleListResponseDto.class));
         List<BlogArticleListResponseDto> list = convert.getRecords();
+
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(
                     item -> {
                         item.setAuthor(item.getIsOriginal() == 1 ? sysUserService.getById(item.getCreateBy()).getUsername() : item.getArticleAuthor());
                         item.setCategoryName(blogCategoryService.getById(item.getCategoryId()).getName());
                         item.setCategoryIcon(blogCategoryService.getById(item.getCategoryId()).getIcon());
+                        QueryWrapper<BlogComment> queryWrapper1=new QueryWrapper<>();
+                        queryWrapper1.eq("article_id",item.getId());
+                        item.setCommentCount(blogCommentService.count(queryWrapper1));
                     }
             );
             if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTagId())) {

@@ -22,7 +22,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.common.security.config.UserDetailsServiceImpl;
 import com.hope.blog.utils.JwtTokenUtil;
 import org.springframework.beans.BeanUtils;
+
 import javax.annotation.Resource;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -172,8 +174,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public boolean updateStatusRequest(UpdateSysUserStatusRequestDto updateSysUserStatusRequestDto) {
-        int i = sysUserMapper.updateStatus(updateSysUserStatusRequestDto);
-        return i > 0;
+        return sysUserMapper.updateStatus(updateSysUserStatusRequestDto) > 0;
     }
 
     @Override

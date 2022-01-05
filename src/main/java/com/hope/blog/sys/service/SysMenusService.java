@@ -2,6 +2,7 @@ package com.hope.blog.sys.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.sys.dto.request.SysMenusSearchRequestDto;
+import com.hope.blog.sys.dto.request.UpdateSysMenusStatusRequestDto;
 import com.hope.blog.sys.dto.response.SysMenusTreeResponseDto;
 import com.hope.blog.sys.model.SysMenus;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -21,4 +22,6 @@ public interface SysMenusService extends IService<SysMenus> {
     IPage<SysMenus> findListByPage(SysMenusSearchRequestDto sysMenusSearchRequestDto);
 
     List<SysMenusTreeResponseDto> treeList();
+
+    boolean updateStatusRequest(UpdateSysMenusStatusRequestDto updateSysMenusStatusRequestDto);
 }

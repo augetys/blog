@@ -19,16 +19,16 @@ public class LocalStorageUtil {
      * 上传文件到指定路径
      */
     public static File upload(MultipartFile file, String filePath) {
-        Date date = new Date();
+        Date today = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         // 获取文件后缀
         String suffix = FileUtil.getExtensionName(file.getOriginalFilename());
-        String nowStr = format.format(date);
+        String date = format.format(today);
         try {
             // 重新命名文件
             String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + suffix;
             // 创建目录
-            String path = filePath + "/" + nowStr + "/" + suffix;
+            String path = filePath + "/" + date;
             File dest = new File(path, fileName);
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {

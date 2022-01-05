@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author lijin
@@ -94,7 +95,9 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
             throw new BusinessException("cron表达式格式错误");
         }
         if (!StringUtils.isEmpty(quartzJob.getSubTask())) {
-            List<String> tasks = Arrays.asList(quartzJob.getSubTask().split("[,，]"));
+            // List<String>转List<Long>
+            List<String> subTasks = Arrays.asList(quartzJob.getSubTask().split("[,]"));
+            List<Long> tasks = subTasks.stream().map(item -> Long.parseLong(item.trim())).collect(Collectors.toList());
             if (tasks.contains(quartzJob.getId())) {
                 throw new BusinessException("子任务中不能添加当前任务ID");
             }

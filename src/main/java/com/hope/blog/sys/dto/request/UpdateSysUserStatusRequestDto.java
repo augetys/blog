@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by lijin on  2021/6/8
@@ -19,7 +20,7 @@ public class UpdateSysUserStatusRequestDto {
     @ApiModelProperty(value = "用户Id")
     private String id;
 
-    @NotBlank(message = "状态不能为空")
+    @NotNull(message = "状态不能为空")
     @ApiModelProperty(value = "启用状态：0->禁用；1->启用")
     private Integer status;
 

@@ -3,6 +3,7 @@ package com.hope.blog;
 import com.hope.blog.blog.model.BlogArticle;
 import com.hope.blog.utils.EsUtil;
 import com.hope.blog.utils.MailUtil;
+import com.hope.blog.utils.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -161,6 +162,11 @@ class BlogApplicationTests {
         MailUtil.send("激活账号", "hahahahha", "1181881941@qq.com" );
     }
 
+    @Test
+    public void getEnv(){
+        String activeProfile = SpringContextHolder.getActiveProfile();
+        System.out.println(activeProfile);
+    }
 }
 
 
