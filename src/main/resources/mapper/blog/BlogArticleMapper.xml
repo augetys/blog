@@ -13,7 +13,8 @@
         <result column="cover" property="cover"/>
         <result column="click_count" property="clickCount"/>
         <result column="is_original" property="isOriginal"/>
-        <result column="articles_part" property="articlesPart"/>
+        <result column="article_part" property="articlePart"/>
+        <result column="article_author" property="articleAuthor"/>
         <result column="sort" property="sort"/>
         <result column="open_comment" property="openComment"/>
         <result column="create_time" property="createTime"/>
@@ -33,7 +34,8 @@
         cover,
         click_count,
         is_original,
-        articles_part,
+        article_part,
+        article_author,
         sort,
         open_comment,
         create_time,

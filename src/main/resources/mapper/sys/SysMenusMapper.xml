@@ -11,6 +11,7 @@
         <result column="icon" property="icon"/>
         <result column="level" property="level"/>
         <result column="sort" property="sort"/>
+        <result column="is_show" property="isShow"/>
         <result column="create_time" property="createTime"/>
         <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
@@ -26,6 +27,7 @@
         icon,
         level,
         sort,
+        is_show,
         create_time,
         create_by,
         update_time,
