@@ -5,10 +5,12 @@ import com.hope.blog.blog.dto.response.BlogArticleListResponseDto;
 import com.hope.blog.blog.mapper.BlogArticleMapper;
 import com.hope.blog.blog.model.BlogArticle;
 import com.hope.blog.blog.service.BlogCategoryService;
+import com.hope.blog.common.security.config.AuthUserDetails;
 import com.hope.blog.sys.service.SysUserService;
 import com.hope.blog.utils.CopyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -47,9 +49,12 @@ public class TestTask {
 
     public void run2() {
         log.info("run2 执行成功");
+        // 此处获取SecurityContextHolder是无法获取到的
+        AuthUserDetails authUserDetails = (AuthUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(authUserDetails);
     }
 
-    public void run3() throws Exception {
+    public void run3() {
         log.info("开始删除blog索引");
         elasticsearchRestTemplate.indexOps(BlogArticleListResponseDto.class).delete();
         QueryWrapper<BlogArticle> queryWrapper = new QueryWrapper<>();

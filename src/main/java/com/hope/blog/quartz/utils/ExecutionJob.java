@@ -68,6 +68,7 @@ public class ExecutionJob extends QuartzJobBean {
             future.get();
             long times = System.currentTimeMillis() - startTime;
             quartzLog.setTime(times);
+
             log.info("任务执行完毕，任务名称：" + quartzJob.getJobName() + ", 执行时间：" + times + "毫秒");
             log.info("--------------------------------------------------------------");
             // 判断是否存在子任务

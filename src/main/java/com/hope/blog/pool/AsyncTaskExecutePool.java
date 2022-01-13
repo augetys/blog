@@ -43,6 +43,8 @@ public class AsyncTaskExecutePool implements AsyncConfigurer {
         executor.setKeepAliveSeconds(config.getKeepAliveSeconds());
         // 线程名字前缀,在有多个线程池的时候以此做区分
         executor.setThreadNamePrefix("blog-async-");
+        // 传递上下文等变量
+        executor.setTaskDecorator(new ContextDecorator());
         // setRejectedExecutionHandler：当pool已经达到max size的时候，如何处理新任务
         // CallerRunsPolicy：不在新线程中执行任务，而是由调用者所在的线程来执行
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());

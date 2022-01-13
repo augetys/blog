@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +40,7 @@ public class EmailContentServiceImpl extends ServiceImpl<EmailContentMapper, Ema
                     emailContent.setContent(emailSendRequestDto.getContent());
                     emailContent.setSubject(emailSendRequestDto.getSubject());
                     emailContent.setToUser(item);
+                    emailContent.setCreateTime(new Date());
                     emailContentMapper.insert(emailContent);
                     MailUtil.sendWithHtml(emailSendRequestDto.getSubject(), emailSendRequestDto.getContent(), item);
                 }

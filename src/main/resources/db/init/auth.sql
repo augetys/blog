@@ -288,10 +288,9 @@ CREATE TABLE `email_content` (
   `id` varchar(64) NOT NULL COMMENT 'ID',
   `from_user` varchar(255) NOT NULL COMMENT '发件人',
   `subject` varchar(255) DEFAULT NULL COMMENT '邮件主题',
-  `content` varchar(255) DEFAULT NULL COMMENT '邮件内容',
+  `content` text DEFAULT NULL COMMENT '邮件内容',
   `to_user` varchar(255) NOT NULL COMMENT '收件人',
   `create_time` datetime NOT NULL COMMENT '发送时间',
-  `create_by` varchar(64) NOT NULL COMMENT '创建人ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='邮箱发送内容';
 
@@ -384,7 +383,6 @@ CREATE TABLE `sys_quartz_log` (
   `params` varchar(255) DEFAULT NULL COMMENT '参数',
   `time` bigint(20) NOT NULL COMMENT '耗时',
   `create_time` datetime NOT NULL COMMENT '执行日期',
-  `create_by` varchar(64) DEFAULT NULL COMMENT '执行人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 

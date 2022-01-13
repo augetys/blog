@@ -82,6 +82,10 @@ public class QiniuUtil {
      */
     public static FileInfo uploadFile(MultipartFile file, String bucketName) {
         try {
+            // 检查文件大小
+            if (FileUtil.checkSize(100L, file.getSize())) {
+                throw new BusinessException("文件超出大小！");
+            }
             String key = UUID.randomUUID().toString().replaceAll("-", "");
             // 创建上传对象
             Configuration cfg = new Configuration();
