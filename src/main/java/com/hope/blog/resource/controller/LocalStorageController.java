@@ -78,7 +78,6 @@ public class LocalStorageController {
      */
     @ApiOperation(value = "文件上传接口")
     @PostMapping("/file")
-    @OperationLog(value = "本地文件上传")
     public CommonResult<LocalStorage> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("name") String name) {
         LocalStorage localStorage = iLocalStorageService.uploadFile(file, name);
         return CommonResult.success(localStorage);
@@ -89,7 +88,6 @@ public class LocalStorageController {
      */
     @ApiOperation(value = "多文件上传接口")
     @PostMapping("/files")
-    @OperationLog(value = "本地多文件上传")
     public CommonResult<List<LocalStorage>> uploadFiles(HttpServletRequest request) {
         List<LocalStorage> filesList = iLocalStorageService.uploadFiles(request);
         return CommonResult.success(filesList);

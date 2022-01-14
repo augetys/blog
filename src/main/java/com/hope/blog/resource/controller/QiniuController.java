@@ -74,7 +74,6 @@ public class QiniuController {
      */
     @ApiOperation(value = "文件上传接口")
     @PostMapping("/file")
-    @OperationLog(value = "上传七牛云文件")
     public CommonResult<QiniuContent> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("bucket") String bucket, @RequestParam("name") String name) {
         QiniuContent qiniuContent = iqiniuService.uploadFile(file, bucket, name);
         return CommonResult.success(qiniuContent);
@@ -85,7 +84,6 @@ public class QiniuController {
      */
     @ApiOperation(value = "多文件上传接口")
     @PostMapping("/files")
-    @OperationLog(value = "上传七牛云多文件")
     public CommonResult<List<QiniuContent>> uploadFiles(HttpServletRequest request, @RequestParam("bucket") String bucket) {
         List<QiniuContent> qiniuContent = iqiniuService.uploadFiles(request, bucket);
         return CommonResult.success(qiniuContent);

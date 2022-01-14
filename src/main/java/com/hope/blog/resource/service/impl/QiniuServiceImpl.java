@@ -68,7 +68,7 @@ public class QiniuServiceImpl extends ServiceImpl<QiniuContentMapper, QiniuConte
         List<MultipartFile> multipartFileList = FileUtil.getMultipartFileList(request);
         multipartFileList.forEach(
                 item -> {
-                    contents.add(uploadFile(item, bucket, null));
+                    contents.add(uploadFile(item, bucket, ""));
                 }
         );
         return contents;
