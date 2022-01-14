@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hope.blog.blog.service.BlogCategoryService;
 import com.hope.blog.comment.model.BlogComment;
 import com.hope.blog.comment.service.BlogCommentService;
+import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.sys.service.SysUserService;
 import com.hope.blog.utils.CopyUtil;
 import com.hope.blog.utils.DateUtil;
@@ -20,12 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
+
 import javax.annotation.Resource;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,32 +84,27 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
             queryWrapper.apply("date_format(create_time,'%Y-%m-%d') = '" + DateUtil.format(blogArticleSearchRequestDto.getCreateTime(), DateUtil.DATE_FORMAT_DAY) + "'");
         }
         queryWrapper.orderByDesc("create_time");
-        Page<BlogArticle> page = new Page<>();
-        page.setCurrent(blogArticleSearchRequestDto.getPageNum());
-        page.setSize(blogArticleSearchRequestDto.getPageSize());
-        IPage<BlogArticle> pageList = this.page(page, queryWrapper);
 
-        // convert方法中是函数式接口,BearUtil不能用
-        IPage<BlogArticleListResponseDto> convert = pageList.convert(BlogArticle -> CopyUtil.copy(BlogArticle, BlogArticleListResponseDto.class));
-        List<BlogArticleListResponseDto> list = convert.getRecords();
-
-        if (!CollectionUtils.isEmpty(list)) {
-            list.forEach(
+        List<BlogArticle> list = blogArticleMapper.selectList(queryWrapper);
+        List<BlogArticleListResponseDto> collect = CopyUtil.copyList(list, BlogArticleListResponseDto.class);
+        if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTagId())) {
+            collect = collect.stream().filter(item -> item.getTagId().equals(blogArticleSearchRequestDto.getTagId())).collect(Collectors.toList());
+        }
+        IPage<BlogArticleListResponseDto> pages = new Page<>();
+        if (!CollectionUtils.isEmpty(collect)) {
+            collect.forEach(
                     item -> {
                         item.setAuthor(item.getIsOriginal() == 1 ? sysUserService.getById(item.getCreateBy()).getUsername() : item.getArticleAuthor());
                         item.setCategoryName(blogCategoryService.getById(item.getCategoryId()).getName());
                         item.setCategoryIcon(blogCategoryService.getById(item.getCategoryId()).getIcon());
-                        QueryWrapper<BlogComment> queryWrapper1=new QueryWrapper<>();
-                        queryWrapper1.eq("article_id",item.getId());
+                        QueryWrapper<BlogComment> queryWrapper1 = new QueryWrapper<>();
+                        queryWrapper1.eq("article_id", item.getId());
                         item.setCommentCount(blogCommentService.count(queryWrapper1));
                     }
             );
-            if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTagId())) {
-                List<BlogArticleListResponseDto> collect = list.stream().filter(item -> Arrays.asList(item.getTagId().split(",")).contains(blogArticleSearchRequestDto.getTagId())).collect(Collectors.toList());
-                convert.setRecords(collect);
-            }
+            pages = CommonPage.getPages(blogArticleSearchRequestDto.getPageNum(), blogArticleSearchRequestDto.getPageSize(), collect);
         }
-        return convert;
+        return pages;
     }
 
     @Override

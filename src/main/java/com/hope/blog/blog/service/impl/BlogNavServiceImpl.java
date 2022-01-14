@@ -34,7 +34,7 @@ public class BlogNavServiceImpl extends ServiceImpl<BlogNavMapper, BlogNav> impl
     public IPage<BlogNav> findListByPage(BlogArticleNavSearchRequestDto blogArticleNavSearchRequestDto) {
         QueryWrapper<BlogNav> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(blogArticleNavSearchRequestDto.getName())) {
-            queryWrapper.like("title", blogArticleNavSearchRequestDto.getName());
+            queryWrapper.like("name", blogArticleNavSearchRequestDto.getName());
         }
         queryWrapper.lambda().orderByAsc(BlogNav::getSort);
         return blogNavMapper.selectPage(new Page<>(blogArticleNavSearchRequestDto.getPageNum(), blogArticleNavSearchRequestDto.getPageSize()), queryWrapper);
