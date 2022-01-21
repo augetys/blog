@@ -42,7 +42,7 @@ public class BlogNav implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @Length(min = 1, max = 8, message = "用户名长度在 1 到 8 个字符")
+    @Length(min = 1, max = 20, message = "用户名长度在 1 到 20 个字符")
     @NotBlank(message = "导航名称不能为空")
     @ApiModelProperty(value = "导航名称")
     private String name;

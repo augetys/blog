@@ -14,6 +14,7 @@ import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
@@ -44,11 +45,11 @@ public class SysDictDetail implements Serializable {
     @ApiModelProperty(value = "字典id")
     private String dictId;
 
-    @NotBlank(message = "字典标签不能为空")
+    @Length(min = 1, max = 50, message = "字典标签在 1 到 50 个字符")
     @ApiModelProperty(value = "字典标签")
     private String label;
 
-    @NotBlank(message = "字典值不能为空")
+    @Length(min = 1, max = 100, message = "字典值在 1 到 100 个字符")
     @ApiModelProperty(value = "字典值")
     private String value;
 

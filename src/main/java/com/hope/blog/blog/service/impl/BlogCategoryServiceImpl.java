@@ -50,6 +50,7 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
         }
+        queryWrapper.lambda().orderByAsc(BlogCategory::getSort);
         return blogCategoryMapper.selectList(queryWrapper);
     }
 

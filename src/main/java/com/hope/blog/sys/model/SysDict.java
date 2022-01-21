@@ -38,11 +38,11 @@ public class SysDict implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @Length(min = 1, max = 8, message = "昵称长度在 1 到 8 个字符")
+    @Length(min = 1, max = 50, message = "字典名称在 1 到 50 个字符")
     @ApiModelProperty(value = "字典名称")
     private String name;
 
-    @Length(min = 1, max = 50, message = "昵称长度在 1 到 50 个字符")
+    @Length(min = 1, max = 50, message = "描述在 1 到 50 个字符")
     @ApiModelProperty(value = "描述")
     private String description;
 

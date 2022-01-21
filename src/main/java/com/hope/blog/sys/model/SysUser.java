@@ -35,7 +35,7 @@ public class SysUser implements Serializable {
     @TableId(type = IdType.ASSIGN_UUID)
     private String id;
 
-    @Length(min = 1, max = 8, message = "用户名长度在 1 到 8 个字符")
+    @Length(min = 1, max = 50, message = "用户名长度在 1 到 50 个字符")
     @ApiModelProperty(value = "用户名")
     private String username;
 
@@ -50,7 +50,7 @@ public class SysUser implements Serializable {
     @ApiModelProperty(value = "邮箱")
     private String email;
 
-    @Length(min = 1, max = 8, message = "昵称长度在 1 到 8 个字符")
+    @Length(min = 1, max = 50, message = "昵称长度在 1 到 50 个字符")
     @ApiModelProperty(value = "昵称")
     private String nickName;
 

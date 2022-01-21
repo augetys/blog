@@ -43,6 +43,7 @@ public class BlogLoopServiceImpl extends ServiceImpl<BlogLoopMapper, BlogLoop> i
     @Override
     public List<BlogLoop> findAll() {
         QueryWrapper<BlogLoop> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("create_time");
         return blogLoopMapper.selectList(queryWrapper);
     }
 }

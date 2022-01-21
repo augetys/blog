@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `blog_tag`;
 CREATE TABLE `blog_tag` (
   `id` varchar(64) NOT NULL,
   `name` varchar(255) NOT NULL COMMENT '标签内容',
-  `icon` varchar(255) NOT NULL COMMENT '标签图标',
+  `icon` varchar(255) DEFAULT NULL COMMENT '标签图标',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `create_by` varchar(64) NOT NULL COMMENT '创建人ID',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
@@ -76,10 +76,10 @@ CREATE TABLE `blog_category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客分类表';
 
-INSERT INTO `blog_category` VALUES ('code', '无妄海', 'code之路', 'icon-code', 1, '2021-11-23 12:30:54', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:30:54', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_category` VALUES ('note', '如梦令', '笔记', 'icon-note', 3, '2021-11-23 12:30:05', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:30:05', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_category` VALUES ('think', '清平乐', '思考人生', 'icon-think', 2, '2021-11-23 12:29:44', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:29:44', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_category` VALUES ('date', '荏苒', '分享生活', 'icon-date', 4, '2021-11-23 12:30:25', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:30:25', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `blog_category` VALUES ('code', '无妄海', '浩瀚书海', 'icon-code', 1, '2021-11-23 12:30:54', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:30:54', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `blog_category` VALUES ('note', '如梦令', '思考人生', 'icon-note', 3, '2021-11-23 12:30:05', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:30:05', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `blog_category` VALUES ('think', '清平乐', '学习笔记', 'icon-think', 2, '2021-11-23 12:29:44', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:29:44', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `blog_category` VALUES ('date', '荏苒', '光阴似箭', 'icon-date', 4, '2021-11-23 12:30:25', 'da6d966d37fcb819546064424a8bdd9f', '2021-11-23 12:30:25', 'da6d966d37fcb819546064424a8bdd9f');
 
 
 -- ----------------------------

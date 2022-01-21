@@ -40,7 +40,7 @@
         ) a
         GROUP BY
         a.tag_id
-        ) b on a.id = b.tag_id
+        ) b on a.id = b.tag_id order by a.sort
     </select>
 
 </mapper>
