@@ -36,6 +36,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -88,7 +89,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         List<BlogArticle> list = blogArticleMapper.selectList(queryWrapper);
         List<BlogArticleListResponseDto> collect = CopyUtil.copyList(list, BlogArticleListResponseDto.class);
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTagId())) {
-            collect = collect.stream().filter(item -> item.getTagId().equals(blogArticleSearchRequestDto.getTagId())).collect(Collectors.toList());
+            collect = collect.stream().filter(item -> Arrays.asList(item.getTagId().split(",")).contains(blogArticleSearchRequestDto.getTagId())).collect(Collectors.toList());
         }
         IPage<BlogArticleListResponseDto> pages = new Page<>();
         if (!CollectionUtils.isEmpty(collect)) {

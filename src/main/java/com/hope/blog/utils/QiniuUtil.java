@@ -86,7 +86,7 @@ public class QiniuUtil {
             if (FileUtil.checkSize(100L, file.getSize())) {
                 throw new BusinessException("文件超出大小！");
             }
-            String key = UUID.randomUUID().toString().replaceAll("-", "");
+            String key = UUID.randomUUID().toString().replaceAll("-", "") + '.' + FileUtil.getExtensionName(file.getOriginalFilename());
             // 创建上传对象
             Configuration cfg = new Configuration();
             UploadManager uploadManager = new UploadManager(cfg);

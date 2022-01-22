@@ -17,7 +17,7 @@ public class CommonConstant {
     /**
      * file域名
      */
-    public static final String WEBSITE = "https://choot.top/file";
+    public static final String WEBSITE = "https://www.choot.top/file";
 
     /**
      * 七牛云图片bucket
