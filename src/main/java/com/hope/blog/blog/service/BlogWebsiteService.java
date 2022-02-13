@@ -2,6 +2,7 @@ package com.hope.blog.blog.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.blog.dto.request.BlogWebsiteSearchRequest;
+import com.hope.blog.blog.dto.response.BlogWebsiteListResponse;
 import com.hope.blog.blog.dto.response.BlogWebsiteResponse;
 import com.hope.blog.blog.model.BlogWebsite;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -15,8 +16,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-12-29
  */
 public interface BlogWebsiteService extends IService<BlogWebsite> {
-    IPage<BlogWebsite> findListByPage(BlogWebsiteSearchRequest BlogWebsiteSearchRequest);
+    IPage<BlogWebsiteResponse> findListByPage(BlogWebsiteSearchRequest BlogWebsiteSearchRequest);
 
-    BlogWebsiteResponse getNavigation();
+    BlogWebsiteListResponse getNavigation();
 
 }

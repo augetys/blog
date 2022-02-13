@@ -15,4 +15,7 @@ import lombok.*;
 public class BlogWebsiteSearchRequest extends PageInfo {
     @ApiModelProperty(value = "网址名称")
     private String name;
+
+    @ApiModelProperty(value = "网址类别")
+    private Integer category;
 }

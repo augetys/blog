@@ -36,14 +36,14 @@ public class BlogLoopServiceImpl extends ServiceImpl<BlogLoopMapper, BlogLoop> i
         if (!StringUtils.isEmpty(blogLoopSearchRequestDto.getTitle())) {
             queryWrapper.like("title", blogLoopSearchRequestDto.getTitle());
         }
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByAsc("sort");
         return blogLoopMapper.selectPage(new Page<>(blogLoopSearchRequestDto.getPageNum(), blogLoopSearchRequestDto.getPageSize()), queryWrapper);
     }
 
     @Override
     public List<BlogLoop> findAll() {
         QueryWrapper<BlogLoop> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByAsc("sort");
         return blogLoopMapper.selectList(queryWrapper);
     }
 }

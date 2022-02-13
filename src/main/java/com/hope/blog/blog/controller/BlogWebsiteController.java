@@ -2,6 +2,7 @@ package com.hope.blog.blog.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hope.blog.blog.dto.request.BlogWebsiteSearchRequest;
+import com.hope.blog.blog.dto.response.BlogWebsiteListResponse;
 import com.hope.blog.blog.dto.response.BlogWebsiteResponse;
 import com.hope.blog.blog.model.BlogWebsite;
 import com.hope.blog.blog.service.BlogWebsiteService;
@@ -41,8 +42,8 @@ public class BlogWebsiteController {
      */
     @ApiOperation(value = "查询分页数据")
     @PostMapping(value = "/list")
-    public CommonResult<CommonPage<BlogWebsite>> findListByPage(@ApiParam @RequestBody BlogWebsiteSearchRequest BlogWebsiteSearchRequest) {
-        IPage<BlogWebsite> list = iBlogWebsiteService.findListByPage(BlogWebsiteSearchRequest);
+    public CommonResult<CommonPage<BlogWebsiteResponse>> findListByPage(@ApiParam @RequestBody BlogWebsiteSearchRequest BlogWebsiteSearchRequest) {
+        IPage<BlogWebsiteResponse> list = iBlogWebsiteService.findListByPage(BlogWebsiteSearchRequest);
         return CommonResult.success(CommonPage.restPage(list));
     }
 
@@ -104,9 +105,9 @@ public class BlogWebsiteController {
      */
     @ApiOperation(value = "查询所有类别的网址导航")
     @PostMapping(value = "/getNavigation")
-    public CommonResult<BlogWebsiteResponse> getNavigation() {
-        BlogWebsiteResponse BlogWebsiteResponse = iBlogWebsiteService.getNavigation();
-        return CommonResult.success(BlogWebsiteResponse);
+    public CommonResult<BlogWebsiteListResponse> getNavigation() {
+        BlogWebsiteListResponse BlogWebsiteListResponse = iBlogWebsiteService.getNavigation();
+        return CommonResult.success(BlogWebsiteListResponse);
     }
 }
 

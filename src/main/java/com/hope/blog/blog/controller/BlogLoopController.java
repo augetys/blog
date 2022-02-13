@@ -48,9 +48,9 @@ public class BlogLoopController {
 
 
     /**
-     * 根据id查询
+     * 门户轮播图
      */
-    @ApiOperation(value = "根据id查询数据")
+    @ApiOperation(value = "门户轮播图")
     @GetMapping(value = "/findAll")
     public CommonResult<List<BlogLoop>> findAll() {
         List<BlogLoop> list = iBlogLoopService.findAll();
