@@ -17,13 +17,16 @@ import javax.annotation.Resource;
 
 import com.hope.blog.common.api.CommonPage;
 import com.hope.blog.common.enums.Website;
+import com.hope.blog.sys.model.SysDictDetail;
+import com.hope.blog.sys.service.SysDictService;
 import com.hope.blog.utils.CopyUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -40,6 +43,9 @@ public class BlogWebsiteServiceImpl extends ServiceImpl<BlogWebsiteMapper, BlogW
 
     @Resource
     private BlogWebsiteMapper BlogWebsiteMapper;
+
+    @Autowired
+    private SysDictService sysDictService;
 
     @Override
     public IPage<BlogWebsiteResponse> findListByPage(BlogWebsiteSearchRequest BlogWebsiteSearchRequest) {
@@ -67,12 +73,19 @@ public class BlogWebsiteServiceImpl extends ServiceImpl<BlogWebsiteMapper, BlogW
     }
 
     @Override
-    public BlogWebsiteListResponse getNavigation() {
-        BlogWebsiteListResponse BlogWebsiteListResponse = new BlogWebsiteListResponse();
-        BlogWebsiteListResponse.setCommonList(BlogWebsiteMapper.commonList());
-        BlogWebsiteListResponse.setSourceList(BlogWebsiteMapper.sourceList());
-        BlogWebsiteListResponse.setStudyList(BlogWebsiteMapper.studyList());
-        BlogWebsiteListResponse.setVideoList(BlogWebsiteMapper.videoList());
-        return BlogWebsiteListResponse;
+    public List<BlogWebsiteListResponse> getNavigation() {
+        List<BlogWebsiteListResponse> list = new ArrayList<>();
+        Map<String, List<SysDictDetail>> dictDetailList = sysDictService.getDetailByNames(new ArrayList<>(Collections.singletonList("blog_website")));
+        List<SysDictDetail> blogWebsite = dictDetailList.get("blog_website");
+
+        blogWebsite.forEach(
+                item -> {
+                    BlogWebsiteListResponse response = new BlogWebsiteListResponse();
+                    response.setNavName(item.getLabel());
+                    response.setWebsiteList(BlogWebsiteMapper.findByCategoryId(Integer.valueOf(item.getValue())));
+                    list.add(response);
+                }
+        );
+        return list;
     }
 }

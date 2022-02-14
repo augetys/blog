@@ -12,16 +12,10 @@ import java.util.List;
 @Data
 public class BlogWebsiteListResponse {
 
-    @ApiModelProperty(value = "常用网址导航")
-    private List<BlogWebsite> commonList;
+    @ApiModelProperty(value = "导航名称")
+    private String navName;
 
-    @ApiModelProperty(value = "常用网址导航")
-    private List<BlogWebsite> studyList;
-
-    @ApiModelProperty(value = "常用网址导航")
-    private List<BlogWebsite> sourceList;
-
-    @ApiModelProperty(value = "常用网址导航")
-    private List<BlogWebsite> videoList;
+    @ApiModelProperty(value = "导航网站")
+    private List<BlogWebsite> WebsiteList;
 
 }

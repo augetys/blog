@@ -3,6 +3,7 @@ package com.hope.blog.blog.model;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 
+import java.io.InputStream;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -18,6 +19,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -48,8 +50,15 @@ public class BlogWebsite implements Serializable {
     @ApiModelProperty(value = "跳转地址")
     private String url;
 
-    @Range(min=1,max=4,message="类别是1-4的整数")
-    @ApiModelProperty(value = "类别（1:常用网址 2:学习 3:资源 4:影视）")
+    @ApiModelProperty(value = "网站描述")
+    private String description;
+
+    @DecimalMax(value = "9999")
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
+    @Range(min=1,max=100,message="类别是1-100的整数")
+    @ApiModelProperty(value = "类别（详情见字典表）")
     private Integer category;
 
     @ApiModelProperty(value = "创建时间")

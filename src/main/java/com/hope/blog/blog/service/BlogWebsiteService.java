@@ -7,6 +7,10 @@ import com.hope.blog.blog.dto.response.BlogWebsiteResponse;
 import com.hope.blog.blog.model.BlogWebsite;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 网址导航表 服务类
@@ -18,6 +22,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface BlogWebsiteService extends IService<BlogWebsite> {
     IPage<BlogWebsiteResponse> findListByPage(BlogWebsiteSearchRequest BlogWebsiteSearchRequest);
 
-    BlogWebsiteListResponse getNavigation();
+    List<BlogWebsiteListResponse> getNavigation();
 
 }

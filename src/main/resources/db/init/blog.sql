@@ -223,18 +223,15 @@ CREATE TABLE `blog_photo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='相册表';
 
-INSERT INTO `blog_photo` VALUES ('18d7cc50b9c1dcc9190e960634fbc76b', 'https://photo.choot.top/9351328d3f6d4e889f42cc45b6183503', '合照', '2021-12-30 13:58:59', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('238039328572ec437edff5345778c825', 'https://photo.choot.top/3e871ae02b274a2a847bcfe5ff6415c7', 'Yoyo', '2021-12-29 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-30 11:51:25', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_photo` VALUES ('3c44aa786997cac49b876b8ea8d171e2', 'https://photo.choot.top/71fd344a3e17466e9296611e684662b1', '旅游', '2021-12-29 16:25:21', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('47da01565bd54c27fed66a7945316aca', 'https://photo.choot.top/d5f9b6a4cb144289b845fa414e0366eb', '登顶', '2021-12-29 16:26:20', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('6d5f55c8aa2c0218b0bc81b55b4aa557', 'https://photo.choot.top/6cb16943cc94443480a3b27da610282d', 'Yoyo', '2021-12-29 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-30 11:51:33', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_photo` VALUES ('6ea250ce22272ea0c18874e300566a88', 'https://photo.choot.top/887100eec5824b2799f8bf87651599d0', '撸狗', '2021-12-29 10:13:54', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('870264d3ea1e0dd204611cfd2c073c70', 'https://photo.choot.top/1f20bb894764428292297772c149b4c8', '回家', '2021-12-30 13:59:11', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('91b4d0eccbe96f142f82242a19569952', 'https://photo.choot.top/f6dfcd55710840478f7e623da88de940', '玉龙雪山', '2021-12-29 16:26:09', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('c16d404f89d575d496b82448173d3033', 'https://photo.choot.top/7a8c435d51bd4cf1b7111815af32341e', 'Yoyo', '2021-12-30 13:55:59', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('eb3d0e4577618b7fa6992fe6919655a6', 'https://photo.choot.top/5737e5eed5f64ffeb922e7e8ac3707a1', '生活', '2021-12-29 16:24:41', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_photo` VALUES ('ed992c3add426cf82bc041da29e0aed2', 'https://photo.choot.top/c56985b56f2d46e3a9a19768b7118b93', 'Yoyo', '2021-12-29 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-30 11:51:39', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_photo` VALUES ('ef6c6bf3867e1914619e417b4a266b1a', 'https://photo.choot.top/8be240e17bdc443fbb46c1a88060a782', '玉龙雪山', '2021-12-29 16:25:53', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `blog_photo` VALUES ('062f43b4abd7ae71b2a4b54284ec9ba6', 'https://photo.choot.top/b1b5c7e18b2a4874974e41fa9d45f28f.jpg', '宜昌旅游', '2022-02-13 23:38:28', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `blog_photo` VALUES ('0ddd013800c73507a033295e1b102627', 'https://photo.choot.top/bc2bd33669fa4905876de8ecad1372a2.JPG', '登岳阳楼', '2022-02-13 23:51:51', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `blog_photo` VALUES ('535a98c7abe66526d92d1bc7af71189a', 'https://photo.choot.top/cac9471f980e4f32827062d5c0e91807.JPEG', '五一游湖', '2022-02-13 23:51:02', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `blog_photo` VALUES ('7bae9d0c87068da8f2ff13c166b19489', 'https://photo.choot.top/3eac273f28ce4e17a4a9ca8b9d34929f.jpg', '苍山洱海', '2022-02-13 23:51:15', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `blog_photo` VALUES ('b3cf5c6cbbe84abbdb71a8abff57295b', 'https://photo.choot.top/8d299b8bb16246cca5ff8e3439d713ce.JPG', '合照', '2022-02-14 00:50:53', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `blog_photo` VALUES ('ed6cbcce0856c5a4d92b784c789f4f95', 'https://photo.choot.top/c13de324afdb4abc89fd9ea864068ac1.jpg', '升学宴', '2022-02-13 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2022-02-13 23:51:21', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `blog_photo` VALUES ('f0b9013e3e225c0ec0b2baeb74e3f9ae', 'https://photo.choot.top/48905cbf5c494d47a73f1f0120955997.JPG', '看书', '2022-02-13 23:37:44', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `blog_photo` VALUES ('fe83d793b4d3cfbc36aefaecafefdc92', 'https://photo.choot.top/1b841dcda72845d093b8cdec1ec52f55.JPG', '婚礼自拍', '2022-02-13 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2022-02-13 23:52:07', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `blog_photo` VALUES ('fe93aeeba7ff983cb08cf3b6eade8acd', 'https://photo.choot.top/7a610d2d5e0d4c3587f5171b8edbc83b.JPG', '三亚自拍', '2022-02-13 23:51:36', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for blog_website
@@ -244,98 +241,14 @@ CREATE TABLE `blog_website` (
   `id` varchar(64) NOT NULL,
   `name` varchar(50) NOT NULL COMMENT '导航名称',
   `url` varchar(1000) NOT NULL COMMENT '跳转地址',
-  `category` int(1) NOT NULL COMMENT '类别（1:常用网址 2:学习 3:资源 4:影视）',
+  `description` varchar(1000) DEFAULT NULL COMMENT '描述',
+  `sort` int(11) NOT NULL COMMENT '排序',
+  `category` int(1) NOT NULL COMMENT '类别（详情见字典表）',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `create_by` varchar(64) NOT NULL COMMENT '创建人ID',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) DEFAULT NULL COMMENT '更新人ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='网址导航表';
-
-INSERT INTO `blog_website` VALUES ('01b9ba0119f8f6e111770b5ef3f046df', '猪肝紫', 'http://zhongguose.com/#shubihong', 3, '2021-12-31 08:49:32', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('06a2d64af7128baf657835ad99edcec4', 'lol外服下载', 'https://cloud.uli1.com/lol/LOL%E7%BE%8E%E6%9C%8DPBE%E6%B5%8B%E8%AF%95%E6%9C%8D/', 3, '2021-12-31 08:40:02', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('06f7838e88223e97e38a0e25be5b79f0', '电脑壁纸', 'http://lcoc.top/bizhi/', 3, '2021-12-30 10:40:56', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('07f6746f02f544c40fe24254d2f694d2', 'springbootDemo', 'https://github.com/xkcoding/spring-boot-demo', 2, '2021-12-31 08:50:18', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('094c88c20811b5ba0844c741d03dd84b', '牛客网', 'https://www.nowcoder.com/home', 2, '2021-12-29 17:11:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('09eaa8780492ae7687b460100840c1ec', '多功能图片网站', 'https://www.logosc.cn/so/', 4, '2021-12-30 10:23:45', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('127628cfd033e201e873d4e8443871eb', '阿木影视', 'https://www.aosk.online/', 4, '2021-12-30 10:21:34', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('13b7afea846ce591eff98fa9e495db37', '鸠摩搜书', 'www.jiumodiary.com', 3, '2021-12-30 10:25:54', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('1d5735acc0ef3f641fc22485f5ed5146', '虫洞栈', 'https://bugstack.cn/', 1, '2021-12-29 17:00:30', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('24812da8b2593c2ea53aca180d853517', '力扣', 'https://leetcode-cn.com/', 2, '2021-12-29 17:09:43', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('24f887a90f55915fcb0da201c226ce91', '94神马电影网', 'http://www.9rmb.com/', 4, '2021-12-30 10:22:49', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('29ad941df79b3fc7b23ace9799b94727', '图灵社区', 'https://www.ituring.com.cn/', 2, '2021-12-29 17:07:18', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('2b29b854b08217dbc4f708ac6829caff', '周读', 'http://ireadweek.com/', 3, '2021-12-30 10:26:27', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('2c6ea352f236e03fe7745f8c83b9b559', 'java3y', 'https://github.com/ZhongFuCheng3y/athena', 2, '2021-12-31 08:42:12', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('2d7034fdac530c549577e8d3c7a666cb', '图片搜索', 'https://www.logosc.cn/so/', 3, '2021-12-30 10:44:31', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('2f035d0c469fcde899274b259ebc4c39', '电影天堂', 'https://www.xiaopian.com/html/tv/hytv/', 3, '2021-12-31 08:41:39', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('2feb382d7a395436fe8392b646aed5f0', '世界网址大全', 'http://www.world68.com/', 1, '2021-12-30 10:33:26', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('322f46e0537798fdd575dc4b939143ae', '百度一下', 'https://www.baidu.com/', 1, '2021-12-29 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-29 16:47:21', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_website` VALUES ('399762bc8a52a54bb089c7ea3550a3c0', 'caj云阅读', 'http://cajviewer.cnki.net/cajcloud/', 3, '2021-12-30 10:28:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('3f561da920364c0350c9d9dc70f37882', '爱扒趣', 'https://www.zyboe.com/', 3, '2021-12-30 10:29:59', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('3fdb370cbc144bdf989b2b28ff1fe469', '书格', 'https://new.shuge.org/', 3, '2021-12-30 10:27:52', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('412690203342096eadcb42f01659a72e', '彼岸图库', 'https://pic.netbian.com/', 3, '2021-12-30 10:43:52', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('444f512d395e9106de07e277139de928', '脚本之家电子书下载', 'https://www.jb51.net/books/', 3, '2021-12-30 10:27:05', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('45094168aec1296f7fa68e92df4530e0', '策驰影院', 'http://www.ynzdhc.com/cc_play/zTRW5N-1-1.html', 4, '2021-12-31 08:38:52', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('465e161c92f0c09af758f6b57a60cf63', 'PDF派', 'https://www.pdfpai.com/', 1, '2021-12-29 16:50:13', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('47e05923af56abbce8946f7a0cb7f16a', '去看TV', 'https://www.qukantv.net/', 4, '2021-12-30 10:22:13', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('48d14334d84755135079585aa48929ea', '原创技术博客大联盟', 'http://techblog.pub/', 2, '2021-12-29 17:05:32', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('48d71118ddf95340410018656eeff1e9', '大数据导航', 'http://hao.199it.com/', 4, '2021-12-30 10:23:32', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('495f62e5f9dda1d5f7a12ad6e1c0a8a9', '豆瓣', 'https://www.douban.com/', 1, '2021-12-29 16:59:40', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('4a8e3c01c934dc82bf31bab9ff03b106', '蓝调网站', 'http://lcoc.top/vip2.3/', 4, '2021-12-30 10:24:29', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('4b341814ec66c36738742b6948456731', '电影推荐（分类别致）', 'http://www.mvcat.com/', 4, '2021-12-30 10:21:50', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('4eb7e1f93baaf1ec27a8ef5000426315', '图库', 'https://www.pexels.com/zh-tw/', 1, '2021-12-29 16:49:26', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('541a52540bdba49d484f6ec185c14f37', '飘花资源网', 'https://www.piaohua.com/html/dianying.html', 3, '2021-12-31 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-31 08:46:47', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_website` VALUES ('595340fd447236c66dddba35b862f969', 'free-api', 'https://www.free-api.com/', 1, '2021-12-30 17:20:26', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('5b9a591b3bf5c50c7cb6d392f8db318e', 'VideoFk', 'http://www.videofk.com/', 4, '2021-12-30 10:24:09', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('5baab856aa29dc0acdeacdf2887c40f4', '聚合数据API', 'https://www.juhe.cn/', 1, '2021-12-31 16:32:48', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('5bae4e35d99194e1ecd4d859d88cfd73', '搜书VIP-电子书搜索', 'http://www.soshuvip.com/all.html', 3, '2021-12-30 10:27:34', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('5d067b27d25124f95c8bd344bef74d6a', 'windows激活', 'https://cmwtat.cloudmoe.com/cn.html', 3, '2021-12-29 17:04:11', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('5e4df37585ff2baf7b9d45de3a51ca81', '在线实用工具', 'http://www.toolnb.com', 1, '2021-12-30 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-30 14:51:40', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_website` VALUES ('6454202151ee09935762c1d0555d27d3', '书栈网', 'https://www.bookstack.cn/', 3, '2021-12-30 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-30 10:25:36', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_website` VALUES ('64fdeaa1dc94ec8d864060d2a22e0a06', 'pixabay', 'https://pixabay.com/', 3, '2021-12-30 10:43:15', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('65dacff0a0871847af8784f0edbdae64', '免费SSL证书', 'https://freessl.cn/', 3, '2021-12-29 17:10:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('681a4199063a2d27c4c88a6ed3d3e76b', '免费api', 'https://github.com/fangzesheng/free-api#521', 3, '2021-12-30 17:11:50', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('6cd7da284b663524d4d4944d2450b57f', 'pdf转换', 'https://www.alltoall.net/', 3, '2021-12-31 08:43:48', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('6e1f788588d909332bbb6b5c3600b476', '在线看剧', 'http://dy.27234.cn/', 4, '2021-12-30 10:23:22', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('717ad39e7c6506359a93efb3531ff934', '永久资源采集网', 'http://www.yongjiuzy1.com/', 4, '2021-12-30 10:24:44', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('7a9cf5b619d251b609e09e5c833505ae', 'Java技术驿站', 'https://www.cmsblogs.com/', 2, '2021-12-29 17:06:41', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('867f5de38a6f5f79cdacb656a3e45a1c', 'NO视频官网', 'http://www.novipnoad.com/', 4, '2021-12-30 10:23:00', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('8c265d27abf6c7718417333ffa6e57bc', '片库', 'https://www.mypianku.net/', 3, '2021-12-31 08:46:00', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('8d82d262f9a3ad76bc19da521c4e9369', 'MSDN', 'https://msdn.itellyou.cn/', 1, '2021-12-30 10:32:12', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('97b30ae4258c9d82ced299b7de5db77a', '咪咕', 'https://www.miguvideo.com/mgs/website/prd/detail.html?cid=660316949', 3, '2021-12-31 08:47:06', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('9a8775ea465bdc97445a2c8aaab95e2d', '视频转换', 'https://convertio.co/zh/flv-mp4/', 3, '2021-12-29 17:04:46', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('9cf58f695f1b930d74a3cf2f64750e6d', '图标制作', 'https://shields.io/', 3, '2021-12-30 15:59:17', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('9e04740256816844b522ff749a638f15', '简捷工具', 'https://www.shulijp.com/index.html', 1, '2021-12-30 10:36:29', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('a0d9c170837a32540684cd6c39c5a313', '偷渡鱼', 'https://touduyu.com/', 1, '2021-12-30 10:37:49', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('a72de2899ea14b9866fd1229ed2f0f72', '阿里云maven仓库', 'https://developer.aliyun.com/mvn/guide', 1, '2021-12-29 16:54:01', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('a8f66a13e7e99c4a085875c2e6aee089', '图片压缩', 'https://docsmall.com/', 1, '2021-12-30 10:45:11', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('aa4f1847eda14e349524eb574d766966', '五分钟学算法', 'https://www.cxyxiaowu.com/', 2, '2021-12-29 17:08:59', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('b317edc9e489a699a547164770391ac0', '知轩藏书', 'http://www.zxcs.me/', 3, '2021-12-30 10:26:50', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('b7e18b3a11439af3b22a2faba3246e4d', 'Github', 'https://github.com/', 1, '2021-12-29 16:52:45', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('c27f9305183ab6e0a409b982aa05e09a', '动漫视频网', 'http://www.zzzfun.com/', 4, '2021-12-30 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2021-12-30 14:52:21', 'da6d966d37fcb819546064424a8bdd9f');
-INSERT INTO `blog_website` VALUES ('c4a44b3eac0bd4e57413269d156a72cb', '豆瓣Top250', 'https://movie.douban.com/top250', 3, '2021-12-31 08:48:55', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('c8edeb34f73da3644cdba78220992698', '高清图库', 'https://wallhaven.cc/toplist?page=2', 1, '2021-12-29 16:50:29', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('cbb7b121b7b41df57bf9493b82069cee', '云海电子图书馆', 'www.pdfbook.cn', 3, '2021-12-30 10:26:07', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('d1d98732f97587775e3d8d93a3687173', '必看网（人生必看的书籍）', 'https://www.biikan.com/', 3, '2021-12-30 10:28:14', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('d2ee046e00b3a38d757529431396ff01', 'unsplash', 'https://unsplash.com/', 3, '2021-12-30 10:43:24', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('d3a611cae955047004f9be37bac419cb', '翻墙安装', 'https://www.v2rayssr.com/trojan-go.html', 1, '2021-12-31 08:37:59', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('d4cdc8d8f4dfe01793416f8ceb0898a4', '电影天堂2', 'https://www.dy2018.com/html/gndy/jddy/', 3, '2021-12-31 08:47:21', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('d771a57f49752cfa81ea9d60349bf9a4', '程序员导航', 'http://cxy521.com/', 1, '2021-12-29 16:46:02', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('da8cbfd4ca54bf7d66ecde789f00a737', 'PDF转换', 'https://www.hipdf.cn/', 1, '2021-12-30 10:45:44', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('db01a47f2e90a0d1373f45222e213870', '********', 'https://mmdd6.com/index.html?channelCode=047&yy', 3, '2021-12-31 08:48:26', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e0d136fbce5491920aaa067165f64416', '小说阅读', 'https://www.xyyuedu.com/gdmz/sanyanerpai/', 3, '2021-12-29 17:09:20', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e5f7a8a265cd68749321f6a0650b2085', '工具导航', 'https://hao.logosc.cn/', 1, '2021-12-30 10:39:22', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e67f6bbcaf40c759583fdc718c07ce9b', '蓝光电影画质', 'http://www.languang.co/', 4, '2021-12-30 10:23:12', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e6ea38c9fd6008afe5ef089ce74ea559', '全历史', 'https://www.allhistory.com/', 2, '2021-12-30 10:28:42', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e7a1e2ae9d73a8642add8397502637d1', '图虫摄影', 'https://tuchong.com/', 4, '2021-12-30 16:34:58', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e8014681686d4a75d72c13ff35015523', 'kuangstudy', 'https://www.kuangstudy.com/bbs', 2, '2021-12-31 08:41:04', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e83538b3b2fdbf7e0643143e5320d6f7', '极像素', 'https://www.sigoo.com/', 3, '2021-12-30 10:44:16', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e98ee2df28ee79c7f213c7cac6a05fe6', '知乎', 'https://www.zhihu.com/', 1, '2021-12-29 16:52:33', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('e9d33367aa4cae7ac391652b21882407', 'oracle', 'https://www.oracle.com/cn/downloads/', 3, '2021-12-29 17:03:05', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('ecacd8ad8cc211b8dc053c1d6d6ef341', '阿里云图标', 'https://www.iconfont.cn/', 3, '2021-12-29 17:08:42', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('f0f9d81015e4494ed82e34c72024a18a', 'Java全栈知识体系', 'https://pdai.tech/', 2, '2021-12-31 08:51:21', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('fbe30be84824216a257aa94f9fcf7118', '精准云工具合集', 'https://jingzhunyun.com/', 1, '2021-12-30 10:40:09', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('fce28ef501a780c3cea7007fc63a2c23', '牛牛TV', 'http://www.ziliao6.com/tv/', 4, '2021-12-30 10:23:58', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
-INSERT INTO `blog_website` VALUES ('fd069ddb7489b0c9a7c18517281681b3', 'APP影院', 'https://app.movie', 4, '2021-12-30 10:22:01', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 commit;

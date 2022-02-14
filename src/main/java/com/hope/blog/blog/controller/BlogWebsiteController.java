@@ -21,6 +21,10 @@ import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 网址导航表 前端控制器
@@ -105,9 +109,9 @@ public class BlogWebsiteController {
      */
     @ApiOperation(value = "查询所有类别的网址导航")
     @PostMapping(value = "/getNavigation")
-    public CommonResult<BlogWebsiteListResponse> getNavigation() {
-        BlogWebsiteListResponse BlogWebsiteListResponse = iBlogWebsiteService.getNavigation();
-        return CommonResult.success(BlogWebsiteListResponse);
+    public CommonResult<List<BlogWebsiteListResponse>> getNavigation() {
+        List<BlogWebsiteListResponse> blogWebsiteListResponse = iBlogWebsiteService.getNavigation();
+        return CommonResult.success(blogWebsiteListResponse);
     }
 }
 
