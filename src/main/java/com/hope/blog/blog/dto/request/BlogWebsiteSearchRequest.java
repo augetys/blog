@@ -16,6 +16,9 @@ public class BlogWebsiteSearchRequest extends PageInfo {
     @ApiModelProperty(value = "网址名称")
     private String name;
 
+    @ApiModelProperty(value = "描述")
+    private String description;
+
     @ApiModelProperty(value = "网址类别")
     private Integer category;
 }

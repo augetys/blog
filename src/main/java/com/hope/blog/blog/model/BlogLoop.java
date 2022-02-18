@@ -46,7 +46,7 @@ public class BlogLoop implements Serializable {
     private String title;
 
     @DecimalMax(value = "9999")
-    @ApiModelProperty(value = "顺序")
+    @ApiModelProperty(value = "排序")
     private Integer sort;
 
     @NotNull(message = "是否外链不能为空")

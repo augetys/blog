@@ -54,6 +54,9 @@ public class BlogWebsiteServiceImpl extends ServiceImpl<BlogWebsiteMapper, BlogW
         if (!StringUtils.isEmpty(BlogWebsiteSearchRequest.getName())) {
             queryWrapper.like("name", BlogWebsiteSearchRequest.getName());
         }
+        if (!StringUtils.isEmpty(BlogWebsiteSearchRequest.getDescription())) {
+            queryWrapper.like("description", BlogWebsiteSearchRequest.getDescription());
+        }
         if (!StringUtils.isEmpty(BlogWebsiteSearchRequest.getCategory())) {
             queryWrapper.eq("category", BlogWebsiteSearchRequest.getCategory());
         }

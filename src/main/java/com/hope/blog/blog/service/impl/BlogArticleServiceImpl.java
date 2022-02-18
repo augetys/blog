@@ -37,6 +37,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,25 +72,30 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         QueryWrapper<BlogArticle> queryWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTitle())) {
             queryWrapper.like("title", blogArticleSearchRequestDto.getTitle());
+            queryWrapper.orderByAsc("sort");
         }
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getCategoryId())) {
             queryWrapper.eq("category_id", blogArticleSearchRequestDto.getCategoryId());
+            queryWrapper.orderByAsc("sort");
         }
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getIsOriginal())) {
             queryWrapper.eq("is_original", blogArticleSearchRequestDto.getIsOriginal());
+            queryWrapper.orderByAsc("sort");
         }
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getIsPublish())) {
             queryWrapper.eq("is_publish", blogArticleSearchRequestDto.getIsPublish());
+            queryWrapper.orderByAsc("sort");
         }
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getCreateTime())) {
             queryWrapper.apply("date_format(create_time,'%Y-%m-%d') = '" + DateUtil.format(blogArticleSearchRequestDto.getCreateTime(), DateUtil.DATE_FORMAT_DAY) + "'");
+            queryWrapper.orderByAsc("sort");
         }
         queryWrapper.orderByDesc("create_time");
 
         List<BlogArticle> list = blogArticleMapper.selectList(queryWrapper);
         List<BlogArticleListResponseDto> collect = CopyUtil.copyList(list, BlogArticleListResponseDto.class);
         if (!StringUtils.isEmpty(blogArticleSearchRequestDto.getTagId())) {
-            collect = collect.stream().filter(item -> Arrays.asList(item.getTagId().split(",")).contains(blogArticleSearchRequestDto.getTagId())).collect(Collectors.toList());
+            collect = collect.stream().filter(item -> Arrays.asList(item.getTagId().split(",")).contains(blogArticleSearchRequestDto.getTagId())).sorted(Comparator.comparing(BlogArticleListResponseDto::getSort)).collect(Collectors.toList());
         }
         IPage<BlogArticleListResponseDto> pages = new Page<>();
         if (!CollectionUtils.isEmpty(collect)) {
