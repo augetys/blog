@@ -63,6 +63,12 @@ class BlogApplicationTests {
     }
 
     @Test
+    void tests(){
+        String s="中国|云南|昆明|电信";
+        System.out.println(s.split("\\|")[2]);
+    }
+
+    @Test
     void deleteIndex() {
         esUtil.deleteIndex("blog");
     }
