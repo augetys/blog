@@ -3,7 +3,7 @@ server:
     connection-timeout: 18000000
 spring:
   profiles:
-    active: dev
+    active: pro
   security:
     user:
       name: lijin

@@ -16,7 +16,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import javax.annotation.Resource;
 
 import com.hope.blog.common.api.CommonPage;
-import com.hope.blog.common.enums.Website;
 import com.hope.blog.sys.model.SysDictDetail;
 import com.hope.blog.sys.service.SysDictService;
 import com.hope.blog.utils.CopyUtil;
@@ -60,6 +59,7 @@ public class BlogWebsiteServiceImpl extends ServiceImpl<BlogWebsiteMapper, BlogW
         if (!StringUtils.isEmpty(BlogWebsiteSearchRequest.getCategory())) {
             queryWrapper.eq("category", BlogWebsiteSearchRequest.getCategory());
         }
+        queryWrapper.orderByAsc("sort");
         queryWrapper.orderByDesc("create_time");
         IPage<BlogWebsiteResponse> pages = new Page<>();
 
@@ -67,7 +67,7 @@ public class BlogWebsiteServiceImpl extends ServiceImpl<BlogWebsiteMapper, BlogW
         if (!CollectionUtils.isEmpty(blogWebsiteResponsesList)) {
             blogWebsiteResponsesList.forEach(
                     item -> {
-                        item.setCategoryName(Website.getName(item.getCategory()));
+                        item.setCategoryName(BlogWebsiteMapper.findByCateGoryIdAndDictName("blog_website",item.getCategory()));
                     }
             );
             pages = CommonPage.getPages(BlogWebsiteSearchRequest.getPageNum(), BlogWebsiteSearchRequest.getPageSize(), blogWebsiteResponsesList);

@@ -1,6 +1,8 @@
 package com.hope.blog;
 
 import com.hope.blog.blog.model.BlogArticle;
+import com.hope.blog.blog.service.BlogArticleService;
+import com.hope.blog.utils.DateUtil;
 import com.hope.blog.utils.EsUtil;
 import com.hope.blog.utils.MailUtil;
 import com.hope.blog.utils.SpringContextHolder;
@@ -16,6 +18,7 @@ import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
@@ -23,9 +26,17 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 @Ignore
@@ -81,7 +92,7 @@ class BlogApplicationTests {
                 .withPageable(PageRequest.of(page, pageSize));
         //查询结果
         NativeSearchQuery searchQuery = queryBuilder.build();
-        log.info("DSL:{}",searchQuery.getQuery().toString());
+        log.info("DSL:{}", searchQuery.getQuery().toString());
         // 执行搜索，获取结果c
         SearchHits<BlogArticle> blogArticleSearchHits = elasticsearchRestTemplate.search(searchQuery, BlogArticle.class);
         System.out.println(blogArticleSearchHits.getTotalHits());
@@ -132,7 +143,7 @@ class BlogApplicationTests {
         // 1.创建并设置SearchSourceBuilder对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         // 查询条件--->生成DSL查询语句
-        searchSourceBuilder.query(QueryBuilders.multiMatchQuery("部署", "title","content","summary"));
+        searchSourceBuilder.query(QueryBuilders.multiMatchQuery("部署", "title", "content", "summary"));
         // 第几页
         searchSourceBuilder.from(0);
         // 每页多少条数据
@@ -159,13 +170,51 @@ class BlogApplicationTests {
 
     @Test
     public void setMail() {
-        MailUtil.send("激活账号", "hahahahha", "1181881941@qq.com" );
+        MailUtil.send("激活账号", "hahahahha", "1181881941@qq.com");
     }
 
     @Test
-    public void getEnv(){
+    public void getEnv() {
         String activeProfile = SpringContextHolder.getActiveProfile();
         System.out.println(activeProfile);
+    }
+
+
+    @Autowired
+    private BlogArticleService blogArticleService;
+
+    @Test
+    public void randomDate() throws Exception {
+        List<BlogArticle> list = blogArticleService.list();
+        for (BlogArticle blogArticle : list) {
+            blogArticle.setCreateTime(randomDate("2020-03-08", "2022-03-08"));
+        }
+        blogArticleService.saveOrUpdateBatch(list);
+    }
+
+    public static Date randomDate(String beginDate, String endDate) throws Exception {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date start = format.parse(beginDate);
+            Date end = format.parse(endDate);
+
+            if (start.getTime() >= end.getTime()) {
+                return null;
+            }
+            long date = random(start.getTime(), end.getTime());
+            return new Date(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static long random(long begin, long end) {
+        long rtn = begin + (long) (Math.random() * (end - begin));
+        if (rtn == begin || rtn == end) {
+            return random(begin, end);
+        }
+        return rtn;
     }
 }
 

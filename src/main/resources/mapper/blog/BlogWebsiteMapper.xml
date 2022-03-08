@@ -20,7 +20,19 @@
     </sql>
 
     <select id="findByCategoryId" resultType="com.hope.blog.blog.model.BlogWebsite">
-        select <include refid="Base_Column_List"></include> from blog_website where category=#{categoryId} order by sort asc,create_time desc
+        select <include refid="Base_Column_List"></include> from blog_website where category=#{categoryId} order by sort
+        asc,create_time desc
+    </select>
+
+    <select id="findByCateGoryIdAndDictName" resultType="java.lang.String">
+        SELECT
+        a.label
+        FROM
+        sys_dict_detail a
+        LEFT JOIN sys_dict b ON a.dict_id = b.id
+        WHERE
+        b.name = #{label}
+        AND a.value = #{value}
     </select>
 
 

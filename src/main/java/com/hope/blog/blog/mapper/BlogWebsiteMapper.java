@@ -2,7 +2,7 @@ package com.hope.blog.blog.mapper;
 
 import com.hope.blog.blog.model.BlogWebsite;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.swagger.models.auth.In;
+
 
 import java.util.List;
 
@@ -15,5 +15,7 @@ import java.util.List;
  * @since 2021-12-29
  */
 public interface BlogWebsiteMapper extends BaseMapper<BlogWebsite> {
-   List<BlogWebsite> findByCategoryId(Integer categoryId);
+    List<BlogWebsite> findByCategoryId(Integer categoryId);
+
+    String findByCateGoryIdAndDictName(String label, Integer value);
 }
