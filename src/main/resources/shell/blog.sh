@@ -1,6 +1,6 @@
 start(){
 	echo "blog服务启动了..."
-	nohup java -jar blog-1.0.0-SNAPSHOT.jar --spring.profiles.active=test >blog.out &
+	nohup java -jar blog-1.0.0-SNAPSHOT.jar --spring.profiles.active=pro >blog.out &
 	echo "启动完成..."
 }
 stop(){

@@ -19,12 +19,15 @@ import com.hope.blog.sys.service.HomeService;
 import com.hope.blog.sys.service.SysMenusService;
 import com.hope.blog.sys.service.SysUserService;
 import com.hope.blog.utils.DateUtil;
+import com.hope.blog.utils.HttpContextUtil;
 import com.hope.blog.utils.HttpUtil;
+import com.hope.blog.utils.IPUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,7 +83,13 @@ public class HomeServiceImpl implements HomeService {
         // 请求参数
         Map<String, String> params = new HashMap<>();
         // 要查询的城市，如：温州、上海、北京
-        params.put("city", "武汉");
+        HttpServletRequest request = HttpContextUtil.getRequest();
+        String ip = IPUtil.getIpAddr(request);
+        log.info("ip地址为：{}", ip);
+        String cityInfo = IPUtil.getCityInfo(ip);
+        log.info("所在城市为：{}", cityInfo);
+        // 如果是手机热点，可能获取的城市info切割有误
+        params.put("city", cityInfo.split("\\|")[2]);
         // 应用KEY(应用详细页查询)
         params.put("key", WeatherKey);
         String result = HttpUtil.net(url, params, "GET");
