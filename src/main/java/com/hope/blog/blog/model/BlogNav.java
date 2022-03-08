@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -59,7 +60,7 @@ public class BlogNav implements Serializable {
     @ApiModelProperty(value = "跳转路由")
     private String path;
 
-    @NotBlank(message = "是否打开新窗口不能为空")
+    @NotNull(message = "是否打开新窗口不能为空")
     @ApiModelProperty(value = "是否打开新窗口")
     private String target;
 
