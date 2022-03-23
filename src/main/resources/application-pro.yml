@@ -6,7 +6,7 @@ server:
     context-path: /api
 spring:
   datasource:
-    name: test
+    name: blog
     url: jdbc:mysql://110.42.244.186:3306/blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456

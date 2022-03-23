@@ -39,6 +39,8 @@
         <qiniu.version>[7.4.0, 7.4.99]</qiniu.version>
         <flexmark.version>0.62.2</flexmark.version>
         <whvcse.version>1.6.2</whvcse.version>
+        <okhttp.version>3.10.0</okhttp.version>
+        <jasypt.version>2.1.0</jasypt.version>
     </properties>
 
     <dependencies>
@@ -73,6 +75,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+        <!--druid连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -83,6 +86,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+        <!-- http请求工具-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
         </dependency>
         <!-- guava工具类 -->
         <dependency>

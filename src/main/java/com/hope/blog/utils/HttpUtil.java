@@ -1,98 +1,303 @@
 package com.hope.blog.utils;
 
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
+import com.alibaba.fastjson.JSON;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
+
+
 
 
 /**
- * 天气预报调用示例代码 － 聚合数据
- * 在线接口文档：http://www.juhe.cn/docs/73
+ * http请求类
  **/
-
+@Slf4j
 public class HttpUtil {
-    public static final String DEF_CHATSET = "UTF-8";
-    public static final int DEF_CONN_TIMEOUT = 30000;
-    public static final int DEF_READ_TIMEOUT = 30000;
-    public static String userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
-
+    private static volatile OkHttpClient okHttpClient = null;
+    private static volatile Semaphore semaphore = null;
+    private Map<String, String> headerMap;
+    private Map<String, String> paramMap;
+    private String url;
+    private Request.Builder request;
 
     /**
-     * @param strUrl 请求地址
-     * @param params 请求参数
-     * @param method 请求方法
-     * @return 网络请求字符串
-     * @throws Exception
+     * 初始化okHttpClient，并且允许https访问
      */
-    public static String net(String strUrl, Map params, String method) throws Exception {
-        HttpURLConnection conn = null;
-        BufferedReader reader = null;
-        String rs = null;
-        try {
-            StringBuffer sb = new StringBuffer();
-            if (method == null || method.equals("GET")) {
-                strUrl = strUrl + "?" + urlencode(params);
-            }
-            URL url = new URL(strUrl);
-            conn = (HttpURLConnection) url.openConnection();
-            if (method == null || method.equals("GET")) {
-                conn.setRequestMethod("GET");
-            } else {
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-            }
-            conn.setRequestProperty("User-agent", userAgent);
-            conn.setUseCaches(false);
-            conn.setConnectTimeout(DEF_CONN_TIMEOUT);
-            conn.setReadTimeout(DEF_READ_TIMEOUT);
-            conn.setInstanceFollowRedirects(false);
-            conn.connect();
-            if (params != null && method.equals("POST")) {
-                try {
-                    DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-                    out.writeBytes(urlencode(params));
-                } catch (Exception e) {
-                    e.printStackTrace();
+    private HttpUtil() {
+        if (okHttpClient == null) {
+            synchronized (HttpUtil.class) {
+                if (okHttpClient == null) {
+                    TrustManager[] trustManagers = buildTrustManagers();
+                    okHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(15, TimeUnit.SECONDS)
+                            .writeTimeout(20, TimeUnit.SECONDS)
+                            .readTimeout(20, TimeUnit.SECONDS)
+                            .sslSocketFactory(createSSLSocketFactory(trustManagers), (X509TrustManager) trustManagers[0])
+                            .hostnameVerifier((hostName, session) -> true)
+                            .retryOnConnectionFailure(true)
+                            .build();
+                    addHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
                 }
             }
-            InputStream is = conn.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(is, DEF_CHATSET));
-            String strRead = null;
-            while ((strRead = reader.readLine()) != null) {
-                sb.append(strRead);
-            }
-            rs = sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
-            if (conn != null) {
-                conn.disconnect();
-            }
         }
-        return rs;
     }
 
-    //将map型转为请求参数型
-    public static String urlencode(Map<String, String> data) {
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry i : data.entrySet()) {
+    /**
+     * 用于异步请求时，控制访问线程数，返回结果
+     *
+     * @return
+     */
+    private static Semaphore getSemaphoreInstance() {
+        //只能1个线程同时访问
+        synchronized (HttpUtil.class) {
+            if (semaphore == null) {
+                semaphore = new Semaphore(0);
+            }
+        }
+        return semaphore;
+    }
+
+    /**
+     * 创建OkHttpUtils
+     *
+     * @return
+     */
+    public static HttpUtil builder() {
+        return new HttpUtil();
+    }
+
+    /**
+     * 添加url
+     *
+     * @param url
+     * @return
+     */
+    public HttpUtil url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    /**
+     * 添加参数
+     *
+     * @param key   参数名
+     * @param value 参数值
+     * @return
+     */
+    public HttpUtil addParam(String key, String value) {
+        if (paramMap == null) {
+            paramMap = new LinkedHashMap<>(16);
+        }
+        paramMap.put(key, value);
+        return this;
+    }
+
+    /**
+     * 添加请求头
+     *
+     * @param key   参数名
+     * @param value 参数值
+     * @return
+     */
+    public HttpUtil addHeader(String key, String value) {
+        if (headerMap == null) {
+            headerMap = new LinkedHashMap<>(16);
+        }
+        headerMap.put(key, value);
+        return this;
+    }
+
+    /**
+     * 初始化get方法
+     *
+     * @return
+     */
+    public HttpUtil get() {
+        request = new Request.Builder().get();
+        StringBuilder urlBuilder = new StringBuilder(url);
+        if (paramMap != null) {
+            urlBuilder.append("?");
             try {
-                sb.append(i.getKey()).append("=").append(URLEncoder.encode(i.getValue() + "", "UTF-8")).append("&");
-            } catch (UnsupportedEncodingException e) {
+                for (Map.Entry<String, String> entry : paramMap.entrySet()) {
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), "utf-8")).
+                            append("=").
+                            append(URLEncoder.encode(entry.getValue(), "utf-8")).
+                            append("&");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            urlBuilder.deleteCharAt(urlBuilder.length() - 1);
+        }
+        request.url(urlBuilder.toString());
+        return this;
+    }
+
+    /**
+     * 初始化post方法
+     *
+     * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw
+     *                   false等于普通的表单提交
+     * @return
+     */
+    public HttpUtil post(boolean isJsonPost) {
+        RequestBody requestBody;
+        if (isJsonPost) {
+            String json = "";
+            if (paramMap != null) {
+                json = JSON.toJSONString(paramMap);
+            }
+            requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        } else {
+            FormBody.Builder formBody = new FormBody.Builder();
+            if (paramMap != null) {
+                paramMap.forEach(formBody::add);
+            }
+            requestBody = formBody.build();
+        }
+        request = new Request.Builder().post(requestBody).url(url);
+        return this;
+    }
+
+    /**
+     * 同步请求
+     *
+     * @return
+     */
+    public String sync() {
+        setHeader(request);
+        try {
+            Response response = okHttpClient.newCall(request.build()).execute();
+            assert response.body() != null;
+            return response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "请求失败：" + e.getMessage();
+        }
+    }
+
+    /**
+     * 异步请求，有返回值
+     */
+    public String async() {
+        StringBuilder buffer = new StringBuilder("");
+        setHeader(request);
+        okHttpClient.newCall(request.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                buffer.append("请求出错：").append(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                assert response.body() != null;
+                buffer.append(response.body().string());
+                getSemaphoreInstance().release();
+            }
+        });
+        try {
+            getSemaphoreInstance().acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return buffer.toString();
+    }
+
+    /**
+     * 异步请求，带有接口回调
+     *
+     * @param callBack
+     */
+    public void async(ICallBack callBack) {
+        setHeader(request);
+        okHttpClient.newCall(request.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callBack.onFailure(call, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                assert response.body() != null;
+                callBack.onSuccessful(call, response.body().string());
+            }
+        });
+    }
+
+    /**
+     * 为request添加请求头
+     *
+     * @param request
+     */
+    private void setHeader(Request.Builder request) {
+        if (headerMap != null) {
+            try {
+                for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+                    request.addHeader(entry.getKey(), entry.getValue());
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return sb.toString();
+    }
+
+
+    /**
+     * 生成安全套接字工厂，用于https请求的证书跳过
+     *
+     * @return
+     */
+    private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
+        SSLSocketFactory ssfFactory = null;
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            ssfFactory = sc.getSocketFactory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ssfFactory;
+    }
+
+    private static TrustManager[] buildTrustManagers() {
+        return new TrustManager[]{
+                new X509TrustManager() {
+                    @Override
+                    public void checkClientTrusted(X509Certificate[] chain, String authType) {
+                    }
+
+                    @Override
+                    public void checkServerTrusted(X509Certificate[] chain, String authType) {
+                    }
+
+                    @Override
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return new X509Certificate[]{};
+                    }
+                }
+        };
+    }
+
+    /**
+     * 自定义一个接口回调
+     */
+    public interface ICallBack {
+
+        void onSuccessful(Call call, String data);
+
+        void onFailure(Call call, String errorMsg);
+
     }
 }
