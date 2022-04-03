@@ -91,6 +91,7 @@ secure:
       - /comment/blogComment/commentsByArticleId
       - /comment/blogComment/save
       - /comment/blogCommentReplay/save
+      - /home/getSoul
       - /blog/looper/findAll
       - /blog/article/list
       - /blog/article/search
