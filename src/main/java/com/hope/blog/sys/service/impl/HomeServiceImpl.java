@@ -1,5 +1,6 @@
 package com.hope.blog.sys.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hope.blog.blog.service.BlogArticleService;
 import com.hope.blog.blog.service.BlogSoulService;
@@ -68,6 +69,8 @@ public class HomeServiceImpl implements HomeService {
     public static final String BookKey = "da5d44edba3f8e9a577d0cd818d38398";
 
 
+    public static final String SoulKey = "LwExDtUWhF3rH5ib";
+
     @Override
     public JSONObject getWeather() throws Exception {
         // 请求接口地址
@@ -120,7 +123,7 @@ public class HomeServiceImpl implements HomeService {
     public String getSoul() throws Exception {
         // 请求接口地址
         String url = "https://api.oick.cn/dutang/api.php";
-        return HttpUtil.builder().url(url).get().sync();
+        return HttpUtil.builder().url(url).addParam("token", SoulKey).get().sync();
     }
 
     @Override
