@@ -4,10 +4,6 @@ server:
 spring:
   profiles:
     active: dev
-  security:
-    user:
-      name: lijin
-      password: 123456
   servlet:
     multipart:
       max-file-size: 100MB
