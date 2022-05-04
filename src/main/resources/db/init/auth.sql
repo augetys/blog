@@ -251,6 +251,7 @@ INSERT INTO `sys_dict` VALUES ('0c3e78bb4aede4d70837cb70e6a79fc5', 'blog_publish
 INSERT INTO `sys_dict` VALUES ('4412b395ac0051a83b5e3657b77c8081', 'blog_comment_disable', '是否开启评论', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_dict` VALUES ('9211a2b6c48cdca1543cfec076f184b7', 'blog_original_status', '博客是否原创', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_dict` VALUES ('9723b0724dc12dbd9462f65cb058bbc1', 'user_status', '用户状态', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_dict` VALUES ('e4c424ba90394bc3f6bd044d18f84230', 'blog_website', '网站分类', '2022-05-04 18:04:13', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_detail
@@ -272,13 +273,25 @@ CREATE TABLE `sys_dict_detail` (
 
 
 INSERT INTO `sys_dict_detail` VALUES ('05ae2a61717d9760b114f86b1678a13f', '9723b0724dc12dbd9462f65cb058bbc1', '启用', '1', 1, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_dict_detail` VALUES ('0778b0a62f32dad1a970ceeb7c2f1510', 'e4c424ba90394bc3f6bd044d18f84230', '影视', '1', 1, 1, '2022-05-04 18:05:18', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_dict_detail` VALUES ('447a2fe62122153956fb85ddd8f6df95', 'e4c424ba90394bc3f6bd044d18f84230', '漫画', '8', 8, 1, '2022-05-04 18:28:13', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 INSERT INTO `sys_dict_detail` VALUES ('51798e8f7560bf6814d92a4bf980c5b8', '0c3e78bb4aede4d70837cb70e6a79fc5', '下架', '0', 1, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_dict_detail` VALUES ('64043fcf7e65c77ef8ea64fd7390f625', 'e4c424ba90394bc3f6bd044d18f84230', '网盘资源', '3', 3, 1, '2022-05-04 18:23:45', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_dict_detail` VALUES ('669f0335c4202b62b3c1e1d76a835263', 'e4c424ba90394bc3f6bd044d18f84230', '学习', '0', 0, 1, '2022-05-04 18:22:32', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 INSERT INTO `sys_dict_detail` VALUES ('6d4cb501797bc49d61de8bf5a5f3f3f3', '0c3e78bb4aede4d70837cb70e6a79fc5', '发布', '1', 0, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_dict_detail` VALUES ('7938623fd8b7281626e6dba344268d7a', '9211a2b6c48cdca1543cfec076f184b7', '转载', '0', 1, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_dict_detail` VALUES ('84b00f9e6b4ac20946d756a86d5d44cf', '9211a2b6c48cdca1543cfec076f184b7', '原创', '1', 0, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_dict_detail` VALUES ('8924cd3dca10a5eaa7e10fe28c3d0bd2', '4412b395ac0051a83b5e3657b77c8081', '开启', '1', 0, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_dict_detail` VALUES ('8a908cb214c0f23df1b4c9716ab72470', 'e4c424ba90394bc3f6bd044d18f84230', '文档处理', '6', 6, 1, '2022-05-04 18:27:18', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_dict_detail` VALUES ('8d314f62afce971746e11c8a6bcb0afa', 'e4c424ba90394bc3f6bd044d18f84230', '工具', '5', 5, 1, '2022-05-04 00:00:00', 'da6d966d37fcb819546064424a8bdd9f', '2022-05-04 18:26:24', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_dict_detail` VALUES ('90caedf46c4275615e0774f0c1336bf4', 'e4c424ba90394bc3f6bd044d18f84230', '电子书', '2', 2, 1, '2022-05-04 18:22:47', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_dict_detail` VALUES ('a18e137850fda466ae4c88f99c970b2d', 'e4c424ba90394bc3f6bd044d18f84230', '奇趣百科', '9', 9, 1, '2022-05-04 18:28:41', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_dict_detail` VALUES ('aa44f51ced45521ed139f30f36face56', 'e4c424ba90394bc3f6bd044d18f84230', '壁纸', '4', 4, 1, '2022-05-04 18:23:56', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
 INSERT INTO `sys_dict_detail` VALUES ('c69a2cd2c714ba6ba929fbd6f3f6f62e', '9723b0724dc12dbd9462f65cb058bbc1', '禁用', '0', 2, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
 INSERT INTO `sys_dict_detail` VALUES ('d2148e404896e914a3fc8eee224f416b', '4412b395ac0051a83b5e3657b77c8081', '关闭', '0', 1, 1, '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f', '2021-07-16 15:49:30', 'da6d966d37fcb819546064424a8bdd9f');
+INSERT INTO `sys_dict_detail` VALUES ('db4cb269630173620c2d17347253f0ef', 'e4c424ba90394bc3f6bd044d18f84230', '在线阅读', '7', 7, 1, '2022-05-04 18:27:33', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+INSERT INTO `sys_dict_detail` VALUES ('f940a01594a3a8a7754a46c62a161506', 'e4c424ba90394bc3f6bd044d18f84230', '常用导航', '0', 0, 1, '2022-05-04 18:29:20', 'da6d966d37fcb819546064424a8bdd9f', NULL, NULL);
+
 
 -- ----------------------------
 -- Table structure for config_email
